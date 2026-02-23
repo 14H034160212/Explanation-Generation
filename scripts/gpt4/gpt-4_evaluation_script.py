@@ -4,10 +4,16 @@ import json
 import pandas as pd
 from tqdm import tqdm
 import argparse
+from nltk.translate.bleu_score import sentence_bleu
+from bert_score import score
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--data_path', default="./Paul_new_data/Sydney/Sydney_vicuna_13b_random_100.json",
                     help='the location of the data path.')
+parser.add_argument('--output_path', default="./Paul_new_data/Sydney/round2/Sydney_gpt4_round2_random_100.json",
+                    help='the location of the data path.')
+parser.add_argument('--excel_output_path', default="./Paul_new_data/Sydney/round2/Sydney_gpt4_round2_random_100.json",
+                    help='the location of the data path for saving excel file.')
 parser.add_argument('--model_name', default="gpt-3.5-turbo",
                     help='the name of the openai model that been used')
 parser.add_argument('--temperature', type=float, default=0.7,
@@ -30,7 +36,7 @@ response_list = []
 input_data = pd.read_json(args.data_path)
 
 for index, row in input_data.iterrows():
-    input_prompt = row["instruction"] + " " + row["input"]
+    input_prompt = row["instruction"] + " Please generate a quality rating score between 1 and 5. " + row["input"]
     response = openai.ChatCompletion.create(
         model=args.model_name,
         # prompt=input_prompt,
@@ -41,12 +47,17 @@ for index, row in input_data.iterrows():
         frequency_penalty=args.frequency_penalty,
         presence_penalty=args.presence_penalty
     )
+    # precision, recall, bertscore = score([response["choices"][0]["message"]["content"]], [row["output"]], lang="en", model_type="bert-base-uncased", verbose=False)
+    # bertscore = bertscore.item()
     response_list.append({"instruction": row["instruction"],
                        "input": row["input"],
-                       "Explanation": row["Explanation"],
-                       "Generated_Explanation": response["choices"][0]["message"]["content"],
-                       "bleu_score": row["bleu_score"],
-                       "bert_score": row["bert_score"]})
+                       "output": row["output"],
+                       "predicted_rating_score": response["choices"][0]["message"]["content"]
+                       })
     
-with open('./Paul_new_data/Sydney/Sydney_gpt-4_random_100.json', 'w') as f:
+with open(args.output_path, 'w') as f:
     json.dump(response_list, f, indent=4)
+    
+response_list_df = pd.DataFrame(response_list)
+
+response_list_df.to_excel(args.excel_output_path, index=False)

@@ -2,15 +2,24 @@ numpy
 rouge_score
 fire
 openai
-transformers==4.28.1  ## Make sure you install the transformers-4.28.0.dev0 or 4.28.1
-torch
+transformers>=4.40.0
+torch>=2.1.0
 sentencepiece
-tokenizers==0.12.1
+tokenizers>=0.19.0
 wandb
-accelerate
+accelerate>=0.27.0
 regex
 pandas
 bs4
 bert_score
 openpyxl
 fschat
+scikit-learn
+
+# RL-ILearner dependencies
+trl>=0.10.0           # DPOTrainer, PPOTrainer, SFTTrainer
+peft>=0.10.0          # LoRA / PEFT adapters
+bitsandbytes>=0.43.0  # 4-bit and 8-bit quantization (QLoRA)
+deepspeed>=0.14.0     # ZeRO-2/3 for multi-GPU distributed training
+datasets>=2.18.0      # HuggingFace datasets for data loading
+flash-attn>=2.5.0     # Flash Attention 2 (optional, speeds up training significantly)

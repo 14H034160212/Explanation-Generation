@@ -6,32 +6,26 @@ import torch
 from accelerate import Accelerator
 import accelerate
 import time
+import re
+import pandas as pd
 
 model = None
 tokenizer = None
 generator = None
-os.environ["CUDA_VISIBLE_DEVICES"]="1"
+os.environ["CUDA_VISIBLE_DEVICES"]="3"
 
-flag = "ExplanationGenerator" ## "Qiming-Alpaca", "ExplanationGenerator", "ExplanationVerifier"
+flag = "ExplanationVerifier" ## "Qiming-Alpaca", "ExplanationGenerator", "ExplanationVerifier"
 if flag == "Qiming-Alpaca":
-    load_model_name = "./qiming_alpaca_7B/"
+    load_model_name = "./qiming_alpaca/"
     First_chat = "Qiming-Alpaca: I am Qiming-Alpaca, what questions do you have?"
     invitation = "Qiming-Alpaca: "
     human_invitation = "User: "
-elif flag == "LLaMA-7B":
-    load_model_name = "./llama_7B_hf/llama-7b"
-    First_chat = "Explanation Generator: I am an expert in explantion generator, what questions can I help?"
-    invitation = "Explanation Generator: "
-    human_invitation = "User: "
-elif flag == "ExplanationGenerator":
-    load_model_name = "./qiming_alpaca_7B_Cardiff_generator/"
-    First_chat = "Explanation Generator: I am an expert in explantion generator, what questions can I help?"
-    invitation = "Explanation Generator: "
-    human_invitation = "User: "
 elif flag == "ExplanationVerifier":
-    load_model_name = "./Cardiff_Sydney_merged_verifier/"
+    # load_model_name = "./qiming_llama_7B_Cardiff_Sydney_merged_verifier_way_2/"
+    # load_model_name = "./qiming_alpaca_7B_Cardiff_Sydney_merged_verifier_way_2/"
+    load_model_name = "./llama_2_13B_merged_all_evaluator/"
     First_chat = "Explanation Verifier: I am an expert in explantion verifier, what questions can I help?"
-    invitation = "Explanation Verifier: "
+    invitation = " Output: "
     human_invitation = "User: "
     
 def load_model(model_name, eight_bit=0, device_map="auto"):
@@ -64,23 +58,49 @@ def load_model(model_name, eight_bit=0, device_map="auto"):
 
 load_model(load_model_name)
 
-# First_chat = "Qiming-Alpaca: I am Qiming-Alpaca, what questions do you have?"
-print(First_chat)
-history = []
-history.append(First_chat)
 
-def go():
+history = []
+question_msg = None
+numOption_msg = None
+OptionA_msg = None
+OptionB_msg = None
+OptionC_msg = None
+OptionD_msg = None
+OptionE_msg = None 
+answer_msg = None
+response = None
+
+def numOptionJudgeCondition(s):
+    try:
+        res = int(s)
+        if res >=1 and res <=5:
+            return True
+        else:
+            return False
+    except ValueError:
+        return False
+    
+def go(global_step):
+    msg = ""
+    
+    global_score_tag = explanationVerifier(msg, response)
+    
+    global_step += 1
+    
+    return response, history, global_score_tag, global_step
+
+def explanationVerifier(msg, generator_response):
     # invitation = "Qiming-Alpaca: "
     # human_invitation = "User: "
 
     # input
-    msg = input(human_invitation)
-    print("")
+    # history.append(human_invitation + msg)
 
-    history.append(human_invitation + msg)
-
-    #fulltext = "If you are a doctor, please answer the medical questions based on the patient's description. \n\n" + "\n\n".join(history) + "\n\n" + invitation
-    fulltext = "\n\n".join(history) + "\n\n" + invitation
+    # fulltext = "If you are a doctor, please answer the medical questions based on the patient's description. \n\n" + "\n\n".join(history) + "\n\n" + invitation
+    # fulltext = "\n\n".join(generator_response) + "\n\n" + invitation
+    merged_response = [msg + " Explanation: " + generator_response]
+    fulltext = "Instruction: As a question rating verifier expert, can you generate the question rating score for the given input? \n\n" + \
+        "\n\n".join(merged_response) + "\n\n" + invitation
     
     #print('SENDING==========')
     #print(fulltext)
@@ -92,7 +112,7 @@ def go():
     with torch.no_grad():
             generated_ids = generator(
                 gen_in,
-                max_new_tokens=2048,
+                max_new_tokens=1024,
                 use_cache=True,
                 pad_token_id=tokenizer.eos_token_id,
                 num_return_sequences=1,
@@ -105,19 +125,28 @@ def go():
             )
             generated_text = tokenizer.batch_decode(generated_ids, skip_special_tokens=True)[0] # for some reason, batch_decode returns an array of one element?
 
-            text_without_prompt = generated_text[len(fulltext):]
+            # text_without_prompt = generated_text[len(fulltext):]
+            pattern = r"Output: (\d+\.\d+)"
+            text_without_prompt = re.search(pattern, generated_text)
 
-    response = text_without_prompt
+    response = text_without_prompt.group(1)
 
-    response = response.split(human_invitation)[0]
+    # response = response.split(human_invitation)[0]
 
-    response.strip()
+    response = response.strip()
 
-    print(invitation + response)
+    # print(invitation + response)
 
-    print("")
+    # print("")
 
-    history.append(invitation + response)
+    return float(response)
 
-while True:
-    go()
+if __name__ == "__main__":
+    global_step = 0
+    global_score_tag = 0
+    cardiff_all_question = pd.read_json("./Paul_new_data/Cardiff/Cardiff_vicuna_13b_finetuned_random_100.json")
+    for index, row in cardiff_all_question.iterrows():
+        response, history, global_score_tag, new_global_step = go(global_step)
+        
+        
+        global_step = new_global_step

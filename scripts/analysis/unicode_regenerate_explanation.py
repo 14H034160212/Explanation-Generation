@@ -10,7 +10,8 @@ def contains_unicode(string):
             return True
     return False
 
-with open('/data/qbao775/Explanation-Generation/Paul_new_data/Sydney/Sydney_Paul_random_100.json', 'r') as file:
+# with open('/data/qbao775/Explanation-Generation/Paul_new_data/Sydney/Sydney_Paul_random_100.json', 'r') as file:
+with open('/data/qbao775/Explanation-Generation/Paul_new_data/Sydney/round2/Sydney_Paul_round2_random_sample_100_data.json', 'r') as file:
     data = json.load(file)
 
 
@@ -26,5 +27,6 @@ for index in range(len(data)):
         data[index]["Explanation 2"] = response
     
     
-with open('/data/qbao775/Explanation-Generation/Paul_new_data/Sydney/Sydney_Paul_random_100_regeneration_vicuna.json', 'w') as file:
-    json.dump(data, file)
+# with open('/data/qbao775/Explanation-Generation/Paul_new_data/Sydney/Sydney_Paul_random_100_regeneration_vicuna.json', 'w') as file:
+with open('/data/qbao775/Explanation-Generation/Paul_new_data/Sydney/round2/Sydney_Paul_round2_random_sample_100_data_regenerated.json', 'w') as file:
+    json.dump(data, file, indent=4)

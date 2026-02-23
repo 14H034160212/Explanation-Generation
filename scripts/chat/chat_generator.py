@@ -10,7 +10,7 @@ import time
 model = None
 tokenizer = None
 generator = None
-os.environ["CUDA_VISIBLE_DEVICES"]="0"
+os.environ["CUDA_VISIBLE_DEVICES"]="2"
 
 flag = "ExplanationGenerator" ## "Qiming-Alpaca", "ExplanationGenerator", "ExplanationVerifier"
 if flag == "Qiming-Alpaca":
@@ -24,7 +24,9 @@ elif flag == "ExplanationGenerator":
     # load_model_name = "./qiming_alpaca_7B_Cardiff_Sydney_merged_generator/"
     # load_model_name = "./qiming_alpaca_7B_Cardiff_generator/"
     # load_model_name = "./LLaMA_7B_Cardiff_generator/"
-    load_model_name = "./qiming_alpaca_7B/"
+    # load_model_name = "./qiming_alpaca_7B/"
+    # load_model_name = "./vicuna-13b/"
+    load_model_name = "./llama_2_13B_merged_all_generator_avg_3_lenexp_10/"
     First_chat = "Explanation Generator: I am an expert in explantion generator, what questions can I help?"
     invitation = " Output: "
     human_invitation = "User: "

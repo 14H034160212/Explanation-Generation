@@ -1,141 +1,437 @@
-# Explanation-Generation
-Before you start running the project, you need to setup your environment following those steps.
+# ILearner-LLM + RL-ILearner: Explanation Generation for PeerWise
+
+This repository contains two progressive lines of work for automatically generating and evaluating educational explanations for PeerWise exam questions:
+
+1. **ILearner-LLM** (original paper) — Instruction-tuned LLM pipeline with iterative Generator–Verifier refinement.
+2. **RL-ILearner** (this extension) — Replaces the K-round iterative prompt loop with reinforcement learning (DPO/PPO) using modern models (Llama-3, Qwen3) and LoRA for parameter-efficient fine-tuning.
+
+---
+
+## Table of Contents
+- [Architecture Overview](#architecture-overview)
+- [Project Structure](#project-structure)
+- [Installation](#installation)
+- [Datasets](#datasets)
+- [ILearner-LLM Pipeline (Original)](#ilearner-llm-pipeline-original)
+- [RL-ILearner Pipeline (New Extension)](#rl-ilearner-pipeline-new-extension)
+- [Experimental Results](#experimental-results)
+- [Model Zoo](#model-zoo)
+- [Key Design Decisions](#key-design-decisions)
+- [Acknowledgements](#acknowledgements)
+
+---
+
+## Architecture Overview
+
+### ILearner-LLM (Original)
+
+```
+Question + Options + Answer
+         │
+         ▼
+  ┌─────────────┐   K-round loop (K=1..5)
+  │  Generator  │◄─────────────────────────┐
+  │  (LLaMA-2)  │   "Your last score was X, │
+  └─────────────┘    generate a better one" │
+         │                                  │
+         ▼ generated explanation             │
+  ┌─────────────┐                           │
+  │  Verifier   │──── score (0-5) ──────────┘
+  │  (LLaMA-2)  │
+  └─────────────┘
+         │
+         ▼ final explanation after K rounds
+```
+
+**Limitation**: Latency scales with K. Prompt-only refinement cannot update model weights.
+
+### RL-ILearner (Extension)
+
+```
+         SFT Phase (LoRA)
+Data ──► Fine-tune Llama-3/Qwen3 ──► SFT Generator (LoRA Adapter)
+
+         DPO Phase (Offline RL, RECOMMENDED)
+SFT Generator ──► Generate N candidates per question
+                        │
+                   Verifier scores all N candidates
+                        │
+              (best → y_chosen, worst → y_rejected)
+              + GPT-4o CoT synthetic positives
+              + Model-generated hard negatives
+                        │
+              LoRA-DPO training ──► DPO Generator (LoRA Adapter)
+
+         Inference (1-shot, no K-loop)
+Question ──► DPO Generator ──► High-quality explanation  (single forward pass)
+```
+
+**Key improvements over original**:
+- **1-Shot inference** (vs K-round): ~K× lower latency at deployment
+- **LoRA Hot-swap**: One base model in GPU memory; switch Generator/Verifier adapters in milliseconds
+- **Modern base**: Llama-3-8B/70B, Qwen3-14B/32B — far stronger reasoning than LLaMA-2-13B
+- **Synthetic hard negatives**: Prevent Reward Hacking via GPT-4o CoT flawed explanation generation
+
+---
+
+## Project Structure
+
+```
+Explanation-Generation/
+│
+├── README.md
+├── requirements.txt
+│
+├── train.py                      # Core SFT training (original, full-parameter fine-tuning)
+├── utils.py                      # Shared data loading utilities
+├── training_script.sh            # Original full-param training commands (LLaMA-2)
+│
+│── ── ── RL-ILearner (New) ── ── ──
+├── rl_train_sft.py               # Step 1: SFT fine-tuning with LoRA (Llama-3/Qwen3)
+├── rl_build_preference_data.py   # Step 2: Build DPO preference pairs (multi-sample + Verifier)
+├── rl_generate_synthetic_data.py # Step 2b: GPT-4o/Claude CoT synthetic data (亮点三)
+├── rl_train_dpo.py               # Step 3A: DPO training — RECOMMENDED PATH
+├── rl_train_ppo.py               # Step 3B: PPO online RL training — alternative
+├── rl_evaluation.py              # Step 4: Evaluate & compare all models
+├── rl_training_script.sh         # One-command full RL-ILearner pipeline
+│
+├── rl_configs/
+│   ├── ds_zero2.json             # DeepSpeed ZeRO-2 (lighter, for smaller models)
+│   └── ds_zero3.json             # DeepSpeed ZeRO-3 (for 32B+ models)
+│
+│── ── ── Legacy Scripts ── ── ──
+├── scripts/
+│   ├── preprocessing/            # Data preprocessing (generator & verifier formats)
+│   │   ├── data_preprocessing_generator.py
+│   │   ├── data_preprocessing_verifier_way2.py
+│   │   ├── data_preprocess_generator_one_dataset_cardiff.py
+│   │   ├── data_preprocess_generator_one_dataset_sydney.py
+│   │   ├── merged_all_training_set.py
+│   │   └── reward_data_preprocessing.py
+│   │
+│   ├── evaluation/               # Batch evaluation (BLEU + BERTScore)
+│   │   ├── batch_evaluation_Cardiff.py
+│   │   ├── batch_evaluation_Sydney.py
+│   │   ├── batch_evaluation_auckland_law.py
+│   │   ├── batch_evaluation_uk_medical_year1.py
+│   │   ├── batch_evaluation_uk_medical_year2.py
+│   │   ├── batch_evaluation_all.py
+│   │   └── bleu_score_calculator.py
+│   │
+│   ├── chat/                     # Interactive demo (Generator + Verifier loop)
+│   │   ├── chat_generator.py
+│   │   ├── chat_verifier_way2.py
+│   │   └── chat_explanation_verifier_way2.py
+│   │
+│   ├── sampling/                 # Random sample selection for evaluation
+│   ├── analysis/                 # Metric merging & analysis utilities
+│   └── gpt4/                     # GPT-4 generation and evaluation scripts
+│
+├── Paul_new_data/                # Primary PeerWise datasets (Cardiff, Sydney, ...)
+├── PeerWiseData/                 # Additional datasets (Medicine, Law)
+├── rl_preference_data/           # [runtime] DPO preference pairs
+└── rl_eval_results/              # [runtime] RL evaluation results
+```
+
+> **Note**: All scripts in `scripts/` must be run **from the project root** so that relative
+> data paths (e.g., `./Paul_new_data/`) resolve correctly:
+> ```bash
+> cd /path/to/Explanation-Generation
+> python scripts/evaluation/batch_evaluation_Cardiff.py
+> ```
+
+---
+
 ## Installation
-~~~bash
+
+### Base environment (original ILearner-LLM)
+
+```bash
 conda create -n explanation python=3.10
 conda activate explanation
 git clone https://github.com/Strong-AI-Lab/Explanation-Generation.git
 cd Explanation-Generation
 pip install -r requirements.txt
-~~~
+```
 
-### We follow the fine-tuning steps from Stanford Alpaca to conduct instruction tunning on LLaMA-7B model and replicate the Alpaca-7B
-https://github.com/tatsu-lab/stanford_alpaca#fine-tuning
+### RL-ILearner environment (recommended: use existing `trl` conda env)
 
-#### Here are the links that someone has trained and other related models.
+```bash
+conda activate trl
+# Install any missing packages
+pip install trl>=0.10.0 peft>=0.10.0 bitsandbytes>=0.43.0 \
+            deepspeed>=0.14.0 datasets>=2.18.0 accelerate>=0.27.0
+# Optional: Flash Attention 2 for ~2× faster training
+pip install flash-attn --no-build-isolation
+```
 
-Alpaca-7B: https://github.com/tatsu-lab/stanford_alpaca#recovering-alpaca-weights 
+---
 
-Alpaca-13B: https://huggingface.co/chavinlo/alpaca-13b
+## Datasets
 
-Vicuna-7B: https://github.com/lm-sys/FastChat#vicuna-7b
+| Dataset | Domain | Train (~) | Test (~) |
+|---------|--------|-----------|----------|
+| Cardiff | Biology | 4,000 | 1,400 |
+| Sydney | Biology | 500 | 460 |
+| Auckland Law | Law | 1,000 | — |
+| UK Medicine Year 1 | Medicine | 1,000 | — |
+| UK Medicine Year 2 | Medicine | 1,000 | — |
+| **Merged All** | Mixed | 5,000 | — |
 
-Vicuna-13B: https://github.com/lm-sys/FastChat#vicuna-13b
+**Data format** (JSON, one object per question):
+```json
+{
+  "instruction": "As an explanation generation expert, can you generate the explanation for the given input?",
+  "input": "Question: [stem] Option A: ... Option B: ... The correct answer is A",
+  "output": "Student-written explanation text..."
+}
+```
 
-GPT4-x-alpaca: https://huggingface.co/chavinlo/gpt4-x-alpaca
+---
 
-### More issues about installation and fine-tuning can be referred to the following link.
-https://github.com/tatsu-lab/stanford_alpaca/issues/159
+## ILearner-LLM Pipeline (Original)
 
-## Data preprocessing
-### Data preprocessing before training a generator
-Generator means that we use the whole question including question stem, each option, answer as the input and the output is the explanation. 
-~~~bash
-Data Format for generator:
-Instruct: As an explanation generation expert, can you generate the explanation for the given input?
+### 1. Data Preprocessing
 
-Input: Question, Option A, Option B, Option C, Option D, Option E, The correct answer
+```bash
+# Full merged dataset for generator training
+python scripts/preprocessing/data_preprocessing_generator.py
 
-Output: Generated Explanation
-~~~
+# Single-domain: Cardiff only, avg_rating >= 3, explanation length >= 10
+python scripts/preprocessing/data_preprocess_generator_one_dataset_cardiff.py
 
-To use the whole dataset for the training set, you can run the following command.
-~~~bash
-python data_preprocessing_generator.py
-~~~
+# Verifier data (Way 2: input = question + explanation → output = score)
+python scripts/preprocessing/data_preprocessing_verifier_way2.py
+```
 
-To use the Cardiff only average rating score >= 3 and the explanation length >=10 for the training set, you can run the following command.
-~~~bash
-python data_preprocessing_generator_one_dataset.py
-~~~
+### 2. Convert LLaMA weights to HuggingFace format
 
-### Data preprocessing before training a verifier using way 2
-Way 2 verifier means that we use the whole question including question stem, each option, answer and explanation as the input and the output is the question rating score. In this way, we avoid the assumption in way 1, while it may enlarge the length of the whole input. It is a more reasonable way at this stage.
-~~~bash
-Data Format for Way 2:
-Instruct: As a question rating verifier expert, can you generate the question rating score for the given input?
-
-Input: Question, Option A, Option B, Option C, Option D, Option E, Explanation
-
-Output: Question average rating score
-~~~
-
-~~~bash
-python data_preprocessing_verifier_way2.py
-~~~
-
-## Convert the LLaMA into huggingface supported version
-You need to convert the LLaMA into huggingface supported version before you run the script to do experiment.
-~~~bash
-## Convert the LLaMA-7B to LLaMA-7B huggingface model
+```bash
 python transformers/src/transformers/models/llama/convert_llama_weights_to_hf.py \
-    --input_dir ../../LLaMA/7B \
-    --model_size 7B \
-    --output_dir llama_7B_hf
-~~~
-~~~bash
-## Convert the LLaMA-13B to LLaMA-13B huggingface model
-python transformers/src/transformers/models/llama/convert_llama_weights_to_hf.py \
-    --input_dir ../../LLaMA/13B \
+    --input_dir /data/shared/llama2/llama-2-13b \
     --model_size 13B \
-    --output_dir llama_13B_hf
-~~~
+    --output_dir ./llama_2_13B_hf
+```
 
-## Running script
-You can find the detail training script under `training_script.sh`. In this file, it includes the commands for the following functions.
-1. Convert the LLaMA model from meta to the huggingface version.
-2. Instruction tunning for LLaMA-7B using 4 A100 80 GB GPUs to replicate the Alpaca-7B or you can download the weight for Alpaca-7B from [here](https://github.com/tatsu-lab/stanford_alpaca#recovering-alpaca-weights) or other models' weights from as above shown.
-3. Train a generator using instruction tuning on new PeerWise dataset for using LLaMA-7B or Alpaca-7B (4 A100 80GB GPUs needed) and LLaMA-13B, Alpaca-13B or Vicuna-13B (8 A100 80GB GPUs needed).
-5. Train a verifier way 2 using instruction tuning on new PeerWise dataset for using LLaMA-7B or Alpaca-7B.
+### 3. Fine-tuning (full parameter, 8× A100)
 
-## Fine-tuning example
-Here is an example for fine-tuning Vicuna-13B using Cardiff only average rating score >= 3 and the explanation length >=10 to train a generator. You need to have 8 A100 80GB GPUs.
-~~~bash
-## Fine-tuning the Vicuna-13B using Cardiff only avg >=3 and explanation length >=10 PeerWise dataset for explanation generator
+```bash
+# Example: Vicuna-13B generator on Cardiff (avg>=3, len>=10)
 CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 torchrun --nproc_per_node=8 --master_port=2026 train.py \
    --model_name_or_path vicuna-13b \
-   --data_path ./Paul_new_data/Cardiff_generator_train_avg_3_lenexp_10.json \
+   --data_path ./Paul_new_data/Cardiff_all_generator_train_avg_3_lenexp_10.json \
    --bf16 True \
-   --output_dir vicuna_13B_Cardiff_generator_avg_3_lenexp_10 \
-   --model_max_length 512 \
-   --num_train_epochs 5 \
-   --per_device_train_batch_size 1 \
-   --per_device_eval_batch_size 1 \
-   --gradient_accumulation_steps 16 \
-   --evaluation_strategy "no" \
-   --save_strategy "steps" \
-   --save_steps 2000 \
-   --save_total_limit 1 \
+   --output_dir vicuna_13B_Cardiff_all_generator_avg_3_lenexp_10 \
+   --model_max_length 512 --num_train_epochs 5 \
+   --per_device_train_batch_size 1 --gradient_accumulation_steps 16 \
    --learning_rate 2e-5 \
-   --weight_decay 0. \
-   --warmup_ratio 0.03 \
-   --lr_scheduler_type "cosine" \
-   --logging_steps 1 \
    --fsdp "full_shard auto_wrap" \
    --fsdp_transformer_layer_cls_to_wrap 'LlamaDecoderLayer' \
-   --tf32 True \
-   --gradient_checkpointing True
-~~~
+   --tf32 True --gradient_checkpointing True
+```
 
-## Run the program to interact with user
-To run the program to interact with generator and verifier way 2, you can run the following code. The code will call the method in `chat_generator.py` and `chat_verifier_way2.py`.
-~~~bash
-python chat_explanation_verifier_way2.py
-~~~
+See `training_script.sh` for all training commands.
 
-## Run the program to do batch evaluation
-To batch evaluate the generator's generated explanation for Cardiff only, you can run the follwong command.
-~~~bash
-python batch_evaluation_Cardiff.py
-~~~
+### 4. Batch Evaluation
 
-## Potential research questions
-1. Save the models from different epochs and to see the explanation generation performance.
-2. Check the hyperparameter for model.generate function and to see how it will change the model output.
-3. Think about how to generate new data and teach model what explanation is better.
+```bash
+python scripts/evaluation/batch_evaluation_Cardiff.py     # Cardiff
+python scripts/evaluation/batch_evaluation_Sydney.py      # Sydney
+python scripts/evaluation/batch_evaluation_all.py         # All domains
+```
 
-## System architecture
-https://drive.google.com/file/d/1m7FLEvTJnjxjqNRxCNnjzweYoWn43k4x/view?usp=sharing
+### 5. Interactive Demo
 
-## Acknowledgement
-Thanks the great example from [ChatDoctor](https://github.com/Kent0n-Li/ChatDoctor) which inspired us to develop the code to interact with user.
+```bash
+python scripts/chat/chat_explanation_verifier_way2.py
+```
+
+---
+
+## RL-ILearner Pipeline (New Extension)
+
+### Prerequisites (server)
+| Resource | Location |
+|----------|----------|
+| Llama-3-8B-Instruct | `/data/shared/llama3/llama3/Meta-Llama-3-8B-Instruct` |
+| Llama-3-70B-Instruct | `/data/shared/llama3/llama3/Meta-Llama-3-70B-Instruct` |
+| Cardiff Verifier | `./qiming_vicuna_13B_Cardiff_merged_verifier_way_2` |
+| Sydney Verifier | `./qiming_vicuna_13B_Sydney_merged_verifier_way_2` |
+| Free GPUs | cuda:4, cuda:5, cuda:6, cuda:7 (80GB each) |
+
+### Step 1: SFT with LoRA
+
+```bash
+conda activate trl
+deepspeed --num_gpus 4 rl_train_sft.py \
+    --model_name_or_path /data/shared/llama3/llama3/Meta-Llama-3-8B-Instruct \
+    --data_path ./Paul_new_data/Merged_Sydney_Cardiff_Law_Medical_Y1_Y2/generator_merged_avg_3_lenexp_10.json \
+    --output_dir ./rl_sft_llama3_8b_generator \
+    --num_train_epochs 3 \
+    --per_device_train_batch_size 2 --gradient_accumulation_steps 4 \
+    --lora_r 16 --lora_alpha 32 --bf16 True --gradient_checkpointing True \
+    --deepspeed ./rl_configs/ds_zero3.json
+```
+
+### Step 2: Build DPO Preference Pairs
+
+```bash
+CUDA_VISIBLE_DEVICES=4,5,6,7 python rl_build_preference_data.py \
+    --generator_path /data/shared/llama3/llama3/Meta-Llama-3-8B-Instruct \
+    --lora_adapter_path ./rl_sft_llama3_8b_generator \
+    --verifier_path ./qiming_vicuna_13B_Cardiff_merged_verifier_way_2 \
+    --data_path ./Paul_new_data/Merged_Sydney_Cardiff_Law_Medical_Y1_Y2/generator_merged_avg_3_lenexp_10.json \
+    --output_path ./rl_preference_data/preference_pairs.json \
+    --num_samples 6 --min_score_gap 0.3 --add_hard_negatives \
+    --generator_device cuda:4 --verifier_device cuda:7
+```
+
+### Step 2b: Synthetic Data Augmentation (Optional, 亮点三)
+
+```bash
+export OPENAI_API_KEY="sk-..."
+python rl_generate_synthetic_data.py \
+    --data_path ./Paul_new_data/Merged_Sydney_Cardiff_Law_Medical_Y1_Y2/generator_merged_avg_3_lenexp_10.json \
+    --output_path ./rl_preference_data/preference_pairs_augmented.json \
+    --merge_with ./rl_preference_data/preference_pairs.json \
+    --api_provider openai --api_key $OPENAI_API_KEY --model gpt-4o \
+    --num_questions 1000 --negatives_per_question 2
+```
+
+### Step 3A: DPO Training (Recommended)
+
+```bash
+CUDA_VISIBLE_DEVICES=4,5,6,7 deepspeed --num_gpus 4 rl_train_dpo.py \
+    --model_name_or_path /data/shared/llama3/llama3/Meta-Llama-3-8B-Instruct \
+    --sft_adapter_path ./rl_sft_llama3_8b_generator \
+    --preference_data_path ./rl_preference_data/preference_pairs_augmented.json \
+    --output_dir ./rl_dpo_llama3_8b_generator \
+    --num_train_epochs 2 --beta 0.1 \
+    --per_device_train_batch_size 1 --gradient_accumulation_steps 8 \
+    --lora_r 16 --lora_alpha 32 \
+    --bf16 True --gradient_checkpointing True \
+    --deepspeed ./rl_configs/ds_zero3.json
+```
+
+### Step 4: Full Automated Pipeline
+
+```bash
+# Edit BASE_MODEL and VERIFIER_PATH in the script first, then:
+bash rl_training_script.sh
+```
+
+### Step 5: Evaluate All Models
+
+```bash
+CUDA_VISIBLE_DEVICES=4,5 python rl_evaluation.py \
+    --test_data_path ./Paul_new_data/Cardiff/Cardiff_vicuna_13b_finetuned_random_100.json \
+    --verifier_path ./qiming_vicuna_13B_Cardiff_merged_verifier_way_2 \
+    --output_path ./rl_eval_results/comparison.json \
+    --sft_model_path /data/shared/llama3/llama3/Meta-Llama-3-8B-Instruct \
+    --sft_lora_path ./rl_sft_llama3_8b_generator \
+    --dpo_model_path /data/shared/llama3/llama3/Meta-Llama-3-8B-Instruct \
+    --dpo_lora_path ./rl_dpo_llama3_8b_generator \
+    --ilearner_model_path ./vicuna_13B_Cardiff_all_generator_avg_3_lenexp_10 \
+    --ilearner_k 5 --ilearner_is_legacy \
+    --device cuda:4 --verifier_device cuda:5
+```
+
+---
+
+## Experimental Results
+
+### ILearner-LLM Baseline (Reproduced from saved evaluation files)
+
+#### Cardiff Dataset
+
+| Model | Training Data | N (test) | BLEU ↑ | BERTScore F1 ↑ |
+|-------|--------------|----------|---------|----------------|
+| Alpaca-7B (no Cardiff SFT) | — | 4,203 | 0.1952 | 0.5550 |
+| LLaMA-7B (Cardiff SFT) | Cardiff | 4,203 | 0.2378 | 0.5466 |
+| Alpaca-7B (Cardiff SFT) | Cardiff | 4,203 | 0.2415 | 0.5494 |
+| GPT4-X-Alpaca-13B (Cardiff SFT) | Cardiff | 4,203 | 0.2469 | 0.5466 |
+| **Vicuna-13B (Cardiff SFT)** | Cardiff | 4,203 | **0.2402** | **0.5562** |
+| Vicuna-13B (merged all, 100 sample) | All domains | 100 | 0.1523 | 0.5797 |
+
+#### Sydney Dataset
+
+| Model | Training Data | N (test) | BLEU ↑ | BERTScore F1 ↑ |
+|-------|--------------|----------|---------|----------------|
+| Vicuna-13B (no SFT) | — | 463 | 0.0818 | 0.1845 |
+| **Vicuna-13B (Sydney SFT, avg≥3, len≥10)** | Sydney | 463 | **0.3317** | **0.6255** |
+| Vicuna-13B (merged all, 100 sample) | All domains | 100 | 0.1589 | 0.5343 |
+
+---
+
+### RL-ILearner vs Baseline — Cardiff (To Be Updated After Training)
+
+| Model | Method | Inference | BLEU ↑ | BERTScore F1 ↑ | Verifier Score ↑ | Latency |
+|-------|--------|-----------|---------|----------------|------------------|---------|
+| Vicuna-13B (Cardiff SFT) | Full-param | K=1 | 0.2402 | 0.5562 | — | 1× |
+| ILearner-LLM Vicuna-13B | Prompt loop | K=5 | — | — | — | 5× |
+| Llama-3-8B (SFT LoRA) | LoRA SFT | K=1 | *pending* | *pending* | *pending* | ~1× |
+| **Llama-3-8B (DPO LoRA)** | LoRA DPO | K=1 | *pending* | *pending* | *pending* | ~1× |
+| Llama-3-8B (PPO LoRA) | LoRA PPO | K=1 | *pending* | *pending* | *pending* | ~1× |
+| **Llama-3-8B (DPO + GPT-4o Synth)** | LoRA DPO + CoT | K=1 | *pending* | *pending* | *pending* | ~1× |
+
+> Run `bash rl_training_script.sh` then `python rl_evaluation.py` to populate this table.
+
+---
+
+## Model Zoo
+
+### Pre-trained Base Models (on this server)
+
+| Model | Local Path | Params |
+|-------|-----------|--------|
+| LLaMA-2-7B-HF | `/data/shared/llama2/llama-2-7b-hf` | 7B |
+| LLaMA-2-13B-HF | `/data/shared/llama2/llama-2-13b-hf` | 13B |
+| LLaMA-2-70B-HF | `/data/shared/llama2/llama-2-70b-hf` | 70B |
+| **Llama-3-8B-Instruct** | `/data/shared/llama3/llama3/Meta-Llama-3-8B-Instruct` | 8B |
+| **Llama-3-70B-Instruct** | `/data/shared/llama3/llama3/Meta-Llama-3-70B-Instruct` | 70B |
+
+### Fine-tuned Models (in this project directory)
+
+| Model | Path | Task | Domain |
+|-------|------|------|--------|
+| Vicuna-13B Generator | `./vicuna_13B_Cardiff_all_generator_avg_3_lenexp_10` | Generator | Cardiff |
+| Vicuna-13B Verifier | `./qiming_vicuna_13B_Cardiff_merged_verifier_way_2` | Verifier | Cardiff |
+| Vicuna-13B Verifier | `./qiming_vicuna_13B_Sydney_merged_verifier_way_2` | Verifier | Sydney |
+| Vicuna-13B Verifier | `./qiming_vicuna_13B_Auckland_law_merged_verifier_way_2` | Verifier | Law |
+| Vicuna-13B Verifier | `./qiming_vicuna_13B_UK_medicine_year1_merged_verifier_way_2` | Verifier | Medicine Y1 |
+| Alpaca-7B Generator | `./qiming_alpaca_7B_Cardiff_generator` | Generator | Cardiff |
+
+---
+
+## Key Design Decisions
+
+### Why DPO over PPO?
+
+| Factor | DPO | PPO |
+|--------|-----|-----|
+| Models in memory | 2 (Actor + Reference) | 4 (Actor + Critic + Reference + Reward) |
+| Training stability | High (offline, no reward hacking) | Lower (needs careful KL tuning) |
+| Convergence speed | 1-2 epochs | 10k-50k steps |
+| Reward ceiling | Lower (bounded by data) | Higher (can discover new strategies) |
+| **Recommendation** | ✅ Default choice | For when data is exhausted |
+
+### Why LoRA over full fine-tuning?
+
+| Factor | LoRA | Full Fine-tuning |
+|--------|------|-----------------|
+| Trainable parameters | <1% | 100% |
+| VRAM for 8B model | ~2× A100 | ~8× A100 |
+| Adapter file size | ~50MB | ~16GB |
+| Deployment hot-swap | <10ms (vLLM) | Reload entire model |
+| Quality | Matches full FT | Best possible |
+
+---
+
+## Acknowledgements
+
+- Original ILearner-LLM design inspired by [Stanford Alpaca](https://github.com/tatsu-lab/stanford_alpaca) and [ChatDoctor](https://github.com/Kent0n-Li/ChatDoctor)
+- RL training via [TRL](https://github.com/huggingface/trl) (Hugging Face)
+- LoRA / PEFT via [PEFT](https://github.com/huggingface/peft) (Hugging Face)
+- Base models: [Meta Llama-3](https://llama.meta.com/), [Qwen3](https://huggingface.co/Qwen)
+- PeerWise platform: [peerwise.cs.auckland.ac.nz](https://peerwise.cs.auckland.ac.nz)
+- System architecture diagram: [Google Drive](https://drive.google.com/file/d/1m7FLEvTJnjxjqNRxCNnjzweYoWn43k4x/view?usp=sharing)
