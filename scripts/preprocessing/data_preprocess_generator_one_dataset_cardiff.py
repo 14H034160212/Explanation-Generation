@@ -8,21 +8,23 @@ import json
 from bs4 import BeautifulSoup
 import random
 
-# cardiff_all_question=pd.read_excel('./Paul_new_data/Cardiff_all_questions.xlsx')
-Sydney_all_questions=pd.read_excel('./Paul_new_data/Sydney_all_questions.xlsx')
-Sydney_additionalLTISet_all_questions=pd.read_excel('./Paul_new_data/Sydney_additionalLTISet_all_questions.xlsx')
-name_list = ["Sydney_all_question"]#, "Sydney_all_questions", "Sydney_additionalLTISet_all_questions"]
+cardiff_all_question=pd.read_excel('./Paul_new_data/Cardiff_all_questions.xlsx')
+# Sydney_all_questions=pd.read_excel('./Paul_new_data/Sydney_all_questions.xlsx')
+# Sydney_additionalLTISet_all_questions=pd.read_excel('./Paul_new_data/Sydney_additionalLTISet_all_questions.xlsx')
+name_list = ["Cardiff_all_question"]#, "Sydney_all_questions", "Sydney_additionalLTISet_all_questions"]
 # cardiff_all_question.rename(columns={0:'id',1:'course_id',2:'timestamp',3:'user',4:'avg_rating',5:'total_responses',6:'total_ratings',7:'top_rating_count',8:'avg_difficulty',9:'total_comments',10:'deleted',11:'answer',12:'numAlts',13:'question',14:'altA',15:'altB',16:'altC',17:'altD',18:'altE',19:'explanation'},inplace=1)
 # Sydney_all_questions.rename(columns={0:'id',1:'course_id',2:'timestamp',3:'user',4:'avg_rating',5:'total_responses',6:'total_ratings',7:'top_rating_count',8:'avg_difficulty',9:'total_comments',10:'deleted',11:'answer',12:'numAlts',13:'question',14:'altA',15:'altB',16:'altC',17:'altD',18:'altE',19:'explanation'},inplace=1)
 # Sydney_additionalLTISet_all_questions.rename(columns={0:'id',1:'course_id',2:'timestamp',3:'user',4:'avg_rating',5:'total_responses',6:'total_ratings',7:'top_rating_count',8:'avg_difficulty',9:'total_comments',10:'deleted',11:'answer',12:'numAlts',13:'question',14:'altA',15:'altB',16:'altC',17:'altD',18:'altE',19:'explanation'},inplace=1)
 
-# cardiff_all_question_list = []
-Sydney_all_questions_list = []
-Sydney_all_questions_list2 = []
+cardiff_all_question_list = []
+# Sydney_all_questions_list = []
+# Sydney_all_questions_list2 = []
 # Sydney_additionalLTISet_all_questions_list = []
 
-total_questions = [Sydney_all_questions, Sydney_additionalLTISet_all_questions]#, Sydney_all_questions, Sydney_additionalLTISet_all_questions]
-total_list = [Sydney_all_questions_list]#, Sydney_all_questions_list, Sydney_additionalLTISet_all_questions_list]
+total_questions = [cardiff_all_question]#, Sydney_all_questions, Sydney_additionalLTISet_all_questions]
+total_list = [cardiff_all_question_list]#, Sydney_all_questions_list, Sydney_additionalLTISet_all_questions_list]
+total_counter = 0
+total_explanation_length_coutner = 0
 for i in range(len(total_questions)):
     for index, row in total_questions[i].iterrows():
         question = str(row["question"])
@@ -61,6 +63,11 @@ for i in range(len(total_questions)):
         
         if explanation == "" or avg_rating < 3 or len(explanation.split()) < 10:
             continue
+        
+        if isinstance(total_ratings, (int, float)):
+            total_counter = total_counter + total_ratings
+            
+        total_explanation_length_coutner = total_explanation_length_coutner + len(explanation.split())
         
         if numAlts == 1:
             total_list[0].append({
@@ -113,9 +120,9 @@ test_list = final_total_list[split_index:]
 
 
 ## 80% data from the final_total_list will be used for training
-with open('./Paul_new_data/Sydney_all_generator_train_avg_3_lenexp_10.json', "w") as f:
+with open('./Paul_new_data/Cardiff_all_generator_train_avg_3_lenexp_10.json', "w") as f:
     json.dump(train_list, f, indent=4)
 
 ## 20% data from the final_total_list will be used for testing and evaluation
-with open('./Paul_new_data/Sydney_all_generator_test_avg_3_lenexp_10.json', "w") as f:
+with open('./Paul_new_data/Cardiff_all_generator_test_avg_3_lenexp_10.json', "w") as f:
     json.dump(test_list, f, indent=4)

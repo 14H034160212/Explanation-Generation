@@ -22,19 +22,23 @@ from tqdm import tqdm
 
 # load_model_name = "./qiming_alpaca_7B_Cardiff_generator/"
 # load_model_name_list = ["./qiming_alpaca_7B_Cardiff_generator/", "./qiming_alpaca_7B/", "./LLaMA_7B_Cardiff_generator/"]
-load_model_name_list = ["./vicuna-13b/", "chavinlo/alpaca-13b", "chavinlo/gpt4-x-alpaca"]
-path_list = ["./Paul_new_data/"]
+# load_model_name_list = ["./vicuna-13b/", "./vicuna_13B_Cardiff_all_generator_avg_3_lenexp_10"]
+load_model_name_list = ["./llama_2_13B_chat_merged_all_generator_avg_3_lenexp_10/"]
+path_list = ["./Paul_new_data/Cardiff/"]
 # cardiff_all_question=pd.read_excel(path_list[0]+'Questions.xlsx')
-cardiff_all_question = pd.read_json(path_list[0]+"Cardiff_generator_test.json")
+cardiff_all_question = pd.read_json(path_list[0]+"Cardiff_vicuna_13b_finetuned_random_100.json")
 
 # tag = "alpaca_7B_Cardiff_Sydney_merged_generator_"
 # tag = "alpaca_7B_"
 # tag1 = "alpaca_7B_Cardiff_generator_"
 # tag2 = "alpaca_7B_Cardiff_test_"
 # tag3 = "LLaMA_7B_Cardiff_generator_"
-tag4 = "Vicuna_13B_Cardiff_generator_"
-tag5 = "Alpaca_13B_Cardiff_generator_"
-tag6 = "gpt4_x_alpaca_13B_Cardiff_generator_"
+
+# tag4 = "Vicuna_13B_Cardiff_generator_"
+# tag5 = "Fine_tuned_Vicuna_13B_Cardiff_generator_"
+tag4 = "Fine_tuned_llama_2_13B_chat_Cardiff_generator_"
+
+# tag6 = "gpt4_x_alpaca_13B_Cardiff_generator_"
 # cardiff_all_question.rename(columns={0:'id',1:'course_id',2:'timestamp',3:'user',4:'avg_rating',5:'total_responses',6:'total_ratings',7:'top_rating_count',8:'avg_difficulty',9:'total_comments',10:'deleted',11:'answer',12:'numAlts',13:'question',14:'altA',15:'altB',16:'altC',17:'altD',18:'altE',19:'explanation'},inplace=1)
 # Sydney_all_questions.rename(columns={0:'id',1:'course_id',2:'timestamp',3:'user',4:'avg_rating',5:'total_responses',6:'total_ratings',7:'top_rating_count',8:'avg_difficulty',9:'total_comments',10:'deleted',11:'answer',12:'numAlts',13:'question',14:'altA',15:'altB',16:'altC',17:'altD',18:'altE',19:'explanation'},inplace=1)
 # Sydney_additionalLTISet_all_questions.rename(columns={0:'id',1:'course_id',2:'timestamp',3:'user',4:'avg_rating',5:'total_responses',6:'total_ratings',7:'top_rating_count',8:'avg_difficulty',9:'total_comments',10:'deleted',11:'answer',12:'numAlts',13:'question',14:'altA',15:'altB',16:'altC',17:'altD',18:'altE',19:'explanation'},inplace=1)
@@ -43,9 +47,7 @@ total_questions = [cardiff_all_question]
 # total_list = [tag1+"cardiff_test_question_generated_explanation", 
 #               tag2+"cardiff_test_question_generated_explanation", 
 #               tag3+"cardiff_test_question_generated_explanation"]
-total_list = [tag4+"cardiff_test_question_generated_explanation",
-              tag5+"cardiff_test_question_generated_explanation",
-              tag6+"cardiff_test_question_generated_explanation"]
+total_list = [tag4+"cardiff_test_question_generated_explanation"]
 def load_model(model_name, eight_bit=0, device_map="auto"):
     global model, tokenizer, generator
 
@@ -113,18 +115,23 @@ for model_id in range(len(load_model_name_list)):
                 response = response.strip()
             data["instruction"].append(row["instruction"].replace("</s>", ""))
             data["input"].append(row["input"].replace("</s>", ""))
-            data["Explanation"].append(row["output"])
+            explanation = ""
+            if "output" in total_questions[i].columns:
+                groundtruth = row["output"]
+            elif "Explanation" in total_questions[i].columns:
+                groundtruth = row["Explanation"]
+            data["Explanation"].append(groundtruth)
             data["Generated_Explanation"].append(response)
-            precision, recall, bertscore = score([response], [row["output"]], lang="en", model_type="bert-base-uncased", verbose=False)
+            precision, recall, bertscore = score([response], [groundtruth], lang="en", model_type="bert-base-uncased", verbose=False)
             bertscore = bertscore.item()
-            data["bleu_score"].append(sentence_bleu([row["output"]], response))
+            data["bleu_score"].append(sentence_bleu([groundtruth], response))
             data["bert_score"].append(bertscore)
             
             json_data.append({"instruction":row["instruction"].replace("</s>", ""),
                             "input":row["input"].replace("</s>", ""),
-                            "Explanation":row["output"],
+                            "Explanation":groundtruth,
                             "Generated_Explanation":response,
-                            "bleu_score":sentence_bleu([row["output"]], response),
+                            "bleu_score":sentence_bleu([groundtruth], response),
                             "bert_score":bertscore})
 
 
