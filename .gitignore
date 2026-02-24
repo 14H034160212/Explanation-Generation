@@ -65,6 +65,19 @@ transformers/
 cache/
 wandb/
 temp_pdf.txt
+*.log
 
-# RL configs (if contains sensitive/large data)
-# rl_configs/
+# Claude session data
+.claude/
+
+# RL model checkpoint directories
+rl_sft_llama2_13b_generator/
+rl_dpo_llama2_13b_generator/
+rl_dpo_v2_llama2_13b_generator/
+rl_dpo_v3_llama2_13b_generator/
+rl_ppo_llama2_13b_generator/
+
+# RL preference data (large generated data, re-runnable)
+rl_preference_data/
+rl_preference_data_v2/
+rl_preference_data_v3/

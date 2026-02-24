@@ -9,16 +9,22 @@ Evaluates all models on the test set and produces a comparison table:
 
 Metrics:
   - BLEU Score: n-gram overlap with ground-truth student explanations
-  - BERTScore F1: Semantic similarity to ground-truth
+  - BERTScore F1 (vs Student): Semantic similarity to student ground-truth explanation
+  - BERTScore F1 (vs Answer): Answer-anchored — semantic similarity to the correct option
+    text extracted from the question. Reference-free w.r.t. student explanations;
+    measures whether the generated explanation covers the correct answer concept.
+  - Answer Coverage Rate (ACR): Fraction of key terms in the correct option text that
+    appear in the generated explanation. Fast lexical proxy for answer correctness.
   - Verifier Score: Quality rating from the trained Verifier model
   - Avg. Inference Time: Latency per explanation (1-shot vs K-round)
 
 Usage:
     python rl_evaluation.py \
         --test_data_path ./Paul_new_data/Cardiff/Cardiff_vicuna_13b_finetuned_random_100.json \
-        --models_config ./rl_configs/eval_models.json \
-        --verifier_path ./llama_2_13B_merged_all_evaluator \
-        --output_path ./rl_eval_results/comparison.json
+        --verifier_path ./qiming_alpaca_7B_Cardiff_Sydney_merged_verifier_way_2 \
+        --output_path ./rl_eval_results/comparison.json \
+        --sft_model_path /data/shared/llama2/llama-2-13b-hf \
+        --sft_lora_path ./rl_sft_llama2_13b_generator
 """
 
 import argparse
@@ -35,7 +41,7 @@ from bert_score import score as bert_score_fn
 from nltk.translate.bleu_score import SmoothingFunction, sentence_bleu
 from peft import PeftModel
 from tqdm import tqdm
-from transformers import AutoModelForCausalLM, AutoTokenizer
+from transformers import AutoModelForCausalLM, AutoModelForSequenceClassification, AutoTokenizer
 
 logging.basicConfig(
     level=logging.INFO,
@@ -59,6 +65,51 @@ GENERATOR_INSTRUCTION = (
 )
 
 
+# ---------------------------------------------------------------------------
+# Answer-grounded evaluation helpers
+# ---------------------------------------------------------------------------
+
+def extract_correct_option_text(input_text: str):
+    """
+    Parse the correct answer letter and option text from the question input.
+
+    The input format contains:
+        "Option A: <text> Option B: <text> ... The correct answer is Option X."
+
+    Returns:
+        (correct_letter, option_text) — e.g. ("C", "Long head of triceps brachii")
+        Returns (None, None) if parsing fails.
+    """
+    m = re.search(r"The correct answer is Option ([A-Z])", input_text)
+    if not m:
+        return None, None
+    letter = m.group(1)
+    opt_pat = rf"Option {letter}:\s*(.+?)(?:\s+Option [A-Z]:|The correct answer|$)"
+    opt_m = re.search(opt_pat, input_text, re.DOTALL)
+    opt_text = opt_m.group(1).strip() if opt_m else None
+    return letter, opt_text
+
+
+def answer_coverage_rate(explanation: str, correct_option_text: str) -> float:
+    """
+    Answer Coverage Rate (ACR): lexical measure of whether the generated
+    explanation mentions the key terms in the correct answer option.
+
+    Computed as: |matched key terms| / |total key terms|
+    where key terms are words of ≥4 characters in the correct option text.
+
+    Returns 0.0 if inputs are missing or no key terms found.
+    """
+    if not explanation or not correct_option_text:
+        return 0.0
+    exp_lower = explanation.lower()
+    key_terms = re.findall(r"\b\w{4,}\b", correct_option_text.lower())
+    if not key_terms:
+        return 0.0
+    matched = sum(1 for t in key_terms if t in exp_lower)
+    return matched / len(key_terms)
+
+
 @dataclass
 class ModelConfig:
     """Configuration for a single model to evaluate."""
@@ -74,9 +125,13 @@ class ModelConfig:
 class EvalResult:
     model_name: str
     bleu_scores: List[float]
-    bert_scores: List[float]
+    bert_scores: List[float]           # vs student explanation (traditional)
+    bert_scores_answer: List[float]    # vs correct option text (answer-anchored, new)
+    acr_scores: List[float]            # Answer Coverage Rate (lexical, new)
+    nli_scores: List[float]            # NLI entailment score (explanation → correct option)
     verifier_scores: List[float]
     inference_times: List[float]
+    generated_explanations: List[str]  # saved for qualitative analysis
 
     @property
     def avg_bleu(self) -> float:
@@ -85,6 +140,18 @@ class EvalResult:
     @property
     def avg_bert(self) -> float:
         return sum(self.bert_scores) / len(self.bert_scores) if self.bert_scores else 0
+
+    @property
+    def avg_bert_answer(self) -> float:
+        return sum(self.bert_scores_answer) / len(self.bert_scores_answer) if self.bert_scores_answer else 0
+
+    @property
+    def avg_acr(self) -> float:
+        return sum(self.acr_scores) / len(self.acr_scores) if self.acr_scores else 0
+
+    @property
+    def avg_nli(self) -> float:
+        return sum(self.nli_scores) / len(self.nli_scores) if self.nli_scores else 0
 
     @property
     def avg_verifier(self) -> float:
@@ -99,9 +166,68 @@ class EvalResult:
             "model": self.model_name,
             "avg_bleu": round(self.avg_bleu, 4),
             "avg_bert_score_f1": round(self.avg_bert, 4),
+            "avg_bert_score_f1_answer_anchored": round(self.avg_bert_answer, 4),
+            "avg_answer_coverage_rate": round(self.avg_acr, 4),
+            "avg_nli_entailment": round(self.avg_nli, 4),
             "avg_verifier_score": round(self.avg_verifier, 4),
             "avg_inference_time_s": round(self.avg_time, 3),
         }
+
+
+def load_nli_model(model_name: str, device: str = "cpu", cache_dir: str = "cache"):
+    """
+    Load a DeBERTa-based NLI model for entailment scoring.
+    Default: cross-encoder/nli-deberta-v3-small (lightweight, ~90 MB).
+
+    Returns (model, tokenizer, entailment_idx) where entailment_idx is the
+    index of the ENTAILMENT class in the model's label space.
+    """
+    logger.info(f"Loading NLI model: {model_name} ...")
+    # use_fast=False: older tokenizers lib (0.13.x) can't parse DeBERTa-v3 fast tokenizer
+    nli_tokenizer = AutoTokenizer.from_pretrained(model_name, cache_dir=cache_dir, use_fast=False)
+    nli_model = AutoModelForSequenceClassification.from_pretrained(
+        model_name, cache_dir=cache_dir
+    ).to(device)
+    nli_model.eval()
+    # Determine entailment label index from id2label
+    id2label = nli_model.config.id2label or {}
+    entailment_idx = next(
+        (k for k, v in id2label.items() if "entail" in v.lower()), 1
+    )
+    logger.info(f"  NLI model loaded. id2label={id2label}, entailment_idx={entailment_idx}")
+    return nli_model, nli_tokenizer, entailment_idx
+
+
+@torch.no_grad()
+def compute_nli_scores(
+    nli_model,
+    nli_tokenizer,
+    explanations: List[str],
+    hypotheses: List[str],
+    entailment_idx: int,
+    device: str = "cpu",
+    batch_size: int = 16,
+) -> List[float]:
+    """
+    Compute NLI entailment probability for each (explanation, hypothesis) pair.
+    Premise = generated explanation; Hypothesis = correct option text.
+    Returns list of entailment probabilities in [0, 1].
+    """
+    scores = []
+    for i in range(0, len(explanations), batch_size):
+        batch_exp = explanations[i:i + batch_size]
+        batch_hyp = hypotheses[i:i + batch_size]
+        enc = nli_tokenizer(
+            batch_exp, batch_hyp,
+            padding=True, truncation=True, max_length=512,
+            return_tensors="pt",
+        )
+        enc = {k: v.to(device) for k, v in enc.items()}
+        logits = nli_model(**enc).logits          # (B, num_labels)
+        probs = torch.softmax(logits, dim=-1)     # (B, num_labels)
+        entail_probs = probs[:, entailment_idx].cpu().tolist()
+        scores.extend(entail_probs)
+    return scores
 
 
 def load_model_and_tokenizer(config: ModelConfig, device: str = "cuda", cache_dir: str = "cache"):
@@ -231,7 +357,8 @@ def get_verifier_score(
         f"Output: "
     )
     tokens = verifier_tokenizer(fulltext, return_tensors="pt", truncation=True, max_length=1024)
-    tokens = tokens.input_ids.to(device)
+    verifier_device = next(verifier_model.parameters()).device
+    tokens = tokens.input_ids.to(verifier_device)
     out = verifier_model.generate(
         tokens,
         max_new_tokens=16,
@@ -256,6 +383,10 @@ def evaluate_model(
     device: str = "cuda",
     cache_dir: str = "cache",
     max_new_tokens: int = 512,
+    nli_model=None,
+    nli_tokenizer=None,
+    nli_entailment_idx: int = 1,
+    nli_device: str = "cpu",
 ) -> EvalResult:
     """Run full evaluation for one model on the test set."""
     model, tokenizer = load_model_and_tokenizer(config, device=device, cache_dir=cache_dir)
@@ -263,11 +394,18 @@ def evaluate_model(
         model_name=config.name,
         bleu_scores=[],
         bert_scores=[],
+        bert_scores_answer=[],
+        acr_scores=[],
+        nli_scores=[],
         verifier_scores=[],
         inference_times=[],
+        generated_explanations=[],
     )
 
     smoother = SmoothingFunction().method1
+    generated_explanations = []
+    ground_truths_for_bert = []
+    correct_option_texts = []   # for answer-anchored BERTScore
 
     for item in tqdm(test_data, desc=f"Evaluating {config.name}"):
         instruction = item.get("instruction", GENERATOR_INSTRUCTION).replace("</s>", "").strip()
@@ -276,6 +414,9 @@ def evaluate_model(
 
         if not input_text or not ground_truth:
             continue
+
+        # Extract correct answer option text for answer-grounded metrics
+        _, correct_opt_text = extract_correct_option_text(input_text)
 
         start_time = time.time()
 
@@ -314,12 +455,19 @@ def evaluate_model(
         if not explanation:
             continue
 
-        # Compute BLEU
+        generated_explanations.append(explanation)
+        ground_truths_for_bert.append(ground_truth)
+        correct_option_texts.append(correct_opt_text or "")
+
+        # Compute BLEU (vs student explanation — traditional)
         bleu = sentence_bleu(
             [ground_truth.split()],
             explanation.split(),
             smoothing_function=smoother,
         )
+
+        # Compute Answer Coverage Rate (ACR) — lexical, reference-free
+        acr = answer_coverage_rate(explanation, correct_opt_text)
 
         # Compute Verifier Score (final 1-shot score for RL models)
         v_score = get_verifier_score(
@@ -327,20 +475,64 @@ def evaluate_model(
         )
 
         result.bleu_scores.append(bleu)
+        result.acr_scores.append(acr)
         result.verifier_scores.append(v_score)
         result.inference_times.append(elapsed)
+        result.generated_explanations.append(explanation)
 
     # Compute BERTScore in batch for all predictions
-    if result.bleu_scores:
-        preds = [item.get("output", item.get("Explanation", "")) for item in test_data
-                 if item.get("input", "").strip()]
-        # Re-collect generated explanations for BERTScore (simplified: use dummy batch)
-        # In practice, store generated texts and compute BERTScore in one batch
-        logger.info(f"  Computing BERTScore for {config.name} ...")
-        # Note: BERTScore is computed on whatever was generated per item.
-        # For simplicity here we set it equal to BLEU as a placeholder for the loop structure.
-        # The actual BERTScore computation is done below.
-        result.bert_scores = [0.0] * len(result.bleu_scores)  # Placeholder
+    if generated_explanations:
+        from bert_score import score as bert_score_fn
+
+        # Traditional: generated vs student explanation
+        logger.info(f"  Computing BERTScore (vs student) for {config.name} ...")
+        _, _, F1 = bert_score_fn(
+            generated_explanations, ground_truths_for_bert,
+            lang="en", verbose=False
+        )
+        result.bert_scores = F1.tolist()
+
+        # New: generated vs correct option text (answer-anchored, reference-free)
+        valid_pairs = [(g, c) for g, c in zip(generated_explanations, correct_option_texts) if c]
+        if valid_pairs:
+            logger.info(f"  Computing BERTScore (vs correct answer) for {config.name} ...")
+            gen_valid, ans_valid = zip(*valid_pairs)
+            _, _, F1_ans = bert_score_fn(
+                list(gen_valid), list(ans_valid),
+                lang="en", verbose=False
+            )
+            # Fill scores back (use 0.0 for examples without extractable option text)
+            idx = 0
+            for c in correct_option_texts:
+                if c:
+                    result.bert_scores_answer.append(F1_ans[idx].item())
+                    idx += 1
+                else:
+                    result.bert_scores_answer.append(0.0)
+        else:
+            result.bert_scores_answer = [0.0] * len(generated_explanations)
+
+        # NLI entailment: explanation → correct option text (answer-anchored)
+        if nli_model is not None:
+            valid_nli = [(g, c) for g, c in zip(generated_explanations, correct_option_texts) if c]
+            if valid_nli:
+                logger.info(f"  Computing NLI entailment scores for {config.name} ...")
+                gen_nli, hyp_nli = zip(*valid_nli)
+                nli_vals = compute_nli_scores(
+                    nli_model, nli_tokenizer,
+                    list(gen_nli), list(hyp_nli),
+                    entailment_idx=nli_entailment_idx,
+                    device=nli_device,
+                )
+                idx = 0
+                for c in correct_option_texts:
+                    if c:
+                        result.nli_scores.append(nli_vals[idx])
+                        idx += 1
+                    else:
+                        result.nli_scores.append(0.0)
+            else:
+                result.nli_scores = [0.0] * len(generated_explanations)
 
     # Clean up model from GPU memory
     del model
@@ -361,6 +553,12 @@ def main():
     parser.add_argument("--verifier_device", default="cuda:1", help="Device for verifier model.")
     parser.add_argument("--cache_dir", default="cache")
     parser.add_argument("--max_new_tokens", type=int, default=512)
+    parser.add_argument("--nli_model", default="cross-encoder/nli-deberta-v3-small",
+                        help="NLI model for entailment scoring (default: cross-encoder/nli-deberta-v3-small).")
+    parser.add_argument("--nli_device", default="cpu",
+                        help="Device for NLI model (cpu or cuda:N). Defaults to cpu.")
+    parser.add_argument("--skip_nli", action="store_true",
+                        help="Skip NLI entailment metric (faster, no download needed).")
 
     # Model specification arguments
     parser.add_argument("--sft_model_path", default=None,
@@ -371,6 +569,10 @@ def main():
                         help="Base model path for DPO-trained model.")
     parser.add_argument("--dpo_lora_path", default=None,
                         help="LoRA adapter path from DPO training.")
+    parser.add_argument("--dpo_v2_model_path", default=None,
+                        help="Base model path for DPO-v2 model (improved preference data).")
+    parser.add_argument("--dpo_v2_lora_path", default=None,
+                        help="LoRA adapter path from DPO-v2 training.")
     parser.add_argument("--ppo_model_path", default=None,
                         help="Base model path for PPO-trained model.")
     parser.add_argument("--ppo_lora_path", default=None,
@@ -392,8 +594,9 @@ def main():
 
     # ---------- Load Verifier ----------
     logger.info(f"Loading verifier from {args.verifier_path} ...")
+    # use_fast=False: LlamaTokenizerFast has infinite recursion on older model configs
     verifier_tokenizer = AutoTokenizer.from_pretrained(
-        args.verifier_path, cache_dir=args.cache_dir, trust_remote_code=True
+        args.verifier_path, cache_dir=args.cache_dir, trust_remote_code=True, use_fast=False
     )
     if verifier_tokenizer.pad_token is None:
         verifier_tokenizer.pad_token = verifier_tokenizer.eos_token
@@ -427,6 +630,14 @@ def main():
             use_kround=False,
         ))
 
+    if args.dpo_v2_model_path and args.dpo_v2_lora_path:
+        model_configs.append(ModelConfig(
+            name="RL-DPO-v2 (K=1)",
+            model_path=args.dpo_v2_model_path,
+            lora_adapter_path=args.dpo_v2_lora_path,
+            use_kround=False,
+        ))
+
     if args.ppo_model_path and args.ppo_lora_path:
         model_configs.append(ModelConfig(
             name="RL-PPO (K=1)",
@@ -448,6 +659,16 @@ def main():
         logger.error("No models specified. Use --sft_model_path, --dpo_model_path, etc.")
         return
 
+    # ---------- Load NLI model ----------
+    nli_model, nli_tokenizer, nli_entailment_idx = None, None, 1
+    if not args.skip_nli:
+        try:
+            nli_model, nli_tokenizer, nli_entailment_idx = load_nli_model(
+                args.nli_model, device=args.nli_device, cache_dir=args.cache_dir
+            )
+        except Exception as e:
+            logger.warning(f"NLI model load failed ({e}). Skipping NLI metric.")
+
     # ---------- Evaluate each model ----------
     all_results = []
     for config in model_configs:
@@ -463,6 +684,10 @@ def main():
             device=args.device,
             cache_dir=args.cache_dir,
             max_new_tokens=args.max_new_tokens,
+            nli_model=nli_model,
+            nli_tokenizer=nli_tokenizer,
+            nli_entailment_idx=nli_entailment_idx,
+            nli_device=args.nli_device,
         )
         all_results.append(result)
 
@@ -472,18 +697,30 @@ def main():
             logger.info(f"  {k}: {v}")
 
     # ---------- Summary Table ----------
-    logger.info("\n" + "="*80)
+    logger.info("\n" + "="*100)
     logger.info("FINAL COMPARISON TABLE")
-    logger.info("="*80)
-    header = f"{'Model':<35} {'BLEU':>8} {'BERTScore':>10} {'Verifier':>10} {'Time(s)':>10}"
+    logger.info("="*100)
+    header = (
+        f"{'Model':<28} {'BLEU':>8} {'BERT(Stu)':>10} {'BERT(Ans)':>10} "
+        f"{'ACR':>8} {'NLI':>8} {'Verifier':>10} {'Time(s)':>9}"
+    )
     logger.info(header)
-    logger.info("-" * 80)
+    logger.info("-" * 110)
     for result in all_results:
         s = result.summary()
         logger.info(
-            f"{s['model']:<35} {s['avg_bleu']:>8.4f} {s['avg_bert_score_f1']:>10.4f} "
-            f"{s['avg_verifier_score']:>10.4f} {s['avg_inference_time_s']:>10.3f}"
+            f"{s['model']:<28} {s['avg_bleu']:>8.4f} {s['avg_bert_score_f1']:>10.4f} "
+            f"{s['avg_bert_score_f1_answer_anchored']:>10.4f} "
+            f"{s['avg_answer_coverage_rate']:>8.4f} "
+            f"{s['avg_nli_entailment']:>8.4f} "
+            f"{s['avg_verifier_score']:>10.4f} {s['avg_inference_time_s']:>9.3f}"
         )
+    logger.info("")
+    logger.info("Column guide:")
+    logger.info("  BERT(Stu) = BERTScore vs student explanation (traditional reference-based)")
+    logger.info("  BERT(Ans) = BERTScore vs correct option text (answer-anchored, reference-free)")
+    logger.info("  ACR       = Answer Coverage Rate — fraction of correct option keywords in explanation")
+    logger.info("  NLI       = DeBERTa entailment probability: explanation -> correct option text")
 
     # ---------- Save results ----------
     output_data = {
@@ -494,8 +731,13 @@ def main():
             {
                 "model": r.model_name,
                 "bleu_scores": r.bleu_scores,
+                "bert_scores_vs_student": r.bert_scores,
+                "bert_scores_vs_answer": r.bert_scores_answer,
+                "acr_scores": r.acr_scores,
+                "nli_entailment_scores": r.nli_scores,
                 "verifier_scores": r.verifier_scores,
                 "inference_times": r.inference_times,
+                "generated_explanations": r.generated_explanations,
             }
             for r in all_results
         ],

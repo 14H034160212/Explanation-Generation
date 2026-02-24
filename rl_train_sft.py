@@ -1,39 +1,35 @@
 """
 RL-ILearner Step 1: SFT Fine-tuning with LoRA
+TRL 0.7.1 + Transformers 4.31.0 compatible (llm-tuning conda env)
 
-Fine-tunes modern LLMs (Qwen3.5 / Qwen3 / Llama-3) on PeerWise explanation data
-using LoRA (PEFT) for parameter-efficient training.
+Fine-tunes LLaMA-2-13B on PeerWise explanation data using LoRA (PEFT).
+Uses standard Alpaca prompt format consistent with the legacy ILearner pipeline.
 
-Supports 8x A100 via DeepSpeed ZeRO-3. Replaces the legacy full-parameter
-fine-tuning in train.py with a LoRA-based approach that allows hot-swap deployment.
-
-Usage (8x A100, Qwen3-14B):
-    deepspeed --num_gpus 8 rl_train_sft.py \
-        --model_name_or_path Qwen/Qwen3-14B-Instruct \
-        --data_path ./Paul_new_data/Merged_Sydney_Cardiff_Law_Medical_Y1_Y2/generator_merged_avg_3_lenexp_10.json \
-        --output_dir ./rl_sft_qwen3_14b_generator \
-        --num_train_epochs 3 \
-        --per_device_train_batch_size 2 \
-        --gradient_accumulation_steps 4 \
-        --deepspeed ./rl_configs/ds_zero3.json
+Usage (4x A100 80GB, GPUs 4-7):
+    CUDA_VISIBLE_DEVICES=4,5,6,7 torchrun --nproc_per_node=4 --master_port 29500 \\
+        rl_train_sft.py \\
+        --model_name_or_path /data/shared/llama2/llama-2-13b-hf \\
+        --data_path ./Paul_new_data/Merged_Sydney_Cardiff_Law_Medical_Y1_Y2/generator_merged_avg_3_lenexp_10.json \\
+        --output_dir ./rl_sft_llama2_13b_generator \\
+        --num_train_epochs 3 \\
+        --per_device_train_batch_size 1 \\
+        --gradient_accumulation_steps 8 \\
+        --bf16 True \\
+        --gradient_checkpointing True \\
+        --report_to none
 """
 
 import json
 import logging
-import os
 from dataclasses import dataclass, field
-from typing import List, Optional
+from typing import Optional
 
 import torch
 import transformers
 from datasets import Dataset
-from peft import LoraConfig, TaskType
-from transformers import (
-    AutoModelForCausalLM,
-    AutoTokenizer,
-    BitsAndBytesConfig,
-)
-from trl import SFTConfig, SFTTrainer
+from peft import LoraConfig, TaskType, get_peft_model
+from transformers import AutoModelForCausalLM, AutoTokenizer, TrainingArguments
+from trl import SFTTrainer
 
 logging.basicConfig(
     level=logging.INFO,
@@ -41,77 +37,52 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-SYSTEM_PROMPT = (
-    "You are an expert educator specializing in generating high-quality explanations "
-    "for exam questions. Your explanations should be clear, accurate, educational, "
-    "and written in a style similar to how knowledgeable students explain answers."
+# Alpaca-style prompt template — must match rl_build_preference_data.py
+ALPACA_TEMPLATE = (
+    "Below is an instruction that describes a task, paired with an input that "
+    "provides further context. Write a response that appropriately completes the request.\n\n"
+    "### Instruction:\n{instruction}\n\n"
+    "### Input:\n{input}\n\n"
+    "### Response:\n{output}"
 )
 
 
 @dataclass
 class ModelArguments:
     model_name_or_path: str = field(
-        default="Qwen/Qwen3-14B-Instruct",
-        metadata={
-            "help": (
-                "HuggingFace model ID or local path. "
-                "Supported: Qwen/Qwen3.5-14B-Instruct, Qwen/Qwen3-14B-Instruct, "
-                "Qwen/Qwen3-32B-Instruct, meta-llama/Llama-3.3-70B-Instruct, "
-                "meta-llama/Llama-3.1-8B-Instruct"
-            )
-        },
+        default="/data/shared/llama2/llama-2-13b-hf",
+        metadata={"help": "Local path or HuggingFace model ID. Default: LLaMA-2-13B-HF."},
     )
-    use_4bit: bool = field(
-        default=False,
-        metadata={"help": "Use 4-bit quantization (QLoRA). Recommended for 70B+ models."},
-    )
-    use_8bit: bool = field(
-        default=False,
-        metadata={"help": "Use 8-bit quantization. Alternative to 4-bit."},
-    )
-    cache_dir: Optional[str] = field(
-        default="cache",
-        metadata={"help": "Directory to cache downloaded models."},
-    )
-    use_flash_attention: bool = field(
-        default=True,
-        metadata={"help": "Use Flash Attention 2 for faster training (requires flash-attn)."},
-    )
+    cache_dir: Optional[str] = field(default="cache")
 
 
 @dataclass
 class DataArguments:
     data_path: str = field(
         default="./Paul_new_data/Merged_Sydney_Cardiff_Law_Medical_Y1_Y2/generator_merged_avg_3_lenexp_10.json",
-        metadata={"help": "Path to training data JSON (fields: instruction, input, output)."},
+        metadata={"help": "Training data JSON with fields: instruction, input, output."},
     )
-    eval_data_path: Optional[str] = field(
-        default=None,
-        metadata={"help": "Optional validation data path."},
-    )
-    max_seq_length: int = field(
-        default=1024,
-        metadata={"help": "Maximum tokenized sequence length. Sequences will be truncated."},
-    )
+    eval_data_path: Optional[str] = field(default=None)
+    max_seq_length: int = field(default=1024)
 
 
 @dataclass
 class LoraArguments:
-    lora_r: int = field(default=16, metadata={"help": "LoRA rank (higher = more capacity, more VRAM)."})
-    lora_alpha: int = field(default=32, metadata={"help": "LoRA scaling factor (usually 2x rank)."})
-    lora_dropout: float = field(default=0.05, metadata={"help": "Dropout probability for LoRA layers."})
+    lora_r: int = field(default=16)
+    lora_alpha: int = field(default=32)
+    lora_dropout: float = field(default=0.05)
     lora_target_modules: str = field(
         default="q_proj,k_proj,v_proj,o_proj,gate_proj,up_proj,down_proj",
-        metadata={"help": "Comma-separated LoRA target modules. Works for Qwen3/Llama-3."},
+        metadata={"help": "Comma-separated LoRA target modules. Works for LLaMA-2/Qwen3."},
     )
 
 
 def load_peerwise_data(data_path: str) -> Dataset:
-    """Load PeerWise JSON data and convert to chat-format for modern models."""
+    """Load PeerWise JSON and convert to Alpaca text format for SFTTrainer."""
     with open(data_path, "r", encoding="utf-8") as f:
         raw_data = json.load(f)
 
-    formatted = []
+    examples = []
     skipped = 0
     for item in raw_data:
         instruction = item.get("instruction", "").replace("</s>", "").strip()
@@ -122,41 +93,24 @@ def load_peerwise_data(data_path: str) -> Dataset:
             skipped += 1
             continue
 
-        # Build user message: merge instruction + question/options input
-        user_content = f"{instruction}\n\n{input_text}" if instruction else input_text
+        text = ALPACA_TEMPLATE.format(
+            instruction=instruction,
+            input=input_text,
+            output=output_text,
+        )
+        examples.append({"text": text})
 
-        messages = [
-            {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "user", "content": user_content},
-            {"role": "assistant", "content": output_text},
-        ]
-        formatted.append({"messages": messages})
-
-    logger.info(f"Loaded {len(formatted)} examples from {data_path} (skipped {skipped} empty).")
-    return Dataset.from_list(formatted)
+    logger.info(f"Loaded {len(examples)} training examples from {data_path} (skipped {skipped} empty).")
+    return Dataset.from_list(examples)
 
 
 def main():
     parser = transformers.HfArgumentParser(
-        (ModelArguments, DataArguments, LoraArguments, SFTConfig)
+        (ModelArguments, DataArguments, LoraArguments, TrainingArguments)
     )
     model_args, data_args, lora_args, training_args = parser.parse_args_into_dataclasses()
 
-    # ---------- Quantization ----------
-    bnb_config = None
-    if model_args.use_4bit:
-        logger.info("Using 4-bit QLoRA quantization.")
-        bnb_config = BitsAndBytesConfig(
-            load_in_4bit=True,
-            bnb_4bit_quant_type="nf4",
-            bnb_4bit_compute_dtype=torch.bfloat16,
-            bnb_4bit_use_double_quant=True,
-        )
-    elif model_args.use_8bit:
-        logger.info("Using 8-bit quantization.")
-        bnb_config = BitsAndBytesConfig(load_in_8bit=True)
-
-    # ---------- Tokenizer ----------
+    # ── Tokenizer ──────────────────────────────────────────────────────────────
     tokenizer = AutoTokenizer.from_pretrained(
         model_args.model_name_or_path,
         cache_dir=model_args.cache_dir,
@@ -167,30 +121,16 @@ def main():
         tokenizer.pad_token = tokenizer.eos_token
         logger.info("pad_token set to eos_token.")
 
-    # ---------- Model ----------
-    attn_impl = "flash_attention_2" if model_args.use_flash_attention else "eager"
-    try:
-        model = AutoModelForCausalLM.from_pretrained(
-            model_args.model_name_or_path,
-            cache_dir=model_args.cache_dir,
-            quantization_config=bnb_config,
-            torch_dtype=torch.bfloat16,
-            device_map="auto" if bnb_config is not None else None,
-            trust_remote_code=True,
-            attn_implementation=attn_impl,
-        )
-    except Exception:
-        logger.warning("flash_attention_2 unavailable, falling back to eager attention.")
-        model = AutoModelForCausalLM.from_pretrained(
-            model_args.model_name_or_path,
-            cache_dir=model_args.cache_dir,
-            quantization_config=bnb_config,
-            torch_dtype=torch.bfloat16,
-            device_map="auto" if bnb_config is not None else None,
-            trust_remote_code=True,
-        )
+    # ── Model ──────────────────────────────────────────────────────────────────
+    model = AutoModelForCausalLM.from_pretrained(
+        model_args.model_name_or_path,
+        cache_dir=model_args.cache_dir,
+        torch_dtype=torch.bfloat16,
+        trust_remote_code=True,
+    )
+    model.config.use_cache = False  # Required when gradient_checkpointing=True
 
-    # ---------- LoRA ----------
+    # ── LoRA ───────────────────────────────────────────────────────────────────
     target_modules = [m.strip() for m in lora_args.lora_target_modules.split(",")]
     lora_config = LoraConfig(
         r=lora_args.lora_r,
@@ -200,28 +140,41 @@ def main():
         bias="none",
         task_type=TaskType.CAUSAL_LM,
     )
-    logger.info(f"LoRA config: r={lora_args.lora_r}, alpha={lora_args.lora_alpha}, "
-                f"target_modules={target_modules}")
+    # Apply LoRA manually so we can call enable_input_require_grads().
+    # When gradient_checkpointing=True, PyTorch requires at least one input to
+    # have requires_grad=True at each checkpointed module boundary. LoRA freezes
+    # the base weights, so we register a forward hook on the input embeddings to
+    # propagate gradients through the checkpointed regions.
+    model = get_peft_model(model, lora_config)
+    model.enable_input_require_grads()
+    model.print_trainable_parameters()
 
-    # ---------- Dataset ----------
+    # ── Dataset ────────────────────────────────────────────────────────────────
     train_dataset = load_peerwise_data(data_args.data_path)
     eval_dataset = None
     if data_args.eval_data_path:
         eval_dataset = load_peerwise_data(data_args.eval_data_path)
 
-    # ---------- SFT Training ----------
-    training_args.max_seq_length = data_args.max_seq_length
-
+    # ── SFT Training (TRL 0.7.1 API) ──────────────────────────────────────────
+    # peft_config is omitted — LoRA is already applied above.
+    # TRL 0.7.1: SFTTrainer takes dataset_text_field and max_seq_length directly.
     trainer = SFTTrainer(
         model=model,
         tokenizer=tokenizer,
         args=training_args,
         train_dataset=train_dataset,
         eval_dataset=eval_dataset,
-        peft_config=lora_config,
+        dataset_text_field="text",
+        max_seq_length=data_args.max_seq_length,
     )
 
     logger.info("Starting SFT training...")
+    logger.info(f"  Model: {model_args.model_name_or_path}")
+    logger.info(f"  Training examples: {len(train_dataset)}")
+    logger.info(f"  Epochs: {training_args.num_train_epochs}")
+    logger.info(f"  Per-device batch size: {training_args.per_device_train_batch_size}")
+    logger.info(f"  Gradient accumulation: {training_args.gradient_accumulation_steps}")
+
     trainer.train()
     trainer.save_model(training_args.output_dir)
     tokenizer.save_pretrained(training_args.output_dir)

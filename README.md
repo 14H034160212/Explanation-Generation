@@ -19,6 +19,9 @@ This repository contains two progressive lines of work for automatically generat
 - [Key Design Decisions](#key-design-decisions)
 - [Acknowledgements](#acknowledgements)
 
+> **RL-ILearner detailed documentation** (paper innovations, full results, future experiments):
+> **[README_RL.md](README_RL.md)**
+
 ---
 
 ## Architecture Overview
@@ -363,18 +366,26 @@ CUDA_VISIBLE_DEVICES=4,5 python rl_evaluation.py \
 
 ---
 
-### RL-ILearner vs Baseline — Cardiff (To Be Updated After Training)
+### RL-ILearner Results — Cardiff Biology (100-question test set)
 
-| Model | Method | Inference | BLEU ↑ | BERTScore F1 ↑ | Verifier Score ↑ | Latency |
-|-------|--------|-----------|---------|----------------|------------------|---------|
-| Vicuna-13B (Cardiff SFT) | Full-param | K=1 | 0.2402 | 0.5562 | — | 1× |
-| ILearner-LLM Vicuna-13B | Prompt loop | K=5 | — | — | — | 5× |
-| Llama-3-8B (SFT LoRA) | LoRA SFT | K=1 | *pending* | *pending* | *pending* | ~1× |
-| **Llama-3-8B (DPO LoRA)** | LoRA DPO | K=1 | *pending* | *pending* | *pending* | ~1× |
-| Llama-3-8B (PPO LoRA) | LoRA PPO | K=1 | *pending* | *pending* | *pending* | ~1× |
-| **Llama-3-8B (DPO + GPT-4o Synth)** | LoRA DPO + CoT | K=1 | *pending* | *pending* | *pending* | ~1× |
+| Model | BLEU ↑ | BERT(Stu) ↑ | BERT(Ans) ↑ | ACR ↑ | NLI ↑ | Verifier ↑ | Time(s) ↓ |
+|-------|--------|------------|------------|-------|-------|-----------|---------|
+| SFT (LLaMA-2-13B + LoRA) | 0.0160 | 0.8070 | 0.7820 | 0.8087 | 0.0555 | 3.1976 | 19.947 |
+| DPO v1 (165 pairs) | 0.0173 | 0.8238 | 0.8325 | 0.7698 | **0.2969** | 3.0467 | 6.567 |
+| **DPO v2 (458 pairs)** | **0.0247** | **0.8300** | **0.8422** | **0.8682** | 0.2905 | 3.0648 | **5.774** |
+| PPO (125 steps) | 0.0175 | 0.8245 | 0.8255 | 0.7390 | 0.2260 | 3.0750 | 7.234 |
 
-> Run `bash rl_training_script.sh` then `python rl_evaluation.py` to populate this table.
+### RL-ILearner Results — Sydney Biology (100-question test set)
+
+| Model | BLEU ↑ | BERT(Stu) ↑ | BERT(Ans) ↑ | ACR ↑ | NLI ↑ | Verifier ↑ | Time(s) ↓ |
+|-------|--------|------------|------------|-------|-------|-----------|---------|
+| SFT (LLaMA-2-13B + LoRA) | 0.0222 | 0.8244 | 0.7870 | 0.6249 | 0.0537 | 3.1937 | 19.001 |
+| DPO v1 (165 pairs) | 0.0314 | 0.8262 | 0.8272 | 0.6034 | 0.2171 | 2.9094 | 9.049 |
+| **DPO v2 (458 pairs)** | 0.0364 | **0.8367** | **0.8426** | 0.6290 | **0.2774** | 2.9474 | **6.370** |
+| PPO (125 steps) | **0.0421** | 0.8364 | 0.8294 | **0.6606** | 0.2269 | 2.9609 | 7.596 |
+
+**Key finding**: NLI entailment is the most discriminative metric — SFT scores ~0.05 vs all RL models 0.22–0.30 (4–5× gap).
+See [README_RL.md](README_RL.md) for full analysis, metric definitions, and future experiments.
 
 ---
 

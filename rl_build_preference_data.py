@@ -26,8 +26,7 @@ import logging
 import os
 import re
 import random
-from dataclasses import dataclass, field
-from typing import List, Optional, Tuple
+from typing import List, Optional
 
 import torch
 from tqdm import tqdm
@@ -69,8 +68,10 @@ class VerifierScorer:
 
     def __init__(self, model_path: str, device: str = "cuda", cache_dir: str = "cache"):
         logger.info(f"Loading verifier from {model_path} ...")
+        # use_fast=False avoids LlamaTokenizerFast infinite recursion on older
+        # model configs that have a circular bos_token_id → unk_token_id lookup.
         self.tokenizer = AutoTokenizer.from_pretrained(
-            model_path, cache_dir=cache_dir, trust_remote_code=True
+            model_path, cache_dir=cache_dir, trust_remote_code=True, use_fast=False
         )
         self.model = AutoModelForCausalLM.from_pretrained(
             model_path,
@@ -154,23 +155,8 @@ class ExplanationGenerator:
         logger.info("Generator loaded.")
 
     def _build_prompt(self, instruction: str, input_text: str) -> str:
-        """Build the full prompt using the model's chat template if available."""
-        user_content = f"{instruction}\n\n{input_text}" if instruction else input_text
-        messages = [
-            {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "user", "content": user_content},
-        ]
-        if hasattr(self.tokenizer, "apply_chat_template"):
-            try:
-                return self.tokenizer.apply_chat_template(
-                    messages, tokenize=False, add_generation_prompt=True
-                )
-            except Exception:
-                pass
-        # Fallback: alpaca-style prompt
-        return (
-            f"Instruction: {instruction}\n\nInput: {input_text}\n\nOutput: "
-        )
+        """Build Alpaca-format inference prompt (no response text, ends with ### Response:)."""
+        return build_prompt_for_dpo(instruction, input_text)
 
     @torch.no_grad()
     def generate_samples(
@@ -222,9 +208,20 @@ class ExplanationGenerator:
 
 
 def build_prompt_for_dpo(instruction: str, input_text: str) -> str:
-    """Build the prompt string stored in the preference dataset (plain text)."""
-    user_content = f"{instruction}\n\n{input_text}" if instruction else input_text
-    return user_content
+    """
+    Build Alpaca-format prompt for DPO dataset.
+
+    Ends with '### Response:\\n' so TRL 0.7.1 DPOTrainer can identify the
+    boundary between prompt tokens and response tokens.
+    Must match the ALPACA_TEMPLATE used in rl_train_sft.py (without the output).
+    """
+    return (
+        "Below is an instruction that describes a task, paired with an input that "
+        "provides further context. Write a response that appropriately completes the request.\n\n"
+        f"### Instruction:\n{instruction}\n\n"
+        f"### Input:\n{input_text}\n\n"
+        "### Response:\n"
+    )
 
 
 def add_synthetic_hard_negatives(

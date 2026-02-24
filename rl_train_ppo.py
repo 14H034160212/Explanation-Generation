@@ -15,13 +15,18 @@ When to prefer PPO over DPO:
   - You have a very high-quality, calibrated Verifier (to avoid reward hacking).
   - You have compute budget for longer, noisier training runs.
 
-Usage (8x A100, PPO path):
-    accelerate launch --config_file rl_configs/accelerate_ppo.yaml rl_train_ppo.py \
-        --model_name_or_path Qwen/Qwen3-14B-Instruct \
-        --sft_adapter_path ./rl_sft_qwen3_14b_generator \
-        --verifier_path ./llama_2_13B_merged_all_evaluator \
+Usage (single GPU, CUDA_VISIBLE_DEVICES=4):
+    CUDA_VISIBLE_DEVICES=4,7 python rl_train_ppo.py \
+        --model_name_or_path /data/shared/llama2/llama-2-13b-hf \
+        --sft_adapter_path ./rl_sft_llama2_13b_generator \
+        --verifier_path ./qiming_alpaca_7B_Cardiff_Sydney_merged_verifier_way_2 \
         --data_path ./Paul_new_data/Merged_Sydney_Cardiff_Law_Medical_Y1_Y2/generator_merged_avg_3_lenexp_10.json \
-        --output_dir ./rl_ppo_qwen3_14b_generator
+        --output_dir ./rl_ppo_llama2_13b_generator \
+        --batch_size 4 \
+        --mini_batch_size 1 \
+        --ppo_epochs 4 \
+        --learning_rate 1e-5 \
+        --max_questions 500
 """
 
 import json
@@ -60,18 +65,26 @@ VERIFIER_INSTRUCTION = (
 @dataclass
 class ModelArguments:
     model_name_or_path: str = field(
-        default="Qwen/Qwen3-14B-Instruct",
+        default="/data/shared/llama2/llama-2-13b-hf",
         metadata={"help": "Actor base model (HF ID or local path)."},
     )
     sft_adapter_path: Optional[str] = field(
-        default=None,
+        default="./rl_sft_llama2_13b_generator",
         metadata={"help": "SFT LoRA adapter path to initialize the Actor."},
     )
     verifier_path: str = field(
-        default="./llama_2_13B_merged_all_evaluator",
+        default="./qiming_alpaca_7B_Cardiff_Sydney_merged_verifier_way_2",
         metadata={"help": "Path to the trained Verifier model (Reward Model)."},
     )
     use_4bit: bool = field(default=False, metadata={"help": "4-bit QLoRA for actor."})
+    output_dir: str = field(
+        default="./rl_ppo_llama2_13b_generator",
+        metadata={"help": "Output directory for PPO LoRA adapter."},
+    )
+    verifier_device: str = field(
+        default="cuda:1",
+        metadata={"help": "Device for verifier reward model. With CUDA_VISIBLE_DEVICES=4,7 this is cuda:1 (physical GPU 7)."},
+    )
     cache_dir: Optional[str] = field(default="cache")
     use_flash_attention: bool = field(default=True)
 
@@ -109,7 +122,7 @@ class VerifierRewardModel:
     def __init__(self, model_path: str, device: str = "cuda:1", cache_dir: str = "cache"):
         logger.info(f"Loading verifier reward model from {model_path} ...")
         self.tokenizer = AutoTokenizer.from_pretrained(
-            model_path, cache_dir=cache_dir, trust_remote_code=True
+            model_path, cache_dir=cache_dir, trust_remote_code=True, use_fast=False
         )
         if self.tokenizer.pad_token is None:
             self.tokenizer.pad_token = self.tokenizer.eos_token
@@ -179,22 +192,14 @@ def build_ppo_dataset(data_path: str, tokenizer, max_questions: Optional[int] = 
         if not input_text:
             continue
 
-        user_content = f"{instruction}\n\n{input_text}" if instruction else input_text
-        messages = [
-            {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "user", "content": user_content},
-        ]
-
-        # Build prompt string
-        if hasattr(tokenizer, "apply_chat_template"):
-            try:
-                prompt = tokenizer.apply_chat_template(
-                    messages, tokenize=False, add_generation_prompt=True
-                )
-            except Exception:
-                prompt = f"Instruction: {instruction}\n\nInput: {input_text}\n\nOutput: "
-        else:
-            prompt = f"Instruction: {instruction}\n\nInput: {input_text}\n\nOutput: "
+        # Use Alpaca template — must be consistent with SFT training
+        prompt = (
+            "Below is an instruction that describes a task, paired with an input that "
+            "provides further context. Write a response that appropriately completes the request.\n\n"
+            f"### Instruction:\n{instruction}\n\n"
+            f"### Input:\n{input_text}\n\n"
+            "### Response:\n"
+        )
 
         # Tokenize prompt (PPOTrainer expects "input_ids" in dataset)
         tokenized = tokenizer(prompt, truncation=True, max_length=512)
@@ -213,6 +218,9 @@ def main():
         (ModelArguments, DataArguments, LoraArguments, PPOConfig)
     )
     model_args, data_args, lora_args, ppo_config = parser.parse_args_into_dataclasses()
+
+    # PPOConfig default strips string columns ("question_input", "query") — keep them
+    ppo_config.remove_unused_columns = False
 
     # ---------- Tokenizer ----------
     tokenizer = AutoTokenizer.from_pretrained(
@@ -278,15 +286,22 @@ def main():
     # Wrap with Value Head for PPO (Critic)
     actor_model = AutoModelForCausalLMWithValueHead.from_pretrained(base_model)
 
+    # Move to GPU when not using device_map/quantization.
+    # With bare `python` run, set CUDA_VISIBLE_DEVICES=4,5,6 so cuda:0 = A100 #4.
+    # With `accelerate launch`, accelerate.prepare() moves the model automatically.
+    if not model_args.use_4bit:
+        actor_model = actor_model.cuda()
+        logger.info("Actor model moved to GPU.")
+
     # Reference model: frozen copy of the SFT model (no LoRA)
     # PPOTrainer handles creating the ref_model internally when not provided.
 
     # ---------- Verifier Reward Model ----------
-    # Load on a separate GPU to avoid VRAM conflicts with the actor
-    verifier_device = "cuda:7"  # Use last GPU for verifier
+    # Load on a separate GPU to avoid VRAM conflicts with the actor.
+    # With CUDA_VISIBLE_DEVICES=4,7: actor on cuda:0 (GPU4), verifier on cuda:1 (GPU7).
     reward_model = VerifierRewardModel(
         model_path=model_args.verifier_path,
-        device=verifier_device,
+        device=model_args.verifier_device,
         cache_dir=model_args.cache_dir,
     )
 
@@ -324,7 +339,8 @@ def main():
     logger.info("Starting PPO online RL training...")
 
     for epoch, batch in enumerate(ppo_trainer.dataloader):
-        query_tensors = batch["input_ids"]
+        # TRL 0.7.1 PPOTrainer.generate expects List[LongTensor], not list-of-lists
+        query_tensors = [torch.tensor(ids, dtype=torch.long) for ids in batch["input_ids"]]
         question_inputs = batch["question_input"]
 
         # Step 1: Actor generates explanations (rollout)
@@ -358,9 +374,10 @@ def main():
             )
 
     # ---------- Save ----------
-    ppo_trainer.save_pretrained(ppo_config.output_dir)
-    tokenizer.save_pretrained(ppo_config.output_dir)
-    logger.info(f"PPO LoRA adapter saved to {ppo_config.output_dir}")
+    os.makedirs(model_args.output_dir, exist_ok=True)
+    ppo_trainer.save_pretrained(model_args.output_dir)
+    tokenizer.save_pretrained(model_args.output_dir)
+    logger.info(f"PPO LoRA adapter saved to {model_args.output_dir}")
 
 
 if __name__ == "__main__":
