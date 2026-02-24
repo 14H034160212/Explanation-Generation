@@ -77,7 +77,12 @@ rl_dpo_v2_llama2_13b_generator/
 rl_dpo_v3_llama2_13b_generator/
 rl_ppo_llama2_13b_generator/
 
+# RL model checkpoint directories (Qwen3)
+rl_sft_qwen3_8b_generator/
+rl_dpo_qwen3_8b_generator/
+
 # RL preference data (large generated data, re-runnable)
 rl_preference_data/
 rl_preference_data_v2/
 rl_preference_data_v3/
+rl_preference_data_qwen3/
