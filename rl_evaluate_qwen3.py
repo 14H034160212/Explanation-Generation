@@ -17,6 +17,7 @@ Usage:
         --device cuda:0 --verifier_device cuda:0 --nli_device cpu
 """
 
+import re
 import argparse
 import json
 import logging
@@ -123,6 +124,18 @@ def load_nli_model(model_name: str, device: str, cache_dir: str):
     return mdl, tok, ent_idx
 
 
+def extract_correct_option_text(input_text: str):
+    """Parse the correct answer letter and option text from the question input."""
+    m = re.search(r"The correct answer is Option ([A-Z])", input_text)
+    if not m:
+        return None, None
+    letter = m.group(1)
+    opt_pat = rf"Option {letter}:\s*(.+?)(?:\s+Option [A-Z]:|The correct answer|$)"
+    opt_m = re.search(opt_pat, input_text, re.DOTALL)
+    opt_text = opt_m.group(1).strip() if opt_m else None
+    return letter, opt_text
+
+
 def generate_explanation(model, tokenizer, instruction: str, input_text: str,
                           device: str, max_new_tokens: int = 300) -> str:
     messages = [{"role": "user", "content": f"{instruction}\n\n{input_text}"}]
@@ -143,7 +156,6 @@ def generate_explanation(model, tokenizer, instruction: str, input_text: str,
 
 
 def get_verifier_score(ver_model, ver_tok, question_input: str, explanation: str) -> float:
-    import re
     prompt = VERIFIER_TEMPLATE.format(
         instruction=VERIFIER_INSTRUCTION,
         input=f"{question_input}\n\nExplanation: {explanation}",
@@ -196,8 +208,11 @@ def evaluate_model(model_name: str, gen_model, gen_tok, ver_model, ver_tok,
     for i, item in enumerate(test_data):
         instruction = item.get("instruction", "").strip()
         input_text = item.get("input", "").strip()
-        ref_stu = item.get("output", "").strip()
+        ref_stu = item.get("output", item.get("Explanation", "")).strip()
         correct_opt = item.get("correct_option_text", item.get("correct_option", "")).strip()
+        if not correct_opt:
+            _, correct_opt = extract_correct_option_text(input_text)
+            correct_opt = correct_opt or ""
 
         if not input_text:
             continue

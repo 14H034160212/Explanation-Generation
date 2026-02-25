@@ -157,6 +157,7 @@ def main():
         cache_dir=model_args.cache_dir,
         torch_dtype=torch.bfloat16,
         trust_remote_code=True,
+        device_map="auto",
     )
     model.config.use_cache = False
 
