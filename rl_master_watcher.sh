@@ -93,8 +93,9 @@ run_branch_a() {
         --preference_data_path ./rl_preference_data_v3/preference_pairs.json \
         --output_dir ./rl_dpo_v3_llama2_13b_generator \
         --num_train_epochs 5 \
-        --per_device_train_batch_size 2 \
-        --gradient_accumulation_steps 4 \
+        --per_device_train_batch_size 1 \
+        --gradient_accumulation_steps 8 \
+        --gradient_checkpointing True \
         --learning_rate 5e-5 \
         --lora_r 16 --lora_alpha 32 \
         --bf16 True \
@@ -110,7 +111,7 @@ run_branch_a() {
     # A3: 评估 DPO v3 (Cardiff + Sydney)
     log "[A] Starting DPO v3 evaluation — Cardiff..."
     CUDA_VISIBLE_DEVICES=4,5 conda run -n llm-tuning python3 rl_evaluation.py \
-        --test_data_path ./Paul_new_data/Cardiff/cardiff_eval_nli.json \
+        --test_data_path ./Paul_new_data/Cardiff/Cardiff_vicuna_13b_finetuned_random_100.json \
         --verifier_path ./qiming_alpaca_7B_Cardiff_Sydney_merged_verifier_way_2 \
         --output_path ./rl_eval_results/dpo_v3_cardiff_eval.json \
         --base_model_path /data/shared/llama2/llama-2-13b-hf \
@@ -123,7 +124,7 @@ run_branch_a() {
 
     log "[A] Starting DPO v3 evaluation — Sydney..."
     CUDA_VISIBLE_DEVICES=4,5 conda run -n llm-tuning python3 rl_evaluation.py \
-        --test_data_path ./Paul_new_data/Sydney/sydney_eval_nli.json \
+        --test_data_path ./Paul_new_data/Sydney/Sydney_vicuna_13b_finetuned_random_100.json \
         --verifier_path ./qiming_alpaca_7B_Cardiff_Sydney_merged_verifier_way_2 \
         --output_path ./rl_eval_results/dpo_v3_sydney_eval.json \
         --base_model_path /data/shared/llama2/llama-2-13b-hf \
@@ -213,7 +214,7 @@ run_branch_b() {
     # B4: 评估 Qwen3 SFT + DPO (需要一个适配 Qwen3 的评估脚本)
     log "[B] Qwen3 evaluation — running inference script..."
     CUDA_VISIBLE_DEVICES=7 conda run -n qwen3-rl python3 rl_evaluate_qwen3.py \
-        --test_data_path ./Paul_new_data/Cardiff/cardiff_eval_nli.json \
+        --test_data_path ./Paul_new_data/Cardiff/Cardiff_vicuna_13b_finetuned_random_100.json \
         --base_model_path /data/shared/qwen3/Qwen3-8B \
         --sft_lora_path ./rl_sft_qwen3_8b_generator \
         --dpo_lora_path ./rl_dpo_qwen3_8b_generator \
@@ -225,7 +226,7 @@ run_branch_b() {
     log "[B] Qwen3 Cardiff eval done (exit=$?)"
 
     CUDA_VISIBLE_DEVICES=7 conda run -n qwen3-rl python3 rl_evaluate_qwen3.py \
-        --test_data_path ./Paul_new_data/Sydney/sydney_eval_nli.json \
+        --test_data_path ./Paul_new_data/Sydney/Sydney_vicuna_13b_finetuned_random_100.json \
         --base_model_path /data/shared/qwen3/Qwen3-8B \
         --sft_lora_path ./rl_sft_qwen3_8b_generator \
         --dpo_lora_path ./rl_dpo_qwen3_8b_generator \

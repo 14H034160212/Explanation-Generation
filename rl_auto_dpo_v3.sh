@@ -42,8 +42,9 @@ CUDA_VISIBLE_DEVICES=4,5,6,7 conda run -n llm-tuning python3 rl_train_dpo.py \
     --preference_data_path ./rl_preference_data_v3/preference_pairs.json \
     --output_dir ./rl_dpo_v3_llama2_13b_generator \
     --num_train_epochs 5 \
-    --per_device_train_batch_size 2 \
-    --gradient_accumulation_steps 4 \
+    --per_device_train_batch_size 1 \
+    --gradient_accumulation_steps 8 \
+    --gradient_checkpointing True \
     --learning_rate 5e-5 \
     --lora_r 16 --lora_alpha 32 \
     --bf16 True \
