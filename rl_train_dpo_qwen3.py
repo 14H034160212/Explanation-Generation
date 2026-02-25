@@ -104,18 +104,21 @@ def load_preference_data(data_path: str, tokenizer, max_length: int, max_prompt_
         )
 
         return {
+            "prompt": prompt,
+            "chosen": chosen,
+            "rejected": rejected,
             "prompt_input_ids": prompt_tokens["input_ids"],
             "prompt_attention_mask": prompt_tokens["attention_mask"],
             "chosen_input_ids": chosen_tokens["input_ids"],
             "chosen_attention_mask": chosen_tokens["attention_mask"],
-            "chosen_labels": chosen_tokens["input_ids"], # Collator will mask prompt part if labels are provided
+            "chosen_labels": chosen_tokens["input_ids"],
             "rejected_input_ids": rejected_tokens["input_ids"],
             "rejected_attention_mask": rejected_tokens["attention_mask"],
             "rejected_labels": rejected_tokens["input_ids"],
         }
 
     dataset = Dataset.from_list(pairs)
-    tokenized_dataset = dataset.map(tokenize_function, remove_columns=dataset.column_names)
+    tokenized_dataset = dataset.map(tokenize_function, remove_columns=[c for c in dataset.column_names if c not in ["prompt","chosen","rejected"]])
     return tokenized_dataset
 
 
