@@ -74,11 +74,49 @@ class LoraArguments:
     )
 
 
-def load_preference_data(data_path: str) -> Dataset:
+def load_preference_data(data_path: str, tokenizer, max_length: int, max_prompt_length: int) -> Dataset:
     with open(data_path, "r", encoding="utf-8") as f:
         pairs = json.load(f)
     logger.info(f"Loaded {len(pairs)} DPO preference pairs from {data_path}")
-    return Dataset.from_list(pairs)
+
+    def tokenize_function(example):
+        # TRL 0.8.6 DPODataCollatorWithPadding expects:
+        # chosen_input_ids, rejected_input_ids, prompt_input_ids
+        # And their corresponding attention masks.
+        
+        prompt = example["prompt"]
+        chosen = example["chosen"]
+        rejected = example["rejected"]
+
+        # Tokenize prompt
+        prompt_tokens = tokenizer(
+            prompt, truncation=True, max_length=max_prompt_length, add_special_tokens=True
+        )
+        
+        # Tokenize chosen (full sequence)
+        chosen_tokens = tokenizer(
+            prompt + chosen, truncation=True, max_length=max_length, add_special_tokens=True
+        )
+        
+        # Tokenize rejected (full sequence)
+        rejected_tokens = tokenizer(
+            prompt + rejected, truncation=True, max_length=max_length, add_special_tokens=True
+        )
+
+        return {
+            "prompt_input_ids": prompt_tokens["input_ids"],
+            "prompt_attention_mask": prompt_tokens["attention_mask"],
+            "chosen_input_ids": chosen_tokens["input_ids"],
+            "chosen_attention_mask": chosen_tokens["attention_mask"],
+            "chosen_labels": chosen_tokens["input_ids"], # Collator will mask prompt part if labels are provided
+            "rejected_input_ids": rejected_tokens["input_ids"],
+            "rejected_attention_mask": rejected_tokens["attention_mask"],
+            "rejected_labels": rejected_tokens["input_ids"],
+        }
+
+    dataset = Dataset.from_list(pairs)
+    tokenized_dataset = dataset.map(tokenize_function, remove_columns=dataset.column_names)
+    return tokenized_dataset
 
 
 def main():
@@ -129,16 +167,29 @@ def main():
     model.print_trainable_parameters()
 
     # ── Dataset ─────────────────────────────────────────────────────────────────
-    train_dataset = load_preference_data(data_args.preference_data_path)
+    train_dataset = load_preference_data(
+        data_args.preference_data_path, 
+        tokenizer, 
+        dpo_args.max_length, 
+        dpo_args.max_prompt_length
+    )
 
     # ── DPO Training (TRL 0.8.6 API) ─────────────────────────────────────────────
-    # ref_model=None: use the non-LoRA part of the model as implicit reference
+    # Manual collation to fix TRL 0.8.6 + Transformers 5.2 collision
+    from trl.trainer.utils import DPODataCollatorWithPadding
+    data_collator = DPODataCollatorWithPadding(
+        pad_token_id=tokenizer.pad_token_id,
+        label_pad_token_id=-100,
+        is_encoder_decoder=False
+    )
+
     trainer = DPOTrainer(
         model=model,
         ref_model=None,
         args=training_args,
         beta=dpo_args.beta,
         train_dataset=train_dataset,
+        data_collator=data_collator,
         tokenizer=tokenizer,
         max_length=dpo_args.max_length,
         max_prompt_length=dpo_args.max_prompt_length,
