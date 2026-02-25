@@ -18,8 +18,8 @@ CUDA_VISIBLE_DEVICES=5 conda run -n qwen3-rl python3 rl_train_dpo_qwen3.py \
     --bf16 True \
     --report_to none > rl_qwen3_dpo_v1.log 2>&1 &
 
-echo ">>> [STAGGER] Waiting 180 seconds..."
-sleep 180
+echo ">>> [STAGGER] Waiting 600 seconds..."
+sleep 600
 
 # 2. DPO v2 on GPU 4
 echo ">>> [STAGGER] Starting DPO v2 on GPU 4..."
@@ -34,8 +34,8 @@ CUDA_VISIBLE_DEVICES=4 conda run -n qwen3-rl python3 rl_train_dpo_qwen3.py \
     --bf16 True \
     --report_to none > rl_qwen3_dpo_v2.log 2>&1 &
 
-echo ">>> [STAGGER] Waiting 180 seconds..."
-sleep 180
+echo ">>> [STAGGER] Waiting 600 seconds..."
+sleep 600
 
 # 3. Hybrid DPO+PPO on GPU 6
 echo ">>> [STAGGER] Starting Hybrid PPO on GPU 6..."
@@ -51,8 +51,8 @@ CUDA_VISIBLE_DEVICES=6 conda run -n qwen3-rl python3 rl_train_ppo_qwen3.py \
     --max_questions 2000 \
     --verifier_device cuda:0 > rl_qwen3_ppo_hybrid.log 2>&1 &
 
-echo ">>> [STAGGER] Waiting 180 seconds..."
-sleep 180
+echo ">>> [STAGGER] Waiting 600 seconds..."
+sleep 600
 
 # 4. Standard PPO (from SFT) on GPU 7
 echo ">>> [STAGGER] Starting Standard PPO on GPU 7..."

@@ -142,8 +142,10 @@ def build_ppo_dataset(data_path: str, tokenizer, max_questions: Optional[int] = 
             "### Response:\n"
         )
         tokenized = tokenizer(prompt, truncation=True, max_length=512)
+        # Filter out any unexpected None values
+        ids = [int(x) for x in tokenized["input_ids"] if x is not None]
         examples.append({
-            "input_ids": tokenized["input_ids"],
+            "input_ids": ids,
             "query": prompt,
             "question_input": input_text,
         })
