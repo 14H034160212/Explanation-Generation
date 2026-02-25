@@ -49,10 +49,10 @@ CUDA_VISIBLE_DEVICES=6 conda run -n qwen3-rl python3 rl_train_ppo_qwen3.py \
     --mini_batch_size 1 \
     --learning_rate 1e-5 \
     --max_questions 2000 \
-    --verifier_device cuda:0 > rl_qwen3_ppo_hybrid.log 2>&1 &
+    --verifier_device cuda:6 > rl_qwen3_ppo_hybrid.log 2>&1 &
 
 echo ">>> [STAGGER] Waiting 600 seconds..."
-sleep 600
+# sleep 600 # Reduced sleep for relaunching only 2 jobs
 
 # 4. Standard PPO (from SFT) on GPU 7
 echo ">>> [STAGGER] Starting Standard PPO on GPU 7..."
@@ -66,7 +66,7 @@ CUDA_VISIBLE_DEVICES=7 conda run -n qwen3-rl python3 rl_train_ppo_qwen3.py \
     --mini_batch_size 1 \
     --learning_rate 1e-5 \
     --max_questions 2000 \
-    --verifier_device cuda:0 > rl_qwen3_ppo_sft.log 2>&1 &
+    --verifier_device cuda:7 > rl_qwen3_ppo_sft.log 2>&1 &
 
 echo ">>> All experiments launched in background with staggering."
 wait
