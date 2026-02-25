@@ -25,8 +25,20 @@ import torch
 import transformers
 from datasets import Dataset
 from peft import LoraConfig, PeftModel, TaskType, get_peft_model
-from transformers import AutoModelForCausalLM, AutoTokenizer
-from trl import DPOConfig, DPOTrainer
+from transformers import AutoModelForCausalLM, AutoTokenizer, TrainingArguments
+
+# -- Monkey Patch for TRL 0.8.6 + Transformers 5.2+ --
+import transformers
+original_trainer_init = transformers.Trainer.__init__
+def patched_trainer_init(self, *args, **kwargs):
+    if "tokenizer" in kwargs and "processing_class" not in kwargs:
+        kwargs["processing_class"] = kwargs.pop("tokenizer")
+    elif "tokenizer" in kwargs and "processing_class" in kwargs:
+        kwargs.pop("tokenizer")
+    original_trainer_init(self, *args, **kwargs)
+transformers.Trainer.__init__ = patched_trainer_init
+
+from trl import DPOTrainer
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
@@ -42,6 +54,13 @@ class ModelArguments:
 @dataclass
 class DataArguments:
     preference_data_path: str = field(default="./rl_preference_data_qwen3/preference_pairs.json")
+
+
+@dataclass
+class DPOArguments:
+    beta: float = field(default=0.1)
+    max_length: int = field(default=1024)
+    max_prompt_length: int = field(default=512)
 
 
 @dataclass
@@ -64,9 +83,9 @@ def load_preference_data(data_path: str) -> Dataset:
 
 def main():
     parser = transformers.HfArgumentParser(
-        (ModelArguments, DataArguments, LoraArguments, DPOConfig)
+        (ModelArguments, DataArguments, DPOArguments, LoraArguments, TrainingArguments)
     )
-    model_args, data_args, lora_args, dpo_config = parser.parse_args_into_dataclasses()
+    model_args, data_args, dpo_args, lora_args, training_args = parser.parse_args_into_dataclasses()
 
     # ── Tokenizer ──────────────────────────────────────────────────────────────
     tokenizer = AutoTokenizer.from_pretrained(
@@ -112,25 +131,28 @@ def main():
     # ── Dataset ─────────────────────────────────────────────────────────────────
     train_dataset = load_preference_data(data_args.preference_data_path)
 
-    # ── DPO Training (TRL 0.28 API) ─────────────────────────────────────────────
+    # ── DPO Training (TRL 0.8.6 API) ─────────────────────────────────────────────
     # ref_model=None: use the non-LoRA part of the model as implicit reference
     trainer = DPOTrainer(
         model=model,
         ref_model=None,
-        args=dpo_config,
+        args=training_args,
+        beta=dpo_args.beta,
         train_dataset=train_dataset,
-        processing_class=tokenizer,
+        tokenizer=tokenizer,
+        max_length=dpo_args.max_length,
+        max_prompt_length=dpo_args.max_prompt_length,
     )
 
     logger.info("Starting Qwen3-8B DPO training...")
     logger.info(f"  Preference pairs: {len(train_dataset)}")
-    logger.info(f"  Epochs: {dpo_config.num_train_epochs}")
-    logger.info(f"  Beta: {dpo_config.beta}")
+    logger.info(f"  Epochs: {training_args.num_train_epochs}")
+    logger.info(f"  Beta: {dpo_args.beta}")
 
     trainer.train()
-    trainer.save_model(dpo_config.output_dir)
-    tokenizer.save_pretrained(dpo_config.output_dir)
-    logger.info(f"DPO LoRA adapter saved to {dpo_config.output_dir}")
+    trainer.save_model(training_args.output_dir)
+    tokenizer.save_pretrained(training_args.output_dir)
+    logger.info(f"DPO LoRA adapter saved to {training_args.output_dir}")
 
 
 if __name__ == "__main__":

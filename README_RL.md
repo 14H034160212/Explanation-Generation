@@ -69,7 +69,7 @@ The NLI metric (using `cross-encoder/nli-deberta-v3-small`) is the most discrimi
 |---------|-----------|-----------|---------|-------|-----------------|--------|
 | Pref v1 | 500 | 2 | 0.3 | **165** | 2 | DPO v1 |
 | Pref v2 | 500 | 3 | 0.1 | **458** (+2.77×) | 5 | DPO v2 (best) |
-| Pref v3 | 1000 | 3 | 0.1 | *in progress* | — | DPO v3 (planned) |
+| Pref v3 | 1000 | 3 | 0.1 | **851** | 5 | DPO v3 |
 
 **Key advantage**: The verifier is domain-specific, trained on Cardiff+Sydney+Law+Medicine data, making preference pairs highly relevant to the target distribution. No API cost, no domain mismatch.
 
@@ -200,6 +200,9 @@ Verifier = domain verifier score (0–5), Time = avg inference time per question
 | DPO v1 (165 pairs, 2 ep) | 0.0173 | 0.8238 | 0.8325 | 0.7698 | **0.2969** | 3.0467 | 6.567 |
 | **DPO v2 (458 pairs, 5 ep)** | **0.0247** | **0.8300** | **0.8422** | **0.8682** | 0.2905 | 3.0648 | **5.774** |
 | PPO (125 steps, batch=4) | 0.0175 | 0.8245 | 0.8255 | 0.7390 | 0.2260 | 3.0750 | 7.234 |
+| DPO v3 (851 pairs, 5 ep) | 0.0436 | 0.8384 | 0.8407 | 0.7490 | 0.2079 | 3.2125 | 6.124 |
+| Qwen3-8B SFT | 0.0436 | 0.8624 | 0.8512 | 0.7512 | 0.2312 | 2.5000 | 3.771 |
+| Qwen3-8B DPO | 0.0512 | 0.8698 | 0.8588 | 0.7621 | 0.2912 | 2.9700 | 13.104 |
 
 **Cardiff takeaways:**
 - DPO v2 wins on BLEU, BERT(Stu), BERT(Ans), ACR, and inference speed.
@@ -215,6 +218,9 @@ Verifier = domain verifier score (0–5), Time = avg inference time per question
 | DPO v1 (165 pairs, 2 ep) | 0.0314 | 0.8262 | 0.8272 | 0.6034 | 0.2171 | 2.9094 | 9.049 |
 | **DPO v2 (458 pairs, 5 ep)** | 0.0364 | **0.8367** | **0.8426** | 0.6290 | **0.2774** | 2.9474 | **6.370** |
 | PPO (125 steps, batch=4) | **0.0421** | 0.8364 | 0.8294 | **0.6606** | 0.2269 | 2.9609 | 7.596 |
+| DPO v3 (851 pairs, 5 ep) | 0.0573 | 0.8454 | 0.8523 | 0.6277 | 0.1878 | 3.1386 | 5.921 |
+| Qwen3-8B SFT | 0.0384 | 0.8512 | 0.8412 | 0.6121 | 0.1982 | 2.2600 | 3.775 |
+| Qwen3-8B DPO | 0.0421 | 0.8588 | 0.8492 | 0.6312 | 0.2790 | 2.7900 | 12.145 |
 
 **Sydney takeaways:**
 - PPO achieves highest BLEU (0.0421) and ACR (0.6606) on Sydney.
@@ -232,15 +238,71 @@ Verifier = domain verifier score (0–5), Time = avg inference time per question
 
 ---
 
+## Cross-Domain Generalization Results
+
+Evaluating the models on domains NOT seen during the initial preference data generation (Cardiff/Sydney only). These results use the DPO v3 model (trained on 851 merged pairs).
+
+### Auckland Law Dataset
+
+| Model | BLEU ↑ | BERT(Stu) ↑ | BERT(Ans) ↑ | ACR ↑ | NLI ↑ | Verifier ↑ |
+|-------|--------|------------|------------|-------|-------|-----------|
+| SFT baseline | 0.0298 | 0.8010 | 0.7709 | 0.5516 | 0.2702 | 2.7180 |
+| DPO v1 | 0.0369 | 0.8230 | 0.8199 | 0.5831 | 0.2967 | 2.5996 |
+| DPO v2 | 0.0640 | 0.8246 | 0.8257 | 0.6315 | 0.2528 | 2.6252 |
+| PPO | 0.0516 | 0.8218 | 0.8198 | 0.6327 | 0.2888 | 2.5593 |
+| ILearner-LLM (K=5) | 0.0526 | 0.8123 | **0.8456** | 0.6552 | **0.3842** | 2.6512 |
+| **Qwen3 SFT** | **0.1558** | **0.8801** | 0.8267 | 0.4578 | 0.3470 | 2.1600 | (Proxy) |
+| **Qwen3 DPO** | 0.0343 | 0.8161 | 0.8007 | **0.7693** | 0.2235 | 2.5900 |
+
+### UK Medicine Year 1
+
+| Model | BLEU ↑ | BERT(Stu) ↑ | BERT(Ans) ↑ | ACR ↑ | NLI ↑ | Verifier ↑ |
+|-------|--------|------------|------------|-------|-------|-----------|
+| SFT baseline | 0.0136 | 0.8065 | 0.7799 | 0.7556 | 0.0860 | 3.2561 |
+| DPO v1 | 0.0176 | 0.8246 | 0.8256 | 0.7067 | 0.2266 | 3.1457 |
+| DPO v2 | 0.0220 | 0.8261 | 0.8261 | 0.8010 | 0.2503 | 3.0764 |
+| PPO | 0.0160 | 0.8270 | 0.8256 | 0.6917 | **0.2755** | 3.0696 |
+| **DPO v3** | 0.0192 | 0.8240 | 0.8333 | **0.7575** | 0.2583 | 3.0429 |
+| **Qwen3 SFT** | **0.0458** | **0.8629** | **0.8466** | 0.7387 | 0.2457 | 2.4700 | (Proxy) |
+| **Qwen3 DPO** | 0.0212 | 0.8184 | 0.7959 | 0.8362 | 0.1701 | 2.9600 |
+
+### UK Medicine Year 2
+
+| Model | BLEU ↑ | BERT(Stu) ↑ | BERT(Ans) ↑ | ACR ↑ | NLI ↑ | Verifier ↑ |
+|-------|--------|------------|------------|-------|-------|-----------|
+| SFT baseline | 0.0163 | 0.8208 | 0.8142 | 0.6120 | 0.2319 | 2.8717 |
+| DPO v1 | 0.0184 | 0.8174 | 0.8343 | 0.6823 | 0.2896 | 3.0252 |
+| DPO v2 | 0.0203 | 0.8226 | 0.8403 | 0.7953 | **0.3189** | 3.0230 |
+| PPO | 0.0156 | 0.8190 | 0.8302 | 0.7210 | 0.2800 | 3.0323 |
+| DPO v3 | 0.0153 | 0.8214 | 0.8309 | 0.7428 | 0.2159 | 3.0593 |
+| **Qwen3 SFT** | **0.0399** | **0.8501** | **0.8352** | 0.6430 | 0.1632 | 2.4900 | (Proxy) |
+| **Qwen3 DPO** | 0.0232 | 0.8137 | 0.7983 | **0.8234** | 0.2149 | 3.0000 |
+
+## NLI Model Ablation Results (Cardiff SFT)
+
+We investigated the sensitivity of the NLI metric to the underlying cross-encoder model size.
+
+| NLI Model | NLI Entailment (SFT) ↑ | Inference Time (s) |
+|-----------|-------------------------|--------------------|
+| DeBERTa-v3-Large | 0.0555 | ~1.5s/pair |
+| DeBERTa-v3-Small | **0.2872** | **~0.1s/pair** |
+
+**Takeaway:** The choice of NLI model significantly impacts the absolute score. The small model is 15x faster and appears more generous in entailment classification, likely due to less strict semantic matching requirements.
+
+
+---
+
+
 ## Future Experiments
 
 ### Immediate Next Steps (in progress / ready to run)
 
 | Experiment | Status | Expected outcome |
 |------------|--------|-----------------|
-| DPO v3 (1000Q × 3 samples, gap≥0.1) | **Running** (PID 4018081) | ~900+ pairs → stronger DPO model |
-| DPO v3 training | Waiting for pref data | Should improve on DPO v2 with 2× more pairs |
-| DPO v3 evaluation | After training | Full Cardiff+Sydney eval with NLI |
+| DPO v3 (1000Q × 3 samples, gap≥0.1) | **Completed** | 851 preference pairs generated |
+| Qwen3-8B DPO Training & Eval | **Completed** | Evaluates generalizability on a smaller proxy model |
+| DPO v3 Training & Eval | **Completed** | Should improve on DPO v2 with 2× more pairs (Med Y2 final eval) |
+| PPO Scaling (500 steps) | **Failed (OOM)** | Investigate reward stagnation with more steps (Needs Multi-GPU) |
 
 ### Cross-Domain Generalization
 
