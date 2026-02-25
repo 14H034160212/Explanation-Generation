@@ -239,6 +239,7 @@ def load_model_and_tokenizer(config: ModelConfig, device: str = "cuda", cache_di
         cache_dir=cache_dir,
         trust_remote_code=True,
         padding_side="left",
+        use_fast=False,
     )
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
