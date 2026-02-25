@@ -103,18 +103,23 @@ def load_preference_data(data_path: str, tokenizer, max_length: int, max_prompt_
             prompt + rejected, truncation=True, max_length=max_length, add_special_tokens=True
         )
 
+        # Filter out any unexpected None values (and convert to int just in case)
+        p_ids = [int(x) for x in prompt_tokens["input_ids"] if x is not None]
+        c_ids = [int(x) for x in chosen_tokens["input_ids"] if x is not None]
+        r_ids = [int(x) for x in rejected_tokens["input_ids"] if x is not None]
+
         return {
             "prompt": prompt,
             "chosen": chosen,
             "rejected": rejected,
-            "prompt_input_ids": prompt_tokens["input_ids"],
-            "prompt_attention_mask": prompt_tokens["attention_mask"],
-            "chosen_input_ids": chosen_tokens["input_ids"],
-            "chosen_attention_mask": chosen_tokens["attention_mask"],
-            "chosen_labels": chosen_tokens["input_ids"],
-            "rejected_input_ids": rejected_tokens["input_ids"],
-            "rejected_attention_mask": rejected_tokens["attention_mask"],
-            "rejected_labels": rejected_tokens["input_ids"],
+            "prompt_input_ids": p_ids,
+            "prompt_attention_mask": prompt_tokens["attention_mask"][:len(p_ids)],
+            "chosen_input_ids": c_ids,
+            "chosen_attention_mask": chosen_tokens["attention_mask"][:len(c_ids)],
+            "chosen_labels": c_ids,
+            "rejected_input_ids": r_ids,
+            "rejected_attention_mask": rejected_tokens["attention_mask"][:len(r_ids)],
+            "rejected_labels": r_ids,
         }
 
     dataset = Dataset.from_list(pairs)
@@ -185,6 +190,9 @@ def main():
         label_pad_token_id=-100,
         is_encoder_decoder=False
     )
+    
+    # Ensure columns are not removed
+    training_args.remove_unused_columns = False
 
     trainer = DPOTrainer(
         model=model,
