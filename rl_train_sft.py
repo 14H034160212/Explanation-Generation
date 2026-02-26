@@ -1,5 +1,5 @@
 """
-RL-ILearner Step 1: SFT Fine-tuning with LoRA
+RLearner-LLM Step 1: SFT Fine-tuning with LoRA
 TRL 0.7.1 + Transformers 4.31.0 compatible (llm-tuning conda env)
 
 Fine-tunes LLaMA-2-13B on PeerWise explanation data using LoRA (PEFT).

@@ -1,5 +1,5 @@
 """
-RL-ILearner Step 2: Build DPO Preference Dataset
+RLearner-LLM Step 2: Build DPO Preference Dataset
 
 For each question in the PeerWise dataset:
   1. Use the SFT generator to sample N explanations at varying temperatures.
@@ -251,7 +251,7 @@ def add_synthetic_hard_negatives(
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Build DPO preference dataset for RL-ILearner.")
+    parser = argparse.ArgumentParser(description="Build DPO preference dataset for RLearner-LLM.")
     parser.add_argument("--generator_path", required=True,
                         help="Path to the SFT generator model (local dir or HF model ID).")
     parser.add_argument("--lora_adapter_path", default=None,

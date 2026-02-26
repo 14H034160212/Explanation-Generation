@@ -1,5 +1,5 @@
 """
-RL-ILearner Step 3 (Qwen3-8B): DPO Training with LoRA
+RLearner-LLM Step 3 (Qwen3-8B): DPO Training with LoRA
 TRL 0.28 + Transformers 5.2 (qwen3-rl conda env)
 
 Usage (single GPU 7):

@@ -1,5 +1,5 @@
 """
-RL-ILearner Step 3 (Alternative): PPO Online RL Training with LoRA
+RLearner-LLM Step 3 (Alternative): PPO Online RL Training with LoRA
 
 Online reinforcement learning using Proximal Policy Optimization (PPO).
 The trained Verifier model acts as the Reward Model — scoring each generated

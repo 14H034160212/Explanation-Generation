@@ -1,5 +1,5 @@
 """
-RL-ILearner Evaluation (Qwen3-8B)
+RLearner-LLM Evaluation (Qwen3-8B)
 qwen3-rl conda env (transformers 5.2, TRL 0.28)
 
 Evaluates Qwen3-8B SFT and DPO models on PeerWise test data.
