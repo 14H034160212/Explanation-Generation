@@ -1,5 +1,5 @@
 """
-RL-ILearner Step 1 (Qwen3-8B): SFT Fine-tuning with LoRA
+RLearner-LLM Step 1 (Qwen3-8B): SFT Fine-tuning with LoRA
 TRL 0.28 + Transformers 5.2 (qwen3-rl conda env)
 
 Fine-tunes Qwen3-8B on PeerWise explanation data using LoRA (PEFT).

@@ -1,9 +1,9 @@
-# ILearner-LLM + RL-ILearner: Explanation Generation for PeerWise
+# ILearner-LLM + RLearner-LLM: Explanation Generation for PeerWise
 
 This repository contains two progressive lines of work for automatically generating and evaluating educational explanations for PeerWise exam questions:
 
 1. **ILearner-LLM** (original paper) — Instruction-tuned LLM pipeline with iterative Generator–Verifier refinement.
-2. **RL-ILearner** (this extension) — Replaces the K-round iterative prompt loop with reinforcement learning (DPO/PPO) using modern models (Llama-3, Qwen3) and LoRA for parameter-efficient fine-tuning.
+2. **RLearner-LLM** (this extension) — Replaces the K-round iterative prompt loop with reinforcement learning (DPO/PPO) using modern models (Llama-3, Qwen3) and LoRA for parameter-efficient fine-tuning.
 
 ---
 
@@ -13,13 +13,13 @@ This repository contains two progressive lines of work for automatically generat
 - [Installation](#installation)
 - [Datasets](#datasets)
 - [ILearner-LLM Pipeline (Original)](#ilearner-llm-pipeline-original)
-- [RL-ILearner Pipeline (New Extension)](#rl-ilearner-pipeline-new-extension)
+- [RLearner-LLM Pipeline (New Extension)](#rlearner-llm-pipeline-new-extension)
 - [Experimental Results](#experimental-results)
 - [Model Zoo](#model-zoo)
 - [Key Design Decisions](#key-design-decisions)
 - [Acknowledgements](#acknowledgements)
 
-> **RL-ILearner detailed documentation** (paper innovations, full results, future experiments):
+> **RLearner-LLM detailed documentation** (paper innovations, full results, future experiments):
 > **[README_RL.md](README_RL.md)**
 
 ---
@@ -48,7 +48,7 @@ Question + Options + Answer
 
 **Limitation**: Latency scales with K. Prompt-only refinement cannot update model weights.
 
-### RL-ILearner (Extension)
+### RLearner-LLM (Extension)
 
 ```
          SFT Phase (LoRA)
@@ -89,14 +89,14 @@ Explanation-Generation/
 ├── utils.py                      # Shared data loading utilities
 ├── training_script.sh            # Original full-param training commands (LLaMA-2)
 │
-│── ── ── RL-ILearner (New) ── ── ──
+│── ── ── RLearner-LLM (New) ── ── ──
 ├── rl_train_sft.py               # Step 1: SFT fine-tuning with LoRA (Llama-3/Qwen3)
 ├── rl_build_preference_data.py   # Step 2: Build DPO preference pairs (multi-sample + Verifier)
 ├── rl_generate_synthetic_data.py # Step 2b: GPT-4o/Claude CoT synthetic data (亮点三)
 ├── rl_train_dpo.py               # Step 3A: DPO training — RECOMMENDED PATH
 ├── rl_train_ppo.py               # Step 3B: PPO online RL training — alternative
 ├── rl_evaluation.py              # Step 4: Evaluate & compare all models
-├── rl_training_script.sh         # One-command full RL-ILearner pipeline
+├── rl_training_script.sh         # One-command full RLearner-LLM pipeline
 │
 ├── rl_configs/
 │   ├── ds_zero2.json             # DeepSpeed ZeRO-2 (lighter, for smaller models)
@@ -157,7 +157,7 @@ cd Explanation-Generation
 pip install -r requirements.txt
 ```
 
-### RL-ILearner environment (recommended: use existing `trl` conda env)
+### RLearner-LLM environment (recommended: use existing `trl` conda env)
 
 ```bash
 conda activate trl
@@ -251,7 +251,7 @@ python scripts/chat/chat_explanation_verifier_way2.py
 
 ---
 
-## RL-ILearner Pipeline (New Extension)
+## RLearner-LLM Pipeline (New Extension)
 
 ### Prerequisites (server)
 | Resource | Location |
@@ -366,7 +366,7 @@ CUDA_VISIBLE_DEVICES=4,5 python rl_evaluation.py \
 
 ---
 
-### RL-ILearner Results — Cardiff Biology (100-question test set)
+### RLearner-LLM Results — Cardiff Biology (100-question test set)
 
 | Model | BLEU ↑ | BERT(Stu) ↑ | BERT(Ans) ↑ | ACR ↑ | NLI ↑ | Verifier ↑ | Time(s) ↓ |
 |-------|--------|------------|------------|-------|-------|-----------|---------|
@@ -375,7 +375,7 @@ CUDA_VISIBLE_DEVICES=4,5 python rl_evaluation.py \
 | **DPO v2 (458 pairs)** | **0.0247** | **0.8300** | **0.8422** | **0.8682** | 0.2905 | 3.0648 | **5.774** |
 | PPO (125 steps) | 0.0175 | 0.8245 | 0.8255 | 0.7390 | 0.2260 | 3.0750 | 7.234 |
 
-### RL-ILearner Results — Sydney Biology (100-question test set)
+### RLearner-LLM Results — Sydney Biology (100-question test set)
 
 | Model | BLEU ↑ | BERT(Stu) ↑ | BERT(Ans) ↑ | ACR ↑ | NLI ↑ | Verifier ↑ | Time(s) ↓ |
 |-------|--------|------------|------------|-------|-------|-----------|---------|

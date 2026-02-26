@@ -1,5 +1,5 @@
 """
-RL-ILearner Step 3 (Recommended): DPO Fine-tuning with LoRA
+RLearner-LLM Step 3 (Recommended): DPO Fine-tuning with LoRA
 TRL 0.7.1 + Transformers 4.31.0 compatible (llm-tuning conda env)
 
 Direct Preference Optimization trains the model to prefer high-quality

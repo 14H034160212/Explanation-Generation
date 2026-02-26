@@ -1,4 +1,4 @@
-# RL-ILearner: Reinforcement Learning for Educational Explanation Generation
+# RLearner-LLM: Reinforcement Learning for Educational Explanation Generation
 
 > **Extension of ILearner-LLM** — replaces K-round iterative inference with RL-trained single-pass generation.
 > See the main [README.md](README.md) for the full project overview.

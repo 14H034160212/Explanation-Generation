@@ -1,5 +1,5 @@
 """
-RL-ILearner Step 2 (Qwen3-8B): Build DPO Preference Pairs
+RLearner-LLM Step 2 (Qwen3-8B): Build DPO Preference Pairs
 TRL >=0.12 + Transformers >=4.51.0 (qwen3-rl conda env)
 
 Generates N explanations per question using Qwen3-8B + SFT LoRA adapter,

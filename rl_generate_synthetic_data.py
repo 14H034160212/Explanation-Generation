@@ -1,5 +1,5 @@
 """
-RL-ILearner Synthetic Data Augmentation (亮点三完整实现)
+RLearner-LLM Synthetic Data Augmentation (亮点三完整实现)
 
 Generates two types of synthetic data to strengthen DPO training:
 
@@ -375,7 +375,7 @@ def generate_synthetic_pairs(
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Generate synthetic CoT positive + hard negative data for RL-ILearner DPO."
+        description="Generate synthetic CoT positive + hard negative data for RLearner-LLM DPO."
     )
     # Data
     parser.add_argument("--data_path", required=True,

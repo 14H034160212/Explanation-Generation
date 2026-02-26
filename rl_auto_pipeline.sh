@@ -1,6 +1,6 @@
 #!/bin/bash
 # =============================================================================
-# RL-ILearner: Auto-continue pipeline monitor
+# RLearner-LLM: Auto-continue pipeline monitor
 # Waits for Step 2 (preference data) to finish, then runs Step 3 (DPO) and
 # Step 4 (evaluation) automatically, logging all results.
 # =============================================================================
@@ -29,7 +29,7 @@ log() {
     echo "[$(date '+%Y-%m-%d %H:%M:%S')] $*" | tee -a "${LOG}"
 }
 
-log "=== RL-ILearner Auto Pipeline Monitor started ==="
+log "=== RLearner-LLM Auto Pipeline Monitor started ==="
 log "Watching for preference data at: ${PREF_DATA}"
 
 # ─────────────────────────────────────────────────────────────────
@@ -129,7 +129,7 @@ log "Step 4 DONE. Results saved to: ${RESULTS_FILE}"
 # ─────────────────────────────────────────────────────────────────
 log ""
 log "============================================================"
-log "  RL-ILearner Experiment Summary"
+log "  RLearner-LLM Experiment Summary"
 log "============================================================"
 
 # SFT training results

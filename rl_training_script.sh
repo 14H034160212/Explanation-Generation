@@ -1,6 +1,6 @@
 #!/bin/bash
 # =============================================================================
-# RL-ILearner: Complete Training Pipeline
+# RLearner-LLM: Complete Training Pipeline
 # =============================================================================
 # Hardware: 4x A100 (80GB) — GPUs 4,5,6,7 (GPUs 0-3 reserved for other jobs)
 # Environment: conda activate llm-tuning  (TRL 0.7.1, Transformers 4.31.0)
@@ -70,12 +70,12 @@ source "$(conda info --base)/etc/profile.d/conda.sh"
 conda activate llm-tuning
 
 export TOKENIZERS_PARALLELISM=false
-export WANDB_PROJECT="RL-ILearner"
+export WANDB_PROJECT="RLearner-LLM"
 
 mkdir -p ./rl_preference_data ./rl_eval_results
 
 echo "========================================================"
-echo "  RL-ILearner Pipeline Starting"
+echo "  RLearner-LLM Pipeline Starting"
 echo "  Base Model: ${BASE_MODEL}"
 echo "  GPUs: ${TRAIN_GPUS} (${NUM_GPUS}x A100 80GB)"
 echo "  Environment: llm-tuning (TRL 0.7.1)"
@@ -338,7 +338,7 @@ CUDA_VISIBLE_DEVICES=4,5 python rl_evaluation.py \
 
 echo ""
 echo "========================================================"
-echo "  RL-ILearner Pipeline COMPLETE!"
+echo "  RLearner-LLM Pipeline COMPLETE!"
 echo "  Results: ${EVAL_OUTPUT}"
 echo "========================================================"
 

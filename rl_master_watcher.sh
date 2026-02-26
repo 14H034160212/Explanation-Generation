@@ -1,5 +1,5 @@
 #!/bin/bash
-# RL-ILearner Master Auto-Pipeline Watcher
+# RLearner-LLM Master Auto-Pipeline Watcher
 # 全自动监控并依次执行所有训练/评估任务
 # 运行于后台，不需要人工干预
 #

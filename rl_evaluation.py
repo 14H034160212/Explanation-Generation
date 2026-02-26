@@ -1,5 +1,5 @@
 """
-RL-ILearner Evaluation: Compare RL vs Baseline Models
+RLearner-LLM Evaluation: Compare RL vs Baseline Models
 
 Evaluates all models on the test set and produces a comparison table:
   - Baseline SFT (K=1, no RL): Original LLaMA-2 / Qwen3 fine-tuned
@@ -543,7 +543,7 @@ def evaluate_model(
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Evaluate RL-ILearner models.")
+    parser = argparse.ArgumentParser(description="Evaluate RLearner-LLM models.")
     parser.add_argument("--test_data_path", required=True,
                         help="Test set JSON file (fields: instruction, input, output/Explanation).")
     parser.add_argument("--verifier_path", required=True,
