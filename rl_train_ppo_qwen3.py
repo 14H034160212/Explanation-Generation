@@ -56,6 +56,9 @@ class ModelArguments:
 class DataArguments:
     data_path: str = field(default="./Paul_new_data/Merged_Sydney_Cardiff_Law_Medical_Y1_Y2/generator_merged_avg_3_lenexp_10.json")
     max_questions: Optional[int] = field(default=None)
+    num_epochs: int = field(default=1)
+    max_global_steps: Optional[int] = field(default=None)  # stop after N global steps (avoids conflict with PPOConfig.max_steps)
+    save_every_steps: int = field(default=200)              # save checkpoint every N steps
 
 
 @dataclass
@@ -76,6 +79,7 @@ class VerifierRewardModel:
         )
         if self.tokenizer.pad_token is None:
             self.tokenizer.pad_token = self.tokenizer.eos_token
+        self.tokenizer.model_max_length = 2048
 
         self.model = AutoModelForCausalLM.from_pretrained(
             model_path,
@@ -113,7 +117,9 @@ class VerifierRewardModel:
             pad_token_id=self.tokenizer.eos_token_id,
         )
         text = self.tokenizer.decode(out[0], skip_special_tokens=True)
-        match = re.search(r"Output:\s*(\d+(?:\.\d+)?)", text)
+        # Strip spaces because some tokenizers/configs decode with spaces between every character
+        text_no_space = text.replace(" ", "")
+        match = re.search(r"Output:(\d+(?:\.\d+)?)", text_no_space)
         if match:
             val = float(match.group(1))
             return min(val, self.max_score)
@@ -234,25 +240,53 @@ def main():
         "pad_token_id": tokenizer.eos_token_id,
     }
 
-    logger.info("Starting Qwen3 PPO online RL training...")
-    for epoch, batch in enumerate(ppo_trainer.dataloader):
-        query_tensors = [torch.tensor(ids, dtype=torch.long) for ids in batch["input_ids"]]
-        question_inputs = batch["question_input"]
+    max_global_steps = data_args.max_global_steps
+    save_every_steps = data_args.save_every_steps
+    logger.info(
+        f"Starting Qwen3 PPO training | epochs={data_args.num_epochs} | "
+        f"max_global_steps={max_global_steps if max_global_steps else 'unlimited'} | "
+        f"save_every={save_every_steps} steps"
+    )
+    global_step = 0
+    done = False
+    for epoch_idx in range(data_args.num_epochs):
+        if done:
+            break
+        logger.info(f"--- Starting Epoch {epoch_idx} ---")
+        for step_in_epoch, batch in enumerate(ppo_trainer.dataloader):
+            query_tensors = [torch.tensor(ids, dtype=torch.long) for ids in batch["input_ids"]]
+            question_inputs = batch["question_input"]
 
-        response_tensors = ppo_trainer.generate(query_tensors, return_prompt=False, **gen_kwargs)
-        batch["response"] = [tokenizer.decode(r, skip_special_tokens=True) for r in response_tensors]
-        
-        rewards = reward_model.get_rewards(question_inputs, batch["response"])
-        stats = ppo_trainer.step(query_tensors, response_tensors, rewards)
-        ppo_trainer.log_stats(stats, batch, rewards)
+            response_tensors = ppo_trainer.generate(query_tensors, return_prompt=False, **gen_kwargs)
+            batch["response"] = [tokenizer.decode(r, skip_special_tokens=True) for r in response_tensors]
 
-        mean_reward = sum(r.item() for r in rewards) / len(rewards)
-        logger.info(
-            f"Step {epoch} | Mean reward: {mean_reward:.4f} | "
-            f"KL: {stats.get('objective/kl', 0):.4f}"
-        )
+            rewards = reward_model.get_rewards(question_inputs, batch["response"])
+            stats = ppo_trainer.step(query_tensors, response_tensors, rewards)
+            ppo_trainer.log_stats(stats, batch, rewards)
 
-    # ── Save ───────────────────────────────────────────────────────────────────
+            mean_reward = sum(r.item() for r in rewards) / len(rewards)
+            logger.info(
+                f"Step {global_step} (Epoch {epoch_idx}, Step {step_in_epoch}) | "
+                f"Mean reward: {mean_reward:.4f} | "
+                f"KL: {stats.get('objective/kl', 0):.4f}"
+            )
+            global_step += 1
+
+            # Periodic checkpoint save
+            if save_every_steps > 0 and global_step % save_every_steps == 0:
+                ckpt_dir = os.path.join(model_args.output_dir, f"checkpoint-{global_step}")
+                os.makedirs(ckpt_dir, exist_ok=True)
+                ppo_trainer.save_pretrained(ckpt_dir)
+                tokenizer.save_pretrained(ckpt_dir)
+                logger.info(f"Checkpoint saved to {ckpt_dir}")
+
+            # Stop at max_global_steps
+            if max_global_steps and global_step >= max_global_steps:
+                logger.info(f"Reached max_global_steps={max_global_steps}. Stopping training.")
+                done = True
+                break
+
+    # ── Final Save ─────────────────────────────────────────────────────────────
     os.makedirs(model_args.output_dir, exist_ok=True)
     ppo_trainer.save_pretrained(model_args.output_dir)
     tokenizer.save_pretrained(model_args.output_dir)
