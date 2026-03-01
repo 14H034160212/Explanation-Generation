@@ -360,6 +360,58 @@ The exception is **Auckland Law** (K=5 NLI=0.400), which is the best NLI result 
 
 ---
 
+---
+
+## NLI-Guided DPO Experiments (In Progress)
+
+### Motivation
+
+Prior DPO experiments used the Alpaca-7B **verifier score** to rank candidate explanations. This caused an **alignment tax** on Qwen3-8B: DPO training caused NLI to *drop* from 0.196 (SFT) to 0.115 (DPO), because the verifier rewards style/fluency rather than answer-entailment. To fix this, we replace the ranking signal with **NLI entailment probability** — the same metric we evaluate on — so DPO directly optimises what matters.
+
+### New Script: `rl_build_preference_data_nli.py`
+
+Unified preference data builder supporting LLaMA-2-13B and Qwen3-8B via `--model_type`. Three scoring modes:
+
+| `--score_method` | Ranking signal | Verifier needed |
+|-----------------|---------------|----------------|
+| `nli` | NLI entailment P(chosen > rejected) | No |
+| `hybrid` | 0.5 × NLI + 0.5 × normalised verifier | Yes |
+| `verifier` | Alpaca-7B verifier score (legacy) | Yes |
+
+For each question, the script: generates N explanations → extracts correct option text via regex from `"The correct answer is Option X."` → scores each by NLI entailment (premise = explanation, hypothesis = correct option) → pairs (highest NLI, lowest NLI) if gap ≥ `--min_score_gap`.
+
+### Experiment Design
+
+Four experiments running in parallel (two chains), using GPUs 4–7:
+
+| Experiment | Model | Score method | Output dir | Pipeline script |
+|------------|-------|-------------|-----------|----------------|
+| **NLI-DPO** | Qwen3-8B | `nli` | `./rl_dpo_qwen3_nli_generator/` | `run_nli_dpo_qwen3.sh` |
+| **Hybrid-DPO** | Qwen3-8B | `hybrid` | `./rl_dpo_qwen3_hybrid_generator/` | `run_hybrid_dpo_qwen3.sh` |
+| **NLI-DPO** | LLaMA-2-13B | `nli` | `./rl_dpo_nli_llama2_generator/` | `run_nli_dpo_llama2.sh` |
+| **Hybrid-DPO** | LLaMA-2-13B | `hybrid` | `./rl_dpo_hybrid_llama2_generator/` | `run_hybrid_dpo_llama2.sh` |
+
+Preference data: 500 questions × 3 samples, `min_score_gap=0.05` (NLI), `min_score_gap=0.03` (hybrid).
+
+### Success Criteria
+
+| Experiment | Success criterion | Baseline to beat |
+|------------|------------------|-----------------|
+| Qwen3 DPO-NLI | NLI after DPO ≥ SFT NLI (0.196) | Old verifier DPO: NLI=0.115 (−41%) |
+| Qwen3 DPO-Hybrid | NLI after DPO ≥ 0.196 | Same |
+| LLaMA-2 DPO-NLI | NLI > DPO v2 (0.291) | Best LLaMA-2 to date |
+| LLaMA-2 DPO-Hybrid | Competitive with NLI | — |
+
+### Results (Pending)
+
+> Results will be updated here once experiments complete. Expected eval files:
+> - `rl_eval_results/qwen3_dpo_nli_cardiff_eval.json`
+> - `rl_eval_results/qwen3_dpo_hybrid_cardiff_eval.json`
+> - `rl_eval_results/llama2_dpo_nli_cardiff_eval.json`
+> - `rl_eval_results/llama2_dpo_hybrid_cardiff_eval.json`
+
+---
+
 ## NLI Model Ablation (Cardiff)
 
 | NLI Model | NLI Score (SFT) | Speed | Notes |
@@ -419,23 +471,24 @@ LLaMA-2 requires A100-class GPUs and has a restrictive commercial license. Qwen3
 
 ### High Priority
 
-| Experiment | Description | Expected outcome |
-|------------|-------------|-----------------|
-| Fix Qwen3 DPO alignment | Re-design preference data using NLI as reward signal instead of verifier score | Recover NLI≥0.20 after DPO for Qwen3 |
-| NLI-guided reward for PPO | Replace verifier score with NLI entailment probability as PPO reward | Directly optimise the most discriminative metric |
-| Larger preference dataset | Scale to 2000+ pairs across all 5 domains | Test data scaling limits for LLaMA-2 DPO |
-| Human evaluation study | Rate 50 explanations per model for correctness and relevance | Validate NLI as a proxy for human-judged quality |
+| Experiment | Status | Description | Expected outcome |
+|------------|--------|-------------|-----------------|
+| NLI-DPO for Qwen3-8B | **In Progress** | Use NLI entailment probability as DPO ranking signal | Recover NLI≥0.196 (SFT baseline) after DPO for Qwen3 |
+| Hybrid-DPO for Qwen3-8B | **In Progress** | 0.5×NLI + 0.5×verifier as DPO ranking signal | Balance quality and answer-grounding for Qwen3 |
+| NLI-DPO for LLaMA-2-13B | **In Progress** | Use NLI entailment probability as DPO ranking signal | Improve beyond DPO v2 (NLI=0.291) for LLaMA-2 |
+| Hybrid-DPO for LLaMA-2-13B | **In Progress** | 0.5×NLI + 0.5×verifier as DPO ranking signal | Compare hybrid vs pure NLI signal for LLaMA-2 |
+| Cross-domain unified training | Planned (after Phase 1+2) | Train on all 5 domains (Cardiff, Sydney, Law, Med Y1/Y2) with NLI reward | Improved generalisation; single model for all subjects |
+| NLI-guided reward for PPO | Planned | Replace verifier score with NLI entailment probability as PPO reward | Directly optimise the most discriminative metric |
+| Human evaluation study | Planned | Rate 50 explanations per model for correctness and relevance | Validate NLI as a proxy for human-judged quality |
 
 ### Model Improvements
 
 | Experiment | Description | Rationale |
 |------------|-------------|-----------|
-| Qwen3-8B with NLI reward DPO | Use NLI score as preference oracle instead of verifier | Qwen3 verifier score reward causes alignment tax |
-| DPO + PPO two-stage pipeline | Initialise PPO from DPO v2 (LLaMA-2) | Combine offline alignment with online exploration |
+| DPO + PPO two-stage pipeline | Initialise PPO from DPO-NLI adapter (LLaMA-2) | Combine offline NLI alignment with online exploration |
 | PPO with larger batch size | batch=8–16 for LLaMA-2 PPO | Reduce reward variance; enable more stable online RL |
 | Qwen3-8B 4-bit quantization | QLoRA fine-tuning for deployment | Enable deployment on consumer GPUs |
 | Qwen3 thinking mode | Enable Qwen3 chain-of-thought (`enable_thinking=True`) | May improve answer-grounded reasoning quality |
-| Reward model ensemble | Combine verifier + NLI as composite reward | More robust reward signal for PPO |
 
 ### Evaluation Improvements
 
