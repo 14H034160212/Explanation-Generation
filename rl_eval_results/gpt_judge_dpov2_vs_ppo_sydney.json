@@ -1,0 +1,413 @@
+{
+  "args": {
+    "model_a_json": "./rl_eval_results/sydney_eval_nli.json",
+    "model_b_json": "./rl_eval_results/sydney_eval_nli.json",
+    "test_data_json": "./Paul_new_data/Sydney/Sydney_vicuna_13b_finetuned_random_100.json",
+    "model_a_name": "RL-DPO-v2 (K=1)",
+    "model_b_name": "RL-PPO (K=1)",
+    "output_path": "./rl_eval_results/gpt_judge_dpov2_vs_ppo_sydney.json",
+    "limit": 100
+  },
+  "summary": {
+    "total": 98,
+    "win_a": 89,
+    "win_b": 9,
+    "ties": 0,
+    "errors": 0,
+    "win_rate_b": 0.09183673469387756
+  },
+  "detailed_results": [
+    {
+      "index": 0,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 1,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 2,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 3,
+      "verdict": "MODEL_B"
+    },
+    {
+      "index": 4,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 5,
+      "verdict": "MODEL_B"
+    },
+    {
+      "index": 6,
+      "verdict": "MODEL_B"
+    },
+    {
+      "index": 7,
+      "verdict": "MODEL_B"
+    },
+    {
+      "index": 8,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 9,
+      "verdict": "MODEL_B"
+    },
+    {
+      "index": 10,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 11,
+      "verdict": "MODEL_B"
+    },
+    {
+      "index": 12,
+      "verdict": "MODEL_B"
+    },
+    {
+      "index": 13,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 14,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 15,
+      "verdict": "MODEL_B"
+    },
+    {
+      "index": 16,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 17,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 18,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 19,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 20,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 21,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 22,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 23,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 24,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 25,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 26,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 27,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 28,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 29,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 30,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 31,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 32,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 33,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 34,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 35,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 36,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 37,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 38,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 39,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 40,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 41,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 42,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 43,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 44,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 45,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 46,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 47,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 48,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 49,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 50,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 51,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 52,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 53,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 54,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 55,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 56,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 57,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 58,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 59,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 60,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 61,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 62,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 63,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 64,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 65,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 66,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 67,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 68,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 69,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 70,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 71,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 72,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 73,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 74,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 75,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 76,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 77,
+      "verdict": "MODEL_B"
+    },
+    {
+      "index": 78,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 79,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 80,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 81,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 82,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 83,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 84,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 85,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 86,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 87,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 88,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 89,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 90,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 91,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 92,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 93,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 94,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 95,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 96,
+      "verdict": "MODEL_A"
+    },
+    {
+      "index": 97,
+      "verdict": "MODEL_A"
+    }
+  ]
+}

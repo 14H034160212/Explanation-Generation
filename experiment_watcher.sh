@@ -12,6 +12,9 @@ CHECK_INTERVAL=120   # seconds between checks
 
 cd "$WORKDIR"
 
+# Load API key if available
+[ -f .env_openai ] && source .env_openai
+
 log() { echo "[$(date '+%Y-%m-%d %H:%M:%S')] $*"; }
 
 # ── PID state file ───────────────────────────────────────────
@@ -194,6 +197,41 @@ trigger_downstream() {
             if ! is_alive "$m2pid"; then
                 log "Med Y1 K5 complete → triggering Med Y2 K5"
                 start_med_y2_k5
+            fi
+        fi
+    fi
+
+    # After Med Y2 K5 done → run GPT-3.5 Sydney eval (needs GPU for verifier)
+    if is_done rl_eval_results/baselines_med_y2_k5_eval.json; then
+        if ! is_done rl_eval_results/gpt35_sydney_eval.json; then
+            local g35pid=$(get_pid gpt35_sydney)
+            if ! is_alive "$g35pid"; then
+                log "Med Y2 K5 complete → triggering GPT-3.5 Sydney eval on GPU 7"
+                CUDA_VISIBLE_DEVICES=7 nohup \
+                    /data/qbao775/miniconda3/envs/llm-tuning/bin/python3 \
+                    scripts/eval_pretrained_explanations.py \
+                    --input_path ./Paul_new_data/Sydney/Sydney_gpt-35_random_100_correct.json \
+                    --model_name "GPT-3.5" \
+                    --verifier_path ./qiming_alpaca_7B_Cardiff_Sydney_merged_verifier_way_2 \
+                    --output_path ./rl_eval_results/gpt35_sydney_eval.json \
+                    --verifier_device cuda:0 \
+                    >> rl_gpt35_sydney_eval.log 2>&1 &
+                set_pid gpt35_sydney $!
+                log "   GPT-3.5 Sydney eval → PID $!"
+            fi
+        fi
+    fi
+
+    # After Law K5 done → run GPT-4/GPT-4o-mini eval on GPU 7 (verifier needs GPU)
+    if is_done rl_eval_results/baselines_law_k5_eval.json; then
+        if ! is_done rl_eval_results/gpt4o_mini_cardiff_eval.json; then
+            local gpid=$(get_pid gpt_eval)
+            if ! is_alive "$gpid"; then
+                log "Law K5 complete → triggering GPT-4/GPT-4o-mini eval on GPU 7"
+                OPENAI_API_KEY="${OPENAI_API_KEY:-}" nohup bash run_gpt_eval_pretrained.sh \
+                    >> rl_gpt_eval_pretrained.log 2>&1 &
+                set_pid gpt_eval $!
+                log "   GPT eval → PID $!"
             fi
         fi
     fi
