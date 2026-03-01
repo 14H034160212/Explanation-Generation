@@ -25,3 +25,11 @@ rl_sft_qwen3_8b_generator/
 rl_dpo_qwen3_8b_generator/
 rl_preference_data*/build_log.txt
 temp_pdf.txt
+# Runtime / secrets — never commit these
+.env_openai
+.watcher_state
+*.pid
+watcher_pids.txt
+# Large model weights
+rl_ppo_qwen3_hybrid_v1_2000steps/
+rl_ppo_qwen3_hybrid_v2_2000steps/
