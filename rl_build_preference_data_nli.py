@@ -161,13 +161,15 @@ def score_by_nli(
 # ---------------------------------------------------------------------------
 
 def load_verifier(verifier_path: str, device: str):
-    """Load Alpaca-7B verifier. use_fast=False avoids LlamaTokenizerFast recursion."""
+    """Load Alpaca-7B verifier. use_fast=False avoids LlamaTokenizerFast recursion.
+    Uses float32 on CPU (bfloat16/float16 matmul not supported on CPU)."""
     logger.info(f"Loading verifier from {verifier_path} on {device} ...")
     tokenizer = AutoTokenizer.from_pretrained(
         verifier_path, trust_remote_code=True, use_fast=False
     )
+    verifier_dtype = torch.float32 if str(device) == "cpu" else torch.bfloat16
     model = AutoModelForCausalLM.from_pretrained(
-        verifier_path, torch_dtype=torch.bfloat16, trust_remote_code=True
+        verifier_path, torch_dtype=verifier_dtype, trust_remote_code=True
     ).to(device).eval()
     return model, tokenizer
 

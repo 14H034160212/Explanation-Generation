@@ -601,9 +601,11 @@ def main():
     )
     if verifier_tokenizer.pad_token is None:
         verifier_tokenizer.pad_token = verifier_tokenizer.eos_token
+    # CPU does not support fp16 matmul; use fp32 for CPU verifier
+    verifier_dtype = torch.float32 if str(args.verifier_device) == "cpu" else torch.float16
     verifier_model = AutoModelForCausalLM.from_pretrained(
         args.verifier_path,
-        torch_dtype=torch.float16,
+        torch_dtype=verifier_dtype,
         low_cpu_mem_usage=True,
         cache_dir=args.cache_dir,
         trust_remote_code=True,
