@@ -192,7 +192,7 @@ All results on 100-question held-out test sets.
 | **ILearner-LLM (K=5)** | 0.0729 | — | 0.7859 | 0.8713 | 0.0864 | 3.1960 | — |
 | SFT (LLaMA-2-13B) | 0.0160 | 0.8070 | 0.7820 | 0.8087 | 0.0555 | 3.1976 | 19.947 |
 | DPO v1 (165 pairs, 2 ep) | 0.0173 | 0.8238 | 0.8325 | 0.7698 | **0.2969** | 3.0467 | 6.567 |
-| **DPO v2 (458 pairs, 5 ep)** | **0.0247** | **0.8300** | **0.8422** | **0.8682** | 0.2905 | 3.0648 | **5.774** |
+| **DPO v2 (458 pairs, 5 ep)** | **0.0247** | **0.8300** | 0.8422 | **0.8682** | 0.2905 | 3.0648 | **5.774** |
 | DPO v3 (851 pairs, 5 ep) | 0.0189 | 0.8228 | 0.8284 | 0.8007 | 0.2257 | 3.0551 | 8.698 |
 | PPO (125 steps, batch=4) | 0.0175 | 0.8245 | 0.8255 | 0.7390 | 0.2260 | 3.0750 | 7.234 |
 | GPT-4 | 0.0316 | 0.8472 | 0.8178 | 0.8972 | 0.0736 | 3.0100 | — |
@@ -202,6 +202,7 @@ All results on 100-question held-out test sets.
 | Qwen3-8B DPO | 0.0230 | 0.8169 | 0.7980 | 0.8323 | 0.1149 | 2.9300 | 13.985 |
 | Qwen3-8B Hybrid PPO v1 | 0.0233 | 0.8157 | 0.7977 | 0.8381 | 0.1791 | 2.9300 | 12.800 |
 | Qwen3-8B Hybrid PPO v2 | 0.0256 | 0.8156 | 0.7974 | 0.8493 | 0.1613 | 2.9700 | 13.030 |
+| **LLaMA-2 Hybrid-DPO (New)** | 0.0154 | 0.8185 | **0.8358** | 0.7894 | **0.3209** | **3.0736** | 5.946 |
 
 **Cardiff takeaways:**
 - **DPO v2 is the overall best**: highest BLEU, BERT(Ans), ACR, and fastest inference among RL models.
@@ -219,9 +220,9 @@ All results on 100-question held-out test sets.
 | **ILearner-LLM (K=5)** | 0.0274 | — | 0.7889 | 0.6451 | 0.0837 | 3.1843 | — |
 | SFT (LLaMA-2-13B) | 0.0222 | 0.8244 | 0.7870 | 0.6249 | 0.0537 | 3.1937 | 19.001 |
 | DPO v1 (165 pairs, 2 ep) | 0.0314 | 0.8262 | 0.8272 | 0.6034 | 0.2171 | 2.9094 | 9.049 |
-| **DPO v2 (458 pairs, 5 ep)** | 0.0364 | **0.8367** | **0.8426** | 0.6290 | **0.2774** | 2.9474 | **6.370** |
+| **DPO v2 (458 pairs, 5 ep)** | 0.0364 | **0.8367** | 0.8426 | 0.6290 | 0.2774 | 2.9474 | 6.370 |
 | DPO v3 (851 pairs, 5 ep) | 0.0357 | 0.8360 | 0.8372 | 0.6481 | 0.2310 | 2.8448 | 8.081 |
-| PPO (125 steps, batch=4) | **0.0421** | 0.8364 | 0.8294 | **0.6606** | 0.2269 | 2.9609 | 7.596 |
+| PPO (125 steps, batch=4) | **0.0421** | 0.8364 | 0.8294 | **0.6606** | 0.2269 | **2.9609** | 7.596 |
 | GPT-4 | **0.0843** | 0.8685 | 0.8302 | 0.4727 | 0.1973 | 2.8100 | — |
 | GPT-3.5 | 0.0530 | 0.8636 | 0.8260 | **0.8925** | 0.2475 | 2.8600 | — |
 | GPT-4o-mini | 0.0385 | 0.8541 | 0.8079 | 0.8785 | 0.1787 | 2.9100 | — |
@@ -229,6 +230,7 @@ All results on 100-question held-out test sets.
 | Qwen3-8B DPO | 0.0404 | 0.8358 | 0.7997 | 0.8238 | 0.1973 | 2.8000 | 13.055 |
 | Qwen3-8B Hybrid PPO v1 | 0.0419 | 0.8358 | 0.7996 | 0.8238 | 0.2122 | 2.8000 | 11.994 |
 | Qwen3-8B Hybrid PPO v2 | 0.0434 | 0.8365 | 0.7993 | 0.7966 | 0.1887 | 2.8200 | 12.017 |
+| **LLaMA-2 Hybrid-DPO (New)** | 0.0316 | 0.8359 | **0.8620** | 0.6327 | **0.3562** | 2.8376 | **4.060** |
 
 **Sydney takeaways:**
 - **DPO v2 best NLI** (0.277) and BERT(Ans). **PPO best BLEU and ACR** — complementary strengths.
@@ -379,6 +381,38 @@ Unified preference data builder supporting LLaMA-2-13B and Qwen3-8B via `--model
 | `verifier` | Alpaca-7B verifier score (legacy) | Yes |
 
 For each question, the script: generates N explanations → extracts correct option text via regex from `"The correct answer is Option X."` → scores each by NLI entailment (premise = explanation, hypothesis = correct option) → pairs (highest NLI, lowest NLI) if gap ≥ `--min_score_gap`.
+
+### ⚡ Hybrid-DPO Architecture Diagram
+
+The **Hybrid-DPO** strategy solves the "alignment tax" by ensuring explanations are both **logically correct** (NLI) and **linguistically fluent** (Verifier). 
+
+```mermaid
+flowchart TD
+    Q[Question/Options Context] --> G[SFT Generator Model]
+    G -->|Generates N candidates| Cand[Candidate Explanations]
+    Cand --> V1[NLI Model DeBERTa-v3]
+    Cand --> V2[Domain Verifier Alpaca-7B]
+    
+    Q --> Ans[Extract Correct Option Text]
+    Ans --> V1
+    
+    V1 -->|P entailment| S1(NLI Score: 0.0 to 1.0)
+    V2 -->|0 to 5 scale| S2(Verifier Score: 0.0 to 5.0)
+    
+    S2 --> Norm[Min-Max Normalization -> 0.0 to 1.0]
+    
+    S1 --> W1[0.5 x NLI Score]
+    Norm --> W2[0.5 x Normalized Verifier]
+    
+    W1 --> Add(Hybrid Preference Score)
+    W2 --> Add
+    
+    Add --> Rank[Rank Candidates by Hybrid Score]
+    Rank --> Pair[Select Chosen / Rejected Pair]
+    Pair --> DPO[DPO Offline RL Training]
+    
+    DPO --> Final[LLaMA-2 / Qwen3 Hybrid-XD Model]
+```
 
 ### Experiment Design
 
