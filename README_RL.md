@@ -331,6 +331,7 @@ We used GPT-4o-mini as a pairwise judge on 100 questions per comparison (N=100, 
 | Qwen3-8B SFT | Qwen3-8B NLI-DPO | 1 | 99 | 0 | 99% |
 | **Qwen3-8B SFT**| **Qwen3-8B Hybrid-DPO (New)**| **5** | **95** | 0 | **95%** |
 | **Qwen3 NLI-DPO** | **Qwen3-8B Hybrid-DPO (New)**| **48** | **50** | 2 | **51%** |
+| **Qwen3-8B Hybrid-DPO** | **GPT-4o-mini** | **5** | **95** | 0 | **95%** |
 
 *\*Note on LLaMA-2 "Verbosity Bias": GPT-4o-mini demonstrates a severe "verbosity bias" when evaluating LLaMA-2. The LLaMA-2 SFT model hallucinates explanations averaging over 2,100 characters per response, while the highly-accurate Hybrid-DPO and DPO v2 models generate concise, ~300-character factual explanations. GPT-4o-mini incorrectly penalizes the concise text. When evaluating Qwen3 (where explanation lengths are controlled/similar), Hybrid-DPO achieves a 95% win rate over SFT and evenly splits with NLI-DPO.*
 
