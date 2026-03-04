@@ -319,14 +319,18 @@ We used GPT-4o-mini as a pairwise judge on 100 questions per comparison (N=100, 
 
 #### Cardiff Biology
 
-| Model A | Model B | A wins | B wins | B win rate |
-|---------|---------|--------|--------|-----------|
-| SFT | DPO v2 | 69 | 31 | 31% |
-| SFT | PPO | 86 | 12 | 12% |
-| DPO v2 | PPO | 76 | 22 | 22% |
-| **DPO v2** | **GPT-4o-mini** | **0** | **100** | **100%** |
-| **DPO v2** | **GPT-3.5** | **8** | **92** | **92%** |
-| Qwen3-8B SFT | Qwen3-8B DPO | 1 | 99 | 99% |
+| Model A | Model B | A wins | B wins | Ties | B win rate |
+|---------|---------|--------|--------|------|-----------|
+| SFT (LLaMA-2) | DPO v2 (LLaMA-2) | 69 | 31 | 0 | 31%* |
+| SFT (LLaMA-2) | PPO (LLaMA-2) | 86 | 12 | 0 | 12% |
+| DPO v2 (LLaMA-2)| PPO (LLaMA-2) | 76 | 22 | 0 | 22% |
+| **DPO v2** | **GPT-4o-mini** | **0** | **100** | 0 | **100%** |
+| **DPO v2** | **GPT-3.5** | **8** | **92** | 0 | **92%** |
+| Qwen3-8B SFT | Qwen3-8B NLI-DPO | 1 | 99 | 0 | 99% |
+| **Qwen3-8B SFT**| **Qwen3-8B Hybrid-DPO (New)**| **5** | **95** | 0 | **95%** |
+| **Qwen3 NLI-DPO** | **Qwen3-8B Hybrid-DPO (New)**| **48** | **50** | 2 | **51%** |
+
+*\*Note on LLaMA-2 "Verbosity Bias": GPT-4o-mini demonstrates a severe "verbosity bias" when evaluating LLaMA-2. The LLaMA-2 SFT model hallucinates explanations averaging over 2,100 characters per response, while the highly-accurate Hybrid-DPO and DPO v2 models generate concise, ~300-character factual explanations. GPT-4o-mini incorrectly penalizes the concise text. When evaluating Qwen3 (where explanation lengths are controlled/similar), Hybrid-DPO achieves a 95% win rate over SFT and evenly splits with NLI-DPO.*
 
 #### Sydney Biology
 
