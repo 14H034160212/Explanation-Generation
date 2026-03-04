@@ -371,7 +371,7 @@ The exception is **Auckland Law** (K=5 NLI=0.400), which is the best NLI result 
 
 ---
 
-## NLI-Guided DPO Experiments (In Progress)
+## NLI-Guided DPO Experiments
 
 ### Motivation
 
@@ -549,10 +549,10 @@ LLaMA-2 requires A100-class GPUs and has a restrictive commercial license. Qwen3
 
 | Experiment | Status | Description | Expected outcome |
 |------------|--------|-------------|-----------------|
-| NLI-DPO for Qwen3-8B | **In Progress** | Use NLI entailment probability as DPO ranking signal | Recover NLI≥0.196 (SFT baseline) after DPO for Qwen3 |
-| Hybrid-DPO for Qwen3-8B | **In Progress** | 0.5×NLI + 0.5×verifier as DPO ranking signal | Balance quality and answer-grounding for Qwen3 |
-| NLI-DPO for LLaMA-2-13B | **In Progress** | Use NLI entailment probability as DPO ranking signal | Improve beyond DPO v2 (NLI=0.291) for LLaMA-2 |
-| Hybrid-DPO for LLaMA-2-13B | **In Progress** | 0.5×NLI + 0.5×verifier as DPO ranking signal | Compare hybrid vs pure NLI signal for LLaMA-2 |
+| NLI-DPO for Qwen3-8B | **Completed** | Use NLI entailment probability as DPO ranking signal | Recover NLI≥0.196 (SFT baseline) after DPO for Qwen3 |
+| Hybrid-DPO for Qwen3-8B | **Completed** | 0.5×NLI + 0.5×verifier as DPO ranking signal | Balance quality and answer-grounding for Qwen3 |
+| NLI-DPO for LLaMA-2-13B | **Completed** | Use NLI entailment probability as DPO ranking signal | Improve beyond DPO v2 (NLI=0.291) for LLaMA-2 |
+| Hybrid-DPO for LLaMA-2-13B | **Completed** | 0.5×NLI + 0.5×verifier as DPO ranking signal | Compare hybrid vs pure NLI signal for LLaMA-2 |
 | Cross-domain unified training | Planned (after Phase 1+2) | Train on all 5 domains (Cardiff, Sydney, Law, Med Y1/Y2) with NLI reward | Improved generalisation; single model for all subjects |
 | NLI-guided reward for PPO | Planned | Replace verifier score with NLI entailment probability as PPO reward | Directly optimise the most discriminative metric |
 | Human evaluation study | Planned | Rate 50 explanations per model for correctness and relevance | Validate NLI as a proxy for human-judged quality |
