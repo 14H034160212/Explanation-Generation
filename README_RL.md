@@ -414,52 +414,39 @@ flowchart TD
     DPO --> Final[LLaMA-2 / Qwen3 Hybrid-XD Model]
 ```
 
-#### Academic Version (Suitable for Papers)
-For a more formal, academic presentation of the Hybrid-DPO alignment process:
+#### High-Level Conceptual Framework (Methodology Architecture)
+For a broader, model-agnostic presentation of the Hybrid-DPO alignment process, suitable for the methodology section of a paper:
 
 ```mermaid
 graph TD
-    %% Define Styles
-    classDef model fill:#e1f5fe,stroke:#01579b,stroke-width:2px;
-    classDef data fill:#f5f5f5,stroke:#424242,stroke-width:1px,stroke-dasharray: 5 5;
-    classDef metric fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px;
-    classDef process fill:#fff3e0,stroke:#e65100,stroke-width:2px;
+    classDef generator fill:#e3f2fd,stroke:#1565c0,stroke-width:2px;
+    classDef evaluation fill:#fff3e0,stroke:#e65100,stroke-width:2px;
+    classDef alignment fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px;
+    classDef context fill:#fafafa,stroke:#9e9e9e,stroke-width:1px,stroke-dasharray: 5 5;
+
+    Input["Context<br/>(Educational Question + Ground Truth Answer)"]:::context
+    Policy(("Explanation<br/>Policy Model")):::generator
     
-    %% Nodes
-    Ctx["Context (x):<br/>Question + Options"]:::data
-    Ans["Ground Truth (y*):<br/>Correct Option Text"]:::data
-    Gen["Policy Generator π_θ"]:::model
-    Cands["Candidate Explanations<br/>{y_1, y_2, ..., y_N}"]:::data
+    Input --> Policy
     
-    subgraph "Dual-Signal Reward Construction"
-        NLI["Entailment Model (DeBERTa-v3)<br/>P(Entailment | y_i, y*)"]:::metric
-        Ver["Domain Verifier (Alpaca-7B)<br/>Fluency/Style Score"]:::metric
-        
-        S_NLI("S_NLI ∈ [0,1]"):::data
-        S_Ver("S_Ver (Normalized) ∈ [0,1]"):::data
-        
-        Combine["Hybrid Preference Score:<br/>S_{hybrid} = α·S_NLI + (1-α)·S_Ver"]:::process
+    subgraph "Phase 1: Multi-Candidate Generation"
+        Policy -->|Sampling| Cands["Candidate Explanations"]:::context
     end
     
-    Rank["Preference Pair Extraction:<br/>y_w = argmax(S_{hybrid})<br/>y_l = argmin(S_{hybrid})"]:::process
-    Opt["Direct Preference Optimization (DPO)<br/>L_{DPO}(π_θ; π_{ref})"]:::process
+    subgraph "Phase 2: Hybrid Quality Assessment"
+        Cands --> Logic["Logical Evaluator<br/>(Ensures factual entailment)"]:::evaluation
+        Cands --> Fluency["Linguistic Verifier<br/>(Ensures domain style/quality)"]:::evaluation
+        Input -.->|Ground Truth Reference| Logic
+    end
     
-    %% Edges
-    Ctx --> Gen
-    Gen -->|Sampling| Cands
+    Logic -->|Logic Signal| Rank["Dual-Signal Preference Ranking"]:::context
+    Fluency -->|Fluency Signal| Rank
     
-    Cands --> NLI
-    Ans -->|Hypothesis| NLI
-    Cands --> Ver
+    subgraph "Phase 3: Preference Alignment"
+        Rank -->|"(Chosen, Rejected) Pairs"| DPO["Direct Preference Optimization<br/>(DPO)"]:::alignment
+    end
     
-    NLI --> S_NLI
-    Ver --> S_Ver
-    
-    S_NLI --> Combine
-    S_Ver --> Combine
-    
-    Combine --> Rank
-    Rank -->|"(y_w, y_l) Pairs"| Opt
+    DPO -.->|Alignment Update| Policy
 ```
 
 ### Experiment Design
