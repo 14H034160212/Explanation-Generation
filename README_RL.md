@@ -414,6 +414,54 @@ flowchart TD
     DPO --> Final[LLaMA-2 / Qwen3 Hybrid-XD Model]
 ```
 
+#### Academic Version (Suitable for Papers)
+For a more formal, academic presentation of the Hybrid-DPO alignment process:
+
+```mermaid
+graph TD
+    %% Define Styles
+    classDef model fill:#e1f5fe,stroke:#01579b,stroke-width:2px;
+    classDef data fill:#f5f5f5,stroke:#424242,stroke-width:1px,stroke-dasharray: 5 5;
+    classDef metric fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px;
+    classDef process fill:#fff3e0,stroke:#e65100,stroke-width:2px;
+    
+    %% Nodes
+    Ctx["Context (x):<br/>Question + Options"]:::data
+    Ans["Ground Truth (y*):<br/>Correct Option Text"]:::data
+    Gen["Policy Generator π_θ"]:::model
+    Cands["Candidate Explanations<br/>{y_1, y_2, ..., y_N}"]:::data
+    
+    subgraph "Dual-Signal Reward Construction"
+        NLI["Entailment Model (DeBERTa-v3)<br/>P(Entailment | y_i, y*)"]:::metric
+        Ver["Domain Verifier (Alpaca-7B)<br/>Fluency/Style Score"]:::metric
+        
+        S_NLI("S_NLI ∈ [0,1]"):::data
+        S_Ver("S_Ver (Normalized) ∈ [0,1]"):::data
+        
+        Combine["Hybrid Preference Score:<br/>S_{hybrid} = α·S_NLI + (1-α)·S_Ver"]:::process
+    end
+    
+    Rank["Preference Pair Extraction:<br/>y_w = argmax(S_{hybrid})<br/>y_l = argmin(S_{hybrid})"]:::process
+    Opt["Direct Preference Optimization (DPO)<br/>L_{DPO}(π_θ; π_{ref})"]:::process
+    
+    %% Edges
+    Ctx --> Gen
+    Gen -->|Sampling| Cands
+    
+    Cands --> NLI
+    Ans -->|Hypothesis| NLI
+    Cands --> Ver
+    
+    NLI --> S_NLI
+    Ver --> S_Ver
+    
+    S_NLI --> Combine
+    S_Ver --> Combine
+    
+    Combine --> Rank
+    Rank -->|"(y_w, y_l) Pairs"| Opt
+```
+
 ### Experiment Design
 
 Four experiments running in parallel (two chains), using GPUs 4–7:
