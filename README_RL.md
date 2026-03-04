@@ -248,14 +248,15 @@ Models evaluated on domains **not seen** during preference data construction (wh
 
 | Model | BLEU ↑ | BERT(Stu) ↑ | BERT(Ans) ↑ | ACR ↑ | NLI ↑ | Ver ↑ |
 |-------|--------|------------|------------|-------|-------|-------|
-| ILearner-LLM (K=5) | 0.0381 | — | 0.7720 | 0.6326 | 0.3996 | 2.7845 |
+| ILearner-LLM (K=5) | 0.0381 | — | 0.7720 | 0.6326 | **0.3996** | 2.7845 |
 | SFT (LLaMA-2-13B) | 0.0298 | 0.8010 | 0.7709 | 0.5516 | 0.2702 | 2.7180 |
 | DPO v3 | 0.0540 | 0.8246 | 0.8232 | 0.6261 | 0.3287 | 2.6111 |
 | Qwen3-8B SFT | **0.1382** | **0.8784** | **0.8557** | 0.5175 | 0.3191 | 2.0000 |
 | Qwen3-8B DPO | 0.0355 | 0.8183 | 0.8030 | **0.8018** | 0.2438 | 2.4700 |
 | Qwen3-8B PPO | 0.0343 | 0.8161 | 0.8007 | 0.7693 | 0.2235 | 2.5900 |
+| **LLaMA-2 Hybrid-DPO (New)** | 0.0457 | 0.8265 | 0.8297 | 0.5546 | 0.3229 | 2.5918 |
 
-**Law dataset note:** ILearner K=5 achieves the highest NLI (0.400) here — suggesting that in the Law domain, iterative selection outperforms single-pass RL. Qwen3 SFT shows strong BLEU (0.138) on Law, reflecting its stronger out-of-domain generation capability.
+**Law dataset note:** ILearner K=5 achieves the highest NLI (0.400) here — suggesting that in the Law domain, iterative selection outperforms single-pass RL. Qwen3 SFT shows strong BLEU (0.138) on Law, reflecting its stronger out-of-domain generation capability. The Hybrid-DPO LLaMA-2 model achieves a strong NLI of 0.323, outperforming the SFT baseline heavily.
 
 #### UK Medicine Year 1
 
