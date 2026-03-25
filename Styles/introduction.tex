@@ -1,0 +1,49 @@
+\section{Introduction}
+
+The generation of high-quality educational explanations represents a fundamental challenge in natural language processing. Unlike general-purpose conversational tasks, educational rationales must adhere to strict logical constraints, factual accuracy, and pedagogical clarity. While Supervised Fine-Tuning (SFT) has enabled Large Language Models (LLMs) to produce highly fluent responses, these models frequently suffer from two critical deficiencies: hallucination of facts and "verbosity bias"---the tendency to generate excessively long, rhetorical text to mask underlying logical inconsistencies.
+
+Recent advancements in alignment engineering, such as Proximal Policy Optimization (PPO) and Direct Preference Optimization (DPO), have sought to optimize models to adhere to human preferences. However, these techniques largely rely on reward models trained on stylistic human preferences, which inadvertently reward verbose, "helpful-sounding" but factually shallow rhetoric. Furthermore, when researchers attempt to optimize strictly for deterministic logical metrics, such as Natural Language Inference (NLI) entailment, they often encounter what we define as the \textbf{"alignment tax"}---a phenomenon where the model's linguistic fluency and grammatical coherence collapse in favor of robotic, repetitive, yet logically sound snippets.
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[scale=0.8]
+% Axes
+\draw[->, thick] (0,0) -- (8,0) node[right] {Linguistic Fluency / Quality};
+\draw[->, thick] (0,0) -- (0,6) node[above] {Logical Entailment (NLI)};
+
+% Curves (move right)
+\draw[blue, thick, dashed] (1.2,5) to[bend right=20] (7.5,0.5);
+\node[blue, align=center] at (2.3,1.5) {Standard\\Alignment Frontier};
+
+% Points
+% Pure Logic moved up
+\filldraw[red] (1,5.5) circle (3pt) node[right=0.2cm] {Pure Logic (NLI Opt)};
+
+% Pure Fluency unchanged
+\filldraw[green!60!black] (6,1) circle (3pt) node[right=0.2cm] {Pure Fluency (SFT/Style Opt)};
+
+% RLearner moved right
+\filldraw[orange] (4.5,3.5) circle (4pt) node[right=0.3cm] {\textbf{RLearner-LLM (Ours)}};
+
+% Alignment Tax arrow adjusted
+\draw[<->, red, thick] (1.2,5.2) -- (5.8,1.2) 
+node[midway, sloped, above=0.01cm] {\textbf{Alignment Tax}};
+
+\end{tikzpicture}
+
+\caption{Conceptual illustration of the \textbf{Alignment Tax}. Standard optimization techniques often force a trade-off between logical grounding and linguistic fluency. RLearner-LLM aims to push the boundary toward the upper-right quadrant.}
+\label{fig:alignment_tax}
+\end{figure}
+
+
+
+
+In this paper, we propose \textbf{RLearner-LLM} (utilizing Hybrid-DPO), a cross-domain alignment framework designed to eliminate this tax. By fusing deterministic logical entailment signals from NLI models with holistic fluency scores from a secondary verifier model, RLearner-LLM curates high-fidelity pairwise preference data without the need for expensive human-in-the-loop intervention. This dual-reward signal ensures that the model learns to prioritize factual grounding while maintaining the linguistic naturalness required for effective pedagogy.
+
+Our contributions are summarized as follows:
+\begin{enumerate}
+    \item We demonstrate the severe limitations of current LLM-as-a-judge evaluation paradigms, highlighting a systematic self-preference verbosity bias that penalizes concise, logical explanations.
+    \item We introduce the \textbf{RLearner-LLM} framework, an automated pipeline for generating preference pairs ($\mathcal{D}_{pref}$) that balance factual density with stylistic coherence via Hybrid-DPO.
+    \item We provide an empirical validation across five distinct academic domains (Biology, Medicine, Law) and three model architectures (LLaMA-2-13B, Qwen3-8B, LLaMA-3-8B), demonstrating that \textbf{RLearner-LLM} achieves up to \textbf{7.6$\times$} NLI improvement over SFT on LLaMA-2-13B, with consistent ACR gains across all architectures and domains.
+    \item We conduct extensive ablation studies (Section~\ref{sec:ablation}) comparing NLI-only, Additive Hybrid, and Multiplicative ACR Gate reward signals, demonstrating that the hard coverage gate is necessary to prevent reward hacking and DPO alignment tax regression.
+\end{enumerate}

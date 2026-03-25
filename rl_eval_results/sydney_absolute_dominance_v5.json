@@ -1,0 +1,119 @@
+[
+    {
+        "instruction": "As an explanation generation expert, can you generate the explanation for the given input?",
+        "input": "Given question: Most of the time base sequencing influences how the DNA molecule interacts with histone proteins. Option A: True Option B: False The correct answer is Option B.",
+        "reference": "Interactions between DNA and histone proteins largely does not depend on a sequence of bases. This is because the negatively charged sugar-phosphate backbone of the DNA and positively charged histones play a crucial role in this interaction. However, as always in biology, there are some exceptions. Sometimes we could make specific modifications to histones that could happen in certain regions.Thanks to everybody who has commented on my question. I have added an explanation as was suggested by most of the commentators and rewritten the question a bit to avoid ambiguity.",
+        "best_explanation": "Interactions between DNA and histone proteins largely does not depend on a sequence of bases. This is because the negatively charged sugar-phosphate backbone of the DNA and positively charged histones play a crucial role in this interaction. However, as always in biology, there are some exceptions. Sometimes we could make specific modifications to histones that could happen in certain regions.Thanks to everybody who has commented on my question. I have added an explanation as was suggested by most of the commentators and rewritten the question a bit to avoid ambiguity.",
+        "Generated_Explanation": "Interactions between DNA and histone proteins largely does not depend on a sequence of bases. This is because the negatively charged sugar-phosphate backbone of the DNA and positively charged histones play a crucial role in this interaction. However, as always in biology, there are some exceptions. Sometimes we could make specific modifications to histones that could happen in certain regions.Thanks to everybody who has commented on my question. I have added an explanation as was suggested by most of the commentators and rewritten the question a bit to avoid ambiguity.",
+        "metrics": {
+            "nli": 0.9939444661140442,
+            "verifier": 2.55555555,
+            "acr": 0.0,
+            "bleu": 1.0
+        }
+    },
+    {
+        "instruction": "As an explanation generation expert, can you generate the explanation for the given input?",
+        "input": "Given question: For the following statement answer true or false:Identifying the problem within poor DNA sequencing results could be quite difficult due to there being many possible causing factors. Performing a process of elimination is often the best option by simply reviewing the steps of the experiment and ensuring the correct chemicals and equipment were used. Option A: True Option B: False The correct answer is Option A.",
+        "reference": "Performing a process of elimination is often the best option as there is a large possibility for error. Poor quality DNA in particular is very common when sequencing plasmid DNA templates, thus, reviewing the sample and the methods used to extract it are necessary when trying to identify the reason for results.",
+        "best_explanation": "Identifying the problem within poor DNA sequencing results could be quite difficult due to there being many possible causing factors. Performing a process of elimination is often the best option by simply reviewing the steps of the experiment and ensuring the correct chemicals and equipment were used. True, since there are many possibilities that could cause DNA sequencing to be performed incorrectly. Thus, reviewing the sample and the methods used to sequence it are necessary when trying to identify the reason for results.",
+        "Generated_Explanation": "Identifying the problem within poor DNA sequencing results could be quite difficult due to there being many possible causing factors. Performing a process of elimination is often the best option by simply reviewing the steps of the experiment and ensuring the correct chemicals and equipment were used. True, since there are many possibilities that could cause DNA sequencing to be performed incorrectly. Thus, reviewing the sample and the methods used to sequence it are necessary when trying to identify the reason for results.",
+        "metrics": {
+            "nli": 0.425603985786438,
+            "verifier": 2.55555555,
+            "acr": 1.0,
+            "bleu": 0.307570403380379
+        }
+    },
+    {
+        "instruction": "As an explanation generation expert, can you generate the explanation for the given input?",
+        "input": "Given question: Chemicals such as AZT are able to terminate growing viral DNA chains because DNA polymerases have an inherent proof-reading function. Option A: True Option B: False The correct answer is Option B.",
+        "reference": "DNA polymerases NEED a primer to begin replication 5\u2019 to 3\u2019\u2026 thus, by disrupting the elongation of the primer with an absent 3\u2019-OH group, replication halts and the chain terminates.AZT replaces the 3\u2019OH group with an azide group\u2026 DNA pol\u2019s affinity remains the same for AZT as it does for natural mononucleotides, thus it is not a direct result of DNA pol's 'fact-checking' functions! :)",
+        "best_explanation": "False. Although DNA polymerases do have an inherent proof-reading function, this function is not responsible for the termination of growing viral DNA chains. Instead, these drugs are able to terminate DNA chains because they are able to incorporate into the growing DNA chain and remove the 3' OH group. This prevents the chain from growing any longer.",
+        "Generated_Explanation": "False. Although DNA polymerases do have an inherent proof-reading function, this function is not responsible for the termination of growing viral DNA chains. Instead, these drugs are able to terminate DNA chains because they are able to incorporate into the growing DNA chain and remove the 3' OH group. This prevents the chain from growing any longer.",
+        "metrics": {
+            "nli": 0.002615751698613167,
+            "verifier": 5.0,
+            "acr": 1.0,
+            "bleu": 0.013235309440597958
+        }
+    },
+    {
+        "instruction": "As an explanation generation expert, can you generate the explanation for the given input?",
+        "input": "Given question: The selection of origin sites to initate DNA replication in eukaryotes will occur in the G1 phase of the cell cycle. Option A: True Option B: False The correct answer is Option A.",
+        "reference": "The answer is true. Selection of the origin site occurs in the G1 phase. At this stage pre-replicative complexes (pre-RCs) gather and wait until the cell transitions to the S phase. The S phase is where replication of DNA starts.",
+        "best_explanation": "The answer is true. Selection of the origin site occurs in the G1 phase. At this stage pre-replicative complexes (pre-RCs) gather and wait until the cell transitions to the S phase. The S phase is where replication of DNA starts.",
+        "Generated_Explanation": "The answer is true. Selection of the origin site occurs in the G1 phase. At this stage pre-replicative complexes (pre-RCs) gather and wait until the cell transitions to the S phase. The S phase is where replication of DNA starts.",
+        "metrics": {
+            "nli": 0.9901946187019348,
+            "verifier": 3.0,
+            "acr": 1.0,
+            "bleu": 1.0
+        }
+    },
+    {
+        "instruction": "As an explanation generation expert, can you generate the explanation for the given input?",
+        "input": "Given question: L3-Q04: Types of Sensitive Data include:- Racial or Ethnic origin- Religious Beliefs or Affiliations- Sexual Orientation- Health Information- Genetic Informationand many more...  However, Non-Sensitive data can result in being Sensitive, dependent on the context of the information. Read the following scenario to answer the question below. Scenario: Alison has 8 children and lives in Town X. Alison has the most children in Town X. She has never participated in any study before. She is hesitant about taking part in her friend's study of Town X as she values her privacy. Alison's friend assures her that she will not be identifiable as the data obtained and published will only include a Patient Identifier, her age, and the number of children she has. Question: Is Alison identifiable through the data set?  *The information was obtained through 'Module 2: Sensitive Data' on Canvas* Option A: No - it is impossible to identify Alison through the data set as it will only display Non-Sensitive data. Option B: Yes - Alison is identifiable through the method of Triangulation. Option C: Yes - Alison is identifiable through the method of Data Linkage. Option D: No - Alison is not identifiable as it is anonymised data. The correct answer is Option B.",
+        "reference": "A - Incorrect: Alison is identifiable. Although the study will only display non-sensitive data, this can be accumulated to become Sensitive data.  B- Correct: Alison is identifiable through triangulation. 'Triangulation' is when the identity or sensitivity of a participant or subject can be determined by combining several pieces of non-sensitive information. C- Incorrect: Alison is identifiable, however, not through data linkage as she has not participated in any studies before.  D- Incorrect: It is not anonymised data. A method to anonymise data in this scenario would be to collapse the category of 'Number of Children' to 5+ etc.",
+        "best_explanation": "A - Incorrect: Alison is identifiable. Although the study will only display non-sensitive data, this can be accumulated to become Sensitive data.  B- Correct: Alison is identifiable through triangulation. 'Triangulation' is when the identity or sensitivity of a participant or subject can be determined by combining several pieces of non-sensitive information. C- Incorrect: Alison is identifiable, however, not through data linkage as she has not participated in any studies before.  D- Incorrect: It is not anonymised data. A method to anonymise data in this scenario would be to collapse the category of 'Number of Children' to 5+ etc.",
+        "Generated_Explanation": "A - Incorrect: Alison is identifiable. Although the study will only display non-sensitive data, this can be accumulated to become Sensitive data.  B- Correct: Alison is identifiable through triangulation. 'Triangulation' is when the identity or sensitivity of a participant or subject can be determined by combining several pieces of non-sensitive information. C- Incorrect: Alison is identifiable, however, not through data linkage as she has not participated in any studies before.  D- Incorrect: It is not anonymised data. A method to anonymise data in this scenario would be to collapse the category of 'Number of Children' to 5+ etc.",
+        "metrics": {
+            "nli": 0.8938790559768677,
+            "verifier": 2.81232222,
+            "acr": 1.0,
+            "bleu": 1.0
+        }
+    },
+    {
+        "instruction": "As an explanation generation expert, can you generate the explanation for the given input?",
+        "input": "Given question: Histone Acetyl Transferases (HATs) strongly increases the electrostatic binding interaction between the DNA and histones, by removing an acetyl group. Option A: True Option B: False The correct answer is Option B.",
+        "reference": "Histone Actyl Transferases (HATs) adds more acetyl groups which neutralises lysine positive charges. This in turn weakens the electrostatic interactions between the phosphates from the DNA and histones. Hence, HATs weaken the binding strength between DNA and Histones.",
+        "best_explanation": "Histone Actyl Transferases (HATs) adds more acetyl groups which neutralises lysine positive charges. This in turn weakens the electrostatic interactions between the phosphates from the DNA and histones. Hence, HATs weaken the binding strength between DNA and Histones.",
+        "Generated_Explanation": "Histone Actyl Transferases (HATs) adds more acetyl groups which neutralises lysine positive charges. This in turn weakens the electrostatic interactions between the phosphates from the DNA and histones. Hence, HATs weaken the binding strength between DNA and Histones.",
+        "metrics": {
+            "nli": 0.987065851688385,
+            "verifier": 2.55,
+            "acr": 0.0,
+            "bleu": 1.0
+        }
+    },
+    {
+        "instruction": "As an explanation generation expert, can you generate the explanation for the given input?",
+        "input": "Given question: DNA Helicase 'unzips' dna by breaking what kind of bonds between the complementary bases? Option A: Ionic bonds Option B: Covalent bonds Option C: Hydrogen bonds Option D: Nitrogenous bonds Option E: Phosphate bonds The correct answer is Option C.",
+        "reference": "DNA helicase breaks the hydrogen bonds between the complementary bases in DNA.",
+        "best_explanation": "DNA helicase breaks the hydrogen bonds between the complementary bases in DNA.",
+        "Generated_Explanation": "DNA helicase breaks the hydrogen bonds between the complementary bases in DNA.",
+        "metrics": {
+            "nli": 0.9928667545318604,
+            "verifier": 2.55555555,
+            "acr": 1.0,
+            "bleu": 1.0
+        }
+    },
+    {
+        "instruction": "As an explanation generation expert, can you generate the explanation for the given input?",
+        "input": "Given question: The product of genomic DNA undergoing a process of transcription is catalysed by an unwinding reaction of the genomic sequence. The disassociating regions of RNA polymerase bind to the consensus sequence site of -35 (TTGACA) and -10 (TATAAT) region on a DNA sequence. What enzyme is specialised to detect where the consensus sequence is? Option A: DNA Polymerase III Option B: Shine-Dolgarno Option C: Sigma subunit Option D: Beta Prime subunit Option E: Holoenzyme The correct answer is Option C.",
+        "reference": "This question is determined to examine if an individual has individually learnt to characterise the functions of all enzymes in the process of transcription and their purposes in the creation of mRNA. Choice A: DNA polymerase is in charge of the replication of DNA sequences. Nothing to do with the process of transcriptionChoice B: The shine- dolgarno is involved in the translation process. When mRNAtranslates at the start codon (AUG), in order to create binding affinity with amino acids to make polypeptides. Choice C: The answer is choice C. This subunit in charge of detecting where the consensus sequence is, is the sigma subunit. The sigma subunit detects the promoter sequence and binds at 10million times the affinity.Choice D: This choice is an option which is a likely candidate to answer the question, due to the subunits characteristics. This sub-uni assists in the RNA polymerase keeping intact going down the DNA sequence. As the binding affinity to the sequence isn't strong, this enzyme assists in keeping it \"on track\".Choice E: The holoenzyme is a throw off choice due to the wording of the answer containing the word \"enzyme\", just like the question. The holoenzyme is the name of the RNA polymerase when it is bound by the sigma subunit.",
+        "best_explanation": "The sigma subunit is specialised to detect where the consensus sequence is. The sigma subunit is attached to the core enzyme and is responsible for the detection of the promoter sequence and the initiation of the unwinding reaction. The core enzyme is described as a structure that catalyses the transcription process once the RNA polymerase has detected the promoter sequence. This core enzyme is composed of multiple proteins including those responsible for the unwinding of the DNA sequence, the alignment of the DNA sequence and the synthesis of the RNA sequence. The core enzyme is able to regulate the process of transcription due to the ability for it to change its structure. For example, the core enzyme can change its structure to accommodate for differences in the promoter sequences.",
+        "Generated_Explanation": "The sigma subunit is specialised to detect where the consensus sequence is. The sigma subunit is attached to the core enzyme and is responsible for the detection of the promoter sequence and the initiation of the unwinding reaction. The core enzyme is described as a structure that catalyses the transcription process once the RNA polymerase has detected the promoter sequence. This core enzyme is composed of multiple proteins including those responsible for the unwinding of the DNA sequence, the alignment of the DNA sequence and the synthesis of the RNA sequence. The core enzyme is able to regulate the process of transcription due to the ability for it to change its structure. For example, the core enzyme can change its structure to accommodate for differences in the promoter sequences.",
+        "metrics": {
+            "nli": 0.01719515025615692,
+            "verifier": 5.0,
+            "acr": 1.0,
+            "bleu": 0.06206934655465543
+        }
+    },
+    {
+        "instruction": "As an explanation generation expert, can you generate the explanation for the given input?",
+        "input": "Given question: Hydroelectricity is similar to our metabolism.  It stores water in a reservoir. Water is released from a reservoir to flow through a turbine spinning it, which in turn activates a generator which produces electricity.  Which components of this system best represents those of our metabolism. Option A: Water = Fuels (fatty acids, carbohydrates)Reservoir = CytoplasmTurbine + Generator = Electron transport chain and F0 channel + ADP + PiElectricity = ATP Option B: Water = OxygenReservoir = White adipose tissueTurbine + Generator = Electron transport chain and F0 channel + ADP + PiElectricity = ADP + Pi Option C: Water = Fuels (fatty acids, carbohydrates)Reservoir = CytoplasmTurbine/generator = Electron transport chainElectricity = ATP Option D: Water = Fuels (fatty acids, carbohydrates)Reservoir = CytoplasmTurbine + Generator = Electron transport chainElectricity = ADP + Pi The correct answer is Option A.",
+        "reference": "A: Correct = Fuels are broken down, H+ ions are removed from the mitochondria to create a proton gradient, entry of a H+ ion causes the F0 channel to 'rotate' and ADP + Pi are 'consumed' to generate the ATP energy.B: Incorrect = ADP and Pi is 'consumed' to produce ATPC: Incorrect = Electron transport chain AND F0 channel + ADP + Pi are required to produce ATP D: Incorrect = ADP and Pi is 'consumed' to produce ATP",
+        "best_explanation": "Hydroelectricity is similar to our metabolism. It stores water in a reservoir. Water is released from a reservoir to flow through a turbine spinning it, which in turn activates a generator which produces electricity.  Which components of this system best represents those of our metabolism.  Hydroelectricity = our metabolism Fuels are broken down, in order to generate ATP White adipose tissue is where fuels are stored Carbohydrates are also stored in the cytoplasm, unlike fatty acids Electron transport chain and F0 channel + ADP + Pi are required to generate ATP from ADP and Pi",
+        "Generated_Explanation": "Hydroelectricity is similar to our metabolism. It stores water in a reservoir. Water is released from a reservoir to flow through a turbine spinning it, which in turn activates a generator which produces electricity.  Which components of this system best represents those of our metabolism.  Hydroelectricity = our metabolism Fuels are broken down, in order to generate ATP White adipose tissue is where fuels are stored Carbohydrates are also stored in the cytoplasm, unlike fatty acids Electron transport chain and F0 channel + ADP + Pi are required to generate ATP from ADP and Pi",
+        "metrics": {
+            "nli": 0.0019514936720952392,
+            "verifier": 2.55555555,
+            "acr": 0.8461538461538461,
+            "bleu": 0.15522002299977608
+        }
+    }
+]

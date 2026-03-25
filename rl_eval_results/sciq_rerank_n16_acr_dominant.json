@@ -1,0 +1,817 @@
+{
+  "summary": {
+    "avg_nli": 0.691336748458707,
+    "avg_ver": 2.82,
+    "avg_acr": 0.97,
+    "avg_bert": 0.8301064091920852,
+    "n_samples": 16,
+    "weights": {
+      "nli": 0.1,
+      "ver": 0.1,
+      "acr": 0.6,
+      "bert": 0.2
+    }
+  },
+  "results": [
+    {
+      "question": "Given question: When resources are limited, populations exhibit what type of growth? Option A: efficient growth Option B: lasting growth Option C: component growth Option D: logistic growth The correct answer is Option D.",
+      "best_explanation": "Certainly! Here's a clear explanation for the given question:\n\n---\n\n**Explanation:**\n\nWhen resources in an environment are limited, populations do not continue to grow indefinitely. Instead, their growth slows down and eventually stabilizes. This pattern of growth is known as **logistic growth**.\n\nIn logistic growth, the population increases rapidly at first (exponential growth phase) when resources are abundant. However, as the population size approaches the **carrying capacity** of the environment (the maximum number of individuals that the environment can support), the growth rate decreases due to limited resources such as food, water, space, and other necessities.\n\nThis results in an S-shaped growth curve, where the population growth levels off as it reaches the carrying capacity.\n\n**Option D: logistic growth** is the correct answer because it accurately describes the pattern of population growth under resource limitations.\n\n---\n\n**Summary:**\n\n- **Exponential growth** occurs when resources are unlimited.\n- **Logistic growth** occurs when resources are limited and the population stabilizes at the carrying capacity.\n- Therefore, when resources are limited, populations exhibit **logistic growth** (Option D).",
+      "nli": 0.6556370258331299,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8716625571250916
+    },
+    {
+      "question": "Given question: The sun gives off energy in tiny packets called what? Option A: electrons Option B: photons Option C: ions Option D: atoms The correct answer is Option B.",
+      "best_explanation": "Certainly! Here's the explanation for the given question:\n\n**Question:** The sun gives off energy in tiny packets called what?\n\n**Options:**\n- A: electrons  \n- B: photons  \n- C: ions  \n- D: atoms  \n\n**Correct Answer:** Option B: photons\n\n**Explanation:**\n\nThe sun produces energy through nuclear fusion reactions in its core, where hydrogen atoms fuse to form helium, releasing a tremendous amount of energy. This energy is emitted in the form of electromagnetic waves, such as light and heat.\n\nThese electromagnetic waves are made up of tiny packets of energy called **photons**. A photon is a fundamental particle of light and carries energy in discrete amounts. Photons are the basic units of all electromagnetic radiation, including visible light, ultraviolet light, and infrared radiation.\n\n- **Electrons** are subatomic particles with a negative charge and are not the basic units of energy.\n- **Ions** are atoms that have gained or lost electrons, and they are not related to the emission of energy from the sun.\n- **Atoms** are the basic building blocks of matter, but they are not the packets of energy emitted by the sun.\n\nTherefore, the correct answer is **Option B: photons**, as they are the tiny packets of energy that the sun emits.",
+      "nli": 0.8930954337120056,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8298277258872986
+    },
+    {
+      "question": "Given question: The three parts of the human small intestine is the duodenum, jejunum, and what? Option A: appendix Option B: colon Option C: ileum Option D: cecum The correct answer is Option C.",
+      "best_explanation": "Certainly! Here's a clear and accurate explanation for the given question:\n\nThe small intestine is a vital part of the digestive system, and it is divided into three main sections. These sections work together to absorb nutrients from the food we eat. The three parts of the human small intestine are:\n\n1. **Duodenum** \u2013 This is the first and shortest segment of the small intestine. It connects the stomach to the rest of the small intestine and is where most of the chemical digestion occurs, especially with the help of enzymes from the pancreas and bile from the liver.\n\n2. **Jejunum** \u2013 This is the second part of the small intestine, and it is primarily responsible for the absorption of nutrients. The walls of the jejunum are thick and have many folds and villi that increase the surface area for absorption.\n\n3. **Ileum** \u2013 This is the third and longest part of the small intestine. It continues the process of nutrient absorption, particularly for vitamin B12 and bile salts. The ileum also connects to the large intestine at the ileocecal valve.\n\nSo, the three parts of the human small intestine are the **duodenum**, **jejunum**, and **ileum**.\n\n**Correct Answer: Option C: ileum**",
+      "nli": 0.002932711271569133,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8476463556289673
+    },
+    {
+      "question": "Given question: What type of crust is made of basalt lavas that flow onto the seafloor? Option A: endotopic Option B: warm Option C: exotic Option D: oceanic The correct answer is Option D.",
+      "best_explanation": "Certainly! Here's an explanation for the given question:\n\n---\n\n**Question:** What type of crust is made of basalt lavas that flow onto the seafloor?  \n**Options:**  \nA. Endotopic  \nB. Warm  \nC. Exotic  \nD. Oceanic  \n\n**Correct Answer:** D. Oceanic  \n\n**Explanation:**  \nThe crust formed by basaltic lava flows on the seafloor is known as **oceanic crust**. This type of crust is primarily composed of basalt, a dense, dark volcanic rock that forms from the rapid cooling of lava beneath the ocean. It is created at mid-ocean ridges through a process called seafloor spreading, where magma rises from the Earth's mantle and solidifies into new crust. \n\nThe other options do not accurately describe the type of crust formed from basalt lavas on the seafloor:  \n- **Endotopic** refers to structures or materials that form within a larger body, not specifically related to seafloor crust.  \n- **Warm** is a general term for temperature and not a type of crust.  \n- **Exotic** typically refers to crustal material that has been transported from one location to another, not formed in situ on the seafloor.  \n\nTherefore, the correct answer is **Option D: Oceanic**.",
+      "nli": 0.9216893315315247,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8228728175163269
+    },
+    {
+      "question": "Given question: The body cannot sustain for very long the bursts of energy mediated by epinephrine and norepinephrine, hormones associated with what stress response? Option A: fainting Option B: do-or-die Option C: fight-or-flight Option D: sink-or-swim The correct answer is Option C.",
+      "best_explanation": "Certainly! Here's a clear and detailed explanation for the given question:\n\n---\n\n**Question:**  \nThe body cannot sustain for very long the bursts of energy mediated by epinephrine and norepinephrine, hormones associated with what stress response?\n\n**Options:**  \nA. Fainting  \nB. Do-or-die  \nC. Fight-or-flight  \nD. Sink-or-swim  \n\n**Correct Answer:** **C. Fight-or-flight**\n\n---\n\n**Explanation:**  \nEpinephrine (adrenaline) and norepinephrine are stress hormones released by the adrenal glands in response to perceived threats or danger. These hormones are central to the **fight-or-flight** response, a term coined by Walter Cannon in the early 20th century. This response is a physiological reaction that prepares the body to either confront a threat (fight) or escape from it (flight).\n\nWhen the body activates the fight-or-flight response, several changes occur:\n- **Increased heart rate and blood pressure** to enhance blood flow to muscles.\n- **Dilated pupils** to improve vision.\n- **Increased blood sugar levels** to provide quick energy.\n- **Suppressed non-essential functions** like digestion and immune response.\n\nHowever, the body is not designed to maintain this heightened state of alertness and energy for extended periods. The burst of energy provided by epinephrine and norepinephrine is **short-lived** and not sustainable. If the threat is prolonged or not resolved",
+      "nli": 0.9569417834281921,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8122442960739136
+    },
+    {
+      "question": "Given question: Chelicerae in spiders are often modified into fangs that perform what function? Option A: chewing Option B: tearing flesh Option C: courtship display Option D: inject venom The correct answer is Option D.",
+      "best_explanation": "Certainly! Here's an explanation for the given question:\n\n**Explanation:**\n\nIn spiders, the **chelicerae** are specialized appendages located near the mouth. These structures are often modified into **fangs**, which are used for various purposes depending on the spider species. While some spiders use their fangs for **chewing** (Option A) or **tearing flesh** (Option B), the primary and most notable function of spider fangs is **injecting venom** into prey or predators.\n\nVenom is produced by glands located near the base of the chelicerae and is delivered through the fangs, which act like a syringe. This venom helps in subduing prey and can also be used for defense.\n\n**Option D: inject venom** is the correct answer because it accurately describes the primary function of the modified chelicerae (fangs) in spiders.\n\n**Correct Answer: Option D**",
+      "nli": 0.9652730822563171,
+      "ver": 2.0,
+      "acr": 1.0,
+      "bert": 0.8360756039619446
+    },
+    {
+      "question": "Given question: What involves sensing and focusing light from people and objects? Option A: projection Option B: echolocation Option C: vision Option D: sensory perception The correct answer is Option C.",
+      "best_explanation": "Certainly! Here's an explanation for the given question:\n\n**Question:** What involves sensing and focusing light from people and objects?\n\n**Options:**\n- **A. Projection**  \n- **B. Echolocation**  \n- **C. Vision**  \n- **D. Sensory perception**\n\n**Correct Answer:** **C. Vision**\n\n**Explanation:**\n\nThe process of sensing and focusing light from people and objects is primarily associated with **vision**. Vision is the ability to perceive the world through the eyes, which detect and focus light into images that are then processed by the brain. This involves the use of the eye's lens to focus light onto the retina, where light-sensitive cells (photoreceptors) convert the light into electrical signals that are sent to the brain for interpretation.\n\n- **Option A (Projection)** refers to the act of displaying images or light onto a surface, such as in projectors or screens, and does not involve sensing light.\n- **Option B (Echolocation)** is a biological technique used by some animals (like bats and dolphins) to navigate and locate objects by emitting sound waves and interpreting the echoes that return. It does not involve light.\n- **Option D (Sensory perception)** is a broader term that encompasses all types of sensory input, including sight, sound, touch, taste, and smell. While vision is a form of sensory perception, the question specifically asks about sensing and focusing light, which is most directly associated with **vision",
+      "nli": 0.16339467465877533,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8330972790718079
+    },
+    {
+      "question": "Given question: What is stored mainly in liver and muscle cells by humans and other vertebrates? Option A: protein Option B: amylopectin Option C: glycogen Option D: glucose The correct answer is Option C.",
+      "best_explanation": "Certainly! Here's the explanation for the given question:\n\n**Question:**  \n*What is stored mainly in liver and muscle cells by humans and other vertebrates?*  \n**Options:**  \nA. Protein  \nB. Amylopectin  \nC. Glycogen  \nD. Glucose  \n**Correct Answer:** C. Glycogen  \n\n**Explanation:**  \nGlycogen is the primary storage form of glucose in animals, including humans and other vertebrates. It is stored mainly in two types of cells:  \n- **Liver cells (hepatocytes)**: Glycogen is stored here to maintain blood glucose levels during periods of fasting or between meals.  \n- **Muscle cells**: Glycogen is stored here to provide a quick energy source for muscle activity during physical exertion.  \n\nWhen the body needs energy, glycogen is broken down into glucose through a process called glycogenolysis.  \n\n**Why the other options are incorrect:**  \n- **Protein (Option A)**: While proteins can be broken down for energy, they are not primarily stored in the liver or muscle cells for this purpose.  \n- **Amylopectin (Option B)**: This is a branched polysaccharide found in plant starch, not in animal cells.  \n- **Glucose (Option D)**: Glucose is the immediate energy source, not stored in significant amounts in these cells.  \n\nThus, the correct answer is **Option C: Glycogen",
+      "nli": 0.6510599255561829,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.7646700739860535
+    },
+    {
+      "question": "Given question: What percentage of the field is tilled in traditional plowing? Option A: 50 % Option B: 60 % Option C: 100% Option D: 75% The correct answer is Option C.",
+      "best_explanation": "Certainly! Here's a clear and concise explanation for the given question:\n\n---\n\n**Question:** What percentage of the field is tilled in traditional plowing?\n\n**Options:**\n- A: 50%\n- B: 60%\n- C: 100%\n- D: 75%\n\n**Correct Answer:** C: 100%\n\n**Explanation:**\n\nTraditional plowing involves turning over the entire top layer of soil in a field to prepare it for planting. This process typically covers the entire area of the field, ensuring that the soil is broken up, aerated, and ready for seeds to be planted. Because traditional plowing is a comprehensive method that involves working the entire surface of the field, it results in **100% of the field being tilled**.\n\nTherefore, the correct answer is **Option C: 100%**.",
+      "nli": 0.9959704875946045,
+      "ver": 2.0,
+      "acr": 1.0,
+      "bert": 0.7944150567054749
+    },
+    {
+      "question": "Given question: What type of components of the biosphere do chemical elements and water pass through during ecosystem recycle? Option A: water and air Option B: tropic and subtropic Option C: photic and aphotic Option D: biotic and abiotic The correct answer is Option D.",
+      "best_explanation": "**Explanation:**\n\nIn an ecosystem, chemical elements and water are cycled through various components of the biosphere. These cycles involve both **biotic** (living) and **abiotic** (non-living) components.\n\n- **Biotic components** include all living organisms such as plants, animals, bacteria, and fungi. These organisms take in, use, and release chemical elements and water through processes like respiration, photosynthesis, and decomposition.\n  \n- **Abiotic components** include non-living elements such as air, water, soil, and sunlight. These provide the physical and chemical environment necessary for life and facilitate the movement and transformation of elements and water through the ecosystem.\n\nDuring the recycling of chemical elements and water, they pass through both **biotic** and **abiotic** components, making **Option D: biotic and abiotic** the correct answer.\n\n**Correct Answer: Option D \u2013 biotic and abiotic**",
+      "nli": 0.9840151071548462,
+      "ver": 2.0,
+      "acr": 1.0,
+      "bert": 0.8431317806243896
+    },
+    {
+      "question": "Given question: Digestive enzymes are released, or secreted, by the organs of which body system? Option A: nervous system Option B: urinary system Option C: digestive system Option D: endocrine system The correct answer is Option C.",
+      "best_explanation": "**Explanation:**\n\nDigestive enzymes are specialized proteins that help break down food into smaller, absorbable nutrients. These enzymes are produced and released by the organs of the **digestive system** to facilitate the process of digestion.\n\n- **Option A: Nervous system** \u2013 The nervous system is responsible for controlling and coordinating body functions through electrical and chemical signals, but it does not produce digestive enzymes.\n- **Option B: Urinary system** \u2013 The urinary system is involved in filtering blood and removing waste products from the body; it does not play a role in digestion or enzyme secretion.\n- **Option C: Digestive system** \u2013 This is the correct answer. Organs such as the stomach, pancreas, and small intestine produce and release digestive enzymes (e.g., amylase, lipase, protease) to break down carbohydrates, fats, and proteins, respectively.\n- **Option D: Endocrine system** \u2013 The endocrine system produces hormones, which are chemical messengers, not enzymes. While some hormones may influence digestion, the endocrine system itself does not secrete digestive enzymes.\n\n**Correct Answer: Option C \u2013 Digestive system**.",
+      "nli": 0.5392096638679504,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8556413054466248
+    },
+    {
+      "question": "Given question: What is the passing of traits from parents to offspring called? Option A: variability Option B: cell division Option C: heredity Option D: mutation The correct answer is Option C.",
+      "best_explanation": "Certainly! Here's an explanation for the given question:\n\n**Question:** What is the passing of traits from parents to offspring called?\n\n**Options:**\n- **A: Variability** \u2013 This refers to the differences in traits among individuals within a population, not the transmission of traits from parents to offspring.\n- **B: Cell division** \u2013 This is the process by which cells divide to produce new cells, which is important for growth and development, but not directly related to the passing of traits.\n- **C: Heredity** \u2013 This is the correct answer. Heredity refers to the process by which genetic information is passed from parents to their offspring, allowing traits to be inherited.\n- **D: Mutation** \u2013 This refers to a change in DNA that can lead to new traits, but it is not the process of passing traits from one generation to the next.\n\n**Correct Answer: Option C \u2013 Heredity**\n\n**Explanation:** Heredity is the biological process by which traits, such as eye color, height, or blood type, are transmitted from parents to their children through genes. This ensures that offspring inherit characteristics from their parents, forming the basis of genetic continuity across generations.",
+      "nli": 0.10875125974416733,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8172827363014221
+    },
+    {
+      "question": "Given question: Potassium hydroxide in soap is an example of what? Option A: catalyst Option B: acid Option C: enzyme Option D: base The correct answer is Option D.",
+      "best_explanation": "Certainly! Here's the explanation for the given question:\n\n**Question:**  \nPotassium hydroxide in soap is an example of what?  \n**Options:**  \nA: catalyst  \nB: acid  \nC: enzyme  \nD: base  \n\n**Correct Answer:** D: base  \n\n**Explanation:**  \nPotassium hydroxide (KOH) is a strong base. In the context of soap-making, it is commonly used in the saponification process, where it reacts with fats or oils to produce soap (a salt of a fatty acid) and glycerin. Since KOH is a base, it is an example of a **base**, not an acid, catalyst, or enzyme.\n\nTherefore, the correct answer is **Option D: base**.",
+      "nli": 0.973763108253479,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8355647921562195
+    },
+    {
+      "question": "Given question: What is the energy that matter possesses because of its location or structure? Option A: kinetic energy Option B: mechanical energy Option C: thermal energy Option D: potential energy The correct answer is Option D.",
+      "best_explanation": "Certainly! Here's an explanation for the given question:\n\n**Question:**  \n*What is the energy that matter possesses because of its location or structure?*  \n**Options:**  \nA. Kinetic energy  \nB. Mechanical energy  \nC. Thermal energy  \nD. Potential energy  \n\n**Correct Answer:** D. Potential energy  \n\n**Explanation:**  \nPotential energy is the energy stored in an object due to its position or configuration (structure). It is the energy that an object has because of its location in a gravitational field (like a book on a shelf) or due to the way its parts are arranged (like a stretched spring or a chemical bond).  \n\n- **Kinetic energy (A)** is the energy of motion, not related to location or structure.  \n- **Mechanical energy (B)** is the sum of kinetic and potential energy in a system, so it is not a specific form of energy based solely on location or structure.  \n- **Thermal energy (C)** is related to the internal energy of a substance due to the motion of its particles, not its location or structure.  \n- **Potential energy (D)** is the correct answer because it refers to energy stored due to position (like height) or structure (like chemical bonds or elastic deformation).  \n\nTherefore, the correct answer is **Option D: Potential energy**.",
+      "nli": 0.945713460445404,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.7857711911201477
+    },
+    {
+      "question": "Given question: What is the radioactive process used in nuclear power plants and one type of nuclear bomb? Option A: radiation Option B: fission Option C: fusion Option D: decay The correct answer is Option B.",
+      "best_explanation": "Certainly! Here's the explanation for the given question:\n\n---\n\n**Question:**  \nWhat is the radioactive process used in nuclear power plants and one type of nuclear bomb?  \n**Options:**  \nA. Radiation  \nB. Fission  \nC. Fusion  \nD. Decay  \n\n**Correct Answer:** B. Fission\n\n**Explanation:**  \nThe correct answer is **fission** (Option B). Fission is the process in which the nucleus of a heavy atom, such as uranium-235 or plutonium-239, is split into two smaller nuclei, releasing a large amount of energy in the process. This energy is harnessed in **nuclear power plants** to generate electricity. Additionally, fission is also the primary process used in **nuclear bombs** to produce a massive explosion.\n\n- **Option A: Radiation** is a general term for energy emitted by radioactive materials, but it is not a specific process.\n- **Option C: Fusion** is the process that powers the sun and involves combining light atomic nuclei, but it is not the primary process used in nuclear power plants or most nuclear bombs.\n- **Option D: Decay** refers to the spontaneous breakdown of a nucleus over time, which is not the controlled process used in power plants or bombs.\n\nThus, the correct answer is **B: Fission**.",
+      "nli": 0.025746481493115425,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8497222065925598
+    },
+    {
+      "question": "Given question: Which chemist developed a process to remove carbon and dust particles in smoke? Option A: frederick cottrell Option B: james carpenter Option C: harold black Option D: roger granger The correct answer is Option A.",
+      "best_explanation": "**Explanation:**\n\nThe correct answer is **Option A: Frederick Cottrell**.\n\n**Explanation:**\n\nFrederick Cottrell was an American chemist and engineer who developed a process to remove carbon and dust particles from smoke, particularly in the context of air pollution control. His invention, known as the **electrostatic precipitator**, was a significant advancement in industrial air filtration. This device uses electrically charged plates to attract and collect fine particles, such as soot and dust, from industrial exhaust gases. This innovation greatly reduced air pollution and had a major impact on improving air quality in industrial areas.\n\n**Why the other options are incorrect:**\n\n- **James Carpenter** is not associated with this type of chemical or environmental process.\n- **Harold Black** is known for his work on the invention of the superheterodyne radio receiver, not for air pollution control.\n- **Roger Granger** is not recognized for any significant work related to air pollution or carbon removal.\n\nThus, **Frederick Cottrell** is the correct answer.",
+      "nli": 0.011950051411986351,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8504615426063538
+    },
+    {
+      "question": "Given question: Carpal, metacarpal and phalanx bones comprise what part of the body? Option A: pelvis Option B: thumb Option C: hand Option D: foot The correct answer is Option C.",
+      "best_explanation": "Certainly! Here's a clear and concise explanation for the given question:\n\n---\n\n**Explanation:**\n\nThe carpal, metacarpal, and phalanx bones are all types of bones found in the **hand**. \n\n- **Carpal bones** are the small bones in the **wrist**.\n- **Metacarpal bones** are the bones that connect the **wrist** to the **fingers**.\n- **Phalanx bones** are the bones that make up the **fingers** and **toes**.\n\nSince the question specifically refers to the **carpal, metacarpal, and phalanx bones**, and not the foot, the correct answer is **Option C: hand**.\n\n**Correct Answer: Option C: hand**.",
+      "nli": 0.9413949847221375,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8374171257019043
+    },
+    {
+      "question": "Given question: What record shows that dinosaurs originated 200-250 million years ago? Option A: ancient record Option B: species record Option C: fossil record Option D: biological record The correct answer is Option C.",
+      "best_explanation": "Certainly! Here's a detailed explanation for the question:\n\n**Question:**  \n*What record shows that dinosaurs originated 200-250 million years ago?*  \n**Options:**  \nA. Ancient record  \nB. Species record  \nC. Fossil record  \nD. Biological record  \n\n**Correct Answer:** C. Fossil record  \n\n**Explanation:**  \nThe **fossil record** is the primary evidence that scientists use to determine when dinosaurs originated and how they evolved over time. Fossils are the preserved remains or traces of ancient organisms, such as bones, teeth, footprints, or other structures, that were buried in sediment and gradually turned into rock over millions of years.\n\nDinosaurs originated during the **Triassic period**, which began approximately **252 million years ago** and ended around **201 million years ago**. Fossils of early dinosaurs have been found in rock layers dating back to this time, providing direct evidence of their existence and origin. These fossils allow scientists to study dinosaur anatomy, behavior, and the environments in which they lived.\n\nLet's briefly explain why the other options are not correct:\n\n- **Option A: Ancient record** \u2013 This is too vague and not a specific type of scientific record. It does not refer to a particular method or source of evidence.\n- **Option B: Species record** \u2013 While species are recorded in biological classification, this term does not specifically refer to the physical evidence of ancient life.\n-",
+      "nli": 0.3410002291202545,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.7902456521987915
+    },
+    {
+      "question": "Given question: What is the term for an exact genetic copy? Option A: clone Option B: duplication Option C: genetic recreation Option D: genetic repeat The correct answer is Option A.",
+      "best_explanation": "**Explanation:**\n\nThe term for an exact genetic copy is **\"clone.\"**\n\nA **clone** refers to an organism or a group of cells that are genetically identical to each other. This can occur naturally, as in the case of identical twins, or artificially through processes like cloning in biology. Clones have the same DNA as the original organism from which they were derived.\n\nLet's briefly examine the other options for clarity:\n\n- **Option B: Duplication** \u2013 This term is more commonly used in the context of data or files, meaning a copy of something. It does not specifically refer to an exact genetic copy.\n  \n- **Option C: Genetic recreation** \u2013 This is not a standard scientific term and is not commonly used to describe an exact genetic copy.\n  \n- **Option D: Genetic repeat** \u2013 This term typically refers to repeated sequences within DNA, not an exact genetic copy of an organism or cell.\n\nTherefore, the correct and most accurate term for an exact genetic copy is **Option A: Clone**.",
+      "nli": 0.005239071790128946,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8353850245475769
+    },
+    {
+      "question": "Given question: How many types of molecular orbitals can form from the overlap of two atomic s orbitals on adjacent atoms? Option A: ten Option B: six Option C: three Option D: two The correct answer is Option D.",
+      "best_explanation": "Certainly! Here's a clear explanation for the given question:\n\n---\n\n**Question:**  \nHow many types of molecular orbitals can form from the overlap of two atomic s orbitals on adjacent atoms?\n\n**Options:**  \nA: ten  \nB: six  \nC: three  \nD: two  \n\n**Correct Answer:** D: two  \n\n**Explanation:**  \nWhen two atomic s orbitals from adjacent atoms overlap, they combine to form two types of molecular orbitals:\n\n1. **Bonding Molecular Orbital** \u2013 This results from the constructive interference (in-phase overlap) of the two s orbitals. Electrons in this orbital are more likely to be found between the two nuclei, leading to a lower energy state and a stable bond.\n\n2. **Antibonding Molecular Orbital** \u2013 This results from the destructive interference (out-of-phase overlap) of the two s orbitals. Electrons in this orbital are more likely to be found outside the region between the nuclei, leading to a higher energy state and a less stable bond.\n\nThese two molecular orbitals are referred to as the **\u03c3 (sigma)** bonding and **\u03c3* (sigma star)** antibonding orbitals, respectively, because the overlap of s orbitals results in a symmetrical, head-on (\u03c3) interaction.\n\nTherefore, **only two types of molecular orbitals** can form from the overlap of two atomic s orbitals.\n\n---\n\n**Final Answer:** **D: two** \u2705",
+      "nli": 0.003630931954830885,
+      "ver": 3.0,
+      "acr": 0.0,
+      "bert": 0.8388757705688477
+    },
+    {
+      "question": "Given question: What two types of tissue compose most of the non-pregnant and non-lactating female breast? Option A: intestine and collagenous Option B: adipose and collagenous Option C: silicone and collagenous Option D: scar and collagenous The correct answer is Option B.",
+      "best_explanation": "Certainly! Here's a clear and detailed explanation for the given question:\n\n---\n\n**Question:**  \nWhat two types of tissue compose most of the non-pregnant and non-lactating female breast?\n\n**Options:**  \nA. Intestine and collagenous  \nB. Adipose and collagenous  \nC. Silicone and collagenous  \nD. Scar and collagenous  \n\n**Correct Answer:** B. Adipose and collagenous  \n\n**Explanation:**\n\nThe breast is a complex organ composed of various tissues, and its structure can change throughout a woman's life, especially during pregnancy, lactation, and aging. In the **non-pregnant and non-lactating** state, the breast is primarily composed of two main types of tissue:\n\n1. **Adipose tissue (fat tissue):**  \n   - This is the most prominent component of the breast in the non-pregnant state.  \n   - Adipose tissue contributes to the size, shape, and softness of the breast.  \n   - It also plays a role in hormone production and energy storage.  \n\n2. **Collagenous tissue (connective tissue):**  \n   - Collagenous tissue includes **connective tissues** such as **fibrous connective tissue**, **ligaments**, and **collagen fibers**.  \n   - These tissues provide structural support and shape to the breast.  \n   - They help maintain the integrity of the breast and support the mammary glands.",
+      "nli": 0.7917152047157288,
+      "ver": 2.0,
+      "acr": 1.0,
+      "bert": 0.8049091696739197
+    },
+    {
+      "question": "Given question: Each species has a particular way of making a living which is called its what? Option A: system Option B: habit Option C: niche Option D: life-cycle The correct answer is Option C.",
+      "best_explanation": "Certainly! Here's an explanation for the given question:\n\n**Question:**  \nEach species has a particular way of making a living which is called its what?  \n**Options:**  \nA: system  \nB: habit  \nC: niche  \nD: life-cycle  \n\n**Correct Answer:** C: niche  \n\n**Explanation:**  \nThe term \"niche\" refers to the unique role and way of life that a particular species has within its environment. It includes how the species interacts with its surroundings, such as what it eats, where it lives, and how it reproduces. In other words, a species' niche describes its specific way of making a living and how it fits into the ecosystem.  \n\n- **Option A: system** \u2013 This is too general and can refer to many things, not specifically the way a species lives.  \n- **Option B: habit** \u2013 This refers more to routine behavior, not the overall lifestyle or role in the environment.  \n- **Option D: life-cycle** \u2013 This refers to the stages an organism goes through from birth to death, not the way it makes a living.  \n\nTherefore, the correct answer is **Option C: niche**.",
+      "nli": 0.960268497467041,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8257068991661072
+    },
+    {
+      "question": "Given question: What provides clear evidence of evolution? Option A: biologists Option B: mutations Option C: fossils Option D: extinction The correct answer is Option C.",
+      "best_explanation": "Certainly! Here's a clear explanation for the given question:\n\n**Question:** What provides clear evidence of evolution?\n\n**Options:**\n- **A: Biologists** \u2013 This refers to people who study biology, not a form of evidence.\n- **B: Mutations** \u2013 While mutations are a source of genetic variation that can lead to evolution, they are not direct evidence of evolution itself.\n- **C: Fossils** \u2013 Fossils provide **clear and direct evidence** of evolution because they show the **physical remains of ancient organisms**, allowing scientists to trace **changes in species over time**. This supports the theory of evolution by showing **transitions between different life forms**.\n- **D: Extinction** \u2013 Extinction is a process that can be a result of evolution, but it is not direct evidence of evolutionary change itself.\n\n**Correct Answer: Option C \u2013 Fossils**\n\n**Explanation:** Fossils are the preserved remains or traces of ancient life forms. They provide **physical evidence** that shows how organisms have changed over time, supporting the concept of evolution. By studying fossils, scientists can observe **gradual changes in species** and **relationships between different organisms**, making them one of the strongest pieces of evidence for evolution.",
+      "nli": 0.9376108050346375,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8271246552467346
+    },
+    {
+      "question": "Given question: Club mosses, horsetails, ferns, and whisk ferns are examples of what type of plants? Option A: cycads Option B: angiosperms Option C: gymnosperms Option D: seedless vascular plants The correct answer is Option D.",
+      "best_explanation": "Certainly! Here's an explanation for the given question:\n\n**Question:**  \nClub mosses, horsetails, ferns, and whisk ferns are examples of what type of plants?  \n**Options:**  \nA. Cycads  \nB. Angiosperms  \nC. Gymnosperms  \nD. Seedless vascular plants  \n\n**Correct Answer:** D. Seedless vascular plants  \n\n**Explanation:**  \nClub mosses, horsetails, ferns, and whisk ferns are all examples of **seedless vascular plants**. These plants have specialized tissues for transporting water and nutrients\u2014vascular tissues (xylem and phloem)\u2014but they do **not** produce seeds. Instead, they reproduce through spores. \n\n- **Cycads (Option A)** are a type of seed plants (gymnosperms) and produce seeds, so they are not correct.  \n- **Angiosperms (Option B)** are flowering plants that produce seeds enclosed in fruits, which is not the case for the listed plants.  \n- **Gymnosperms (Option C)** are seed plants that produce naked seeds (like conifers), so they are also not correct.  \n- **Seedless vascular plants (Option D)** is the correct category, as it includes plants like ferns, horsetails, club mosses, and whisk ferns, which have vascular systems but reproduce via spores rather than seeds.  \n\nTherefore, the correct answer is **Option D:",
+      "nli": 0.9912036657333374,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8075441718101501
+    },
+    {
+      "question": "Given question: What is the cause of common mold allergies? Option A: viruses Option B: airborne mold spores Option C: bacteria Option D: immobile mold spores The correct answer is Option B.",
+      "best_explanation": "Certainly! Here's a clear and detailed explanation for the given question:\n\n---\n\n**Question:** What is the cause of common mold allergies?\n\n**Options:**\n- **A: viruses**  \n- **B: airborne mold spores**  \n- **C: bacteria**  \n- **D: immobile mold spores**\n\n**Correct Answer: B: airborne mold spores**\n\n**Explanation:**\n\nCommon mold allergies are caused by **airborne mold spores**, which are microscopic particles released by mold organisms into the air. These spores are lightweight and can become airborne, making them easy to inhale. When a person with a mold allergy inhales these spores, their immune system overreacts, triggering an allergic response such as sneezing, runny nose, itchy eyes, or even asthma symptoms.\n\n- **Option A (viruses):** Viruses are not related to mold allergies. Allergies are typically immune responses to non-infectious substances like mold spores, not infectious agents like viruses.\n  \n- **Option C (bacteria):** Bacteria are also not the cause of mold allergies. While some bacteria can cause allergies, mold allergies are specifically triggered by mold spores.\n\n- **Option D (immobile mold spores):** Mold spores are generally **airborne** and can become mobile when disturbed. Immobile spores are not the typical form that causes allergies. In fact, it's the airborne spores that are inhaled and",
+      "nli": 0.6426628828048706,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8360316753387451
+    },
+    {
+      "question": "Given question: In many places, small hills rise above the ocean floor. these hills are undersea volcanoes, called what? Option A: reefs Option B: seamounts Option C: corals Option D: ridges The correct answer is Option B.",
+      "best_explanation": "**Explanation:**\n\nIn many parts of the ocean, small hills rise from the ocean floor. These underwater landforms are created by volcanic activity and are known as **seamounts**. A seamount is a mountain-like structure that rises from the ocean floor but does not reach the surface. They are often the remnants of underwater volcanoes that have become inactive over time.\n\nLet\u2019s break down the options:\n\n- **Option A: Reefs** \u2013 Reefs are structures formed by coral and other marine organisms, not by volcanic activity.\n- **Option B: Seamounts** \u2013 This is the correct answer. Seamounts are underwater mountains formed by volcanic activity.\n- **Option C: Corals** \u2013 Corals are living organisms that build reefs, not volcanic hills.\n- **Option D: Ridges** \u2013 Ocean ridges are large underwater mountain ranges formed by tectonic activity, not small hills from volcanoes.\n\n**Correct Answer: Option B \u2013 Seamounts**.",
+      "nli": 0.8973408341407776,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.850477933883667
+    },
+    {
+      "question": "Given question: By exploding what the space probes get separated from their launchers? Option A: walls Option B: bolts Option C: doors Option D: frames The correct answer is Option B.",
+      "best_explanation": "**Explanation:**\n\nWhen space probes are launched into space, they are attached to the rocket or launcher for the initial stages of the mission. To separate from the launcher, the probe must physically detach from the structure that holds it in place during launch.\n\nThe correct method for separation involves **bolts**, which are mechanical fasteners that secure the probe to the launcher. Once the rocket has reached the appropriate altitude and velocity, these **bolts are exploded** (or jettisoned) to release the probe from the launcher, allowing it to continue its journey independently.\n\n**Option B: bolts** is the correct answer because they are the components that are intentionally separated by being \"exploded\" to free the space probe.\n\n**Other options are incorrect because:**\n- **Walls** and **doors** are not typically used to secure space probes.\n- **Frames** are structural parts, not the components that are specifically designed for separation.\n\nThus, the correct explanation is:  \n**By exploding bolts, the space probes get separated from their launchers.**",
+      "nli": 0.9120001792907715,
+      "ver": 2.0,
+      "acr": 1.0,
+      "bert": 0.8336691856384277
+    },
+    {
+      "question": "Given question: About what percentage of the earth's water is fresh water? Option A: thirty percent Option B: two percent Option C: nine percent Option D: three percent The correct answer is Option D.",
+      "best_explanation": "Certainly! Here's an explanation for the question:\n\n**Question:** About what percentage of the Earth's water is fresh water?\n\n**Options:**\n- A: thirty percent  \n- B: two percent  \n- C: nine percent  \n- D: three percent  \n\n**Correct Answer:** Option D: three percent\n\n**Explanation:**\n\nApproximately **97.5%** of the Earth's water is saltwater, found in oceans and seas. The remaining **2.5%** is freshwater, which includes water from lakes, rivers, groundwater, glaciers, and ice caps. However, only a small fraction of this freshwater is accessible and usable by humans. Specifically, about **3%** of the Earth's total water supply is fresh water, which is why **Option D: three percent** is the correct answer.\n\nIt's important to note that while freshwater makes up only about 3% of the Earth's total water, most of it is locked in glaciers and ice caps, leaving a very limited amount of liquid freshwater available for human use.",
+      "nli": 0.9727979302406311,
+      "ver": 2.0,
+      "acr": 1.0,
+      "bert": 0.8483399748802185
+    },
+    {
+      "question": "Given question: In the u. s. , the majority of electricity is produced by burning coal or what else? Option A: hydroelectic Option B: fossil fuels Option C: wind power Option D: solar The correct answer is Option B.",
+      "best_explanation": "Certainly! Here's an explanation for the given question:\n\nIn the United States, the majority of electricity is produced by burning coal or other **fossil fuels**. Fossil fuels include coal, natural gas, and petroleum. While coal is a major source, natural gas is often used in combination with coal to generate electricity. \n\nOption B, **fossil fuels**, is the correct answer because it encompasses both coal and natural gas, which are the primary non-renewable energy sources used for electricity generation in the U.S.\n\n- **Option A (hydroelectric)**: This refers to electricity generated by water, which is a renewable energy source but not the majority in the U.S.\n- **Option C (wind power)**: This is a renewable energy source, but it contributes a smaller portion of the total electricity generation.\n- **Option D (solar)**: Like wind power, solar energy is renewable and currently accounts for a smaller share of the U.S. electricity supply.\n\nTherefore, the correct answer is **Option B: fossil fuels**.",
+      "nli": 0.8653737902641296,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.842001736164093
+    },
+    {
+      "question": "Given question: No charge is actually created or destroyed when charges are separated as we have been discussing. rather, existing charges are moved about. in fact, in all situations the total amount of charge is always this? Option A: more Option B: smaller Option C: less Option D: constant The correct answer is Option D.",
+      "best_explanation": "**Explanation:**\n\nWhen charges are separated, no new charges are created, and no existing charges are destroyed. Instead, the charges are simply moved from one location to another. This movement redistributes the charges but does not change the total amount of electric charge in the system.\n\nAccording to the **law of conservation of charge**, the total amount of electric charge in an isolated system remains constant over time. This means that the total charge before and after any redistribution or separation remains the same.\n\n**Therefore, the correct answer is:**\n\n**Option D: constant**\n\nThis is because the total amount of charge in the system is always **constant**.",
+      "nli": 0.17723484337329865,
+      "ver": 2.0,
+      "acr": 1.0,
+      "bert": 0.8755555152893066
+    },
+    {
+      "question": "Given question: What group of animals has adapted to live in both water and on land? Option A: omnivores Option B: reptiles Option C: amphibians Option D: herbivores The correct answer is Option C.",
+      "best_explanation": "Certainly! Here's a clear and concise explanation for the given question:\n\n---\n\n**Question:** What group of animals has adapted to live in both water and on land?\n\n**Options:**\n- **A: Omnivores** \u2013 These are animals that eat both plants and meat. This is a dietary classification, not a habitat classification.\n- **B: Reptiles** \u2013 While many reptiles live on land, they are not typically adapted to live in both water and land in the same way as another group.\n- **C: Amphibians** \u2013 This is the correct answer. Amphibians, such as frogs, salamanders, and newts, have life cycles that involve both aquatic and terrestrial environments. They typically spend part of their lives in water and part on land.\n- **D: Herbivores** \u2013 These are animals that eat only plant material. Like omnivores, this is a dietary classification, not a habitat classification.\n\n**Correct Answer: Option C (Amphibians)**\n\n**Explanation:** Amphibians are uniquely adapted to live in both water and on land. Many amphibians, like frogs, begin their lives in water, where they breathe through their gills, and later transition to land, where they breathe through their lungs. This dual adaptation makes them the correct answer to the question.",
+      "nli": 0.6487822532653809,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8551403284072876
+    },
+    {
+      "question": "Given question: When present in large volumes, what color hue can water emit? Option A: white Option B: yellow Option C: blue Option D: pink The correct answer is Option C.",
+      "best_explanation": "**Explanation:**\n\nWhen water is present in large volumes, such as in the ocean or a large lake, it typically appears **blue**. This is due to the way water absorbs and scatters light. \n\nWater molecules absorb light most efficiently in the red and infrared parts of the electromagnetic spectrum. As a result, they scatter more of the blue and green wavelengths, which gives water its characteristic blue color. \n\n- **Option A: White** \u2013 This is the color of water when it is highly reflective, such as when it is very choppy or contains a lot of suspended particles (like in a murky river or during a storm), but not the typical color of large volumes of water.\n- **Option B: Yellow** \u2013 This is not a typical color of water under normal conditions.\n- **Option C: Blue** \u2013 This is the correct answer, as large bodies of water appear blue due to the absorption and scattering of light.\n- **Option D: Pink** \u2013 This is not a natural color of water and may occur in rare cases due to algae or other substances, but it is not the standard hue of water in large volumes.\n\n**Correct Answer: Option C \u2013 Blue**",
+      "nli": 0.44373297691345215,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8314400911331177
+    },
+    {
+      "question": "Given question: What is the space between a neuron and the next cell? Option A: dendritic gap Option B: cell divide Option C: neurotransmitter passage Option D: the synapse The correct answer is Option D.",
+      "best_explanation": "**Explanation:**\n\nThe space between a neuron and the next cell is called **the synapse**. This is the junction where communication between neurons (or between a neuron and another type of cell, such as a muscle or gland cell) occurs.\n\nHere's a breakdown of the options:\n\n- **Option A: Dendritic gap** \u2013 This is not a standard term used in neuroscience to describe the space between neurons. Dendrites are the receiving parts of a neuron, not a gap between cells.\n\n- **Option B: Cell divide** \u2013 This refers to the process of cell division, such as mitosis or meiosis, and is unrelated to the space between neurons.\n\n- **Option C: Neurotransmitter passage** \u2013 This refers to the movement of neurotransmitters across the synapse, not the space itself.\n\n- **Option D: The synapse** \u2013 This is the correct answer. The synapse is the tiny gap between the axon terminal of one neuron and the dendrite of another neuron (or another cell), where chemical signals (neurotransmitters) are transmitted.\n\n**Correct Answer: Option D \u2013 the synapse**.",
+      "nli": 0.9515436291694641,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8440305590629578
+    },
+    {
+      "question": "Given question: What is the study of how forces affect the motion of objects? Option A: dynamics Option B: behaviors Option C: kinematics Option D: acceleration The correct answer is Option A.",
+      "best_explanation": "**Explanation:**\n\nThe study of how forces affect the motion of objects is known as **dynamics**. Dynamics is a branch of physics that focuses on the relationship between forces and the motion they produce. It involves understanding how forces cause changes in an object's velocity, direction, or shape.\n\nLet\u2019s briefly examine the options:\n\n- **Option A: Dynamics** \u2013 This is the correct answer. Dynamics specifically deals with the causes of motion, including forces and their effects.\n- **Option B: Behaviors** \u2013 This is too vague and not a specific branch of physics.\n- **Option C: Kinematics** \u2013 Kinematics is the study of motion without considering the forces that cause it. It deals with displacement, velocity, and acceleration.\n- **Option D: Acceleration** \u2013 Acceleration is a concept within dynamics and kinematics, but it is not a field of study itself.\n\n**Correct Answer: Option A \u2013 Dynamics**",
+      "nli": 0.002011179691180587,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8374377489089966
+    },
+    {
+      "question": "Given question: What is a large molecule with many repeating units? Option A: supermolecule Option B: cells Option C: polymer Option D: plasma The correct answer is Option C.",
+      "best_explanation": "**Explanation:**\n\nA **large molecule with many repeating units** is known as a **polymer**. Polymers are made up of **monomers**, which are small repeating units that bond together to form long chains. This structure gives polymers their unique properties and makes them useful in a wide range of applications, such as plastics, rubber, and synthetic fibers.\n\nLet's briefly examine the options:\n\n- **Option A: Supermolecule** \u2013 This is not a standard term in chemistry and does not refer to a molecule made of repeating units.\n- **Option B: Cells** \u2013 Cells are the basic structural and functional units of living organisms, not large molecules.\n- **Option C: Polymer** \u2013 This is the correct answer. Polymers are large molecules made up of repeating units (monomers).\n- **Option D: Plasma** \u2013 Plasma is a state of matter, not a molecule.\n\n**Correct Answer: Option C \u2013 Polymer**.",
+      "nli": 0.9471697807312012,
+      "ver": 2.0,
+      "acr": 1.0,
+      "bert": 0.8289147615432739
+    },
+    {
+      "question": "Given question: Vertebrate animals have two major body cavities, the dorsal and what is the other? Option A: proximal cavity Option B: functional cavity Option C: anterior cavity Option D: spinal cavity The correct answer is Option D.",
+      "best_explanation": "Certainly! Here's a clear and detailed explanation for the given question:\n\n---\n\n**Question:**  \nVertebrate animals have two major body cavities, the dorsal and what is the other?  \n**Options:**  \nA. Proximal cavity  \nB. Functional cavity  \nC. Anterior cavity  \nD. Spinal cavity  \n\n**Correct Answer:** D. Spinal cavity  \n\n**Explanation:**  \nVertebrate animals have two primary body cavities: the **dorsal cavity** and the **ventral cavity**. These cavities are divided based on their location relative to the body's midline.\n\n- The **dorsal cavity** is located on the back side of the body and contains the **central nervous system** (the brain and spinal cord).\n- The **ventral cavity** is located on the front side of the body and contains several important organs, such as the heart, lungs, and digestive organs. It is further divided into the **thoracic cavity** (containing the heart and lungs) and the **abdominopelvic cavity** (containing the stomach, liver, intestines, and other organs).\n\nHowever, in the context of this question, the options provided are not the standard anatomical terms. The **spinal cavity** is a part of the **dorsal cavity**, as it houses the spinal cord. Therefore, the question seems to be using a simplified or alternative terminology, and the \"other\" major body",
+      "nli": 0.9150004386901855,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8292520046234131
+    },
+    {
+      "question": "Given question: Gymnamoebas constitute a large and varied group of what? Option A: sporozoans Option B: amoebozoans Option C: cells Option D: newborns The correct answer is Option B.",
+      "best_explanation": "Certainly! Here's an explanation for the given question:\n\n**Explanation:**  \nGymnamoebas are a type of protist that belong to the group **Amoebozoa**. They are characterized by their ability to change shape through the extension and retraction of pseudopodia, which they use for movement and feeding. Gymnamoebas are a large and varied group within the **Amoebozoans**, which are a major clade of eukaryotes that include a wide range of amoeboid organisms. \n\n**Option B: amoebozoans** is the correct answer because Gymnamoebas are a subgroup of the Amoebozoa, not sporozoans, cells, or newborns.\n\n**Correct Answer: Option B: amoebozoans**.",
+      "nli": 0.9720906019210815,
+      "ver": 2.0,
+      "acr": 1.0,
+      "bert": 0.7950300574302673
+    },
+    {
+      "question": "Given question: Reptiles are described by what term that means their internal temperature depends on the temperature of their environment? Option A: zygomorphic Option B: actinomorphic Option C: ectothermic Option D: endothermic The correct answer is Option C.",
+      "best_explanation": "Certainly! Here's an explanation for the given question:\n\n---\n\n**Question:**  \nReptiles are described by what term that means their internal temperature depends on the temperature of their environment?\n\n**Options:**  \nA. Zygomorphic  \nB. Actinomorphic  \nC. Ectothermic  \nD. Endothermic  \n\n**Correct Answer:** Option C \u2013 Ectothermic  \n\n**Explanation:**  \nReptiles are classified as **ectothermic** organisms. The term \"ectothermic\" means that an organism's body temperature is regulated primarily by the external environment rather than by internal metabolic processes. In other words, reptiles rely on external heat sources, such as sunlight, to warm their bodies and maintain their body temperature. This is in contrast to **endothermic** animals (like mammals and birds), which generate their own body heat internally through metabolic processes.\n\n- **Zygomorphic** and **actinomorphic** are terms related to the symmetry of flowers in botany and are not relevant to the thermoregulation of animals.\n- **Endothermic** refers to animals that maintain a constant body temperature through internal heat production, which is not the case for reptiles.\n\nTherefore, the correct term that describes how reptiles regulate their body temperature is **ectothermic**.",
+      "nli": 0.9731133580207825,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8235964775085449
+    },
+    {
+      "question": "Given question: A bee will sometimes do a dance to tell other bees in the hive where to find what? Option A: enemies Option B: food Option C: water Option D: honey The correct answer is Option B.",
+      "best_explanation": "Certainly! Here's a detailed explanation for the given question:\n\n**Question:**  \n*A bee will sometimes do a dance to tell other bees in the hive where to find what?*  \n**Options:**  \nA: enemies  \nB: food  \nC: water  \nD: honey  \n\n**Correct Answer:** B: food  \n\n**Explanation:**  \nBees are known for their complex communication methods, one of which is the \"waggle dance.\" This dance is performed by worker bees to convey information to other members of the hive. When a forager bee discovers a rich source of food\u2014such as nectar or pollen\u2014it returns to the hive and performs a specific dance to communicate the location of that food source to its fellow bees.\n\nThe waggle dance provides several pieces of information:\n- The **direction** of the food source relative to the sun.\n- The **distance** from the hive to the food source.\n- The **quality** of the food (e.g., how rich the nectar is).\n\nThis behavior is a remarkable example of animal communication and cooperation. Bees do not use the dance to signal enemies, water, or honey directly. While water and honey are important to the hive, the dance specifically serves the purpose of guiding other bees to food sources.\n\nTherefore, the correct answer is **Option B: food**.",
+      "nli": 0.7675364017486572,
+      "ver": 2.0,
+      "acr": 1.0,
+      "bert": 0.8492157459259033
+    },
+    {
+      "question": "Given question: Salts that are neither acidic nor basic do not affect what property of the solution when dissolved in water? Option A: density Option B: saturation Option C: homeostasis Option D: ph The correct answer is Option D.",
+      "best_explanation": "Certainly! Here's a clear and detailed explanation for the given question:\n\n---\n\n**Question:**  \nSalts that are neither acidic nor basic do not affect what property of the solution when dissolved in water?\n\n**Options:**  \nA: Density  \nB: Saturation  \nC: Homeostasis  \nD: pH  \n\n**Correct Answer:** D: pH  \n\n**Explanation:**  \nWhen a salt is dissolved in water, it may or may not affect the **pH** of the solution, depending on whether the salt is acidic, basic, or neutral. \n\n- **Acidic salts** (e.g., ammonium chloride, NH\u2084Cl) dissociate in water to produce H\u207a ions, which lower the pH, making the solution acidic.\n- **Basic salts** (e.g., sodium carbonate, Na\u2082CO\u2083) dissociate to produce OH\u207b ions, which raise the pH, making the solution basic.\n- **Neutral salts** (e.g., sodium chloride, NaCl) are formed from the neutralization of a strong acid and a strong base. When these salts dissolve in water, they do not produce H\u207a or OH\u207b ions. As a result, **they do not affect the pH** of the solution.\n\nNow, let's consider the other options:\n\n- **A: Density** \u2013 The density of the solution can change when a salt is dissolved, as the mass of the solution increases while the volume may also change. So, salts can affect",
+      "nli": 0.6154686808586121,
+      "ver": 2.0,
+      "acr": 0.0,
+      "bert": 0.8351795077323914
+    },
+    {
+      "question": "Given question: Ibuprofen and albuterol are examples of drugs whose _________ have different effects. Option A: analogous Option B: nanoparticles Option C: enantiomers Option D: misnomers The correct answer is Option C.",
+      "best_explanation": "**Explanation:**\n\nThe correct answer is **Option C: enantiomers**.\n\n**Explanation:**\n\nIbuprofen and albuterol are examples of drugs whose **enantiomers** have different effects. \n\n**Enantiomers** are mirror-image isomers of a molecule that have the same chemical structure but are non-superimposable. While they may have similar physical properties, they can interact differently with biological systems, leading to **different pharmacological effects**, **different toxicities**, or even **opposite effects**.\n\nFor example:\n- **Ibuprofen** is the active enantiomer, while its enantiomer (ibuprofen S-isomer) is less effective or even potentially harmful.\n- **Albuterol** (also known as salbutamol) is the active enantiomer, while the other enantiomer may have little or no bronchodilatory effect.\n\nThus, the statement is correct because **enantiomers** of these drugs have **different effects**.\n\n**Correct Answer: Option C: enantiomers**.",
+      "nli": 0.939559817314148,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.792804479598999
+    },
+    {
+      "question": "Given question: The chemical and/or physical agents that cause mutations are called what? Option A: genes Option B: mutagens Option C: dioxins Option D: organelles The correct answer is Option B.",
+      "best_explanation": "Certainly! Here's an explanation for the given question:\n\n**Question:**  \n*The chemical and/or physical agents that cause mutations are called what?*\n\n**Options:**  \nA. Genes  \nB. Mutagens  \nC. Dioxins  \nD. Organelles  \n\n**Correct Answer:** B. Mutagens  \n\n**Explanation:**  \nMutagens are substances or agents, either chemical or physical, that can cause mutations in DNA. Mutations are changes in the genetic material (DNA) of an organism, and they can lead to variations in traits, which may be beneficial, neutral, or harmful.  \n\n- **Option A (Genes):** Genes are segments of DNA that contain the instructions for making proteins and are not agents that cause mutations.  \n- **Option C (Dioxins):** Dioxins are a specific type of chemical pollutant that can be harmful and may have mutagenic properties, but not all dioxins are mutagens, and the term is more specific.  \n- **Option D (Organelles):** Organelles are structures within cells, such as mitochondria or ribosomes, and they are not agents that cause mutations.  \n\nTherefore, the correct term for chemical and/or physical agents that cause mutations is **mutagens**, which is **Option B**.",
+      "nli": 0.7570109367370605,
+      "ver": 2.0,
+      "acr": 1.0,
+      "bert": 0.8035681843757629
+    },
+    {
+      "question": "Given question: Unlike matter, which is continuously recycled through ecosystems, what must constantly be added to an ecosystem for use by organisms? Option A: hydrogen Option B: carbon Option C: fuel Option D: energy The correct answer is Option D.",
+      "best_explanation": "Certainly! Here's a clear and detailed explanation for the given question:\n\n---\n\n**Question:**  \nUnlike matter, which is continuously recycled through ecosystems, what must constantly be added to an ecosystem for use by organisms?  \n**Options:**  \nA. Hydrogen  \nB. Carbon  \nC. Fuel  \nD. Energy  \n\n**Correct Answer:** D. Energy\n\n**Explanation:**  \nIn an ecosystem, **matter** (such as water, carbon, nitrogen, and other elements) is **recycled** through various biogeochemical cycles. For example, carbon is cycled through the atmosphere, plants, animals, and the soil. These materials are broken down, reused, and transformed, maintaining a closed loop.\n\nHowever, **energy** is different. Energy, primarily in the form of **sunlight**, enters an ecosystem and is captured by producers (like plants) through **photosynthesis**. Once energy is used by organisms for growth, movement, and other life processes, it is **lost as heat** due to the **second law of thermodynamics**. This means energy cannot be recycled or reused within the ecosystem. As a result, **energy must be constantly added** to the ecosystem to sustain life.\n\nWhile **carbon** (Option B) is part of the carbon cycle and is recycled, the question specifically asks what must be **constantly added**\u2014not just recycled. **Hydrogen** (Option A) and **fuel** (Option C) are not general",
+      "nli": 0.8989982008934021,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8462069034576416
+    },
+    {
+      "question": "Given question: When water is aerated it can provide a plant's roots with what gas for cellular respiration? Option A: oxygen Option B: carbon dioxide Option C: carbon Option D: nitrogen The correct answer is Option A.",
+      "best_explanation": "**Explanation:**\n\nWhen water is aerated, it means that air (specifically oxygen) is introduced into the water. This process increases the amount of dissolved oxygen in the water. For plants, especially those with roots submerged in water (such as in aquatic environments or hydroponic systems), this dissolved oxygen is essential for **cellular respiration**.\n\nDuring cellular respiration, plant roots use oxygen to break down glucose and produce energy, carbon dioxide, and water. This process is vital for the plant's growth and survival.\n\n- **Option A: oxygen** \u2013 Correct. Aerating water increases the availability of oxygen, which is necessary for the roots to perform cellular respiration.\n- **Option B: carbon dioxide** \u2013 Incorrect. While plants use carbon dioxide for photosynthesis, it is not used by roots during respiration.\n- **Option C: carbon** \u2013 Incorrect. Carbon is a component of organic molecules, but it is not a gas used directly in respiration.\n- **Option D: nitrogen** \u2013 Incorrect. Nitrogen is important for plant growth, but it is not used directly in cellular respiration.\n\n**Correct Answer: Option A \u2013 oxygen**",
+      "nli": 0.9441553950309753,
+      "ver": 2.0,
+      "acr": 1.0,
+      "bert": 0.7907209992408752
+    },
+    {
+      "question": "Given question: What is a vector quantity with the same direction as the force called? Option A: simple Option B: inverted Option C: accelerated Option D: impulse The correct answer is Option D.",
+      "best_explanation": "Certainly! Here's an explanation for the given question:\n\n**Question:** *What is a vector quantity with the same direction as the force called?*  \n**Options:**  \nA. Simple  \nB. Inverted  \nC. Accelerated  \nD. Impulse  \n\n**Correct Answer:** D. Impulse  \n\n**Explanation:**  \nImpulse is a vector quantity that is defined as the product of the average force applied to an object and the time interval during which the force is applied. Mathematically, impulse (J) is given by the equation:\n\n$$\nJ = F \\cdot \\Delta t\n$$\n\nwhere $ F $ is the force and $ \\Delta t $ is the time interval. Since impulse is directly proportional to the force and the time it acts, and since both are vector quantities, impulse also has a direction. Importantly, the direction of impulse is the same as the direction of the force applied. \n\nTherefore, the vector quantity that has the same direction as the force is called **impulse**.",
+      "nli": 0.8415802121162415,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8492840528488159
+    },
+    {
+      "question": "Given question: What are plant structures that contain male and/or female reproductive organs? Option A: roots Option B: leaves Option C: stems Option D: flowers The correct answer is Option D.",
+      "best_explanation": "Certainly! Here's a clear and detailed explanation for the given question:\n\n---\n\n**Question:** What are plant structures that contain male and/or female reproductive organs?\n\n**Options:**\n- A: Roots  \n- B: Leaves  \n- C: Stems  \n- D: Flowers  \n\n**Correct Answer:** D: Flowers  \n\n**Explanation:**\n\nIn flowering plants, the **flowers** are the primary structures responsible for **reproduction**. Flowers contain the **male and/or female reproductive organs**, which are essential for the process of **sexual reproduction**.\n\n- **Male reproductive organs** in flowers are called **stamens**, which produce **pollen** (containing **sperm cells**).\n- **Female reproductive organs** in flowers are called **pistils**, which contain the **ovary** (where **egg cells** are produced).\n\nOther plant structures such as **roots**, **leaves**, and **stems** play important roles in **support, nutrient absorption, and photosynthesis**, but they do **not** contain the **reproductive organs** necessary for sexual reproduction. \n\nTherefore, the correct answer is **Option D: Flowers**.",
+      "nli": 0.9601420164108276,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8273494243621826
+    },
+    {
+      "question": "Given question: Organs involved in digestion that do not have food pass through them are called? Option A: vestigial organs Option B: bypass organs Option C: layer organs Option D: accessory organs The correct answer is Option D.",
+      "best_explanation": "Certainly! Here's a clear and detailed explanation for the given question:\n\n---\n\n**Question:**  \nOrgans involved in digestion that do not have food pass through them are called?  \n**Options:**  \nA. Vestigial organs  \nB. Bypass organs  \nC. Layer organs  \nD. Accessory organs  \n**Correct Answer:** D. Accessory organs\n\n---\n\n**Explanation:**\n\nIn the process of digestion, some organs play a supportive role by aiding in the mechanical or chemical breakdown of food, but they do **not** have food passing through them. These organs are known as **accessory organs**.\n\n- **Accessory organs** are those that assist in digestion but are not part of the **digestive tract** (the pathway through which food physically moves).  \n- Examples of accessory organs include the **liver**, **pancreas**, and **salivary glands**.  \n  - The **liver** produces bile, which helps break down fats.  \n  - The **pancreas** secretes enzymes into the small intestine to aid in digestion.  \n  - **Salivary glands** produce saliva, which begins the digestion of carbohydrates.  \n- None of these organs have food passing through them in the same way that the stomach or intestines do. Instead, they contribute to digestion by secreting substances into the digestive tract.\n\n---\n\n**Why the other options are incorrect:**\n\n- **Option A: Vestigial organs** \u2013 These are organs",
+      "nli": 0.9885649085044861,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8367090821266174
+    },
+    {
+      "question": "Given question: What artery takes blood to the brain? Option A: carotid Option B: veins Option C: coronary Option D: pulmonary The correct answer is Option A.",
+      "best_explanation": "Certainly! Here's an explanation for the question:\n\n**Question:** What artery takes blood to the brain?  \n**Options:**  \nA) Carotid  \nB) Veins  \nC) Coronary  \nD) Pulmonary  \n\n**Correct Answer:** A) Carotid  \n\n**Explanation:**  \nThe **carotid arteries** are the main arteries that supply oxygenated blood to the **brain**. There are two carotid arteries \u2014 the **common carotid arteries**, which branch into the **internal carotid arteries** and the **external carotid arteries**. The **internal carotid arteries** are responsible for delivering blood directly to the brain.  \n\n- **Option B (Veins):** Veins carry **deoxygenated blood** back to the heart, not to the brain.  \n- **Option C (Coronary):** The coronary arteries supply blood to the **heart muscle**, not the brain.  \n- **Option D (Pulmonary):** The pulmonary arteries carry **deoxygenated blood** from the heart to the **lungs** for oxygenation.  \n\nTherefore, the correct answer is **Option A: Carotid**, as it is the primary artery responsible for delivering blood to the brain.",
+      "nli": 0.9226605296134949,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.819177508354187
+    },
+    {
+      "question": "Given question: What do ecologists study at every level? Option A: plants Option B: solar system Option C: taxonomy Option D: ecosystems The correct answer is Option D.",
+      "best_explanation": "Certainly! Here's the explanation for the given question:\n\n**Question:** What do ecologists study at every level?  \n**Options:**  \nA. Plants  \nB. Solar system  \nC. Taxonomy  \nD. Ecosystems  \n\n**Correct Answer:** D. Ecosystems  \n\n**Explanation:**  \nEcologists study ecosystems at every level of biological organization, from individual organisms up to entire biomes. An ecosystem includes all living organisms (plants, animals, microorganisms) and their physical environment (soil, water, air, climate) interacting as a system. By studying ecosystems, ecologists can understand how energy flows, how nutrients cycle, and how different species interact with each other and their environment. This holistic approach allows ecologists to examine ecological processes at various scales, from a single pond to a whole planet. \n\nTherefore, the correct answer is **Option D: Ecosystems**.",
+      "nli": 0.9393132925033569,
+      "ver": 2.0,
+      "acr": 1.0,
+      "bert": 0.8407996892929077
+    },
+    {
+      "question": "Given question: What is the term for when an embryo fixes itself to the side of the uterus? Option A: implantation Option B: exploration Option C: parasite Option D: bacterial The correct answer is Option A.",
+      "best_explanation": "Certainly! Here's a clear explanation for the given question:\n\n**Question:** What is the term for when an embryo fixes itself to the side of the uterus?\n\n**Options:**\n- A: Implantation  \n- B: Exploration  \n- C: Parasite  \n- D: Bacterial  \n\n**Correct Answer:** A: Implantation  \n\n**Explanation:**  \nDuring the process of pregnancy, after the fertilized egg (embryo) travels through the fallopian tube, it eventually reaches the uterus. The embryo then attaches itself to the lining of the uterus, a process known as **implantation**. This is a critical step that allows the embryo to receive nutrients and oxygen from the mother, supporting its development into a fetus.\n\n- **Option B (Exploration)** refers to the act of examining or investigating, which is not related to the biological process of embryo attachment.  \n- **Option C (Parasite)** is an organism that lives on or in another organism and benefits at the expense of the host, which is not relevant here.  \n- **Option D (Bacterial)** refers to microorganisms, which are not involved in the process of embryo attachment.  \n\nTherefore, the correct term for when an embryo fixes itself to the side of the uterus is **implantation**.",
+      "nli": 0.40557289123535156,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8442181348800659
+    },
+    {
+      "question": "Given question: Cells that have a nucleus and other organelles which are membrane-bound are generally called what kinds of cells? Option A: Erythrocyte Option B: Monocyte Option C: Megakaryocyte Option D: eukaryotic The correct answer is Option D.",
+      "best_explanation": "Certainly! Here's the explanation for the given question:\n\n---\n\n**Question:**  \nCells that have a nucleus and other organelles which are membrane-bound are generally called what kinds of cells?\n\n**Options:**  \nA. Erythrocyte  \nB. Monocyte  \nC. Megakaryocyte  \nD. Eukaryotic\n\n**Correct Answer:** D. Eukaryotic\n\n**Explanation:**  \nEukaryotic cells are characterized by the presence of a true nucleus and various membrane-bound organelles such as the mitochondria, endoplasmic reticulum, Golgi apparatus, and lysosomes. These structures are essential for carrying out specialized functions within the cell.\n\nIn contrast, the other options refer to specific types of cells:\n\n- **Erythrocyte (Red blood cell):** A type of cell found in the blood, typically lacking a nucleus in mammals.\n- **Monocyte:** A type of white blood cell involved in the immune response.\n- **Megakaryocyte:** A large cell responsible for producing platelets in the bone marrow.\n\nTherefore, the correct answer is **D. Eukaryotic**, as it refers to the general category of cells that have a nucleus and membrane-bound organelles.",
+      "nli": 0.20165683329105377,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.849425196647644
+    },
+    {
+      "question": "Given question: While ecosystems need a constant input of energy for their organisms, what do ecosystems recycle? Option A: light Option B: food Option C: water Option D: matter The correct answer is Option D.",
+      "best_explanation": "Certainly! Here's an explanation for the given question:\n\n---\n\n**Question:** While ecosystems need a constant input of energy for their organisms, what do ecosystems recycle?\n\n**Options:**\n- A: Light  \n- B: Food  \n- C: Water  \n- D: Matter  \n\n**Correct Answer:** D: Matter  \n\n**Explanation:**  \nEcosystems require a continuous supply of energy, primarily from the sun, to support life. This energy is captured by producers (like plants) through photosynthesis and then flows through the ecosystem as organisms consume one another. However, **energy is not recycled**\u2014it is lost as heat through metabolic processes and ultimately radiates into the environment.\n\nOn the other hand, **matter** is what ecosystems **recycle**. Nutrients such as carbon, nitrogen, and water are cycled through various components of the ecosystem\u2014producers, consumers, decomposers, and the environment. For example, when an organism dies, decomposers break it down, returning nutrients to the soil or water, which can then be reused by other organisms. This recycling of **matter** ensures that ecosystems remain functional and sustainable over time.\n\nWhile **water** (Option C) and **food** (Option B) are involved in the cycling process, they are not the broad, fundamental form of what ecosystems recycle. **Light** (Option A) is an energy source, not something that is recycled. Therefore, the correct answer is **Option D: Matter**",
+      "nli": 0.7839487195014954,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8488345742225647
+    },
+    {
+      "question": "Given question: What are the two most common silicates? Option A: feldspar and quartz Option B: Micas\t and feldspar Option C: Olivine and quartz Option D: Micas\t and quartz The correct answer is Option A.",
+      "best_explanation": "Certainly! Here's a clear and concise explanation for the given question:\n\n---\n\n**Explanation:**\n\nSilicates are the most abundant minerals in the Earth's crust, and they are composed primarily of silicon and oxygen, often with other elements such as aluminum, sodium, potassium, and calcium. Among the various silicate minerals, **feldspar** and **quartz** are the two most common.\n\n- **Feldspar** is a group of rock-forming minerals that make up about 60% of the Earth's crust. It includes minerals like potassium feldspar and plagioclase feldspar.\n- **Quartz** is another common silicate mineral composed of silicon dioxide (SiO\u2082). It is found in many types of rocks, including granite and sandstone.\n\nThese two minerals are widely distributed and form a significant portion of the Earth's crust, making **Option A: feldspar and quartz** the correct answer.\n\n---\n\n**Correct Answer: Option A**  \n**Feldspar and quartz** are the two most common silicates.",
+      "nli": 0.5328524112701416,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8246245980262756
+    },
+    {
+      "question": "Given question: What unit do astronomers use to describe distances in space? Option A: light years Option B: light months Option C: gravity years Option D: quantum years The correct answer is Option A.",
+      "best_explanation": "**Explanation:**\n\nAstronomers use the **light year** as the standard unit to describe distances in space. A **light year** is the distance that light travels in one year, which is approximately **9.46 trillion kilometers (5.88 trillion miles)**. This unit is particularly useful because the distances between celestial objects in space are incredibly large, making light years a more practical and comprehensible measure than kilometers or miles.\n\nLet's examine the options:\n\n- **Option A: Light years** \u2013 This is the correct answer. As explained, a light year is the distance light travels in one year and is widely used in astronomy.\n  \n- **Option B: Light months** \u2013 While it might seem like a logical unit, it is not commonly used. The term \"light month\" is not a standard or established unit in astronomical measurements.\n  \n- **Option C: Gravity years** \u2013 This is not a recognized unit of distance in astronomy. It might be confused with \"gravitational time dilation,\" a concept in physics, but not a measure of distance.\n  \n- **Option D: Quantum years** \u2013 This is not a standard unit of distance. It may be a distractor or a term from a different field, such as quantum physics, but it is not used to describe spatial distances.\n\n**Conclusion:** The correct and most widely accepted unit for measuring distances in space is the **light year**.",
+      "nli": 0.13687023520469666,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8656835556030273
+    },
+    {
+      "question": "Given question: What type of telescopes collect and focus radio waves from distant objects? Option A: refracting telescopes Option B: radio telescopes Option C: space telescopes Option D: reflecting telescopes The correct answer is Option B.",
+      "best_explanation": "Certainly! Here's the explanation for the given question:\n\n**Question:** What type of telescopes collect and focus radio waves from distant objects?\n\n**Options:**\n- **A: Refracting telescopes**  \n- **B: Radio telescopes**  \n- **C: Space telescopes**  \n- **D: Reflecting telescopes**\n\n**Correct Answer: B: Radio telescopes**\n\n**Explanation:**  \nRadio telescopes are specifically designed to detect and focus radio waves, which are a type of electromagnetic radiation emitted by distant celestial objects such as stars, galaxies, and other cosmic phenomena. These telescopes use large dish-shaped antennas or arrays to collect weak radio signals from space and then focus them onto a receiver for analysis.\n\n- **Refracting telescopes** (Option A) use lenses to gather and focus visible light, not radio waves.\n- **Space telescopes** (Option C) are telescopes placed in space to avoid atmospheric interference, but they can be of various types (e.g., Hubble for visible light, Chandra for X-rays), and not all space telescopes are designed for radio waves.\n- **Reflecting telescopes** (Option D) use mirrors to focus visible light, similar to refracting telescopes, but they are not designed for radio waves.\n\nTherefore, the correct answer is **Option B: Radio telescopes**, as they are specifically built to collect and focus radio waves from distant objects.",
+      "nli": 0.9763679504394531,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8507115840911865
+    },
+    {
+      "question": "Given question: What nervous system is divided into two parts, the sensory division and the motor division? Option A: developmental Option B: physiological Option C: central Option D: peripheral The correct answer is Option D.",
+      "best_explanation": "Certainly! Here's a clear explanation for the given question:\n\n---\n\n**Question:**  \nWhat nervous system is divided into two parts, the sensory division and the motor division?\n\n**Options:**  \nA. Developmental  \nB. Physiological  \nC. Central  \nD. Peripheral  \n\n**Correct Answer:** D. Peripheral  \n\n**Explanation:**  \nThe **peripheral nervous system (PNS)** is divided into two main parts:  \n1. **Sensory Division (Afferent Division):** This part is responsible for transmitting sensory information from sensory receptors (such as those in the skin, muscles, and internal organs) to the central nervous system (CNS).  \n2. **Motor Division (Efferent Division):** This part carries signals from the CNS to muscles and glands, enabling voluntary and involuntary movements and responses.\n\nIn contrast, the **central nervous system (CNS)**, which includes the brain and spinal cord, is not typically divided into sensory and motor divisions in this way. Instead, it serves as the control center for processing sensory information and initiating motor responses.\n\n**Options A and B** refer to broader categories related to development and general physiological processes, and are not specific to the division of the nervous system into sensory and motor components.\n\n---\n\nTherefore, the correct answer is **Option D: Peripheral**.",
+      "nli": 0.944477379322052,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8329644799232483
+    },
+    {
+      "question": "Given question: Algae produce food using what process? Option A: photosynthesis Option B: spermatogenesis Option C: cellular respiration Option D: glycolysis The correct answer is Option A.",
+      "best_explanation": "**Explanation:**\n\nAlgae are photosynthetic organisms, meaning they are capable of producing their own food using sunlight. This process is called **photosynthesis**, which occurs in the chloroplasts of algae. During photosynthesis, algae use carbon dioxide, water, and sunlight to synthesize glucose and release oxygen as a byproduct.\n\n- **Option A: Photosynthesis** \u2013 This is the correct answer. Algae perform photosynthesis to produce food.\n- **Option B: Spermatogenesis** \u2013 This is the process of sperm cell formation and is related to reproduction, not food production.\n- **Option C: Cellular respiration** \u2013 This is the process by which cells produce energy by breaking down glucose, not by producing it.\n- **Option D: Glycolysis** \u2013 This is a part of cellular respiration and involves the breakdown of glucose, not its synthesis.\n\nTherefore, the correct answer is **Option A: Photosynthesis**.",
+      "nli": 0.9606335163116455,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.832532525062561
+    },
+    {
+      "question": "Given question: What indicates the speed at which a reaction proceeds? Option A: the transform rate Option B: time zone Option C: the reaction rate Option D: reaction scale The correct answer is Option C.",
+      "best_explanation": "Certainly! Here's an explanation for the given question:\n\n**Question:** What indicates the speed at which a reaction proceeds?\n\n**Options:**\n- **A:** the transform rate  \n- **B:** time zone  \n- **C:** the reaction rate  \n- **D:** reaction scale\n\n**Correct Answer:** **Option C: the reaction rate**\n\n**Explanation:**\n\nThe **reaction rate** is a measure of how quickly a chemical reaction proceeds. It is defined as the change in concentration of a reactant or product per unit time. In other words, it tells us how fast the reactants are being consumed or how fast the products are being formed.\n\n- **Option A: the transform rate** \u2013 This is not a standard term used in chemistry to describe the speed of a reaction.\n- **Option B: time zone** \u2013 This refers to geographical regions and has nothing to do with the rate of a chemical reaction.\n- **Option D: reaction scale** \u2013 This typically refers to the size or magnitude of a reaction (e.g., how much reactant is used), not the speed at which it occurs.\n\nTherefore, **Option C: the reaction rate** is the correct answer because it directly indicates the speed at which a reaction proceeds.",
+      "nli": 0.0438070222735405,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.834783136844635
+    },
+    {
+      "question": "Given question: Competition that occurs between members of the same species, which improves the species\u2019 adaptations, is called what? Option A: intraspecific competition Option B: adaptive behavior Option C: commensalism Option D: interspecies competition The correct answer is Option A.",
+      "best_explanation": "Certainly! Here's a clear and detailed explanation for the given question:\n\n---\n\n**Question:**  \n*Competition that occurs between members of the same species, which improves the species\u2019 adaptations, is called what?*  \n**Options:**  \nA. Intraspecific competition  \nB. Adaptive behavior  \nC. Commensalism  \nD. Interspecies competition  \n\n**Correct Answer:** A. Intraspecific competition  \n\n**Explanation:**  \nIntraspecific competition refers to the competition that occurs between individuals of the **same species** for limited resources such as food, space, mates, or territory. This type of competition can lead to stronger selection pressures within a population, which can drive the development of more effective adaptations. For example, in a population of birds competing for food, those individuals with better foraging skills or more efficient energy use may be more likely to survive and pass on their genes. Over time, this can result in improved adaptations within the species.\n\n- **Option B (Adaptive behavior)** refers to behaviors that help an organism survive and reproduce, but it is not a type of competition.\n- **Option C (Commensalism)** is a type of symbiotic relationship where one organism benefits and the other is unaffected.\n- **Option D (Interspecies competition)** refers to competition between individuals of **different species**, not the same species.\n\nTherefore, the correct term for competition within the same species is **intraspecific competition**.",
+      "nli": 0.937186598777771,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8497105240821838
+    },
+    {
+      "question": "Given question: Who wrote the book on the origin of species? Option A: Scopes Option B: Sagan Option C: darwin Option D: cannon The correct answer is Option C.",
+      "best_explanation": "Certainly! Here's an explanation for the given question:\n\n**Question:** Who wrote the book *On the Origin of Species*?\n\n**Options:**\n- A: Scopes  \n- B: Sagan  \n- C: Darwin  \n- D: Cannon  \n\n**Correct Answer:** C: Darwin  \n\n**Explanation:**  \nThe book *On the Origin of Species* was written by **Charles Darwin**, a British naturalist and biologist. Published in 1859, this groundbreaking work introduced the theory of evolution through natural selection, which fundamentally changed the way humans understand the development of life on Earth. \n\n- **Option A (Scopes):** John Scopes was an American high school teacher involved in the famous Scopes Trial, also known as the \"Monkey Trial,\" which dealt with the teaching of evolution in schools. He is not associated with writing *On the Origin of Species*.\n  \n- **Option B (Sagan):** Carl Sagan was an influential astronomer, cosmologist, and science communicator, known for works like *Cosmos*. He did not write *On the Origin of Species*.\n  \n- **Option D (Cannon):** Walter Cannon was a physiologist known for his work on the \"fight or flight\" response and the concept of homeostasis. He is not related to the book in question.\n\nTherefore, the correct answer is **Option C: Darwin**.",
+      "nli": 0.9224976897239685,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.813002347946167
+    },
+    {
+      "question": "Given question: The tissue that will become the scrotum in a male becomes the labia in a female, thus, they are regarded as having what relationship? Option A: symbiotic Option B: homologous Option C: mutual Option D: opposite The correct answer is Option B.",
+      "best_explanation": "Certainly! Here's an explanation for the given question:\n\n---\n\n**Explanation:**\n\nThe question is asking about the relationship between the tissue that develops into the **scrotum** in males and the **labia** in females. \n\nIn embryonic development, both males and females originate from similar structures. In males, the **gonadal ridges** develop into the testes, and the surrounding tissue develops into the **scrotum**. In females, the same gonadal ridges develop into the **ovaries**, and the surrounding tissue develops into the **labia majora**.\n\nAlthough the scrotum and labia serve different functions in males and females, they originate from the **same embryonic tissue**. This means they are **homologous structures**\u2014structures that share a common evolutionary origin but may have different functions or forms in different species or sexes.\n\n**Option B: homologous** is the correct answer because it refers to the relationship between structures that develop from the same embryonic tissue, even if they serve different purposes in males and females.\n\n---\n\n**Summary:**\n- **Homologous** structures have a common origin.\n- The **scrotum** and **labia** are homologous because they both develop from the same embryonic tissue.\n- This makes **Option B** the correct answer.",
+      "nli": 0.9921751618385315,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8151832818984985
+    },
+    {
+      "question": "Given question: What does a continuous string of earthquakes indicate about a volcano? Option A: extinction is close Option B: eruption is close Option C: it is heating up Option D: it is cooling down The correct answer is Option B.",
+      "best_explanation": "Certainly! Here's an explanation for the given question:\n\n**Question:** What does a continuous string of earthquakes indicate about a volcano?  \n**Options:**  \nA: Extinction is close  \nB: Eruption is close  \nC: It is heating up  \nD: It is cooling down  \n**Correct Answer:** B: Eruption is close  \n\n**Explanation:**  \nA continuous string of earthquakes near a volcano is typically a sign that magma is moving beneath the surface. This movement can cause stress on the surrounding rock, leading to a series of small earthquakes. These seismic activities are often precursors to a volcanic eruption, as they indicate that pressure is building up within the magma chamber. Therefore, a continuous string of earthquakes suggests that an eruption may be imminent, making **Option B** the correct answer.",
+      "nli": 0.9377653002738953,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8545602560043335
+    },
+    {
+      "question": "Given question: The basic voltaic cell variations are the dry cell and the what? Option A: lead storage battery Option B: lead flood battery Option C: lead electricity battery Option D: positive terminal The correct answer is Option A.",
+      "best_explanation": "Certainly! Here's a clear and concise explanation for the given question:\n\n---\n\n**Explanation:**\n\nThe basic voltaic cell variations include different types of batteries that convert chemical energy into electrical energy. Two common types are the **dry cell** and the **lead storage battery**.\n\n- A **dry cell** is a type of primary battery that uses a paste-like electrolyte, making it portable and commonly used in everyday devices like flashlights and remote controls.\n- A **lead storage battery** (Option A) is a type of secondary battery, which means it can be recharged. It is widely used in vehicles to start the engine and power electrical systems.\n\n**Option A: Lead storage battery** is the correct answer because it is a well-known variation of the basic voltaic cell, alongside the dry cell.\n\n**Options B, C, and D** are not correct:\n- **Option B: Lead flood battery** is not a standard term used to describe a type of voltaic cell.\n- **Option C: Lead electricity battery** is not a recognized type of battery.\n- **Option D: Positive terminal** refers to a component of a battery, not a type of voltaic cell variation.\n\n---\n\n**Correct Answer: Option A \u2013 Lead storage battery**",
+      "nli": 0.024339227005839348,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8437906503677368
+    },
+    {
+      "question": "Given question: What process is used for cell growth, repair of cuts and replacement of worn out cells? Option A: binary fission Option B: pollination Option C: reproduction Option D: cell division The correct answer is Option D.",
+      "best_explanation": "Certainly! Here's a detailed explanation for the given question:\n\n**Question:**  \nWhat process is used for cell growth, repair of cuts, and replacement of worn out cells?  \n**Options:**  \nA. Binary fission  \nB. Pollination  \nC. Reproduction  \nD. Cell division  \n\n**Correct Answer:** D. Cell division  \n\n**Explanation:**  \nCell division is the process by which a single cell divides into two daughter cells. This process is essential for several biological functions:\n\n1. **Cell Growth:** As an organism grows, its cells must increase in number. Cell division allows for the creation of new cells to support the expansion of tissues and organs.\n\n2. **Repair of Cuts:** When an injury occurs, such as a cut, the body needs to replace damaged cells. Cell division enables the production of new cells to heal the wound and restore the tissue to its original state.\n\n3. **Replacement of Worn Out Cells:** Over time, cells in the body can become old or damaged. Cell division ensures that these worn-out cells are replaced by new, healthy cells, maintaining the proper function of tissues and organs.\n\n**Why the Other Options Are Incorrect:**\n\n- **Option A: Binary fission** \u2013 This is a specific type of cell division that occurs in prokaryotic organisms (like bacteria). It is not the general process used in all types of cell growth and repair in eukaryotic cells.\n\n- **Option B: Pollination** \u2013",
+      "nli": 0.653861403465271,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.828091025352478
+    },
+    {
+      "question": "Given question: What is produced by the end of meiosis? Option A: three haploid cells Option B: eight haploid cells Option C: sixteen haploid cells Option D: four haploid cells The correct answer is Option D.",
+      "best_explanation": "Certainly! Here's a clear explanation for the question:\n\n**Question:** What is produced by the end of meiosis?\n\n**Options:**\n- A: three haploid cells  \n- B: eight haploid cells  \n- C: sixteen haploid cells  \n- D: four haploid cells\n\n**Correct Answer:** D: four haploid cells\n\n**Explanation:**\n\nMeiosis is a specialized type of cell division that occurs in sexually reproducing organisms to produce gametes (sperm and egg cells). It involves two successive divisions\u2014meiosis I and meiosis II\u2014resulting in the production of four genetically diverse haploid cells from one diploid cell.\n\n- **Meiosis I** is the reduction division, where the chromosome number is halved. The original diploid cell divides into two haploid cells.\n- **Meiosis II** is similar to mitosis, where each of the two haploid cells divides again, resulting in a total of **four haploid cells**.\n\nThese four haploid cells are genetically distinct from each other due to processes such as crossing over and independent assortment during meiosis I.\n\nTherefore, by the end of meiosis, **four haploid cells** are produced, making **Option D** the correct answer.",
+      "nli": 0.9773951172828674,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8373429179191589
+    },
+    {
+      "question": "Given question: Earth's axis is an imaginary line passing through which poles? Option A: East and North Option B: southwest and south Option C: north and south Option D: west and south The correct answer is Option C.",
+      "best_explanation": "Certainly! Here's a clear and concise explanation for the given question:\n\n---\n\n**Explanation:**\n\nThe Earth's axis is an imaginary line that runs through the center of the Earth and is tilted at an angle of approximately 23.5 degrees relative to the plane of its orbit around the Sun. This axis is the imaginary line around which the Earth rotates.\n\nThe Earth's axis passes through two specific points on the Earth's surface, known as the **North Pole** and the **South Pole**. These are the points where the axis intersects the Earth's surface.\n\nTherefore, the correct answer to the question \u2014 \"Earth's axis is an imaginary line passing through which poles?\" \u2014 is **Option C: north and south**.\n\n---\n\n**Correct Answer:** Option C: north and south",
+      "nli": 0.9769076108932495,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8393680453300476
+    },
+    {
+      "question": "Given question: An increase in the number of gas molecules in the same volume container causes what to increase? Option A: pressure Option B: power Option C: energy Option D: friction The correct answer is Option A.",
+      "best_explanation": "Certainly! Here's a clear explanation for the given question:\n\n---\n\n**Question:**  \nAn increase in the number of gas molecules in the same volume container causes what to increase?\n\n**Options:**  \nA) Pressure  \nB) Power  \nC) Energy  \nD) Friction  \n\n**Correct Answer:** A) Pressure  \n\n**Explanation:**  \nWhen the number of gas molecules in a fixed volume increases, the pressure inside the container also increases. This is explained by **Dalton's Law of Partial Pressures** and the **Kinetic Molecular Theory** of gases.\n\nAccording to the Kinetic Molecular Theory:\n- Gas molecules are in constant random motion.\n- They collide with the walls of the container, and these collisions exert pressure on the container.\n\nWhen more gas molecules are present in the same volume:\n- There are more collisions per unit time with the container walls.\n- This leads to an increase in the force exerted per unit area, which is pressure.\n\nTherefore, an increase in the number of gas molecules in a fixed volume results in an increase in **pressure**.\n\n**Other Options:**\n- **Power** is a measure of energy transfer over time and is not directly related to gas molecules in a container.\n- **Energy** may increase in some contexts, but the question specifically refers to a direct effect of increasing gas molecules.\n- **Friction** is a force that opposes motion and is not directly affected by the number of gas molecules in a container.\n\n---\n\n**Final Answer:**",
+      "nli": 0.7778613567352295,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8418514132499695
+    },
+    {
+      "question": "Given question: The bird ancestor that lived in trees developed what feature commonly associated with birds? Option A: wings Option B: tails Option C: webbed feet Option D: beaks The correct answer is Option A.",
+      "best_explanation": "Certainly! Here's an explanation for the given question:\n\n**Explanation:**\n\nThe question refers to the evolutionary development of birds from their ancestors, specifically those that lived in trees. One of the key features that distinguish birds from their non-avian dinosaur ancestors is the development of **wings**.\n\nDuring the evolutionary transition from tree-dwelling animals to birds, one of the most significant adaptations was the development of **wings**. These wings, initially used for gliding or flapping in the air, allowed early birds to become more efficient at flight. This adaptation was crucial for survival in arboreal (tree-dwelling) environments, as it enabled them to escape predators, find food, and move between branches more effectively.\n\nWhile **beaks** (Option D), **tails** (Option B), and **webbed feet** (Option C) are also features commonly associated with birds, they are not as directly linked to the specific evolutionary development from tree-dwelling ancestors. Beaks evolved later as specialized feeding structures, tails became more streamlined for flight, and webbed feet are more commonly associated with aquatic birds.\n\n**Therefore, the correct answer is Option A: wings**, as they were a key feature developed by the bird ancestor that lived in trees.",
+      "nli": 0.15825104713439941,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8498944640159607
+    },
+    {
+      "question": "Given question: Chitin, also found in the exoskeleton of insects, gives structural strength to the cell walls of fungi. the cell wall protects the cell from what? Option A: fermentation and predators Option B: desiccation and predators Option C: starvation and predators Option D: entrainment and predators The correct answer is Option B.",
+      "best_explanation": "**Explanation:**\n\nChitin is a structural polysaccharide found in the exoskeletons of insects and in the cell walls of fungi. It provides structural strength and rigidity to these structures.\n\nThe **cell wall** of a fungal cell serves several important protective functions. It acts as a barrier that helps the cell resist physical stress and environmental challenges.\n\nIn the context of the question, the cell wall protects the cell from:\n\n- **Desiccation** (drying out): The cell wall helps maintain the structural integrity of the cell and can contribute to retaining moisture.\n- **Predators**: The rigid and tough cell wall makes it difficult for predators or other organisms to penetrate or consume the fungal cell.\n\n**Option B: desiccation and predators** is the correct answer because it accurately reflects the protective roles of the fungal cell wall.\n\n**Other options are incorrect because:**\n- **Fermentation and starvation** are not physical threats that the cell wall directly protects against.\n- **Entrainment** is not a relevant biological threat in this context.\n\nThus, the correct answer is **Option B: desiccation and predators**.",
+      "nli": 0.9783602952957153,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8160718679428101
+    },
+    {
+      "question": "Given question: What term in biotechnology means a genetically exact copy of an organism? Option A: clone Option B: phenotype Option C: adult Option D: male The correct answer is Option A.",
+      "best_explanation": "Certainly! Here's the explanation for the given question:\n\n**Question:** What term in biotechnology means a genetically exact copy of an organism?\n\n**Options:**\n- A: Clone  \n- B: Phenotype  \n- C: Adult  \n- D: Male  \n\n**Correct Answer:** A: Clone\n\n**Explanation:**  \nIn biotechnology, the term **\"clone\"** refers to an organism or a cell that is genetically identical to another organism or cell. This genetic identity is achieved through various methods such as asexual reproduction, genetic engineering, or cloning techniques like somatic cell nuclear transfer. A clone is not just a copy in appearance (which might be associated with \"phenotype\"), but a **genetically exact copy**, making \"clone\" the correct choice.\n\n- **Phenotype (B)** refers to the observable characteristics of an organism, such as its physical traits or behavior, which result from the interaction of its genotype with the environment. It is not necessarily a genetic copy.\n- **Adult (C)** and **Male (D)** are not related to genetic duplication or biotechnology terminology.\n\nTherefore, **Option A: Clone** is the correct answer.",
+      "nli": 0.2717115581035614,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8184525370597839
+    },
+    {
+      "question": "Given question: The products of what process are needed for cellular respiration, and vice versa? Option A: photosynthesis Option B: spermatogenesis Option C: circulation Option D: digestion The correct answer is Option A.",
+      "best_explanation": "Certainly! Here's an explanation for the given question:\n\n**Question:**  \n*The products of what process are needed for cellular respiration, and vice versa?*  \n**Options:**  \nA) Photosynthesis  \nB) Spermatogenesis  \nC) Circulation  \nD) Digestion  \n**Correct Answer:** A) Photosynthesis  \n\n**Explanation:**  \nCellular respiration is the process by which cells produce energy (in the form of ATP) by breaking down glucose in the presence of oxygen. This process requires **oxygen** and **glucose** as reactants and produces **carbon dioxide**, **water**, and **energy (ATP)** as products.\n\nPhotosynthesis, on the other hand, is the process by which plants, algae, and some bacteria convert light energy into chemical energy stored in glucose. This process uses **carbon dioxide** and **water** as reactants and produces **oxygen** and **glucose** as products.\n\nThus, **photosynthesis and cellular respiration are interconnected** in a cycle:\n- **Photosynthesis produces glucose and oxygen**, which are **needed for cellular respiration**.\n- **Cellular respiration produces carbon dioxide and water**, which are **needed for photosynthesis**.\n\nTherefore, the correct answer is **Option A: Photosynthesis**.",
+      "nli": 0.9611942768096924,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8232970833778381
+    },
+    {
+      "question": "Given question: What is the term for a series of biochemical reactions by which an organism converts a given reactant to a specific end product? Option A: hydrogen pathway Option B: internal pathway Option C: metabolic pathway Option D: direct pathway The correct answer is Option C.",
+      "best_explanation": "**Explanation:**\n\nThe correct answer is **Option C: metabolic pathway**.\n\nA **metabolic pathway** refers to a series of interconnected biochemical reactions in a cell that convert a starting molecule (a reactant) into a specific end product. These pathways are essential for various cellular processes such as energy production, biosynthesis of molecules, and the breakdown of nutrients.\n\nLet's briefly examine why the other options are not correct:\n\n- **Option A: hydrogen pathway** \u2013 This is not a standard term used in biochemistry to describe such a series of reactions. It may refer to a specific process involving hydrogen, but it is not the general term for this concept.\n\n- **Option B: internal pathway** \u2013 This is vague and does not specifically refer to a biochemical series of reactions converting a reactant into a product. It could refer to any internal process, not necessarily a biochemical one.\n\n- **Option D: direct pathway** \u2013 This term is not commonly used in biochemistry to describe a sequence of biochemical reactions. It implies a direct route without intermediate steps, which is not typical of most metabolic processes.\n\nThus, the most accurate and widely accepted term for a series of biochemical reactions that convert a given reactant to a specific end product is **metabolic pathway**.",
+      "nli": 0.021503813564777374,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8159578442573547
+    },
+    {
+      "question": "Given question: The type of bond that forms between molecules is called what? Option A: fission bond Option B: helium bond Option C: hydrogen bond Option D: covalent bond The correct answer is Option C.",
+      "best_explanation": "Certainly! Here's a clear explanation for the given question:\n\n---\n\n**Question:**  \nThe type of bond that forms between molecules is called what?  \n**Options:**  \nA. Fission bond  \nB. Helium bond  \nC. Hydrogen bond  \nD. Covalent bond  \n\n**Correct Answer:** C. Hydrogen bond  \n\n**Explanation:**  \nWhen we talk about bonds that form between **molecules**, we are referring to **intermolecular bonds**\u2014bonds that occur between different molecules rather than within a single molecule.  \n\nAmong the options provided, **hydrogen bonds** are a specific type of **intermolecular bond**. They occur when a **hydrogen atom** (which is covalently bonded to a highly electronegative atom like oxygen, nitrogen, or fluorine) is attracted to another electronegative atom in a neighboring molecule. These bonds are **stronger than dispersion forces** but **weaker than covalent or ionic bonds**.\n\n- **Fission bond (Option A)**: This term is not commonly used in chemistry and is not a recognized type of bond.  \n- **Helium bond (Option B)**: This is not a standard term in chemistry and does not refer to any recognized type of chemical bond.  \n- **Covalent bond (Option D)**: This is a type of **intramolecular bond**, meaning it occurs within a single molecule, not between molecules.  \n\nTherefore,",
+      "nli": 0.9680823683738708,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8206895589828491
+    },
+    {
+      "question": "Given question: What system of the body is responsible for transmitting, processing, and responding to most of the sensory information that is created by various stimuli? Option A: attentive system Option B: respiratory system Option C: circulatory system Option D: nervous system The correct answer is Option D.",
+      "best_explanation": "Certainly! Here's a clear and concise explanation for the given question:\n\n---\n\n**Explanation:**\n\nThe question asks which system of the body is responsible for **transmitting, processing, and responding to most of the sensory information** created by various stimuli.\n\nLet's briefly examine the options:\n\n- **Option A: Attentive system** \u2013 This is not a recognized system in the human body. There is no such system that is specifically responsible for handling sensory information.\n  \n- **Option B: Respiratory system** \u2013 The respiratory system is responsible for taking in oxygen and expelling carbon dioxide, which is essential for cellular respiration, but it does not transmit or process sensory information.\n\n- **Option C: Circulatory system** \u2013 The circulatory system transports blood and nutrients throughout the body, but it is not involved in the processing or responding to sensory information.\n\n- **Option D: Nervous system** \u2013 The **nervous system** is the correct answer. It is responsible for **detecting sensory information** (through sensory receptors), **transmitting signals** via nerves, **processing information** in the brain and spinal cord, and **responding** to stimuli through motor neurons.\n\nTherefore, the **nervous system** plays the central role in handling all the functions mentioned in the question.\n\n**Correct Answer: Option D \u2013 Nervous system**.",
+      "nli": 0.27319350838661194,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8161659836769104
+    },
+    {
+      "question": "Given question: Channel proteins form what in the membrane? Option A: atoms Option B: walls Option C: fibers Option D: pores The correct answer is Option D.",
+      "best_explanation": "Certainly! Here's a clear and detailed explanation for the given question:\n\n**Question:**  \n*Channel proteins form what in the membrane?*  \n**Options:**  \nA: atoms  \nB: walls  \nC: fibers  \nD: pores  \n\n**Correct Answer:** D: pores  \n\n**Explanation:**  \nChannel proteins are integral membrane proteins that span the entire membrane. Their primary function is to form **pores**\u2014which are small, water-filled channels\u2014through which specific molecules or ions can pass. These pores allow for the selective transport of substances across the cell membrane without requiring energy, a process known as passive transport.\n\n- **Option A: atoms** \u2013 Atoms are the basic building blocks of matter, not structures formed by proteins.  \n- **Option B: walls** \u2013 While the cell membrane can be considered a \"wall,\" it is not formed by channel proteins specifically.  \n- **Option C: fibers** \u2013 Fibers typically refer to structural components like collagen or microtubules, not channel proteins.  \n- **Option D: pores** \u2013 This is the correct answer. Channel proteins form pores that allow the movement of substances across the membrane.\n\n**Conclusion:**  \nChannel proteins form **pores** in the membrane, enabling the selective passage of molecules and ions.",
+      "nli": 0.9701792001724243,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8269500136375427
+    },
+    {
+      "question": "Given question: What is the term for the ability of a fluid to exert an upward force on any object placed in it? Option A: buoyancy Option B: resonance Option C: density Option D: viscosity The correct answer is Option A.",
+      "best_explanation": "Certainly! Here's a clear explanation for the given question:\n\n---\n\n**Question:**  \nWhat is the term for the ability of a fluid to exert an upward force on any object placed in it?\n\n**Options:**  \nA. Buoyancy  \nB. Resonance  \nC. Density  \nD. Viscosity  \n\n**Correct Answer:** Option A \u2014 Buoyancy\n\n**Explanation:**  \nBuoyancy is the term used to describe the upward force exerted by a fluid (such as water or air) on an object that is submerged in it. This force is caused by the pressure difference between the top and bottom of the object, and it is what allows objects to float or feel lighter in a fluid. \n\n- **Option B (Resonance)** refers to the phenomenon where an object vibrates at its natural frequency when exposed to an external force of the same frequency. This is unrelated to fluid forces.  \n- **Option C (Density)** is a measure of mass per unit volume and is related to buoyancy but not the force itself.  \n- **Option D (Viscosity)** refers to a fluid's resistance to flow and is not directly related to the upward force exerted on an object.  \n\nThus, the correct term for the upward force exerted by a fluid on an object is **buoyancy**.",
+      "nli": 0.0673648789525032,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8439314961433411
+    },
+    {
+      "question": "Given question: Corrosion is usually defined as the degradation of metals due to what? Option A: crystalline process Option B: nuclear process Option C: electrochemical process Option D: oscillatory process The correct answer is Option C.",
+      "best_explanation": "Certainly! Here's an explanation for the given question:\n\n**Question:**  \nCorrosion is usually defined as the degradation of metals due to what?  \n**Options:**  \nA: Crystalline process  \nB: Nuclear process  \nC: Electrochemical process  \nD: Oscillatory process  \n\n**Correct Answer:** C: Electrochemical process  \n\n**Explanation:**  \nCorrosion is a natural process in which metals, especially iron and steel, degrade due to a reaction with their environment. This degradation is primarily caused by an **electrochemical process**, which involves the transfer of electrons between the metal and its surroundings. In the case of iron, for example, oxidation (a chemical reaction) occurs when the metal reacts with oxygen and water, leading to the formation of rust. This process is driven by electrochemical reactions, where the metal acts as an anode and loses electrons, while other substances in the environment act as cathodes and gain electrons. Therefore, corrosion is best described as an **electrochemical process**, making **Option C** the correct answer.",
+      "nli": 0.9509998559951782,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8385624885559082
+    },
+    {
+      "question": "Given question: What is the science of classifying living things called? Option A: methodology Option B: taxonomy Option C: terminology Option D: botany The correct answer is Option B.",
+      "best_explanation": "Certainly! Here's a clear and concise explanation for the given question:\n\n**Question:** What is the science of classifying living things called?  \n**Options:**  \nA. Methodology  \nB. Taxonomy  \nC. Terminology  \nD. Botany  \n\n**Correct Answer:** B. Taxonomy  \n\n**Explanation:**  \nTaxonomy is the branch of biology that deals with the classification of living organisms into a systematic hierarchy. It involves identifying, naming, and categorizing species based on their characteristics and evolutionary relationships. The term \"taxonomy\" comes from the Greek words *taxis* (meaning \"arrangement\") and *nomos* (meaning \"law\" or \"science\"). \n\n- **Option A (Methodology)** refers to the study of methods and procedures used in research, not the classification of organisms.  \n- **Option C (Terminology)** refers to the use of specialized terms in a particular field, not the classification system itself.  \n- **Option D (Botany)** is the study of plants, which is a specific area within biology, not the general science of classification.  \n\nTherefore, the correct answer is **Option B: Taxonomy**.",
+      "nli": 0.9740698933601379,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8212025165557861
+    },
+    {
+      "question": "Given question: The lens and other parts of the eye work together to focus a real image on what eye structure? Option A: iris Option B: cornea Option C: retina Option D: pupil The correct answer is Option C.",
+      "best_explanation": "Certainly! Here's a clear explanation for the given question:\n\n---\n\n**Explanation:**\n\nThe eye is a complex organ that works like a camera to capture and process light. Light enters the eye through the **cornea**, which is the clear, dome-shaped surface at the front of the eye. The **lens** and other structures within the eye, such as the **ciliary muscles**, work together to adjust the shape of the lens. This adjustment allows the eye to focus light properly onto a specific part of the eye.\n\nThe **retina** is the light-sensitive layer at the back of the eye. It contains specialized cells called **rods and cones**, which are responsible for detecting light and color. When light is properly focused by the lens and other parts of the eye, it forms a **real image** on the **retina**. This image is then converted into electrical signals, which are sent to the brain via the **optic nerve** for interpretation.\n\n**Option C: retina** is the correct answer because it is the structure where the focused image is formed and processed.\n\n---\n\n**Summary:**  \nThe lens and other parts of the eye work together to focus a real image onto the **retina**, which is the light-sensitive layer at the back of the eye.",
+      "nli": 0.8483974933624268,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8463324904441833
+    },
+    {
+      "question": "Given question: Oxygen, carbon dioxide, atp, and nadph are reactants in what process that plants use to produce food? Option A: chlorophyll Option B: absorbtion Option C: photosynthesis Option D: glycolysis The correct answer is Option C.",
+      "best_explanation": "Certainly! Here's a clear and detailed explanation for the given question:\n\n---\n\n**Question:**  \nOxygen, carbon dioxide, ATP, and NADPH are reactants in what process that plants use to produce food?  \n**Options:**  \nA: Chlorophyll  \nB: Absorption  \nC: Photosynthesis  \nD: Glycolysis  \n\n**Correct Answer:** C: Photosynthesis\n\n**Explanation:**  \nPhotosynthesis is the process by which plants, algae, and some bacteria convert light energy into chemical energy, producing glucose (a type of food) and oxygen as byproducts. This process occurs in the chloroplasts of plant cells and involves two main stages: the **light-dependent reactions** and the **Calvin cycle (light-independent reactions)**.\n\nIn the **light-dependent reactions**, light energy is captured by chlorophyll and used to produce ATP (adenosine triphosphate) and NADPH (nicotinamide adenine dinucleotide phosphate), which are energy-rich molecules. Water is split in the process, releasing oxygen as a byproduct.\n\nIn the **Calvin cycle**, the ATP and NADPH produced in the light-dependent reactions are used to fix carbon dioxide (CO\u2082) from the atmosphere into glucose. This is how plants use carbon dioxide and other reactants to produce food (glucose).\n\nThus, **oxygen (from water splitting), carbon dioxide (from the air), ATP, and NADPH** are all reactants in",
+      "nli": 0.951736330986023,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8114948272705078
+    },
+    {
+      "question": "Given question: What is the watery fluid that bathes tissues and organs and contains protective white blood cells but does not contain erythrocytes? Option A: stomach Option B: basil Option C: lymph Option D: secretion The correct answer is Option C.",
+      "best_explanation": "Certainly! Here's a detailed explanation for the given question:\n\n---\n\n**Question:**  \n*What is the watery fluid that bathes tissues and organs and contains protective white blood cells but does not contain erythrocytes?*  \n**Options:**  \nA. Stomach  \nB. Basil  \nC. Lymph  \nD. Secretion  \n\n**Correct Answer:** C. Lymph  \n\n**Explanation:**  \nLymph is a clear, watery fluid that circulates through the lymphatic system. It plays a crucial role in the body's immune system and helps maintain fluid balance. Here are the key points that make **lymph** the correct answer:\n\n1. **Watery Fluid:** Lymph is indeed a fluid, primarily composed of water, proteins, and other substances.  \n2. **Bathes Tissues and Organs:** It flows through lymphatic vessels and bathes the tissues and organs of the body.  \n3. **Contains Protective White Blood Cells:** Lymph contains lymphocytes, which are a type of white blood cell essential for immune defense.  \n4. **Does Not Contain Erythrocytes (Red Blood Cells):** Unlike blood, which contains red blood cells (erythrocytes), lymph does not contain them. Instead, it contains white blood cells and other components like plasma proteins.\n\n**Why the Other Options Are Incorrect:**\n\n- **Option A: Stomach**  \n  The stomach is an organ, not a fluid",
+      "nli": 0.07738780975341797,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8220882415771484
+    },
+    {
+      "question": "Given question: What is a rock that contains important minerals called? Option A: ore Option B: steel Option C: carbonic Option D: copper The correct answer is Option A.",
+      "best_explanation": "Certainly! Here's an explanation for the given question:\n\n**Question:** What is a rock that contains important minerals called?\n\n**Option A:** Ore  \n**Option B:** Steel  \n**Option C:** Carbonic  \n**Option D:** Copper  \n\n**Correct Answer:** Option A: Ore\n\n**Explanation:**  \nA rock that contains important minerals, especially those that can be mined and used for economic purposes, is called an **ore**. Ores are typically rich in one or more valuable minerals, such as metals (like copper, iron, or gold) or other useful substances. These minerals are extracted from the ore through mining and processing to be used in various industries.\n\n- **Option B (Steel):** Steel is a metal alloy made from iron and carbon, not a type of rock.\n- **Option C (Carbonic):** Carbonic refers to carbon dioxide or related compounds, not a type of rock.\n- **Option D (Copper):** Copper is a metal, not a rock.\n\nTherefore, the correct answer is **Option A: Ore**.",
+      "nli": 0.9726374745368958,
+      "ver": 3.0,
+      "acr": 0.0,
+      "bert": 0.8346754312515259
+    },
+    {
+      "question": "Given question: In physics, when one subtracts the frictional force from the applied force what is the result? Option A: quarter force Option B: net force Option C: rolled force Option D: kinetic force The correct answer is Option B.",
+      "best_explanation": "Certainly! Here's the explanation for the given question:\n\n---\n\n**Question:**  \nIn physics, when one subtracts the frictional force from the applied force, what is the result?\n\n**Options:**  \nA. Quarter force  \nB. Net force  \nC. Rolled force  \nD. Kinetic force  \n\n**Correct Answer:** B. Net force  \n\n**Explanation:**  \nIn physics, when an applied force is acting on an object and there is a frictional force opposing the motion, the **net force** is the result of subtracting the frictional force from the applied force. This net force determines the acceleration or deceleration of the object, according to Newton's Second Law of Motion, $ F_{\\text{net}} = F_{\\text{applied}} - F_{\\text{friction}} $.\n\n- **Net force** is the overall force acting on an object, taking into account all the individual forces (like applied force and friction) acting on it.\n- **Quarter force** and **rolled force** are not standard terms used in physics.\n- **Kinetic force** is not a standard term either; however, **kinetic friction** is the friction that acts on an object in motion.\n\nTherefore, the correct answer is **Option B: Net force**.",
+      "nli": 0.9756524562835693,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8367844223976135
+    },
+    {
+      "question": "Given question: The three units of kpa, atm or mmhg commonly measure what? Option A: energy Option B: resistance Option C: weight Option D: pressure The correct answer is Option D.",
+      "best_explanation": "**Explanation:**\n\nThe units **kPa (kilopascal)**, **atm (atmosphere)**, and **mmHg (millimeter of mercury)** are all **units of pressure**. They are used to measure the force exerted per unit area by a gas or liquid.\n\n- **kPa (kilopascal)** is the standard SI unit of pressure.\n- **atm (atmosphere)** is a unit based on the average atmospheric pressure at sea level.\n- **mmHg (millimeter of mercury)** is a unit commonly used in medical and scientific contexts, particularly for measuring blood pressure.\n\n**Option D: pressure** is the correct answer, as all three units are used to quantify pressure.\n\n**Incorrect options:**\n- **Option A: energy** \u2013 Energy is measured in units like joules (J) or calories (cal).\n- **Option B: resistance** \u2013 Resistance is measured in ohms (\u03a9) in electrical circuits.\n- **Option C: weight** \u2013 Weight is a force and is measured in newtons (N).\n\n**Therefore, the correct answer is Option D: pressure.**",
+      "nli": 0.07837502658367157,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.7612232565879822
+    },
+    {
+      "question": "Given question: Connecting a magnesium rod to an underground steel pipeline protects the pipeline from corrosion. because magnesium (e\u00b0 = \u22122.37 v) is much more easily oxidized than iron (e\u00b0 = \u22120.45 v), the mg rod acts as the anode in a what? Option A: stimulation cell Option B: galvanic cell Option C: anode cell Option D: voltaic cell The correct answer is Option B.",
+      "best_explanation": "Certainly! Here's a clear explanation for the given question:\n\n---\n\n**Explanation:**\n\nConnecting a magnesium rod to an underground steel pipeline is a method of **cathodic protection**, which is used to prevent corrosion of the steel pipeline.\n\nIn this setup, **magnesium (Mg)** is used as a **sacrificial anode**. This is because magnesium has a **lower standard electrode potential** (e\u00b0 = \u22122.37 V) compared to iron (e\u00b0 = \u22120.45 V). This means magnesium is **more easily oxidized (more reactive)** than iron.\n\nIn electrochemical terms, the **magnesium rod acts as the anode**, and the **steel pipeline acts as the cathode**. The magnesium undergoes **oxidation** (loses electrons), while the iron (steel) undergoes **reduction** (gains electrons), thus **preventing the iron from corroding**.\n\nThis process takes place in a **galvanic cell**, where a spontaneous redox reaction occurs due to the difference in electrode potentials between the two metals.\n\n---\n\n**Why is Option B the correct answer?**\n\n- **Option B: Galvanic cell**  \n  A galvanic cell is a type of electrochemical cell in which a **spontaneous redox reaction** occurs, producing electrical energy. In this case, the magnesium rod and the steel pipeline form a galvanic cell, with magnesium acting as the an",
+      "nli": 0.988226592540741,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8415878415107727
+    },
+    {
+      "question": "Given question: Solutions of nonelectrolytes such as ethanol do not contain dissolved ions and cannot conduct what? Option A: current Option B: sound Option C: electricity Option D: light The correct answer is Option C.",
+      "best_explanation": "Certainly! Here's a clear and concise explanation for the given question:\n\n---\n\n**Explanation:**\n\nSolutions of nonelectrolytes, such as ethanol, do not dissociate into ions when dissolved in water. Since the solution does not contain dissolved ions, it lacks the charged particles necessary for the flow of electric current. \n\nElectricity is conducted through the movement of ions or electrons. In the absence of ions, the solution cannot carry an electric current. Therefore, solutions of nonelectrolytes cannot conduct **electricity**.\n\n**Correct Answer: Option C (electricity)**\n\n---\n\nThis makes sense because:\n- **Option A (current)** is related to electricity.\n- **Option B (sound)** is not related to the presence of ions.\n- **Option D (light)** is not affected by the presence or absence of ions in a solution.\n\nThus, the correct answer is **Option C: electricity**.",
+      "nli": 0.8298495411872864,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8563527464866638
+    },
+    {
+      "question": "Given question: What is the electron domain geometry of ammonia? Option A: atoms Option B: tetrahedral Option C: neurons Option D: membranes The correct answer is Option B.",
+      "best_explanation": "Certainly! Here's an explanation for the given question:\n\n**Question:** What is the electron domain geometry of ammonia?\n\n**Options:**  \nA: atoms  \nB: tetrahedral  \nC: neurons  \nD: membranes  \n\n**Correct Answer:** Option B: tetrahedral\n\n**Explanation:**\n\nAmmonia (NH\u2083) is a molecule composed of one nitrogen atom and three hydrogen atoms. The nitrogen atom in ammonia has five valence electrons. When forming bonds with the three hydrogen atoms, it forms three single covalent bonds, using three of its valence electrons. The remaining two electrons on the nitrogen atom form a lone pair.\n\nIn terms of electron domain geometry, we consider both the bonding pairs and the lone pairs of electrons around the central atom. In ammonia, there are four electron domains around the nitrogen atom: three bonding pairs and one lone pair.\n\nAccording to the **VSEPR (Valence Shell Electron Pair Repulsion) theory**, the electron domain geometry is determined by the number of electron domains, not by the number of bonding pairs alone. Since there are four electron domains (three bonding and one lone pair), the electron domain geometry is **tetrahedral**.\n\nTherefore, the correct answer is **Option B: tetrahedral**.",
+      "nli": 0.9708423614501953,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8345652222633362
+    },
+    {
+      "question": "Given question: What are formed when cells from the male and female parts of the plant combine? Option A: seeds Option B: varieties Option C: trees Option D: atoms. The correct answer is Option A.",
+      "best_explanation": "**Explanation:**\n\nWhen cells from the male and female parts of a plant combine, they form **seeds**. This process occurs during **fertilization** in plants. \n\n- The **male part** of a plant (the stamen) produces **pollen**, which contains **male gametes** (sperm cells).  \n- The **female part** of a plant (the pistil) contains the **ovule**, which holds the **female gamete** (egg cell).  \n- When pollen from the male part reaches the female part (via pollination), the **male gamete** travels to the **female gamete** and **fertilization** occurs.  \n- This results in the formation of a **seed** inside the ovule.  \n\n**Option A: seeds** is the correct answer.\n\n**Other options:**\n- **Option B: varieties** \u2013 Refers to different types or strains of plants, not the result of cell combination.  \n- **Option C: trees** \u2013 A plant that grows from a seed, but not directly formed by the combination of male and female cells.  \n- **Option D: atoms** \u2013 Are the basic units of matter and not related to plant reproduction.  \n\n**Correct Answer: Option A \u2013 seeds**.",
+      "nli": 0.9130088090896606,
+      "ver": 2.0,
+      "acr": 1.0,
+      "bert": 0.765645444393158
+    },
+    {
+      "question": "Given question: What process done by bacteria makes them important producers in aquatic ecosystems? Option A: infection Option B: maturation Option C: photosynthesis Option D: reproduction The correct answer is Option C.",
+      "best_explanation": "Certainly! Here's an explanation for the given question:\n\n**Question:** What process done by bacteria makes them important producers in aquatic ecosystems?\n\n**Options:**\n- A: Infection  \n- B: Maturation  \n- C: Photosynthesis  \n- D: Reproduction  \n\n**Correct Answer:** C: Photosynthesis\n\n**Explanation:**\n\nWhile many bacteria are not photosynthetic, certain types of bacteria\u2014such as **cyanobacteria**\u2014are capable of **photosynthesis**. These bacteria perform **photosynthesis**, a process in which they use sunlight to convert carbon dioxide and water into organic compounds (like glucose) and oxygen. This makes them **producers** in aquatic ecosystems, similar to plants.\n\nProducers are organisms that can create their own food through processes like photosynthesis. In aquatic environments, bacteria that perform photosynthesis play a vital role in the **food web** by forming the base of the ecosystem and providing energy for other organisms.\n\nTherefore, **photosynthesis** is the key process that makes certain bacteria important producers in aquatic ecosystems.",
+      "nli": 0.6085733771324158,
+      "ver": 2.0,
+      "acr": 1.0,
+      "bert": 0.8418587446212769
+    },
+    {
+      "question": "Given question: Where is energy stored in a chemical substance? Option A: between atoms Option B: inside atoms Option C: in molecules Option D: on the surface The correct answer is Option A.",
+      "best_explanation": "**Explanation:**\n\nEnergy in a chemical substance is stored in the **chemical bonds** between atoms. These bonds are formed when atoms share or transfer electrons, creating a stable arrangement of atoms. The energy stored in these bonds is called **chemical potential energy**. \n\n- **Option A: between atoms** \u2013 This is the correct answer because energy is stored in the **bonds** that form between atoms, not inside the atoms themselves or within molecules as a whole.\n- **Option B: inside atoms** \u2013 Energy is not stored inside individual atoms, but rather in the interactions (bonds) between them.\n- **Option C: in molecules** \u2013 While molecules are made up of atoms and contain bonds, the energy is specifically stored in the **bonds between atoms**, not the molecule as a single entity.\n- **Option D: on the surface** \u2013 Surface energy is more relevant to physical properties and interactions at the surface of a material, not the primary storage of energy in chemical substances.\n\n**Therefore, the correct answer is Option A: between atoms.**",
+      "nli": 0.9772934317588806,
+      "ver": 2.0,
+      "acr": 1.0,
+      "bert": 0.8508139848709106
+    },
+    {
+      "question": "Given question: What do we call a carbohydrate formed by two monosaccharides bonding together? Option A: olivine Option B: calcite Option C: Nitrate Option D: disaccharide The correct answer is Option D.",
+      "best_explanation": "Certainly! Here's a clear and concise explanation for the given question:\n\n---\n\n**Question:** What do we call a carbohydrate formed by two monosaccharides bonding together?\n\n**Options:**  \nA. Olivine  \nB. Calcite  \nC. Nitrate  \nD. Disaccharide  \n\n**Correct Answer:** D. Disaccharide\n\n**Explanation:**  \nA disaccharide is a type of carbohydrate that consists of two monosaccharide units (simple sugar molecules) linked together by a glycosidic bond. Common examples of disaccharides include sucrose (table sugar), lactose (milk sugar), and maltose (malt sugar). \n\n- **Olivine** and **calcite** are minerals, not carbohydrates.  \n- **Nitrate** is a type of inorganic compound, typically a nitrogen-containing ion, and is not related to carbohydrates.  \n- **Disaccharide** is the correct term for a carbohydrate made from two monosaccharides.\n\n--- \n\nThis explanation clearly differentiates between the options and defines the correct term in the context of carbohydrate chemistry.",
+      "nli": 0.8835404515266418,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.824963390827179
+    },
+    {
+      "question": "Given question: What type of eclipse happens when a full moon moves through earth's shadow? Option A: cycle Option B: lunar Option C: planetary Option D: solar The correct answer is Option B.",
+      "best_explanation": "Certainly! Here's a clear and detailed explanation for the given question:\n\n---\n\n**Question:** What type of eclipse happens when a full moon moves through Earth's shadow?\n\n**Options:**\n- A: Cycle  \n- B: Lunar  \n- C: Planetary  \n- D: Solar  \n\n**Correct Answer:** B: Lunar\n\n**Explanation:**\n\nAn **eclipse** occurs when one celestial body moves into the shadow of another. There are two main types of eclipses: **solar** and **lunar**.\n\n- A **solar eclipse** happens when the **Moon passes between the Sun and Earth**, blocking the Sun's light and casting a shadow on Earth.\n- A **lunar eclipse** occurs when the **Earth passes between the Sun and the Moon**, and the Moon moves into Earth's shadow.\n\nIn this question, the situation described is a **full moon moving through Earth's shadow**, which clearly indicates that Earth is positioned between the Sun and the Moon. This is the definition of a **lunar eclipse**.\n\nTherefore, the correct answer is **Option B: Lunar**.",
+      "nli": 0.9795209765434265,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8282144069671631
+    },
+    {
+      "question": "Given question: What is it called when ice changes to liquid water? Option A: melting Option B: boiling Option C: vaporizing Option D: condensing The correct answer is Option A.",
+      "best_explanation": "Certainly! Here's the explanation for the given question:\n\n**Question:** What is it called when ice changes to liquid water?  \n**Options:**  \nA. Melting  \nB. Boiling  \nC. Vaporizing  \nD. Condensing  \n**Correct Answer:** A. Melting  \n\n**Explanation:**  \nWhen ice (solid water) changes into liquid water, it undergoes a process called **melting**. This occurs when heat is added to the ice, causing the molecules to gain energy and transition from a solid state to a liquid state.  \n\n- **Option B (Boiling)** refers to the process of a liquid turning into a gas, which is not the case here.  \n- **Option C (Vaporizing)** is similar to boiling and also refers to the transition from liquid to gas.  \n- **Option D (Condensing)** is the opposite process, where gas turns into liquid.  \n\nTherefore, the correct term for ice turning into liquid water is **melting**.",
+      "nli": 0.9833883047103882,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.7874564528465271
+    },
+    {
+      "question": "Given question: What term describes the process of vesicles fusing with the plasma membrane and releasing their contents to the outside of the cell? Option A: biosynthesis Option B: endocytosis Option C: plasmosis Option D: exocytosis The correct answer is Option D.",
+      "best_explanation": "Certainly! Here's a clear and detailed explanation for the given question:\n\n---\n\n**Question:**  \nWhat term describes the process of vesicles fusing with the plasma membrane and releasing their contents to the outside of the cell?\n\n**Options:**  \nA. Biosynthesis  \nB. Endocytosis  \nC. Plasmosis  \nD. Exocytosis  \n\n**Correct Answer:** D. Exocytosis  \n\n**Explanation:**  \nExocytosis is the cellular process by which materials are transported out of the cell. During this process, a vesicle (a small, membrane-bound structure) containing substances to be released fuses with the plasma membrane (the outer boundary of the cell). This fusion allows the contents of the vesicle to be released into the extracellular space, effectively \"exiting\" the cell.\n\n- **Option A: Biosynthesis** refers to the creation of molecules within the cell, such as proteins or lipids, and is not related to the movement of substances across the membrane.\n- **Option B: Endocytosis** is the process by which the cell takes in materials from the outside by engulfing them in a vesicle. This is the reverse of exocytosis.\n- **Option C: Plasmosis** is not a standard or recognized biological term related to cell membrane transport.\n- **Option D: Exocytosis** is the correct term that accurately describes the process of vesicles fusing with the plasma membrane to",
+      "nli": 0.015796881169080734,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8361730575561523
+    },
+    {
+      "question": "Given question: What system enters the brain stem and influences activity in the cerebellum, spinal cord, and cerebral cortex? Option A: lipids system Option B: vestibular system Option C: ventrical system Option D: vasculature system The correct answer is Option B.",
+      "best_explanation": "Certainly! Here's a detailed explanation for the given question:\n\n**Question:**  \n*What system enters the brain stem and influences activity in the cerebellum, spinal cord, and cerebral cortex?*  \n**Options:**  \nA. Lipids system  \nB. Vestibular system  \nC. Ventricular system  \nD. Vasculature system  \n**Correct Answer:** B. Vestibular system\n\n---\n\n**Explanation:**\n\nThe **vestibular system** is a sensory system that plays a key role in maintaining balance, posture, and spatial orientation. It is located in the **inner ear** and sends information to the **brain stem**, which then relays this information to other parts of the central nervous system.\n\n- **Brain stem:** The vestibular system sends signals to the brain stem, particularly the **vestibular nuclei**, which are involved in processing balance and spatial orientation.\n- **Cerebellum:** The cerebellum receives input from the vestibular system to coordinate movement and maintain balance.\n- **Spinal cord:** The vestibular system also influences motor pathways in the spinal cord, which helps in adjusting body position and movement.\n- **Cerebral cortex:** The vestibular information is further transmitted to the **cerebral cortex**, especially the **parietal and temporal lobes**, which are involved in perception of spatial orientation and movement.\n\nThe **vestibular system** is therefore directly involved in integrating sensory information from the inner ear and coordinating this with",
+      "nli": 0.9733482003211975,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8220694661140442
+    },
+    {
+      "question": "Given question: The invention of the wheel is an example of what, which has the goal of solving human problems? Option A: evolution Option B: technology Option C: industry Option D: concept The correct answer is Option B.",
+      "best_explanation": "Certainly! Here's a clear explanation for the given question:\n\n**Explanation:**  \nThe invention of the wheel is a classic example of **technology**, which refers to the application of scientific knowledge for practical purposes. The wheel was developed to solve human problems related to transportation and movement, making it easier to carry goods and travel longer distances. This innovation reflects how humans create tools and systems to improve their quality of life, which is the core purpose of technology. \n\n**Option B: technology** is the correct answer because it directly relates to the development of tools and systems aimed at solving practical human problems, as demonstrated by the invention of the wheel.\n\n**Correct Answer: Option B**",
+      "nli": 0.9771890640258789,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8465408086776733
+    },
+    {
+      "question": "Given question: While elements are represented by chemical symbols, chemical formulas represent what? Option A: compounds Option B: pollutants Option C: extracts Option D: solutions The correct answer is Option A.",
+      "best_explanation": "Certainly! Here's a clear explanation for the given question:\n\n**Explanation:**\n\nChemical symbols are shorthand notations used to represent individual elements, such as \"H\" for hydrogen or \"O\" for oxygen. However, when multiple elements combine in a specific ratio, they form a **compound**, which is represented by a **chemical formula**. A chemical formula shows the types and numbers of atoms present in a compound.\n\nFor example, the chemical formula **H\u2082O** represents water, which is a compound made up of two hydrogen atoms and one oxygen atom.\n\n- **Option A: compounds** \u2013 This is the correct answer because chemical formulas represent compounds, not individual elements.\n- **Option B: pollutants** \u2013 Pollutants are substances that contaminate the environment, but they are not specifically represented by chemical formulas.\n- **Option C: extracts** \u2013 Extracts refer to substances obtained from a source, but this is not the primary purpose of chemical formulas.\n- **Option D: solutions** \u2013 Solutions are mixtures of substances, and they are not directly represented by chemical formulas.\n\n**Correct Answer: Option A \u2013 compounds**",
+      "nli": 0.16777195036411285,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8494811058044434
+    },
+    {
+      "question": "Given question: In a few species, chloroplast genes are inherited only from what? Option A: eggs Option B: sperm Option C: siblings Option D: mothers The correct answer is Option B.",
+      "best_explanation": "Certainly! Here's a detailed explanation for the given question:\n\n---\n\n**Question:**  \nIn a few species, chloroplast genes are inherited only from what?  \n**Options:**  \nA: eggs  \nB: sperm  \nC: siblings  \nD: mothers  \n\n**Correct Answer:** B: sperm  \n\n**Explanation:**  \nIn most eukaryotic organisms, chloroplasts (the organelles responsible for photosynthesis) are inherited maternally. This means that the chloroplast DNA (cpDNA) typically comes from the mother, as the egg cell contributes the chloroplasts to the zygote. However, the question states that in \"a few species,\" chloroplast genes are inherited *only from* **sperm**.  \n\nThis is a rare exception to the general maternal inheritance pattern. In such species, the sperm contributes the chloroplast DNA to the offspring, overriding the usual maternal contribution. This phenomenon is known as **paternal inheritance** of chloroplast genes.  \n\nIt is important to note that this is not the typical mode of inheritance for chloroplast DNA in most organisms, but it does occur in a few specialized species, such as certain algae and plants.  \n\nThus, the correct answer is **Option B: sperm**.",
+      "nli": 0.5588591694831848,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.7834758162498474
+    },
+    {
+      "question": "Given question: Where are liverworts most often found? Option A: in the ocean Option B: in deserts Option C: on mountains Option D: along stream beds The correct answer is Option D.",
+      "best_explanation": "**Explanation:**\n\nLiverworts are a group of non-vascular plants that are typically found in moist, damp environments. They lack true roots, stems, and leaves, and instead have structures called thallus, which are flat and ribbon-like. Because they require a moist environment to survive and reproduce, liverworts are most commonly found in places where there is consistent moisture, such as **along stream beds**.\n\n- **Option A (in the ocean):** Liverworts are not aquatic plants. They are terrestrial and cannot survive in saltwater environments.\n- **Option B (in deserts):** Deserts are extremely dry, and liverworts require high humidity to thrive, making this an unlikely habitat.\n- **Option C (on mountains):** While some liverworts can be found in mountainous regions, they are more commonly found in lowland areas with consistent moisture.\n- **Option D (along stream beds):** This is the correct answer. Stream beds provide a consistently moist environment, which is ideal for liverworts to grow and reproduce.\n\n**Correct Answer: Option D** \u2014 Liverworts are most often found **along stream beds**.",
+      "nli": 0.9579916596412659,
+      "ver": 2.0,
+      "acr": 1.0,
+      "bert": 0.8397396206855774
+    },
+    {
+      "question": "Given question: What are the two terms that designate how well aqueous solutions conduct electricity? Option A: secular and nonpolar Option B: filter and nonpolar Option C: hot and nonpolar Option D: polar and nonpolar The correct answer is Option D.",
+      "best_explanation": "**Explanation:**\n\nThe two terms that designate how well aqueous solutions conduct electricity are **polar** and **nonpolar**. This is because the ability of a solution to conduct electricity depends on the presence of ions, which are formed when ionic compounds dissolve in water.\n\n- **Polar molecules**, such as water (H\u2082O), are capable of dissolving ionic compounds, which dissociate into ions in solution. These ions are free to move and carry electric current, making the solution a good conductor of electricity.\n  \n- **Nonpolar molecules** do not dissolve ionic compounds effectively and do not produce ions in solution. Therefore, they do not conduct electricity well.\n\n**Option D: polar and nonpolar** is the correct answer because it correctly identifies the two terms related to the electrical conductivity of aqueous solutions.\n\n**Incorrect options:**\n- **Option A (secular and nonpolar)**: \"Secular\" is not related to electrical conductivity.\n- **Option B (filter and nonpolar)**: \"Filter\" refers to a physical process, not electrical conductivity.\n- **Option C (hot and nonpolar)**: \"Hot\" refers to temperature, not the polarity or conductivity of a solution.",
+      "nli": 0.00014831342559773475,
+      "ver": 3.0,
+      "acr": 1.0,
+      "bert": 0.8520206212997437
+    }
+  ]
+}

@@ -33,3 +33,4 @@ watcher_pids.txt
 # Large model weights
 rl_ppo_qwen3_hybrid_v1_2000steps/
 rl_ppo_qwen3_hybrid_v2_2000steps/
+rl_kto_qwen3_8b_baseline/

@@ -1,0 +1,353 @@
+[
+    {
+        "instruction": "As an explanation generation expert, can you generate the explanation for the given input?",
+        "input": "Given question: Most of the time base sequencing influences how the DNA molecule interacts with histone proteins. Option A: True Option B: False The correct answer is Option B.",
+        "reference": "Interactions between DNA and histone proteins largely does not depend on a sequence of bases. This is because the negatively charged sugar-phosphate backbone of the DNA and positively charged histones play a crucial role in this interaction. However, as always in biology, there are some exceptions. Sometimes we could make specific modifications to histones that could happen in certain regions.Thanks to everybody who has commented on my question. I have added an explanation as was suggested by most of the commentators and rewritten the question a bit to avoid ambiguity.",
+        "best_explanation": "Interactions between DNA and histone proteins largely does not depend on a sequence of bases. This is because the negatively charged sugar-phosphate backbone of the DNA and positively charged histones play a crucial role in this interaction. However, as always in biology, there are some exceptions. Sometimes we could make specific modifications to histones that could happen in certain regions.Thanks to everybody who has commented on my question. I have added an explanation as was suggested by most of the commentators and rewritten the question a bit to avoid ambiguity.",
+        "Generated_Explanation": "Interactions between DNA and histone proteins largely does not depend on a sequence of bases. This is because the negatively charged sugar-phosphate backbone of the DNA and positively charged histones play a crucial role in this interaction. However, as always in biology, there are some exceptions. Sometimes we could make specific modifications to histones that could happen in certain regions.Thanks to everybody who has commented on my question. I have added an explanation as was suggested by most of the commentators and rewritten the question a bit to avoid ambiguity.",
+        "metrics": {
+            "nli": 0.9939444661140442,
+            "verifier": 2.55555555,
+            "acr": 0.0,
+            "bleu": 1.0
+        }
+    },
+    {
+        "instruction": "As an explanation generation expert, can you generate the explanation for the given input?",
+        "input": "Given question: For the following statement answer true or false:Identifying the problem within poor DNA sequencing results could be quite difficult due to there being many possible causing factors. Performing a process of elimination is often the best option by simply reviewing the steps of the experiment and ensuring the correct chemicals and equipment were used. Option A: True Option B: False The correct answer is Option A.",
+        "reference": "Performing a process of elimination is often the best option as there is a large possibility for error. Poor quality DNA in particular is very common when sequencing plasmid DNA templates, thus, reviewing the sample and the methods used to extract it are necessary when trying to identify the reason for results.",
+        "best_explanation": "True, identifying the problem could be quite difficult, therefore reviewing the sample DNA and the methods used to extract it are necessary when trying to identify the reason for results. Poor quality DNA in particular is very common when sequencing plasmid DNA templates, thus, reviewing the sample DNA and the methods used to extract it are necessary when trying to identify the reason for results.",
+        "Generated_Explanation": "True, identifying the problem could be quite difficult, therefore reviewing the sample DNA and the methods used to extract it are necessary when trying to identify the reason for results. Poor quality DNA in particular is very common when sequencing plasmid DNA templates, thus, reviewing the sample DNA and the methods used to extract it are necessary when trying to identify the reason for results.",
+        "metrics": {
+            "nli": 0.0005665323697030544,
+            "verifier": 3.0,
+            "acr": 1.0,
+            "bleu": 0.4939995449741075
+        }
+    },
+    {
+        "instruction": "As an explanation generation expert, can you generate the explanation for the given input?",
+        "input": "Given question: Chemicals such as AZT are able to terminate growing viral DNA chains because DNA polymerases have an inherent proof-reading function. Option A: True Option B: False The correct answer is Option B.",
+        "reference": "DNA polymerases NEED a primer to begin replication 5\u2019 to 3\u2019\u2026 thus, by disrupting the elongation of the primer with an absent 3\u2019-OH group, replication halts and the chain terminates.AZT replaces the 3\u2019OH group with an azide group\u2026 DNA pol\u2019s affinity remains the same for AZT as it does for natural mononucleotides, thus it is not a direct result of DNA pol's 'fact-checking' functions! :)",
+        "best_explanation": "False. Although DNA polymerases do have an inherent proof-reading function, this function is not responsible for the termination of growing viral DNA chains. Instead, these drugs are able to terminate DNA chains because they are able to cross the cell membrane and enter the virus. Once inside, these drugs are able to bind with the viral DNA polymerase and prevent the addition of new nucleotides.",
+        "Generated_Explanation": "False. Although DNA polymerases do have an inherent proof-reading function, this function is not responsible for the termination of growing viral DNA chains. Instead, these drugs are able to terminate DNA chains because they are able to cross the cell membrane and enter the virus. Once inside, these drugs are able to bind with the viral DNA polymerase and prevent the addition of new nucleotides.",
+        "metrics": {
+            "nli": 0.019783994182944298,
+            "verifier": 5.0,
+            "acr": 1.0,
+            "bleu": 0.012366292275191459
+        }
+    },
+    {
+        "instruction": "As an explanation generation expert, can you generate the explanation for the given input?",
+        "input": "Given question: The selection of origin sites to initate DNA replication in eukaryotes will occur in the G1 phase of the cell cycle. Option A: True Option B: False The correct answer is Option A.",
+        "reference": "The answer is true. Selection of the origin site occurs in the G1 phase. At this stage pre-replicative complexes (pre-RCs) gather and wait until the cell transitions to the S phase. The S phase is where replication of DNA starts.",
+        "best_explanation": "True. The process of selecting the origin site occurs in the G1 phase. At this stage pre-replicative complexes (pre-RCs) gather and wait until the cell transitions to the S phase. The S phase is where replication of DNA starts.",
+        "Generated_Explanation": "True. The process of selecting the origin site occurs in the G1 phase. At this stage pre-replicative complexes (pre-RCs) gather and wait until the cell transitions to the S phase. The S phase is where replication of DNA starts.",
+        "metrics": {
+            "nli": 0.9877690672874451,
+            "verifier": 3.0,
+            "acr": 1.0,
+            "bleu": 0.8567579936425901
+        }
+    },
+    {
+        "instruction": "As an explanation generation expert, can you generate the explanation for the given input?",
+        "input": "Given question: L3-Q04: Types of Sensitive Data include:- Racial or Ethnic origin- Religious Beliefs or Affiliations- Sexual Orientation- Health Information- Genetic Informationand many more...  However, Non-Sensitive data can result in being Sensitive, dependent on the context of the information. Read the following scenario to answer the question below. Scenario: Alison has 8 children and lives in Town X. Alison has the most children in Town X. She has never participated in any study before. She is hesitant about taking part in her friend's study of Town X as she values her privacy. Alison's friend assures her that she will not be identifiable as the data obtained and published will only include a Patient Identifier, her age, and the number of children she has. Question: Is Alison identifiable through the data set?  *The information was obtained through 'Module 2: Sensitive Data' on Canvas* Option A: No - it is impossible to identify Alison through the data set as it will only display Non-Sensitive data. Option B: Yes - Alison is identifiable through the method of Triangulation. Option C: Yes - Alison is identifiable through the method of Data Linkage. Option D: No - Alison is not identifiable as it is anonymised data. The correct answer is Option B.",
+        "reference": "A - Incorrect: Alison is identifiable. Although the study will only display non-sensitive data, this can be accumulated to become Sensitive data.  B- Correct: Alison is identifiable through triangulation. 'Triangulation' is when the identity or sensitivity of a participant or subject can be determined by combining several pieces of non-sensitive information. C- Incorrect: Alison is identifiable, however, not through data linkage as she has not participated in any studies before.  D- Incorrect: It is not anonymised data. A method to anonymise data in this scenario would be to collapse the category of 'Number of Children' to 5+ etc.",
+        "best_explanation": "A - Incorrect: Alison is identifiable. Although the study will only display non-sensitive data, this can be accumulated to become Sensitive data.  B- Correct: Alison is identifiable through triangulation. 'Triangulation' is when the identity or sensitivity of a participant or subject can be determined by combining several pieces of non-sensitive information. C- Incorrect: Alison is identifiable, however, not through data linkage as she has not participated in any studies before.  D- Incorrect: It is not anonymised data. A method to anonymise data in this scenario would be to collapse the category of 'Number of Children' to 5+ etc.",
+        "Generated_Explanation": "A - Incorrect: Alison is identifiable. Although the study will only display non-sensitive data, this can be accumulated to become Sensitive data.  B- Correct: Alison is identifiable through triangulation. 'Triangulation' is when the identity or sensitivity of a participant or subject can be determined by combining several pieces of non-sensitive information. C- Incorrect: Alison is identifiable, however, not through data linkage as she has not participated in any studies before.  D- Incorrect: It is not anonymised data. A method to anonymise data in this scenario would be to collapse the category of 'Number of Children' to 5+ etc.",
+        "metrics": {
+            "nli": 0.8938790559768677,
+            "verifier": 2.81232222,
+            "acr": 1.0,
+            "bleu": 1.0
+        }
+    },
+    {
+        "instruction": "As an explanation generation expert, can you generate the explanation for the given input?",
+        "input": "Given question: Histone Acetyl Transferases (HATs) strongly increases the electrostatic binding interaction between the DNA and histones, by removing an acetyl group. Option A: True Option B: False The correct answer is Option B.",
+        "reference": "Histone Actyl Transferases (HATs) adds more acetyl groups which neutralises lysine positive charges. This in turn weakens the electrostatic interactions between the phosphates from the DNA and histones. Hence, HATs weaken the binding strength between DNA and Histones.",
+        "best_explanation": "Histone Actyl Transferases (HATs) adds more acetyl groups which neutralises lysine positive charges. This in turn weakens the electrostatic interactions between the phosphates from the DNA and histones. Hence, HATs weaken the binding strength between DNA and Histones.",
+        "Generated_Explanation": "Histone Actyl Transferases (HATs) adds more acetyl groups which neutralises lysine positive charges. This in turn weakens the electrostatic interactions between the phosphates from the DNA and histones. Hence, HATs weaken the binding strength between DNA and Histones.",
+        "metrics": {
+            "nli": 0.987065851688385,
+            "verifier": 2.55,
+            "acr": 0.0,
+            "bleu": 1.0
+        }
+    },
+    {
+        "instruction": "As an explanation generation expert, can you generate the explanation for the given input?",
+        "input": "Given question: DNA Helicase 'unzips' dna by breaking what kind of bonds between the complementary bases? Option A: Ionic bonds Option B: Covalent bonds Option C: Hydrogen bonds Option D: Nitrogenous bonds Option E: Phosphate bonds The correct answer is Option C.",
+        "reference": "DNA helicase breaks the hydrogen bonds between the complementary bases in DNA.",
+        "best_explanation": "DNA helicase breaks the hydrogen bonds between the complementary bases in DNA.",
+        "Generated_Explanation": "DNA helicase breaks the hydrogen bonds between the complementary bases in DNA.",
+        "metrics": {
+            "nli": 0.9928667545318604,
+            "verifier": 2.55555555,
+            "acr": 1.0,
+            "bleu": 1.0
+        }
+    },
+    {
+        "instruction": "As an explanation generation expert, can you generate the explanation for the given input?",
+        "input": "Given question: The product of genomic DNA undergoing a process of transcription is catalysed by an unwinding reaction of the genomic sequence. The disassociating regions of RNA polymerase bind to the consensus sequence site of -35 (TTGACA) and -10 (TATAAT) region on a DNA sequence. What enzyme is specialised to detect where the consensus sequence is? Option A: DNA Polymerase III Option B: Shine-Dolgarno Option C: Sigma subunit Option D: Beta Prime subunit Option E: Holoenzyme The correct answer is Option C.",
+        "reference": "This question is determined to examine if an individual has individually learnt to characterise the functions of all enzymes in the process of transcription and their purposes in the creation of mRNA. Choice A: DNA polymerase is in charge of the replication of DNA sequences. Nothing to do with the process of transcriptionChoice B: The shine- dolgarno is involved in the translation process. When mRNAtranslates at the start codon (AUG), in order to create binding affinity with amino acids to make polypeptides. Choice C: The answer is choice C. This subunit in charge of detecting where the consensus sequence is, is the sigma subunit. The sigma subunit detects the promoter sequence and binds at 10million times the affinity.Choice D: This choice is an option which is a likely candidate to answer the question, due to the subunits characteristics. This sub-uni assists in the RNA polymerase keeping intact going down the DNA sequence. As the binding affinity to the sequence isn't strong, this enzyme assists in keeping it \"on track\".Choice E: The holoenzyme is a throw off choice due to the wording of the answer containing the word \"enzyme\", just like the question. The holoenzyme is the name of the RNA polymerase when it is bound by the sigma subunit.",
+        "best_explanation": "The sigma subunit is specialised to detect where the consensus sequence is. The sigma subunit is attached to the initiator tRNA and is essential in the initiation step in transcription. Beta Prime is an enzyme in the core enzyme complex. It is involved in the processing of introns in DNA transcription. DNA polymerase III is the enzyme that catalyses the polymerisation of the DNA sequence. The dolgarno shine sequence is essential in the translation process in ribosomal binding. The holozyme is the name for the complex of enzymes that catalyses transcription.",
+        "Generated_Explanation": "The sigma subunit is specialised to detect where the consensus sequence is. The sigma subunit is attached to the initiator tRNA and is essential in the initiation step in transcription. Beta Prime is an enzyme in the core enzyme complex. It is involved in the processing of introns in DNA transcription. DNA polymerase III is the enzyme that catalyses the polymerisation of the DNA sequence. The dolgarno shine sequence is essential in the translation process in ribosomal binding. The holozyme is the name for the complex of enzymes that catalyses transcription.",
+        "metrics": {
+            "nli": 0.007843605242669582,
+            "verifier": 5.0,
+            "acr": 1.0,
+            "bleu": 0.03594291548509652
+        }
+    },
+    {
+        "instruction": "As an explanation generation expert, can you generate the explanation for the given input?",
+        "input": "Given question: Hydroelectricity is similar to our metabolism.  It stores water in a reservoir. Water is released from a reservoir to flow through a turbine spinning it, which in turn activates a generator which produces electricity.  Which components of this system best represents those of our metabolism. Option A: Water = Fuels (fatty acids, carbohydrates)Reservoir = CytoplasmTurbine + Generator = Electron transport chain and F0 channel + ADP + PiElectricity = ATP Option B: Water = OxygenReservoir = White adipose tissueTurbine + Generator = Electron transport chain and F0 channel + ADP + PiElectricity = ADP + Pi Option C: Water = Fuels (fatty acids, carbohydrates)Reservoir = CytoplasmTurbine/generator = Electron transport chainElectricity = ATP Option D: Water = Fuels (fatty acids, carbohydrates)Reservoir = CytoplasmTurbine + Generator = Electron transport chainElectricity = ADP + Pi The correct answer is Option A.",
+        "reference": "A: Correct = Fuels are broken down, H+ ions are removed from the mitochondria to create a proton gradient, entry of a H+ ion causes the F0 channel to 'rotate' and ADP + Pi are 'consumed' to generate the ATP energy.B: Incorrect = ADP and Pi is 'consumed' to produce ATPC: Incorrect = Electron transport chain AND F0 channel + ADP + Pi are required to produce ATP D: Incorrect = ADP and Pi is 'consumed' to produce ATP",
+        "best_explanation": "Hydroelectricity is similar to our metabolism. It stores water in a reservoir. Water is released from a reservoir to flow through a turbine spinning it, which in turn activates a generator which produces electricity.  Which components of this system best represents those of our metabolism.  Fuels are broken down, producing acetyl-CoA. This steps up the production of ATP. Our metabolism breaks down fuels (fatty acids, carbohydrates) and produces acetyl-CoA. This then steps up the production of ATP. Both systems store energy and produce energy. This is represented by the reservoir in the hydroelectricity system which stores water, and our cytoplasm which stores fuels. The turbine + generator is the equivalent of the electron transport chain and F0 channel + ADP + Pi. The electron transport chain breaks down fuels, producing ATP. The F0 channel + ADP + Pi is used to generate ATP from ADP and Pi. This is the same as generating electricity from hydroelectricity.",
+        "Generated_Explanation": "Hydroelectricity is similar to our metabolism. It stores water in a reservoir. Water is released from a reservoir to flow through a turbine spinning it, which in turn activates a generator which produces electricity.  Which components of this system best represents those of our metabolism.  Fuels are broken down, producing acetyl-CoA. This steps up the production of ATP. Our metabolism breaks down fuels (fatty acids, carbohydrates) and produces acetyl-CoA. This then steps up the production of ATP. Both systems store energy and produce energy. This is represented by the reservoir in the hydroelectricity system which stores water, and our cytoplasm which stores fuels. The turbine + generator is the equivalent of the electron transport chain and F0 channel + ADP + Pi. The electron transport chain breaks down fuels, producing ATP. The F0 channel + ADP + Pi is used to generate ATP from ADP and Pi. This is the same as generating electricity from hydroelectricity.",
+        "metrics": {
+            "nli": 0.9665162563323975,
+            "verifier": 2.55555555,
+            "acr": 0.8461538461538461,
+            "bleu": 0.06740385231889313
+        }
+    },
+    {
+        "instruction": "As an explanation generation expert, can you generate the explanation for the given input?",
+        "input": "Given question: Which statement is CORRECT? In a plate reader based system, Option A: reducing the amount of fluid in the well increases the absorbance. Option B: increasing the amount of fluid in each well does not change the path length. Option C: the amount of fluid in each well affects the extinction coefficient. Option D: 100 ul of a solution has a lower absorbance than 200 ul of the same solution. The correct answer is Option D.",
+        "reference": "A is wrong, reducing the fluid in the well would decrease concentration, decreasing absorbance.B is wrong, the pathlength in a plate reader system is dependent on the height of the liquid in the well so increasing the fluid in the well would change the path length. C is wrong because the extinction coefficient is intrinsic to the species being measured and does not change based on amount in the wells. D is correct, 200 uL of solution has double the absorbance of 100 uL because of the change in path length.",
+        "best_explanation": "100 ul of a solution has a lower absorbance than 200 ul of the same solution.100 ul has a path length of 100 ul and 200 ul has a path length of 200 ul. Reducing the amount of fluid in the well would decrease the absorbance.Increasing the amount of fluid in each well would change the path length.The amount of fluid in each well does not affect the extinction coefficient.",
+        "Generated_Explanation": "100 ul of a solution has a lower absorbance than 200 ul of the same solution.100 ul has a path length of 100 ul and 200 ul has a path length of 200 ul. Reducing the amount of fluid in the well would decrease the absorbance.Increasing the amount of fluid in each well would change the path length.The amount of fluid in each well does not affect the extinction coefficient.",
+        "metrics": {
+            "nli": 0.00634346716105938,
+            "verifier": 5.0,
+            "acr": 1.0,
+            "bleu": 0.12682194076271228
+        }
+    },
+    {
+        "instruction": "As an explanation generation expert, can you generate the explanation for the given input?",
+        "input": "Given question: Which of the following statements about Promoter strengths is correct? Option A: The strong promoters are the same as the 'consensus' sequence Option B: Weak promoters are more frequently transcribed Option C: Strong promoters are a very good fit for the sigma sub-unit on DNA Option D: Strong promoters are similar to the 'consensus' sequence Option E: Weak promoters are a very good fit for the sigma sub-unit on the holoenzyme The correct answer is Option D.",
+        "reference": "A strong promoter is not the same but similar to the consensus sequence which is several copies of a specific sequence of nucleotides or amino acids found in the different locations.Weak promoters do not have a very good fit to the sigma sub-unit on the holoenzyme and therefore do not get transcribed as often as strong promotersThe sigma sub-unit is found on the holoenzyme of RNA polymerase",
+        "best_explanation": "Strong promoters are similar to the consensus sequence which is several copies of a specific sequence of nucleotides or amino acids found in the different locations.Weak promoters do not have a very good fit to the sigma sub-unit on the holoenzyme and therefore do not get transcribed as often as strong promotersThe sigma sub-unit is found on the holoenzyme of RNA polymerase",
+        "Generated_Explanation": "Strong promoters are similar to the consensus sequence which is several copies of a specific sequence of nucleotides or amino acids found in the different locations.Weak promoters do not have a very good fit to the sigma sub-unit on the holoenzyme and therefore do not get transcribed as often as strong promotersThe sigma sub-unit is found on the holoenzyme of RNA polymerase",
+        "metrics": {
+            "nli": 0.9931360483169556,
+            "verifier": 3.0,
+            "acr": 1.0,
+            "bleu": 0.8767600985439431
+        }
+    },
+    {
+        "instruction": "As an explanation generation expert, can you generate the explanation for the given input?",
+        "input": "Given question: During the process of translocation, the empty tRNA is finally released in the E site by the ribosome to make sure the function of synthesis of protein work continually. Option A: true Option B: false The correct answer is Option A.",
+        "reference": "translocation is a process to help move the tRNA and mRNA. The peptide-tRNA moves from the A site into the P site, then the empty tRNA moves from P site to E site, the tRNA in E site is finally released by the ribosome to wait for another cycle.",
+        "best_explanation": "true",
+        "Generated_Explanation": "true",
+        "metrics": {
+            "nli": 0.0007312982925213873,
+            "verifier": 2.55555555,
+            "acr": 1.0,
+            "bleu": 0
+        }
+    },
+    {
+        "instruction": "As an explanation generation expert, can you generate the explanation for the given input?",
+        "input": "Given question: The use of methylated cytosine within DNA sequences allows for easier detection and repair of mutations that may arise from spontaneous deamination. Option A: True Option B: False The correct answer is Option B.",
+        "reference": "False: This statement may be true if it were about uracil; however, when methylated cytosine is deaminated it becomes methylated uracil, also known as thymine, a base already naturally occurring in DNA. This actually leads to more mutations in DNA, rather than preventing them.  The intention of this statement was to force students to recall the relationship between cytosine, uracil, and thymine. It is simple enough to remember yet I had personally forgotten it as it had been taught a while back. As a result, when it was reintroduced, mild panic ensued.",
+        "best_explanation": "This statement may be false may be true depending on how it is interpreted.  On one hand, the statement is correct in regards to the use of methylated cytosine (i.e. the presence of methyl group in place of thymine) within DNA sequences. This option allows for easier detection and repair of mutations that may arise from issues such as spontaneous deamination.  However, the statement may also be interpreted as suggesting that methylated cytosine itself is a method of detecting and repairing mutations. This is false as methylated cytosine is not a method of detecting mutations, but rather a method of preventing and repairing mutations.  Therefore, the statement may be interpreted in two different ways, one correct and one false.",
+        "Generated_Explanation": "This statement may be false may be true depending on how it is interpreted.  On one hand, the statement is correct in regards to the use of methylated cytosine (i.e. the presence of methyl group in place of thymine) within DNA sequences. This option allows for easier detection and repair of mutations that may arise from issues such as spontaneous deamination.  However, the statement may also be interpreted as suggesting that methylated cytosine itself is a method of detecting and repairing mutations. This is false as methylated cytosine is not a method of detecting mutations, but rather a method of preventing and repairing mutations.  Therefore, the statement may be interpreted in two different ways, one correct and one false.",
+        "metrics": {
+            "nli": 0.0028464144561439753,
+            "verifier": 5.0,
+            "acr": 1.0,
+            "bleu": 0.0433335344635221
+        }
+    },
+    {
+        "instruction": "As an explanation generation expert, can you generate the explanation for the given input?",
+        "input": "Given question: What is the difference between dideoxynucleotides (ddNTP) and deoxynucleotides (dNTP)? Option A: Dideoxynucleotides have one extra hydroxyl group on the 3\u2019 carbon of the sugar ring Option B: Dideoxynucleotides have one less hydroxyl group on the 3\u2019 carbon of the sugar ring Option C: Dideoxynucleotides have one extra hydroxyl group on the 5\u2019 carbon of the sugar ring Option D: Dideoxynucleotides have one less hydroxyl group on the 5\u2019 carbon of the sugar ring Option E: They are not different The correct answer is Option B.",
+        "reference": "Dideoxynucleotides are similar to deoxynucleotides, but they lack a hydroxyl group on the 3\u2019 carbon of the sugar ring. In a regular nucleotide, the 3\u2019 hydroxyl group acts as a \u201chook,\" allowing a new nucleotide to be added to an existing chain. Once a dideoxynucleotide has been added to the chain, there is no hydroxyl available and no further nucleotides can be added. The chain ends with the dideoxynucleotide, which is marked with a particular color of dye depending on the base (A, T, C or G) that it carries.",
+        "best_explanation": "Dideoxynucleotides have one less hydroxyl group on the 3\u2019 carbon of the sugar ring They are not different, otherwise you would have to buy two types of nucleotides",
+        "Generated_Explanation": "Dideoxynucleotides have one less hydroxyl group on the 3\u2019 carbon of the sugar ring They are not different, otherwise you would have to buy two types of nucleotides",
+        "metrics": {
+            "nli": 0.0006041898159310222,
+            "verifier": 5.0,
+            "acr": 1.0,
+            "bleu": 0.034166931200147924
+        }
+    },
+    {
+        "instruction": "As an explanation generation expert, can you generate the explanation for the given input?",
+        "input": "Given question: An undergraduate student is investigating a class of drugs that has been developed for HIV and cancer, by modifying the 3'-OH group. They are unsure of how this would affect human DNA. The drugs are useful because \u2026 Option A: There is a release of pyrophosphate, blocking replication Option B: No hydrogen bonding between the bases, blocking replication Option C: Replication now copies a new strand in the 3' to 5' direction Option D: No nucleotide monophosphate added to the DNA chain, blocking replication The correct answer is Option D.",
+        "reference": "The 3'OH group is needed for the extension of the DNA molecule, this is done by a monophosphate added to the 3'OH to contribute to the growing chain to form a phosphodiester bond and release pyrophosphate.Incorrect explanationsA \u2013 Pyrophosphate release is a normal process in replication and therefore would not block itB \u2013 Hydrogen bonding is from the incoming nucleotide base pair with the template and is not directly associated with the DNA and RNA polymerasesC \u2013 The copying of the new strand always happens in the 5\u2019 to 3\u2019 direction",
+        "best_explanation": "The 3'OH group is needed for the extension of the DNA molecule, this is done by a monophosphate added to the 3'OH to contribute to the growing chain to form a phosphodiester bond and release pyrophosphate.Incorrect explanationsA \u2013 Pyrophosphate release is a normal process in replication and therefore would not block itB \u2013 Hydrogen bonding is from the incoming nucleotide base pair with the template and is not directly associated with the DNA and RNA polymerasesC \u2013 The copying of the new strand always happens in the 5\u2019 to 3\u2019 direction",
+        "Generated_Explanation": "The 3'OH group is needed for the extension of the DNA molecule, this is done by a monophosphate added to the 3'OH to contribute to the growing chain to form a phosphodiester bond and release pyrophosphate.Incorrect explanationsA \u2013 Pyrophosphate release is a normal process in replication and therefore would not block itB \u2013 Hydrogen bonding is from the incoming nucleotide base pair with the template and is not directly associated with the DNA and RNA polymerasesC \u2013 The copying of the new strand always happens in the 5\u2019 to 3\u2019 direction",
+        "metrics": {
+            "nli": 0.9947730898857117,
+            "verifier": 2.55555555,
+            "acr": 0.8333333333333334,
+            "bleu": 1.0
+        }
+    },
+    {
+        "instruction": "As an explanation generation expert, can you generate the explanation for the given input?",
+        "input": "Given question: In the modern age, it has now become possible to store and collect almost unfathomable amounts of data for just about everything. One particularly promising use for this kind of data can be seen in artificial intelligence, particularly AI learning. An exciting area that has already seen success is in the field of AI to detect cancerous cells.My resource looks at the role of \u201cBig Data\u201d to facilitate and support innovations such as this.https://stanmed.stanford.edu/2017summer/artificial-intelligence-could-help-diagnose-cancer-predict-survival.html Option A: Cases of undiagnosed cancer are likely to drastically decrease Option B: Big data allows us to see information that we never knew was there Option C: It is now possible for data to be collected on a much larger scales and formatted in ways useful to computers. Option D: Big data in conjunction with artificial learning is a powerful tool that can have wide-reaching applications and effects. Option E: Doctors and other professionals are likely to be unemployed as a result. The correct answer is Option D.",
+        "reference": "A key point to understand about a story like this is that technology used like this is not constrained solely to medical use and cancer identification. Big data by itself is enormously powerful even without the aid of artificial intelligence. This is because small pieces of information when compiled over a very large scale and interpreted correctly can reveal tendencies or problems we would never have seen before. Consider for example if on a watch or a phone data was logged for things such as heartbeat, diet or occurrences of sickness and disease. Imagine what compiling all that data could tell the medical community! When this is combined with artificial intelligence and machine learning the potential impacts that big data can have grown exponentially. This is what has given rise to technologies such as self-driving cars and facial recognition.However, there is a downside to all this, as outlined in the last point. Though it may not be the most prominent issue, it is likely that many jobs, particularly in data analysis, will be either changed or completely removed if artificial intelligence proves to be as effective it promises to be.This issue relating big data to identifying cancer has also been covered in these other articles and in this video if you want more information.(article) http://news.mit.edu/2017/artificial-intelligence-early-breast-cancer-detection-1017(video) https://www.ted.com/talks/kenneth_cukier_big_data_is_better_data/up-next#t-651878",
+        "best_explanation": "A key point to understand about a story like this is that technology used like this is not constrained solely to medical use and cancer identification. Big data by itself is enormously powerful even without the aid of artificial intelligence. This is because small pieces of information when compiled over a very large scale and interpreted correctly can reveal tendencies or problems we would never have seen before. Consider for example if on a watch or a phone data was logged for things such as heartbeat, diet or occurrences of sickness and disease. Imagine what compiling all that data could tell the medical community! When this is combined with artificial intelligence and machine learning the potential impacts that big data can have grown exponentially. This is what has given rise to technologies such as self-driving cars and facial recognition.However, there is a downside to all this, as outlined in the last point. Though it may not be the most prominent issue, it is likely that many jobs, particularly in data analysis, will be either changed or completely removed if artificial intelligence proves to be as effective it promises to be.This issue relating big data to identifying cancer has also been covered in these other articles and in this video if you want more information.(article) http://news.mit.edu/2017/artificial-intelligence-early-breast-cancer-detection-1017(video) https://www.ted.com/talks/kenneth_cukier_big_data_is_better_data/up-next#t-651878",
+        "Generated_Explanation": "A key point to understand about a story like this is that technology used like this is not constrained solely to medical use and cancer identification. Big data by itself is enormously powerful even without the aid of artificial intelligence. This is because small pieces of information when compiled over a very large scale and interpreted correctly can reveal tendencies or problems we would never have seen before. Consider for example if on a watch or a phone data was logged for things such as heartbeat, diet or occurrences of sickness and disease. Imagine what compiling all that data could tell the medical community! When this is combined with artificial intelligence and machine learning the potential impacts that big data can have grown exponentially. This is what has given rise to technologies such as self-driving cars and facial recognition.However, there is a downside to all this, as outlined in the last point. Though it may not be the most prominent issue, it is likely that many jobs, particularly in data analysis, will be either changed or completely removed if artificial intelligence proves to be as effective it promises to be.This issue relating big data to identifying cancer has also been covered in these other articles and in this video if you want more information.(article) http://news.mit.edu/2017/artificial-intelligence-early-breast-cancer-detection-1017(video) https://www.ted.com/talks/kenneth_cukier_big_data_is_better_data/up-next#t-651878",
+        "metrics": {
+            "nli": 0.9894563555717468,
+            "verifier": 3.17925293,
+            "acr": 0.5384615384615384,
+            "bleu": 1.0
+        }
+    },
+    {
+        "instruction": "As an explanation generation expert, can you generate the explanation for the given input?",
+        "input": "Given question: When doing an assay like this, some results give you confidence that the system is working well and other results indicate that there are problems. Some possibilities are:Each different tissue extract gives the same final result for [acetyl CoA]Different volumes of the same tissue extract give the same absorbance after 20 mins.When left to incubate for several hours, the absorbance of each well plateaus at the same levelFor a particular extract, the absorbance at 20 mins is proportional to the amount of extract added.Identical volumes of the same tissue extract give the same absorbance after 20 minsWhich of the above results would give you the MOST confidence that your acetyl CoA assay was working well? Option A: Option 1 Option B: Option 2 Option C: Option 3 Option D: Option 4 Option E: Option 5 The correct answer is Option D.",
+        "reference": "The author's explanation is in the responses of one of the group's comments.",
+        "best_explanation": "The author's explanation is in the responses of one of the group's comments.",
+        "Generated_Explanation": "The author's explanation is in the responses of one of the group's comments.",
+        "metrics": {
+            "nli": 0.9741384387016296,
+            "verifier": 2.55555555,
+            "acr": 0.0,
+            "bleu": 1.0
+        }
+    },
+    {
+        "instruction": "As an explanation generation expert, can you generate the explanation for the given input?",
+        "input": "Given question: Enhancer DNA sequences recruit RNA polymerase 2 to facilitate transcription while promoter sequences recruit factors to promote the process of transcription. Option A: False Option B: True The correct answer is Option A.",
+        "reference": "Enhancer sequences cannot recruit RNA polymerase 2 (on their own, they cannot facilitate the transcription of a particular gene), they can recruit factors which can amplify or enhance the transcription of a gene which is already under the control of a promoter.  Promoter sequences are those DNA sequences which recruit RNA polymerase 2 to promote the transcription of a particular gene.",
+        "best_explanation": "Enhancer DNA sequences recruit RNA polymerase 2 to facilitate transcription while promoter sequences recruit factors to promote the process of transcription. This is false as both promoter sequences and enhancer DNA sequences recruit RNA polymerase 2 to facilitate transcription.  Rationale: It is important to understand the difference between promoter sequences and enhancer DNA sequences as they serve different purposes during transcription. Understanding this difference will allow you to identify and address misconceptions.",
+        "Generated_Explanation": "Enhancer DNA sequences recruit RNA polymerase 2 to facilitate transcription while promoter sequences recruit factors to promote the process of transcription. This is false as both promoter sequences and enhancer DNA sequences recruit RNA polymerase 2 to facilitate transcription.  Rationale: It is important to understand the difference between promoter sequences and enhancer DNA sequences as they serve different purposes during transcription. Understanding this difference will allow you to identify and address misconceptions.",
+        "metrics": {
+            "nli": 0.30233463644981384,
+            "verifier": 2.55555555,
+            "acr": 1.0,
+            "bleu": 0.11778354299939679
+        }
+    },
+    {
+        "instruction": "As an explanation generation expert, can you generate the explanation for the given input?",
+        "input": "Given question: C4-41 Blood cholesterol levels  Too much LDL in the blood stream would cause atherosclerosis and results in heart attack and stroke. Therefore high blood LDL:HDL ratio is undesirable.Please choose the option that contains all the correct answers for the below questions. Q1. What is the name of the process of HDL returning cholesterol to the liver? Q2. What is the rate limiting enzyme in cholesterol synthesis? Q3. If you have high LDL:HDL ratio, what should you do? Option A: 1. reverse cholesterol transport2. HMG-CoA reductase3. intake \"statins\" which inhibit HMG-CoA reductase Option B: 1. reverse cholesterol transport 2. HMG-CoA synthase3. consume polyunsaturated fatty acids Option C: 1. lipolysis2. HMG-CoA reductase3. come polysaturated fatty acids Option D: 1. reverse cholesterol transport2. thiolase3. take phytosterol which would inhibits the uptake of cholesterol The correct answer is Option A.",
+        "reference": "HDL is usually described as the \"good\" cholesterol as it transports excess cholesterol to the liver to be expelled from body. LDL is called \u201cbad cholesterol\u201d because it takes cholesterol to the arteries, where it may collect in artery walls. Too much cholesterol in the arteries might lead to atherosclerosis, which might results in heart attack and stroke.Though LDL is not always bad because it delivers cholesterol to cells, where it is used in membranes, or for the synthesis of steroid hormones. HDL is involved in reverse cholesterol transport. Excess cholesterol from cells is brought back to the liver by HDL in a process known as reverse cholesterol transpot. HDL is synthesized and secreted by the liver and small intestine. It travels in the circulation where it gathers cholesterol to form mature HDL, which then returns the cholesterol to the liver.There are several ways to reduce LDL. First, we could inhibits the absorption of cholesterol from gut which by using phytoserols. It inhibits the uptake of the cholesterol. Or we could use \"statins\" to inhibit cholesterol synthesis by inhibiting HMG-CoA. the rate limiting enzyme in cholesterol synthesis. By consuming polyunsaturated fatty acids would lead to increase in HDL and reduction in LDL, which  is good for our health.",
+        "best_explanation": "1. reverse cholesterol transport - high LDL would mean that there is more cholesterol being transported to peripheral tissue. And HDL would carry cholesterol to the liver to be metabolized. \"reverse cholesterol transport\" brings cholesterol from peripheral tissue to the liver.2. HMG-CoA reductase - rate limiting enzyme in cholesterol synthesis. If you want to reduce the production of cholesterol, you could inhibit the activity of HMG-CoA reductase.3. intake \"statins\" which inhibit HMG-CoA reductase - high LDL:HDL ratio would mean that your cholesterol is not metabolized and would accumulate in your blood. Therefore it is undesirable. Instead of consuming \"statins\", you could consume polyunsaturated fatty acids which would reduce the production of LDL.",
+        "Generated_Explanation": "1. reverse cholesterol transport - high LDL would mean that there is more cholesterol being transported to peripheral tissue. And HDL would carry cholesterol to the liver to be metabolized. \"reverse cholesterol transport\" brings cholesterol from peripheral tissue to the liver.2. HMG-CoA reductase - rate limiting enzyme in cholesterol synthesis. If you want to reduce the production of cholesterol, you could inhibit the activity of HMG-CoA reductase.3. intake \"statins\" which inhibit HMG-CoA reductase - high LDL:HDL ratio would mean that your cholesterol is not metabolized and would accumulate in your blood. Therefore it is undesirable. Instead of consuming \"statins\", you could consume polyunsaturated fatty acids which would reduce the production of LDL.",
+        "metrics": {
+            "nli": 0.0018271533772349358,
+            "verifier": 5.0,
+            "acr": 0.7777777777777778,
+            "bleu": 0.05730818458633358
+        }
+    },
+    {
+        "instruction": "As an explanation generation expert, can you generate the explanation for the given input?",
+        "input": "Given question: What is hypoinsulinemia NOT likely to cause in the liver. Option A: breakdown of glycogen Option B: lipolysis Option C: glucogenesis Option D: glycogenosis The correct answer is Option D.",
+        "reference": "Answer D is correct,hypoinsulinemia is low insulin, glycogenosis occurs as a response to insulin.",
+        "best_explanation": "hypoinsulinemia is low insulin, glycogenosis occurs as a response to insulin.",
+        "Generated_Explanation": "hypoinsulinemia is low insulin, glycogenosis occurs as a response to insulin.",
+        "metrics": {
+            "nli": 0.001884130877442658,
+            "verifier": 3.0,
+            "acr": 1.0,
+            "bleu": 0.6799584717294223
+        }
+    },
+    {
+        "instruction": "As an explanation generation expert, can you generate the explanation for the given input?",
+        "input": "Given question: The nucleoside substrates from Zovirax (an anti-viral drug) can only be phosphorylated to the viral enzymes, the growth of the virus is therefore inhibited as the virus reverse transcriptase incorporate this substrate as residue in its own DNA copy. Option A: Ture Option B: False The correct answer is Option B.",
+        "reference": "The nucleoside substrates from Zovirax (an anti-viral drug) can only be phosphorylated to the viral enzymes,True: no sugar base in the anti-drug nucleoside so can only be phosphorylated by the viral substrate.  the virus reverse transcriptase incorporate this substrate as residue in its own DNA copyFalse: it is the thymidine kinase, not the reverse transcriptase.",
+        "best_explanation": "The nucleoside substrates from Zovirax (an anti-viral drug) can only be phosphorylated to the viral enzymes,True: no sugar base in the anti-drug nucleoside so can only be phosphorylated by the viral substrate.  the virus reverse transcriptase incorporate this substrate as residue in its own DNA copyFalse: it is the thymidine kinase, not the reverse transcriptase.",
+        "Generated_Explanation": "The nucleoside substrates from Zovirax (an anti-viral drug) can only be phosphorylated to the viral enzymes,True: no sugar base in the anti-drug nucleoside so can only be phosphorylated by the viral substrate.  the virus reverse transcriptase incorporate this substrate as residue in its own DNA copyFalse: it is the thymidine kinase, not the reverse transcriptase.",
+        "metrics": {
+            "nli": 0.9898860454559326,
+            "verifier": 2.55222222,
+            "acr": 1.0,
+            "bleu": 1.0
+        }
+    },
+    {
+        "instruction": "As an explanation generation expert, can you generate the explanation for the given input?",
+        "input": "Given question: Like RNA, DNA is resistant to degradation due to the absence of -OH at position 2 in ribose Option A: True Option B: False The correct answer is Option B.",
+        "reference": "This statement is false as unlike RNA, the absence of -OH at position 2 in the ribose sugar makes DNA very resistant to alkali.",
+        "best_explanation": "This statement is false as unlike RNA, the absence of -OH at position 2 in the ribose sugar makes DNA very resistant to alkali.",
+        "Generated_Explanation": "This statement is false as unlike RNA, the absence of -OH at position 2 in the ribose sugar makes DNA very resistant to alkali.",
+        "metrics": {
+            "nli": 0.9781185984611511,
+            "verifier": 2.5555555,
+            "acr": 1.0,
+            "bleu": 1.0
+        }
+    },
+    {
+        "instruction": "As an explanation generation expert, can you generate the explanation for the given input?",
+        "input": "Given question: When you try the assay system with some standard acetyl CoA solutions, you find that, in the top standards, the absorbance rises by 0.3 in the first minute.Some of the things that can happen next are:i. The rate of change of absorbance stays constant over the next 19 minutes.ii. The absorbance plateaus as all the acetyl CoA runs out.iii. The rate falls as the DTNB concentration gets lower.iv. The absorbance falls as the reaction reverses.v. The absorbance plateaus as all the oxaloacetate gets used up. 73. What DO you WANT to happen next? Option A: ii only Option B: i only Option C: ii and v Option D: iii and v Option E: iii and iv The correct answer is Option A.",
+        "reference": "Answer A is correct because the absorbance graph plateaus as all the acetyl-CoA gets used up because it is the limiting reagent in the reaction: oxAc + acetyl-CoA \u2192 citrate + CoA. Since this is limited, as soon as it gets used up then there can be no further reaction between the two reactants which looks like a plateau on the absorbance graph. In other words, the requirement for acetyl-CoA exceeds that for oxaloacetate. Additionally, if we are interested in the concentration of acetyl-CoA it would have to be the limiting reagent in order to perform the proper calculations. Since this is true, option v is not possible as it is what is reacted with the acetyl-CoA would be in excess, therefore not determining the change in absorbance. Option i is incorrect because the absorbance would not stay constant unless there was zero reaction between the reactants. Option iii is incorrect because the reaction is not dependent on the DTNB and even if it was, the concentration would not be the cause of a change in the rate as they are proportional to one another. Option iv is also incorrect as the reaction does not reverse.",
+        "best_explanation": "73. What DO you WANT to happen next?  A: Answer because the absorbance graph plateaus as all the acetyl-CoA gets used up in the reaction. This happens because the Acetyl-CoA is limited and the reaction only happens when the Acetyl-CoA is present. Since this is the case, once it gets used up in the reaction, hence why the absorbance plateaus.  B: Answer because of the explanation in the comment only.  C: Answer because of the explanation in the comment only. Comment: \"The reaction is only due to the presence of Acetyl-CoA and Oxaloacetate. Once Acetyl-CoA is used up in the reaction, hence why the absorbance plateaus. The limiting factor is not the Oxaloacetate.\"  D: Answer because of the explanation in the comment only. Comment: \"The reaction is only due to the presence of Acetyl-CoA and Oxaloacetate. Once Acetyl-CoA is used up in the reaction, the rate of the reaction falls because of the lower concentration of the DTNB. The limiting factor is not the Oxaloacetate.\"  E: Answer because of the explanation in the comment only. Comment: \"The reaction is only due to the presence of Acetyl-CoA and Oxaloacetate. Once Acetyl-CoA is used up in the reaction, the absorbance falls as the reaction reverses. The limiting factor is not the Oxaloacetate.\"  B73: What DO you WANT to happen next?",
+        "Generated_Explanation": "73. What DO you WANT to happen next?  A: Answer because the absorbance graph plateaus as all the acetyl-CoA gets used up in the reaction. This happens because the Acetyl-CoA is limited and the reaction only happens when the Acetyl-CoA is present. Since this is the case, once it gets used up in the reaction, hence why the absorbance plateaus.  B: Answer because of the explanation in the comment only.  C: Answer because of the explanation in the comment only. Comment: \"The reaction is only due to the presence of Acetyl-CoA and Oxaloacetate. Once Acetyl-CoA is used up in the reaction, hence why the absorbance plateaus. The limiting factor is not the Oxaloacetate.\"  D: Answer because of the explanation in the comment only. Comment: \"The reaction is only due to the presence of Acetyl-CoA and Oxaloacetate. Once Acetyl-CoA is used up in the reaction, the rate of the reaction falls because of the lower concentration of the DTNB. The limiting factor is not the Oxaloacetate.\"  E: Answer because of the explanation in the comment only. Comment: \"The reaction is only due to the presence of Acetyl-CoA and Oxaloacetate. Once Acetyl-CoA is used up in the reaction, the absorbance falls as the reaction reverses. The limiting factor is not the Oxaloacetate.\"  B73: What DO you WANT to happen next?",
+        "metrics": {
+            "nli": 0.001262898906134069,
+            "verifier": 3.18929523,
+            "acr": 1.0,
+            "bleu": 0.11105624983037028
+        }
+    },
+    {
+        "instruction": "As an explanation generation expert, can you generate the explanation for the given input?",
+        "input": "Given question: True or False?As DNA must be unwound for RNA polymerase to form an RNA-DNA hybrid complex, DNA helicase is recruited during transcription elongation. Option A: True Option B: False The correct answer is Option B.",
+        "reference": "False!Although RNA polymerase does assemble RNA whilst attached to DNA making an RNA-DNA hybrid complex, it does not recruit DNA helicase.RNA polymerase unwinds the DNA during transcription and DNA helicase is used during DNA replication. This question aimed to test an understanding of one of the features of transcription elongation - that unlike DNA replication/synthesis, transcription does not require separate enzymes to unwind and build. It aims to challenge the logical assumption/misconception that DNA helicase will unwind DNA during transcription elongation just as it does during DNA replication.",
+        "best_explanation": "False!Although RNA polymerase does assemble RNA whilst attached to DNA making an RNA-DNA hybrid complex, it does not recruit DNA helicase.RNA polymerase unwinds the DNA during transcription and DNA helicase is used during DNA replication. This question aimed to test an understanding of one of the features of transcription elongation - that unlike DNA replication/synthesis, transcription does not require separate enzymes to unwind and build. It aims to challenge the logical assumption/misconception that DNA helicase will unwind DNA during transcription elongation just as it does during DNA replication.",
+        "Generated_Explanation": "False!Although RNA polymerase does assemble RNA whilst attached to DNA making an RNA-DNA hybrid complex, it does not recruit DNA helicase.RNA polymerase unwinds the DNA during transcription and DNA helicase is used during DNA replication. This question aimed to test an understanding of one of the features of transcription elongation - that unlike DNA replication/synthesis, transcription does not require separate enzymes to unwind and build. It aims to challenge the logical assumption/misconception that DNA helicase will unwind DNA during transcription elongation just as it does during DNA replication.",
+        "metrics": {
+            "nli": 0.9857419729232788,
+            "verifier": 2.5,
+            "acr": 1.0,
+            "bleu": 1.0
+        }
+    },
+    {
+        "instruction": "As an explanation generation expert, can you generate the explanation for the given input?",
+        "input": "Given question: A student successfully cut the OriC site out of an E.coli bacterium. What happens if the OriC site of E.coli is re-inserted 300 bases downstream of the original site? Option A: DNA replication won't be able to occur at all since the oriC site is in a foreign location. Option B: The proteins stabilising and regulating DNA replication will go the original area where oriC used to be and initiate replication there. Option C: Another site of origin of replication will be chosen since the oriC site isn't surrounded by the right DNA sequences. Option D: Replication will initiate at the new oriC site, but since it is not in the original position, it will have issues regarding regulation because it isn't surrounded by the necessary DNA sequences. Option E: The entire replication process will happen completely normally since the oriC site is still in good condition and has enough information to start replication. The correct answer is Option D.",
+        "reference": "A is incorrect - We still have the oriC site in the chromosome. The oriC site contains the information necessary (i.e. nucleotide base code) to trigger the unwinding of DNA by signalling proteins that recognise particular sequences within oriC, so we can't say that nothing would occur whatsoever. B is incorrect - If proteins had that ability to do that, it would be too easy for accidental extra replication of DNA. We really want to make sure the DNA replication process is as tightly regulated as possible since we only want replication to occur just before cell division. That's why there is only one very distinct replication site in E.coli. C is incorrect - Unlike eukaryotes such as humans which do have several origin sites, bacteria (including E.coli) only have one origin of replication.  D is correct - the original oriC site will be able to start regulation since the sequences are intact and will be recognised by the regulatory proteins that initiate DNA replication. However, the overall process of regulation is extremely regulated and so changing the position of the oriC site will cause complications after initiation. The surrounding DNA sequences play an important role in controlling the tight regulations of proper replication and changing this leads to increased mutations and increased/decreased regulatory proteins coming in.(This article is beyond the detail necessary for our course but interesting to look at for some extra info: https://www.microbiologyresearch.org/docserver/fulltext/micro/155/9/3070.pdf?expires=1587344761&id=id&accname=guest&checksum=0B160636F2E0A2FE993E0DE741410333). E is incorrect - As stated in A, it is correct in saying replication will happen. However the original oriC site has certain segments of DNA around it that signal and encode proteins that aid in initiating, regulating and continuing replication. Since the oriC site is moved, these proteins will either not be enough or be too abundant, so replication won't happen as normal.",
+        "best_explanation": "A is incorrect - We still have the oriC site in the chromosome. The oriC site contains the information necessary (i.e. nucleotide base code) to trigger the unwinding of DNA by signalling proteins that recognise particular sequences within oriC, so we can't say that nothing would occur whatsoever. B is incorrect - If proteins had that ability to do that, it would be too easy for accidental extra replication of DNA. We really want to make sure the DNA replication process is as tightly regulated as possible since we only want replication to occur just before cell division. That's why there is only one very distinct replication site in E.coli. C is incorrect - Unlike eukaryotes such as humans which do have several origin sites, bacteria (including E.coli) only have one origin of replication.  D is correct - the original oriC site will be able to start regulation since the sequences are intact and will be recognised by the regulatory proteins that initiate DNA replication. However, the overall process of regulation is extremely regulated and so changing the position of the oriC site will cause complications after initiation. The surrounding DNA sequences play an important role in controlling the tight regulations of proper replication and changing this leads to increased mutations and increased/decreased regulatory proteins coming in.(This article is beyond the detail necessary for our course but interesting to look at for some extra info: https://www.microbiologyresearch.org/docserver/fulltext/micro/155/9/3070.pdf?expires=1587344761&id=id&accname=guest&checksum=0B160636F2E0A2FE993E0DE741410333). E is incorrect - As stated in A, it is correct in saying replication will happen. However the original oriC site has certain segments of DNA around it that signal and encode proteins that aid in initiating, regulating and continuing replication. Since the oriC site is moved, these proteins will either not be enough or be too abundant, so replication won't happen as normal.",
+        "Generated_Explanation": "A is incorrect - We still have the oriC site in the chromosome. The oriC site contains the information necessary (i.e. nucleotide base code) to trigger the unwinding of DNA by signalling proteins that recognise particular sequences within oriC, so we can't say that nothing would occur whatsoever. B is incorrect - If proteins had that ability to do that, it would be too easy for accidental extra replication of DNA. We really want to make sure the DNA replication process is as tightly regulated as possible since we only want replication to occur just before cell division. That's why there is only one very distinct replication site in E.coli. C is incorrect - Unlike eukaryotes such as humans which do have several origin sites, bacteria (including E.coli) only have one origin of replication.  D is correct - the original oriC site will be able to start regulation since the sequences are intact and will be recognised by the regulatory proteins that initiate DNA replication. However, the overall process of regulation is extremely regulated and so changing the position of the oriC site will cause complications after initiation. The surrounding DNA sequences play an important role in controlling the tight regulations of proper replication and changing this leads to increased mutations and increased/decreased regulatory proteins coming in.(This article is beyond the detail necessary for our course but interesting to look at for some extra info: https://www.microbiologyresearch.org/docserver/fulltext/micro/155/9/3070.pdf?expires=1587344761&id=id&accname=guest&checksum=0B160636F2E0A2FE993E0DE741410333). E is incorrect - As stated in A, it is correct in saying replication will happen. However the original oriC site has certain segments of DNA around it that signal and encode proteins that aid in initiating, regulating and continuing replication. Since the oriC site is moved, these proteins will either not be enough or be too abundant, so replication won't happen as normal.",
+        "metrics": {
+            "nli": 0.9859504103660583,
+            "verifier": 3.37143167,
+            "acr": 0.7647058823529411,
+            "bleu": 1.0
+        }
+    },
+    {
+        "instruction": "As an explanation generation expert, can you generate the explanation for the given input?",
+        "input": "Given question: Trc_1: A cell\u2019s genome is contained within its nucleus.Dolly the sheep, was famous for being the first mammal to be successfully cloned from another female sheep during the mid-1990s. She was produced in a lab using the process of NUCLEAR TRANSFER, whereby the nucleus of a donor cell was carefully fused with an unfertilised egg. This cell then grew into an embryo, the embryonic cells of which then differentiated into other cell types (e.g. skin, liver, mammary, muscle, etc.) Statements:A sperm or egg donor cell could have been used to produce DollyDolly essentially had the same genome as the original cell donorSomatic cells (e.g. liver, skin tissue) were unlikely to have been used as they do not contain enough genetic information for healthy embryonic cells capable of further differentiation.The red blood cells of Dolly basically have the same genome as the stomach cells of the original donor sheepWhich statement(s) above are/is CORRECT? Option A: 1, 2 and 3 Option B: 1, 2 and 4 Option C: 1 and 3 Option D: 2 and 4 Option E: Only 3 The correct answer is Option D.",
+        "reference": "A sperm cell could not have been used as Dolly was a clone of a female sheep (a sperm cell could not have come from a female). Somatic cells can and were used to clone Dolly. A mammary cell was taken from a 6 year old ewe to create the cells that formed an embryo. This was possible as the whole genetic coding for an individual is contained within every cell. No coding is lost from the first cell (egg and sperm fused) through development to adult cells. Thus, somatic cells have all the necessary information to create other types of cells (muscle, skin, etc.) The whole genome of Dolly is identical to its original donor as all DNA information is passed on from cell to cell. It is as if we had just grown part of the original sheep outside of itself (though it is somewhat more complicated). Hence, 2 and 4 are correct in that they are asking whether Dolly had an identical genome to the original. Idea covered:All cells within an individual\u2019s body are equipped with the same DNA or genotype, regardless of cell type or age of cell (after a complete DNA set is made, ie after sperm/egg nuclei fusion)",
+        "best_explanation": "3 is the correct answer. This is because the somatic cells (e.g. liver, skin tissue) that were used to clone Dolly were adult cells, so they were unlikely to have had any major mutations. Thus, the genome of Dolly was essentially the same as the original cell donor. Furthermore, somatic cells are not capable of further differentiation, so the embryonic cells of Dolly were likely to have been healthy and mutation-free. Thus, 2 and 4 are correct. 1 and 3 are incorrect. This is because a sperm cell could not have been used to produce Dolly, as sperm cells are not capable of undergoing nuclear transfer. Furthermore, somatic cells are not likely to have been used, as they do not contain enough genetic information for healthy embryonic cells. Thus, 1 and 3 are incorrect. E is incorrect because 3 is the correct answer.",
+        "Generated_Explanation": "3 is the correct answer. This is because the somatic cells (e.g. liver, skin tissue) that were used to clone Dolly were adult cells, so they were unlikely to have had any major mutations. Thus, the genome of Dolly was essentially the same as the original cell donor. Furthermore, somatic cells are not capable of further differentiation, so the embryonic cells of Dolly were likely to have been healthy and mutation-free. Thus, 2 and 4 are correct. 1 and 3 are incorrect. This is because a sperm cell could not have been used to produce Dolly, as sperm cells are not capable of undergoing nuclear transfer. Furthermore, somatic cells are not likely to have been used, as they do not contain enough genetic information for healthy embryonic cells. Thus, 1 and 3 are incorrect. E is incorrect because 3 is the correct answer.",
+        "metrics": {
+            "nli": 0.8196871876716614,
+            "verifier": 3.0,
+            "acr": 0.0,
+            "bleu": 0.07909100020719481
+        }
+    },
+    {
+        "instruction": "As an explanation generation expert, can you generate the explanation for the given input?",
+        "input": "Given question: Cytosine is spontaneously deaminated to thymine in DNA, causing a corruption in the strand and inhibiting its ability to carry information. Option A: True Option B: False The correct answer is Option B.",
+        "reference": "Cytosine is not deaminated to Thymine and rather spontaneously undergoes oxidative deamination to become Uracil. It is the unusual presence of Uracil in the DNA strand (not a normal constituent), that enables identification of the corruption and the resulting replacement.",
+        "best_explanation": "Cytosine is not deaminated to Thymine and rather spontaneously undergoes oxidative deamination to become Uracil. It is the unusual presence of Uracil in the DNA strand (not a normal constituent), that enables identification of the corruption and the resulting replacement.",
+        "Generated_Explanation": "Cytosine is not deaminated to Thymine and rather spontaneously undergoes oxidative deamination to become Uracil. It is the unusual presence of Uracil in the DNA strand (not a normal constituent), that enables identification of the corruption and the resulting replacement.",
+        "metrics": {
+            "nli": 0.9856835007667542,
+            "verifier": 2.55,
+            "acr": 0.0,
+            "bleu": 1.0
+        }
+    }
+]

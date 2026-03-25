@@ -1,0 +1,705 @@
+{
+  "description": "Inference latency profiling across all models and domains",
+  "per_domain": {
+    "Cardiff": [
+      {
+        "model": "LLaMA-3-8B-SFT",
+        "time": 3.653,
+        "nli": 0.2059,
+        "bleu": 0.0425,
+        "bert_ans": 0.841,
+        "acr": 0.7466,
+        "verifier": 2.55,
+        "n": 100,
+        "source": "llama3_cardiff_eval.json",
+        "domain": "Cardiff"
+      },
+      {
+        "model": "Qwen3-8B-SFT",
+        "time": 4.161,
+        "nli": 0.1959,
+        "bleu": 0.0406,
+        "bert_ans": 0.8462,
+        "acr": 0.7421,
+        "verifier": 2.5,
+        "n": 100,
+        "source": "qwen3_cardiff_eval.json",
+        "domain": "Cardiff"
+      },
+      {
+        "model": "GPT-4o-mini",
+        "time": 5.5544,
+        "nli": 0.1028,
+        "bleu": 0.0241,
+        "bert_ans": 0.7991,
+        "acr": 0.8979,
+        "verifier": 3.01,
+        "n": 100,
+        "source": "gpt4o_mini_cardiff_eval.json",
+        "domain": "Cardiff"
+      },
+      {
+        "model": "RL-DPO-v2 (K=1)",
+        "time": 5.774,
+        "nli": 0.2905,
+        "bleu": 0.0247,
+        "bert_ans": 0.8422,
+        "acr": 0.8682,
+        "verifier": 3.0648,
+        "n": 0,
+        "source": "cardiff_eval_nli.json",
+        "domain": "Cardiff"
+      },
+      {
+        "model": "RL-DPO (K=1)",
+        "time": 6.567,
+        "nli": 0.2969,
+        "bleu": 0.0173,
+        "bert_ans": 0.8325,
+        "acr": 0.7698,
+        "verifier": 3.0467,
+        "n": 0,
+        "source": "cardiff_eval_nli.json",
+        "domain": "Cardiff"
+      },
+      {
+        "model": "LLaMA-3-8B-DPO",
+        "time": 7.006,
+        "nli": 0.3443,
+        "bleu": 0.0389,
+        "bert_ans": 0.8213,
+        "acr": 0.7964,
+        "verifier": 2.64,
+        "n": 100,
+        "source": "llama3_cardiff_eval.json",
+        "domain": "Cardiff"
+      },
+      {
+        "model": "RL-PPO (K=1)",
+        "time": 7.234,
+        "nli": 0.226,
+        "bleu": 0.0175,
+        "bert_ans": 0.8255,
+        "acr": 0.739,
+        "verifier": 3.075,
+        "n": 0,
+        "source": "cardiff_eval_nli.json",
+        "domain": "Cardiff"
+      },
+      {
+        "model": "KTO-Baseline",
+        "time": 12.855,
+        "nli": 0.1483,
+        "bleu": 0.0282,
+        "bert_ans": 0.809,
+        "acr": 0.8252,
+        "verifier": 2.83,
+        "n": 100,
+        "source": "qwen3_kto_cardiff_eval.json",
+        "domain": "Cardiff"
+      },
+      {
+        "model": "Qwen3-8B-DPO",
+        "time": 13.985,
+        "nli": 0.1149,
+        "bleu": 0.023,
+        "bert_ans": 0.798,
+        "acr": 0.8323,
+        "verifier": 2.93,
+        "n": 100,
+        "source": "qwen3_ppo_cardiff_eval.json",
+        "domain": "Cardiff"
+      },
+      {
+        "model": "Baseline-SFT (K=1)",
+        "time": 19.947,
+        "nli": 0.0555,
+        "bleu": 0.016,
+        "bert_ans": 0.782,
+        "acr": 0.8087,
+        "verifier": 3.1976,
+        "n": 0,
+        "source": "cardiff_eval_nli.json",
+        "domain": "Cardiff"
+      },
+      {
+        "model": "ILearner-LLM (K=5)",
+        "time": 101.611,
+        "nli": 0.0864,
+        "bleu": 0.0729,
+        "bert_ans": 0.7859,
+        "acr": 0.8713,
+        "verifier": 3.196,
+        "n": 0,
+        "source": "baselines_cardiff_k5_eval.json",
+        "domain": "Cardiff"
+      }
+    ],
+    "Sydney": [
+      {
+        "model": "LLaMA-3-8B-SFT",
+        "time": 2.107,
+        "nli": 0.049,
+        "bleu": 0.0,
+        "bert_ans": 0.8036,
+        "acr": 0.1618,
+        "verifier": 2.43,
+        "n": 100,
+        "source": "llama3_sydney_eval.json",
+        "domain": "Sydney"
+      },
+      {
+        "model": "Qwen3-8B-SFT",
+        "time": 3.867,
+        "nli": 0.1737,
+        "bleu": 0.0844,
+        "bert_ans": 0.8416,
+        "acr": 0.5929,
+        "verifier": 2.26,
+        "n": 100,
+        "source": "qwen3_sydney_eval.json",
+        "domain": "Sydney"
+      },
+      {
+        "model": "GPT-4o-mini",
+        "time": 5.3227,
+        "nli": 0.1787,
+        "bleu": 0.0385,
+        "bert_ans": 0.8079,
+        "acr": 0.8785,
+        "verifier": 2.91,
+        "n": 100,
+        "source": "gpt4o_mini_sydney_eval.json",
+        "domain": "Sydney"
+      },
+      {
+        "model": "RL-DPO-v2 (K=1)",
+        "time": 6.37,
+        "nli": 0.2774,
+        "bleu": 0.0364,
+        "bert_ans": 0.8426,
+        "acr": 0.629,
+        "verifier": 2.9474,
+        "n": 0,
+        "source": "sydney_eval_nli.json",
+        "domain": "Sydney"
+      },
+      {
+        "model": "LLaMA-3-8B-DPO",
+        "time": 6.397,
+        "nli": 0.1545,
+        "bleu": 0.0,
+        "bert_ans": 0.7744,
+        "acr": 0.2846,
+        "verifier": 2.51,
+        "n": 100,
+        "source": "llama3_sydney_eval.json",
+        "domain": "Sydney"
+      },
+      {
+        "model": "RL-PPO (K=1)",
+        "time": 7.596,
+        "nli": 0.2269,
+        "bleu": 0.0421,
+        "bert_ans": 0.8294,
+        "acr": 0.6606,
+        "verifier": 2.9609,
+        "n": 0,
+        "source": "sydney_eval_nli.json",
+        "domain": "Sydney"
+      },
+      {
+        "model": "RL-DPO (K=1)",
+        "time": 9.049,
+        "nli": 0.2171,
+        "bleu": 0.0314,
+        "bert_ans": 0.8272,
+        "acr": 0.6034,
+        "verifier": 2.9094,
+        "n": 0,
+        "source": "sydney_eval_nli.json",
+        "domain": "Sydney"
+      },
+      {
+        "model": "Qwen3-8B-DPO",
+        "time": 13.055,
+        "nli": 0.1973,
+        "bleu": 0.0404,
+        "bert_ans": 0.7997,
+        "acr": 0.8238,
+        "verifier": 2.8,
+        "n": 100,
+        "source": "qwen3_ppo_sydney_eval.json",
+        "domain": "Sydney"
+      },
+      {
+        "model": "Baseline-SFT (K=1)",
+        "time": 19.001,
+        "nli": 0.0537,
+        "bleu": 0.0222,
+        "bert_ans": 0.787,
+        "acr": 0.6249,
+        "verifier": 3.1937,
+        "n": 0,
+        "source": "sydney_eval_nli.json",
+        "domain": "Sydney"
+      },
+      {
+        "model": "ILearner-LLM (K=5)",
+        "time": 100.492,
+        "nli": 0.0837,
+        "bleu": 0.0274,
+        "bert_ans": 0.7889,
+        "acr": 0.6451,
+        "verifier": 3.1843,
+        "n": 0,
+        "source": "baselines_sydney_k5_eval.json",
+        "domain": "Sydney"
+      }
+    ],
+    "Law": [
+      {
+        "model": "LLaMA-3-8B-SFT",
+        "time": 1.652,
+        "nli": 0.3619,
+        "bleu": 0.127,
+        "bert_ans": 0.8525,
+        "acr": 0.5238,
+        "verifier": 2.02,
+        "n": 100,
+        "source": "llama3_law_eval.json",
+        "domain": "Law"
+      },
+      {
+        "model": "Qwen3-8B-SFT",
+        "time": 2.093,
+        "nli": 0.3191,
+        "bleu": 0.1382,
+        "bert_ans": 0.8557,
+        "acr": 0.5175,
+        "verifier": 2.0,
+        "n": 100,
+        "source": "qwen3_law_eval.json",
+        "domain": "Law"
+      },
+      {
+        "model": "LLaMA-3-8B-DPO",
+        "time": 5.186,
+        "nli": 0.4621,
+        "bleu": 0.0664,
+        "bert_ans": 0.8189,
+        "acr": 0.6685,
+        "verifier": 2.02,
+        "n": 100,
+        "source": "llama3_law_eval.json",
+        "domain": "Law"
+      },
+      {
+        "model": "RL-DPO (K=1)",
+        "time": 8.759,
+        "nli": 0.3287,
+        "bleu": 0.054,
+        "bert_ans": 0.8232,
+        "acr": 0.6261,
+        "verifier": 2.6111,
+        "n": 0,
+        "source": "dpo_v3_law_eval.json",
+        "domain": "Law"
+      },
+      {
+        "model": "RL-DPO-v2 (K=1)",
+        "time": 10.524,
+        "nli": 0.2528,
+        "bleu": 0.064,
+        "bert_ans": 0.8257,
+        "acr": 0.6315,
+        "verifier": 2.6252,
+        "n": 0,
+        "source": "baselines_law_remaining_eval.json",
+        "domain": "Law"
+      },
+      {
+        "model": "RL-PPO (K=1)",
+        "time": 11.354,
+        "nli": 0.3213,
+        "bleu": 0.0475,
+        "bert_ans": 0.8146,
+        "acr": 0.5992,
+        "verifier": 2.6364,
+        "n": 0,
+        "source": "llama2_ppo_law_eval.json",
+        "domain": "Law"
+      },
+      {
+        "model": "Qwen3-8B-DPO",
+        "time": 13.074,
+        "nli": 0.2235,
+        "bleu": 0.0343,
+        "bert_ans": 0.8007,
+        "acr": 0.7693,
+        "verifier": 2.59,
+        "n": 100,
+        "source": "qwen3_dpo_law_eval.json",
+        "domain": "Law"
+      },
+      {
+        "model": "Baseline-SFT (K=1)",
+        "time": 26.886,
+        "nli": 0.2702,
+        "bleu": 0.0298,
+        "bert_ans": 0.7709,
+        "acr": 0.5516,
+        "verifier": 2.718,
+        "n": 0,
+        "source": "dpo_v3_law_eval.json",
+        "domain": "Law"
+      },
+      {
+        "model": "ILearner-LLM (K=5)",
+        "time": 101.585,
+        "nli": 0.3996,
+        "bleu": 0.0381,
+        "bert_ans": 0.772,
+        "acr": 0.6326,
+        "verifier": 2.7845,
+        "n": 0,
+        "source": "baselines_law_k5_eval.json",
+        "domain": "Law"
+      }
+    ],
+    "Medicine Y1": [
+      {
+        "model": "LLaMA-3-8B-SFT",
+        "time": 2.226,
+        "nli": 0.3161,
+        "bleu": 0.0428,
+        "bert_ans": 0.8501,
+        "acr": 0.7523,
+        "verifier": 2.5,
+        "n": 100,
+        "source": "llama3_med_y1_eval.json",
+        "domain": "Medicine Y1"
+      },
+      {
+        "model": "Qwen3-8B-SFT",
+        "time": 3.722,
+        "nli": 0.2457,
+        "bleu": 0.0458,
+        "bert_ans": 0.8466,
+        "acr": 0.7387,
+        "verifier": 2.47,
+        "n": 100,
+        "source": "qwen3_med_y1_eval.json",
+        "domain": "Medicine Y1"
+      },
+      {
+        "model": "LLaMA-3-8B-DPO",
+        "time": 6.792,
+        "nli": 0.3958,
+        "bleu": 0.0392,
+        "bert_ans": 0.8184,
+        "acr": 0.7874,
+        "verifier": 2.45,
+        "n": 100,
+        "source": "llama3_med_y1_eval.json",
+        "domain": "Medicine Y1"
+      },
+      {
+        "model": "RL-DPO-v2 (K=1)",
+        "time": 7.753,
+        "nli": 0.2503,
+        "bleu": 0.022,
+        "bert_ans": 0.8261,
+        "acr": 0.801,
+        "verifier": 3.0764,
+        "n": 0,
+        "source": "baselines_med_y1_remaining_eval.json",
+        "domain": "Medicine Y1"
+      },
+      {
+        "model": "RL-DPO (K=1)",
+        "time": 9.792,
+        "nli": 0.2583,
+        "bleu": 0.0192,
+        "bert_ans": 0.8333,
+        "acr": 0.7575,
+        "verifier": 3.0429,
+        "n": 0,
+        "source": "dpo_v3_med_y1_eval.json",
+        "domain": "Medicine Y1"
+      },
+      {
+        "model": "RL-PPO (K=1)",
+        "time": 11.317,
+        "nli": 0.3226,
+        "bleu": 0.0131,
+        "bert_ans": 0.829,
+        "acr": 0.7412,
+        "verifier": 3.0289,
+        "n": 0,
+        "source": "llama2_ppo_med_y1_eval.json",
+        "domain": "Medicine Y1"
+      },
+      {
+        "model": "Qwen3-8B-DPO",
+        "time": 13.489,
+        "nli": 0.1701,
+        "bleu": 0.0212,
+        "bert_ans": 0.7959,
+        "acr": 0.8362,
+        "verifier": 2.96,
+        "n": 100,
+        "source": "qwen3_dpo_med_y1_eval.json",
+        "domain": "Medicine Y1"
+      },
+      {
+        "model": "Baseline-SFT (K=1)",
+        "time": 26.659,
+        "nli": 0.086,
+        "bleu": 0.0136,
+        "bert_ans": 0.7799,
+        "acr": 0.7556,
+        "verifier": 3.2561,
+        "n": 0,
+        "source": "dpo_v3_med_y1_eval.json",
+        "domain": "Medicine Y1"
+      },
+      {
+        "model": "ILearner-LLM (K=5)",
+        "time": 103.046,
+        "nli": 0.1219,
+        "bleu": 0.0671,
+        "bert_ans": 0.7863,
+        "acr": 0.8066,
+        "verifier": 3.2005,
+        "n": 0,
+        "source": "baselines_med_y1_k5_eval.json",
+        "domain": "Medicine Y1"
+      }
+    ],
+    "Medicine Y2": [
+      {
+        "model": "LLaMA-3-8B-SFT",
+        "time": 3.204,
+        "nli": 0.1529,
+        "bleu": 0.0488,
+        "bert_ans": 0.8373,
+        "acr": 0.678,
+        "verifier": 2.5,
+        "n": 100,
+        "source": "llama3_med_y2_eval.json",
+        "domain": "Medicine Y2"
+      },
+      {
+        "model": "Qwen3-8B-SFT",
+        "time": 4.64,
+        "nli": 0.1632,
+        "bleu": 0.0399,
+        "bert_ans": 0.8352,
+        "acr": 0.643,
+        "verifier": 2.49,
+        "n": 100,
+        "source": "qwen3_med_y2_eval.json",
+        "domain": "Medicine Y2"
+      },
+      {
+        "model": "LLaMA-3-8B-DPO",
+        "time": 6.094,
+        "nli": 0.3072,
+        "bleu": 0.0412,
+        "bert_ans": 0.8182,
+        "acr": 0.7466,
+        "verifier": 2.48,
+        "n": 100,
+        "source": "llama3_med_y2_eval.json",
+        "domain": "Medicine Y2"
+      },
+      {
+        "model": "GPT-4o-mini",
+        "time": 7.4929,
+        "nli": 0.1115,
+        "bleu": 0.0222,
+        "bert_ans": 0.7992,
+        "acr": 0.8546,
+        "verifier": 2.99,
+        "n": 100,
+        "source": "gpt4o_mini_med_y2_eval.json",
+        "domain": "Medicine Y2"
+      },
+      {
+        "model": "RL-DPO (K=1)",
+        "time": 8.664,
+        "nli": 0.2322,
+        "bleu": 0.0161,
+        "bert_ans": 0.8291,
+        "acr": 0.7552,
+        "verifier": 3.0524,
+        "n": 0,
+        "source": "dpo_v3_med_y2_eval.json",
+        "domain": "Medicine Y2"
+      },
+      {
+        "model": "RL-PPO (K=1)",
+        "time": 9.876,
+        "nli": 0.2188,
+        "bleu": 0.0218,
+        "bert_ans": 0.8263,
+        "acr": 0.6503,
+        "verifier": 3.0035,
+        "n": 0,
+        "source": "llama2_ppo_med_y2_eval.json",
+        "domain": "Medicine Y2"
+      },
+      {
+        "model": "Qwen3-8B-DPO",
+        "time": 13.404,
+        "nli": 0.2149,
+        "bleu": 0.0232,
+        "bert_ans": 0.7983,
+        "acr": 0.8234,
+        "verifier": 3.0,
+        "n": 100,
+        "source": "qwen3_dpo_med_y2_eval.json",
+        "domain": "Medicine Y2"
+      },
+      {
+        "model": "Baseline-SFT (K=1)",
+        "time": 19.398,
+        "nli": 0.0487,
+        "bleu": 0.0147,
+        "bert_ans": 0.7843,
+        "acr": 0.7077,
+        "verifier": 3.1799,
+        "n": 0,
+        "source": "dpo_v3_med_y2_eval.json",
+        "domain": "Medicine Y2"
+      },
+      {
+        "model": "ILearner-LLM (K=5)",
+        "time": 114.929,
+        "nli": 0.0923,
+        "bleu": 0.047,
+        "bert_ans": 0.7882,
+        "acr": 0.7906,
+        "verifier": 3.1746,
+        "n": 0,
+        "source": "med_y2_ilearner_only.json",
+        "domain": "Medicine Y2"
+      }
+    ],
+    "SciQ": [
+      {
+        "model": "Qwen3-8B-SFT",
+        "time": 1.632,
+        "nli": 0.3697,
+        "bleu": 0.0765,
+        "bert_ans": 0.8351,
+        "acr": 0.87,
+        "verifier": 2.1,
+        "n": 100,
+        "source": "qwen3_sciq_orpo_eval.json",
+        "domain": "SciQ"
+      },
+      {
+        "model": "Qwen3-8B-DPO",
+        "time": 10.757,
+        "nli": 0.1657,
+        "bleu": 0.0454,
+        "bert_ans": 0.7827,
+        "acr": 0.97,
+        "verifier": 2.68,
+        "n": 100,
+        "source": "qwen3_sciq_orpo_eval.json",
+        "domain": "SciQ"
+      },
+      {
+        "model": "KTO-Baseline",
+        "time": 12.515,
+        "nli": 0.1784,
+        "bleu": 0.0386,
+        "bert_ans": 0.7847,
+        "acr": 0.965,
+        "verifier": 2.48,
+        "n": 100,
+        "source": "qwen3_sciq_eval.json",
+        "domain": "SciQ"
+      }
+    ],
+    "ARC": [
+      {
+        "model": "Qwen3-8B-SFT",
+        "time": 2.143,
+        "nli": 0.3754,
+        "bleu": 0.0,
+        "bert_ans": 0.8639,
+        "acr": 0.6638,
+        "verifier": 2.09,
+        "n": 100,
+        "source": "arc_orpo_eval.json",
+        "domain": "ARC"
+      },
+      {
+        "model": "Qwen3-8B-DPO",
+        "time": 11.603,
+        "nli": 0.1855,
+        "bleu": 0.0,
+        "bert_ans": 0.8095,
+        "acr": 0.8978,
+        "verifier": 2.65,
+        "n": 100,
+        "source": "arc_orpo_eval.json",
+        "domain": "ARC"
+      }
+    ]
+  },
+  "cross_domain_summary": {
+    "ARC": {
+      "n_models": 2,
+      "min_time_s": 2.143,
+      "max_time_s": 11.603,
+      "avg_time_s": 6.873
+    },
+    "Cardiff": {
+      "n_models": 11,
+      "min_time_s": 3.653,
+      "max_time_s": 101.611,
+      "avg_time_s": 17.122
+    },
+    "Law": {
+      "n_models": 9,
+      "min_time_s": 1.652,
+      "max_time_s": 101.585,
+      "avg_time_s": 20.124
+    },
+    "Medicine Y1": {
+      "n_models": 9,
+      "min_time_s": 2.226,
+      "max_time_s": 103.046,
+      "avg_time_s": 20.533
+    },
+    "Medicine Y2": {
+      "n_models": 9,
+      "min_time_s": 3.204,
+      "max_time_s": 114.929,
+      "avg_time_s": 20.856
+    },
+    "Sydney": {
+      "n_models": 10,
+      "min_time_s": 2.107,
+      "max_time_s": 100.492,
+      "avg_time_s": 17.326
+    },
+    "Other": {
+      "n_models": 4,
+      "min_time_s": 6.983,
+      "max_time_s": 18.341,
+      "avg_time_s": 10.366
+    },
+    "SciQ": {
+      "n_models": 3,
+      "min_time_s": 1.632,
+      "max_time_s": 12.515,
+      "avg_time_s": 8.301
+    }
+  }
+}
