@@ -1,0 +1,918 @@
+{
+  "summary": {
+    "avg_nli": 0.6685093523573596,
+    "avg_ver": 3.0707845190000014,
+    "avg_acr": 0.8879926739926741,
+    "avg_bleu": 0.030832502528891772,
+    "avg_bert": 0.8034638023376465,
+    "n_samples": 16,
+    "weights": {
+      "nli": 0.1,
+      "ver": 0.4,
+      "acr": 0.35,
+      "bleu": 0.15
+    }
+  },
+  "results": [
+    {
+      "question": "Given question: What does it mean by isovolumetric contraction of the heart? Option A: This is when the ventricles contracts for the first 0.02-0.03s which is the time taken to build up pressure. During this period, the atrioventricular valves are closed and even though contraction occurs in ventricles, there is little shortening of muscle fibers but there is a decrease in volume. Option B: This is when the atrium contracts for the first 0.02-0.03s which is the time taken to build up pressure. During this period, the atrioventricular valves are open and even though contraction occurs in ventricles, there is no shortening of muscle fibers and the volume does not decrease. Option C: This is when the atrium contracts for the first 0.02-0.05s which is the time taken to build up pressure. During this period, the atrioventricular valves are closed and even though contraction occurs in ventricles, there is little shortening of muscle fibers and there is no emptying. Option D: This is when the ventricles contracts for the first 0.02-0.05s which is the time taken to build up pressure. During this period, the semilunar valves are open and even though contraction occurs in ventricles, there is no shortening of muscle fibers but emptying happens. Option E: This is when the ventricles contracts for the first 0.02-0.03s which is the time taken to build up pressure. During this period, the semilunar valves are closed and even though contraction occurs in ventricles, there is little shortening of muscle fibers and there is no emptying. The correct answer is Option E.",
+      "best_explanation": "The correct answer is E!Isovolumetric contraction is when the ventricles contract for the first 0.02-0.03s which is the time taken to build up pressure. During this period, the semilunar valves are closed and even though contraction occurs in ventricles, there is little shortening of muscle fibers and there is no emptying. This is due to the fact that the pressure in the ventricles is equal to the atmospheric pressure. During this period, the ventricles are not capable of emptying their contents. At the onset of ventricular systole, the semilunar valves close, and the ventricular systole is isovolumic until the onset of ventricular diastole. At the onset of ventricular diastole, the semilunar valves open, and the ventricles begin to empty their contents. During ventricular diastole, the volume of the ventricles decreases, and this is accompanied by shortening of muscle fibers. The decrease in volume of the ventricles during systole is small, and this is due to the fact that the ventricles are not capable of emptying their contents during systole. The volume of the ventricles begins to decrease during ventricular diastole, and this is accompanied by shortening of mus",
+      "nli": 0.9081078171730042,
+      "ver": 3.09679977,
+      "acr": 0.9642857142857143,
+      "bleu": 0.06500434785796855,
+      "bert": 0.9074437022209167
+    },
+    {
+      "question": "Given question: The three sites in a ribosome can be designated the letters E, P and A. What do these letters stand for? Option A: Exit, Propagation, Access Option B: Esterification, Peptide bonding, Acidification Option C: Entrance, Protein synthesis, Alteration Option D: Exit, Peptidyl, Aminoacyl Option E: Entrance, Passage, Autonomy The correct answer is Option D.",
+      "best_explanation": "E - Exit  P - Peptidyl  A - Aminoacyl Ribosomes are composed of three major sites: the entry site (or peptidyl site), the Aminoacyl site and the Exit site.  The peptidyl site is the location of peptidyl bonds being formed. The Aminoacyl site is the location of the new tRNA being charged with an amino acid. The Exit site is the site of peptidyl site and the Aminoacyl site. In translocation, the tRNA at the Aminoacyl site is released and moves towards the Exit site.  As translocation proceeds, the tRNA at the Peptidyl site is pushed towards the Aminoacyl site. Once the tRNA at the Peptidyl site reaches the Aminoacyl site, peptidyl site is available for the next cycle.  Thus, the three sites of the ribosome can be designated as the letters E, P and A, which stand for Exit, Peptidyl and Aminoacyl. https://www.sciencedirect.com/topics/biochemistry-genetics-and-molecular-biology/ribosome-site-of-action   https://www.sciencedirect.com/topics/biochemistry-",
+      "nli": 0.9418782591819763,
+      "ver": 2.98666666,
+      "acr": 1.0,
+      "bleu": 0.026839038366929295,
+      "bert": 0.7987669706344604
+    },
+    {
+      "question": "Given question: In the production of prostaglandins, the most widely used fatty acid precursor called arachidonic acid must be made. For this to happen, the fatty acid must be cleaved from the membrane phospholipids through the action of an enzyme.What is the name of this enzyme? Option A: Phospholipase B2 - PLB2 Option B: Phospholipase B1 - PLB1 Option C: Phospholipase C Option D: Phospholipase A2 - PLA2 Option E: Phospholipase A1 - PLA1 The correct answer is Option D.",
+      "best_explanation": "Phospholipase A2 (PLA2) is the enzyme that cleaves arachidonic acid from membrane phospholipids. The process of cleaving a fatty acid from the membrane phospholipids is called phospholipid hydrolysis.  Phospholipase B1 and B2 both hydrolyse phospholipids to produce IP3 and DAG.  Phospholipase C is activated by Gq subunit of a G protein and hydrolyses PI(4,5)P2 to DAG and IP3  Phospholipase A1 is activated by thrombin and converts PE to IP3  Phospholipase A2 (PLA2) is activated by thrombin and other agonists and hydrolyses SM to IP3 and AA  THERE IS ANOTHER ANSWER OUT THERE - I HAVE JUST DISCOVERED. Phospholipase A1 (PLA1) hydrolyses PE to IP3 - this was in the previous answer  However, Phospholipase A1 (PLA1) also has a role in the breakdown of membrane phospholipids for the production of AA.  Phospholipase A2 (PLA2) is the enzyme that cle",
+      "nli": 0.964801013469696,
+      "ver": 2.98627776,
+      "acr": 1.0,
+      "bleu": 0.004771995700112755,
+      "bert": 0.8287353515625
+    },
+    {
+      "question": "Given question: Sally has recently been experiencing a burning pain behind her sternum which is worse after eating and when lying down. After some of her own internet research she has decided to purchase some over the counter Gaviscon. She finds that this has helped relieve her symptoms, but the problem doesn't go away.  She goes to the GP, who diagnoses her with GORD and prescribes her omeprazole.  The GP tells her to stop taking the Gaviscon. Why is this? Option A: The internet is not an accurate source of medical advice. Gaviscon actually worsens the effects of GORD. Option B: Gaviscon is an enzyme inducer, therefore accelerating the metabolism of omeprazole. Option C: Omeprazole is a more effective drug, so there is no point taking Gaviscon as well. Option D: Omeprazole requires the acid environment of the stomach to be activated. The correct answer is Option D.",
+      "best_explanation": "A- made up B- partly correct C- incorrect D- correct answer. Omeprazole is a proton pump inhibitor, and so is more effective than Gaviscon which is just an antacid. It also requires the acid environment to be activated whereas Gaviscon can work even if there is no acid present. Gaviscon can actually worsen the effects of GORD as it creates a foam that can push the stomach contents back up into the oesophagus. Gaviscon and GORD are both shortened names, I don't know if that was meant to be a give away or not.  Hope this helps! Let me know if you have any other questions.  :)\n\nAnswer:D- correct answer, omeprazole is a proton pump inhibitor and so is more effective than Gaviscon which is just an antacid. It also requires the acid environment to be activated whereas Gaviscon can work even if there is no acid present. Gaviscon can actually worsen the effects of GORD as it creates a foam that can push the stomach contents back up into the oesophagus. Gaviscon and GORD are both shortened names, I don't know if that was meant to be a give away or not.  Hope this helps! Let me",
+      "nli": 0.9903959631919861,
+      "ver": 3.09622277,
+      "acr": 1.0,
+      "bleu": 0.026195624308204168,
+      "bert": 0.821996808052063
+    },
+    {
+      "question": "Given question: Your GI consultant presents to you a patient that has developed some Gastric ulcers. She tells you that they have ruled out the chances of a H.Pylori cause. The patient is of relatively normal weight and about 30, with no smoking history or alcohol misuse. Before you take a history, the consultant tells you that it is likely another extremely common cause of gastric ulcers, being... Option A: A Gastro-carcinoma Option B: Gastric Neoplasia Option C: Stress Option D: Crohn's Disease Option E: NSAIDS The correct answer is Option E.",
+      "best_explanation": "Non-steroidal anti-inflammatory drugs (NSAIDs) can cause gastric ulcers.  Helicobacter pylori infection and NSAIDs are the two most common causes of gastric ulcers.  A gastric neoplasia would be a tumour, so is unlikely to be the cause of ulcers.  Stress can cause ulcers, but it is unlikely to be the sole cause.  Crohn's disease causes inflammation of the gut, so would present with ulcers, but it is unlikely to be the cause in this case as the patient is of normal weight.  Carcinoma of the stomach is a possibility, but would be very unlikely in a 30 year old.  It is also possible that the patient has developed ulcers due to another cause, such as autoimmune disease, but this is unlikely to be the case without further information.  The most likely answer is NSAIDs, as these are a common cause of gastric ulcers and the patient has no history of smoking, alcohol or obesity, which are all factors which increase the risk of ulcers.  Also, the fact that the patient is relatively young reduces the chances of a gastric carcinoma.  The key point to remember is that stress, NSAIDs, H.pylori and Crohn",
+      "nli": 0.06042606011033058,
+      "ver": 3.13676777,
+      "acr": 1.0,
+      "bleu": 0.013997473189364085,
+      "bert": 0.7645608186721802
+    },
+    {
+      "question": "Given question: The occulomotor nerve (CNIII) innervates several extrinsic eye muscles responsible for rotating the eyeball. Which of the following are ALL innervated by the occulomotor nerve ? Option A: Superior Rectus, Inferior Rectus, Lateral Rectus and Inferior Oblique. Option B: Superior Rectus, Inferior Rectus, Superior Oblique and Inferior Oblique. Option C: Superior Rectus, Inferior Rectus, Medial Rectus and Inferior Oblique. Option D: Superior Rectus, Inferior Rectus, Medial Rectus and Lateral Rectus. The correct answer is Option C.",
+      "best_explanation": "The correct answer is C  A - A way to remember this is Super 3Rs (Superior Rectus, Inferior Rectus, Medial Rectus)B - This is correct but not all of the muscles that rotate the eyeball are innervated by the occulomotor nerve. D- This is incorrect as the lateral Rectus is innervated by the Abducens nerve (CN VI). To remember the lateral Rectus, you could use the mnemonic 'Let's Get Lucky (Lateral Rectus)'.  NB: The remaining extrinsic eye muscle (the superior oblique) is innervated by the trochlear nerve (CNIV). To remember this use the mnemonic 'Socks (Superior Oblique, Lateral Rectus, Occulomotor, Medial Rectus)'.  PCS Unit 3: Eye and Vision Lecture.  Case 2: The Eye: Structure and Function.  Essential Clinical Anatomy p156-7.  See slide 7 from the 'Eye and Vision' lecture.  Learning outcome: Identify and name the extraocular muscles and describe their actions.  Link to PCS: Understand the basic anatomy and physiology of the eye and vision.  Link to",
+      "nli": 0.9364742040634155,
+      "ver": 2.98666666,
+      "acr": 1.0,
+      "bleu": 0.017433286703373945,
+      "bert": 0.819913387298584
+    },
+    {
+      "question": "Given question: During what stage of bone healing is RANK-L active? Option A: Bony callus formation Option B: Consolidation Option C: Granulation callus formation Option D: Inflammation Option E: Remodelling The correct answer is Option A.",
+      "best_explanation": "RANK-L is a protein released by osteoclasts, which are cells that resorb bone. It stands for 'receptor activator of nuclear factor kappa B ligand'. This ligand activates osteoclasts, which results in bone resorption. Bony callus formation is the stage where osteoclasts are active, resorbing the bony callus that has formed. The other stages are where osteoblasts are dominant, and they deposit new bone.  Consolidation is where the fracture ends are healed by suture fusion. Granulation callus formation is where the callus is made of granulation tissue, which is made up of a network of capillaries, and the soft callus is made up of a mixture of dead and living cells.  Inflammation is where there is increased vascularity, and neutrophils clear debris.  Remodelling is where bone is resorbed and replaced with new bone.  The SOS response is where osteoblasts divide rapidly to form a large number of new osteoblasts. The osteoid is deposited rapidly and is not as strong as the one laid down during the primary bone response. It is more like woven bone.  The SOS response is short, and the osteoid is rapidly replaced by l",
+      "nli": 0.0031344827730208635,
+      "ver": 3.06666666,
+      "acr": 1.0,
+      "bleu": 0.011932097265321604,
+      "bert": 0.8036838173866272
+    },
+    {
+      "question": "Given question: Poor James, a 5 year old boy, is brought to the GP by his mum who is concerned that he always seems more out of breath than the other children during sport and is often wheezy. You decide that the most likely diagnosis is asthma and prescribe Salbutamol. Which of the following best describes the mechanism of action of salbutamol? Option A: Beta-2-adrenoreceptor agonist Binds to beta-2-adrenoreceptors which are GPCRThis up regulates adenylate cyclasecAMP increases and activates protein kinase APKA switches of myosin light chain kinase Bronchial smooth muscle relaxes Option B: M3 receptor antagonist Binds to M3 which is a GPCR and blocks acetylcholine from binding This decreases cGMP production cGMP usually causes bronchial smooth muscle contractionLess cGMP causes bronchial smooth muscle relaxation Option C: M3 receptor agonist Binds to M3 which is a GPCR and blocks acetylcholine from bindingThis decreases cGMP productioncGMP usually causes bronchial smooth muscle contractionLess cGMP causes bronchial smooth muscle relaxation Option D: Beta-2-adrenoreceptor antagonistBinds to beta-2-adrenoreceptors which are GPCRThis up regulates adenylate cyclasecAMP increases and activates protein kinase APKA switches of myosin light chain kinaseBronchial smooth muscle relaxes Option E: Inhaled corticosteroid Binds to a glucocorticoid receptor Up regulates transcription anti-inflammatory mediatorsDown regulates transcription of inflammatory mediators Reduces inflammation The correct answer is Option A.",
+      "best_explanation": "A is the correct answer  B - terbutaline  C - ipratropium  D - salmeterol  E - prednisolone  The following website was used to help create this question: https://geekymedics.com/asthma-drugs/  I hope you find this helpful. Let me know if you have any questions.  Good luck with your revision.  Dr Coffey  (GP and Undergraduate Lecturer)  Asthma drugs: Salbutamol:  Beta-2-adrenoreceptor agonistBinds to beta-2-adrenoreceptors which are GPCRThis up regulates adenylate cyclasecAMP increases and activates protein kinase APKA switches of myosin light chain kinaseBronchial smooth muscle relaxesTropicam: M3 receptor antagonistBinds to M3 which is a GPCR and blocks acetylcholine from bindingThis decreases cGMP production cGMP usually causes bronchial smooth muscle contractionLess cGMP causes bronchial smooth muscle relaxationIpratropium: M3 receptor agonistBinds to M3 which is a GPCR and blocks acetylcholine from bindingThis decreases cGMP productioncGMP usually causes bronchial smooth",
+      "nli": 0.7595222592353821,
+      "ver": 3.09777777,
+      "acr": 1.0,
+      "bleu": 0.005085661424844467,
+      "bert": 0.856030285358429
+    },
+    {
+      "question": "Given question: Colin the cell is still on his quest to have a family. The production of his protein has now entered into the translation phase. Every protein starts with a methionine amino acid. The codon that codes for this is AUG. What anticodon would the complementary tRNA molecule possess? Option A: TAC Option B: GCA Option C: CGU Option D: CGT Option E: UAC The correct answer is Option E.",
+      "best_explanation": "AUG = methionine  The complementary tRNA molecule would have an anticodon that pairs with the codon for methionine (AUG) and this is UAC.  The tRNA molecule carrying methionine will only bind to the Aminoacyl tRNA site on the ribosome (PEP) when the complementary anticodon (UAC) pairs with the methionine codon (AUG)  The other tRNA molecules for the other amino acids will also bind to the ribosome at the same time.  Once the tRNA molecules are bound to the ribosome, the peptidyl site on the ribosome will be available to bind the tRNA molecule that carries the growing polypeptide chain.  The ribosome will then perform the peptidyl site turnover, where the Aminoacyl site tRNA molecule is ejected and replaced with a new one.  This process will continue until the full length protein is synthesised.  The Initiation complex is then ready to bind another mRNA molecule.  The ribosomes are capable of carrying out multiple translocation events simultaneously.  Therefore, one or more ribosomes may be translating different mRNA molecules at the same time.",
+      "nli": 0.9635059833526611,
+      "ver": 2.98666666,
+      "acr": 0.0,
+      "bleu": 0.00781070020842435,
+      "bert": 0.7744739055633545
+    },
+    {
+      "question": "Given question: A 87 year old comes to the GP surgery complaining of frequent urination, particularly at night. Following a diabetes test, which returned normal, the doctor suggested Benign Prostatic Hyperplasia (BPH) may be the cause. BPH causes enlargement of a specific part of the prostate. The doctor asks you which part is this? Option A: Anterior Fibromuscular stroma Option B: Central Option C: Oblique Option D: Peripheral Option E: Transitional The correct answer is Option E.",
+      "best_explanation": "The transitional zone is the part of the prostate which is affected by BPH.The peripheral zone is the part which surrounds the transitional zone and is responsible for producing most of the prostate's prostate specific antigen (PSA).The anterior fibromuscular stroma is the part of the prostate nearest the neck of the bladder.The oblique and central parts are the two lobes of the prostate, one on either side of the urethra.  Source: Case 6 Anatomy workbook, PCS2.  https://teachmeanatomy.info/pelvis/male-reproductive-system/prostate/prostatic-zones/   https://teachmeanatomy.info/pelvis/male-reproductive-system/prostate/prostatic-hyperplasia/   https://www.urologyhealth.org/urologic-conditions/benign-prostatic-hyperplasia-bph/symptoms#:~:text=BPH%20causes%20the%20prostate%20to,more%20frequently%20than%20normal.&text=Anterior%20Fibromuscular%20stroma,the%20neck%20of%20the%20",
+      "nli": 0.03458518534898758,
+      "ver": 3.13666227,
+      "acr": 1.0,
+      "bleu": 0.06321921778659127,
+      "bert": 0.755687415599823
+    },
+    {
+      "question": "Given question: The Rhomboid major and minor muscles are located deep to the trapezius and are innervated by the dorsal scapular nerve. What other muscle of the upper limb is also innervated by the dorsal scapular nerve? Option A: Supraspinatus Option B: Infraspinatus Option C: Latissimus Dorsi Option D: Levator Scapulae Option E: Subscapularis The correct answer is Option D.",
+      "best_explanation": "The dorsal scapular nerve supplies the rhomboids and levator scapulae. It also innervates the teres minor and the deltoid.  Nerve to the trapezius - spinal accessory nerve Nerve to supraspinatus - axillary nerve Nerve to infraspinatus and teres minor - subscapular nerve Nerve to latissimus dorsi - thoracodorsal nerve Nerve to levator scapulae - dorsal scapular nerve Nerve to subscapularis - subscapular nerve  Nerve to the trapezius - spinal accessory nerve  Nerve to supraspinatus - axillary nerve  Nerve to infraspinatus and teres minor - subscapular nerve  Nerve to latissimus dorsi - thoracodorsal nerve  Nerve to levator scapulae - dorsal scapular nerve  Nerve to subscapularis - subscapular nerve  Anatomy session 5 and 6 - Muscles of the Upper Limb and Thorax  Unit 1 - The Basics of Life: Structure and Function  Learning Outcome: Understand the basic concepts of structure and function.  Learning Outcome: Understand the",
+      "nli": 0.4387721121311188,
+      "ver": 2.98666662,
+      "acr": 1.0,
+      "bleu": 0.007989614476651441,
+      "bert": 0.7931215167045593
+    },
+    {
+      "question": "Given question: After ovulation the follicle is turned into the corpus leuteum, which cells in the corpus leuteum secrete progesterone? Option A: theca interna Option B: granulosa Option C: leuteal cells Option D: theca externa Option E: follicular cells The correct answer is Option B.",
+      "best_explanation": "Granulosa cells- derived from the follicle and are the dominant cell type in the corpus leuteum, they secrete progesterone to prepare the endometrium for implantation.  theca cells- derived from the theca externa, they produce androgens  Leuteal cells- produced after the corpus leuteum has migrated into the uterus, they produce estrogen  theca externa- derived from the mesenchyme, it forms the outer lining of the follicle and produces androgens  follicular cells- produce the mature oocyte and are surrounded by follicular fluid, the growth and development of the follicle is regulated by FSH and LH  Corpus leuteum- derived from the follicle, it is the dominant cell type in the early secretory phase of the menstrual cycle, it produces progesterone and oestrogen to prepare the endometrium for implantation, if there is no implantation it undergoes degeneration and is absorbed, if it does implantation it becomes the placenta and continues to produce progesterone and oestrogen.  (Human Reproductive Anatomy and Physiology, PCS 3, Lecture 7)  (Human Reproductive Anatomy and Physiology, PCS",
+      "nli": 0.8812813758850098,
+      "ver": 3.09662677,
+      "acr": 1.0,
+      "bleu": 0.009053212336316832,
+      "bert": 0.810100257396698
+    },
+    {
+      "question": "Given question: What is the enzyme commission number for succinyl coA synthetase? Option A: 5.3.2.1 Option B: 5.4.2.14 Option C: 3.2.1.4 Option D: 2.1.8.19 Option E: 6.2.1.5 The correct answer is Option E.",
+      "best_explanation": "The enzyme commission number for succinyl coA synthetase is 6.2.1.5  This enzyme is involved in the link reaction.  Link Reaction:                       HCO-                       HCOOH                       HC(=O)NH-                       HC(=O)N(CH3)2                       HC(=O)N(C2H5)2                       HC(=O)N(C3H7)2                       HC(=O)N(C4H9)2                       HC(=O)N(C5H11)2                       HC(=O)N(C6H13)2                       HC(=O)N(C7H15)2                       HC(=O)N(C8H17)2                       HC(=O)N(C9H19)2                       HC(=O)N(C10H21)2                      HC(=O)N(C11H23)2                      HC(=O)N(C12H25)2                      HC(=O)N(C13H27)2                      HC(=O)N(C14H29)2",
+      "nli": 0.978440523147583,
+      "ver": 2.98677766,
+      "acr": 0.0,
+      "bleu": 0.007711677325854533,
+      "bert": 0.7255190014839172
+    },
+    {
+      "question": "Given question: which of these drugs is an muscarinic acetylcholine agonist? Option A: phenylephrine Option B: tropicamide Option C: tetracaine Option D: pilocarpine Option E: fluorescein The correct answer is Option D.",
+      "best_explanation": "D is the correct answer - all the others are examples of acetylcholine antagonists (except perhaps fluorescein which is an emerald green tricyclic organic pigment with a fluorescent blue emission)  in the eye, acetylcholine allows the ciliary muscle to contract and the lens to become rounder (accommodation) - antagonists prevent this from happening  cholinomimetics (mACh antagonists) - mACh is released from parasympathetic nerve endings and acts on muscarinic receptors to cause smooth muscle relaxation  in the eye this would therefore cause pupil dilation  tropicamide is an example of this - it's a mACh antagonist and blocks parasympathetic impulses to the ciliary muscles, causing the inability to focus the lens (cannot accommodate)  this is usually used during eye exams to dilate the pupils and make the eye easier to examine  other drugs that do this include pilocarpine (a muscarinic agonist as mentioned) and phenylephrine (an adrenoceptor agonist - acts on sympathetic nervous system)  tetracaine - this is a local anaesthetic that blocks voltage-gated sodium channels in sensory nerve",
+      "nli": 0.915398359298706,
+      "ver": 3.13777777,
+      "acr": 1.0,
+      "bleu": 0.0036961017725536277,
+      "bert": 0.7739514112472534
+    },
+    {
+      "question": "Given question: What is testicular torsion? Option A: Undescended testes Option B: A type of swelling in the scrotum that occurs when fluid collects in the thin sheath surrounding a testicle Option C: an enlargement of the veins within the scrotum Option D: Rotation of the testis and the spermatic cord causing occlusion of the testicular artery and testicular ischemia Option E: diminished functional activity of the gonads due to lower hormone levels The correct answer is Option D.",
+      "best_explanation": "Testicular torsion is the rotation of the testis and the spermatic cord, resulting in occlusion of the testicular artery. This leads to ischemia of the testis and, if untreated, necrosis of the testis.  Epididymo orchitis is inflammation of the epididymis and the testis, usually due to a bacterial infection  in the seminiferous tubules of the epididymis, in the pampiniform plexus, or in the testis itself.  Inflammation of the testis (testitis) is usually a complication of orchitis  Spermatorrhea is the uncontrollable emission of semen, often associated with a lack of sexual desire  Hypogonadism is diminished functional activity of the gonads due to lower hormone levels  Hypergonadism is when there is a excess of hormones, testosterone specifically due to a testicular origin  Hyperspermia is an excess of sperm production  Hyperestrogenism is an excess of estrogen production  Kallmann's is when a person doesn't develop puberty secondary to a lack of gonadotropin hormones  5 alpha reductase deficiency is when there is a lack of testosterone due to the inability",
+      "nli": 0.9392299056053162,
+      "ver": 3.13666237,
+      "acr": 0.9,
+      "bleu": 0.06066821770263458,
+      "bert": 0.8633800745010376
+    },
+    {
+      "question": "Given question: Joints have a rich nerve supply provided by articular nerves. Hilton's law states that the nerves supplying a joint also supply the muscles moving the joint and the skin covering their distal attachments. The nerve of a joint transmits impulses which play a key role in which sense? Option A: Nociception Option B: Proprioception Option C: Exteroception Option D: Interoception Option E: Kinesthesia The correct answer is Option B.",
+      "best_explanation": "Hilton's Law states that the nerves supplying a joint also supply the muscles moving the joint and the skin covering their distal attachments. The nerve of a joint transmits impulses which play a key role in proprioception.  Nociception is the sensation of pain. It is a specialised form of nociceptive sensitisation which detects tissue damage.  Exteroception is the sensation of pain arising from stimuli in the external environment.  Interoception is the conscious perception of physiological sensations originating from within the body.  Kinesthesia is the perception of body movement and position. It is the conscious awareness of the movement of the body or a part of the body, which is generated by proprioception.  For example, when you close your eyes, you can still feel your eyelids moving. This is proprioception at work. You are aware of the position and movement of your eyelids. This information is being sent to the brain by proprioceptive nerve impulses.  You can also feel your heart beating. This is proprioception. You are aware of the position and movement of your heart. This information is being sent to the brain by proprioceptive nerve impulses.  In summary, proprioception is the perception of body movement and position. It is the conscious awareness of",
+      "nli": 0.9263989329338074,
+      "ver": 3.13966666,
+      "acr": 1.0,
+      "bleu": 0.005419055419961294,
+      "bert": 0.7819617390632629
+    },
+    {
+      "question": "Given question: A patient has been rushed into the emergency ER after suffering a stroke. The neurologist discovers they have lesions in the left S1 and S2 cortices of the brain. When the patient wakes up, the doctor runs some tests including a test that involves pinching the patient. The doctor finds that the patient is experiencing less pain on the right side of the body and struggles to identify the location where they were pinched. Why is this? Option A: The stroke has led to damage of the spinothalamic tract Option B: The stroke has led to damage of the lateral pain system Option C: The patient has a lower perception of pain Option D: The stroke has led to damage medial pain system Option E: The stroke has led to damage of the dorsal column medial leminiscus tract The correct answer is Option B.",
+      "best_explanation": "Stroke has led to damage of the lateral pain system (broken lateral white line on the brain scan) which explains why the patient struggles to localise where they were pinched. The spinothalamic tract is part of the lateral pain system and transmits information on pain location, so this is intact as the patient can still identify pain when it is presented on the left side.  The patient has an altered perception of pain as the stroke has led to damage to the medial pain system (broken medial white line on the brain scan). This system is responsible for the emotional aspect of pain and the patient's emotional response to pain on the right side of the body is reduced.  The medial pain system is part of the dorsal column medial lemniscus tract.  The spinothalamic tract and the spinoreticulospinal tract make up the spinoreticulospinal pathway which is part of the lateral pain system.  The lateral pain system is ipsilateral (on the same side) and the medial pain system is contralateral (on the other side).  Damage to the spinothalamic tract and spinoreticulospinal tract will lead to a loss of pain localisation.  Damage to the lateral pain system will lead to an inability to localise pain, but the patient will still have",
+      "nli": 0.9728170037269592,
+      "ver": 3.19666666,
+      "acr": 1.0,
+      "bleu": 0.060248571344270856,
+      "bert": 0.8552965521812439
+    },
+    {
+      "question": "Given question: How do NSAIDs reduce pain? Option A: They inhibit PGHS-1 derived PGE2 which normally sensitises A-delta and C fibres to serotonin, bradykinin and substance P Option B: They inhibit PGHS-2 derived PGE2 which normally sensitises A-beta and A-delta fibres to serotonin, bradykinin and substance P Option C: They inhibit PGHS-1 derived PGE2 which normally sensitises A-delta and C fibres to serotonin, acetylcholine and substance P Option D: They inhibit PGHS-2 derived PGE2 which normally sensitises A-deta and C fibres to serotonin, bradykinin and substance P Option E: They inhibit PGHS-1 derived PGE2 which normally sensitises A-beta and A-delta fibres to serotonin, bradykinin and substance P The correct answer is Option D.",
+      "best_explanation": "How do NSAIDs reduce pain?  They inhibit PGHS-2 derived PGE2 which normally sensitises A-delta and C fibres to serotonin, bradykinin and substance P  Why the following are incorrect; Note- PGHS-1 derived PGE2 sensitises A-delta and C fibres to serotonin, acetylcholine and substance P, not bradykinin.  A-delta and C fibres are sensitised to serotonin, acetylcholine and substance P (not bradykinin) by PGHS-1 derived PGE2 which is inhibited by NSAIDs, reducing pain.B- PGHS-2 derived PGE2 sensitises A-beta and A-delta fibres to serotonin, bradykinin and substance P not A-delta and C fibresC- PGHS-1 derived PGE2 sensitises A-delta and C fibres to serotonin, acetylcholine and substance P not bradykininD- Correct- PGHS-2 derived PGE2 sensitises A-delta and C fibres to serotonin, bradykinin and substance P not A-beta and A-deltaE- PGHS-1 derived PGE2 sens",
+      "nli": 0.9903438091278076,
+      "ver": 3.09777777,
+      "acr": 0.9230769230769231,
+      "bleu": 0.04060492827837056,
+      "bert": 0.8600212931632996
+    },
+    {
+      "question": "Given question: Nia is looking into different pain relief options as she is currently taking Ibuprofen and it is not providing strong enough pain relief for her chronic back pain. Which of the following pain relief medication has been linked with the development Cushing's syndrome if taken chronically? Option A: Aspirin Option B: Codeine Option C: Ibuprofen Option D: Paracetamol Option E: Prednisolone The correct answer is Option E.",
+      "best_explanation": "Prednisolone is a glucocorticoid steroid receptor agonist that acts to reduce inflammation and swelling.  Ibuprofen, codeine and aspirin are all NSAIDs (options A and B) or anti-pyretics/analgesics (option C)  Paracetamol is an analgesic and antipyretic (option D) A - aspirin can also be used as an anti-platelet medication B - codeine can be used as an antitussive/anti-diuretic C - ibuprofen is also an anti-pyretic and analgesic D - paracetamol is also a antipyretic and analgesic E - prednisolone is a glucocorticoid steroid receptor agonist that acts to reduce inflammation and swelling.  The following link from the BMJ states that prednisolone is associated with the development of Cushing's syndrome if taken chronically https://www.ncbi.nlm.nih.gov/pubmed/28298611/ \"Chronic use of prednisolone is associated with the development of Cushing's syndrome.\"  The following link from the RCHSD explains how prednisolone works as an anti-inflammatory steroid",
+      "nli": 0.9830814003944397,
+      "ver": 3.06666777,
+      "acr": 1.0,
+      "bleu": 0.01200093383925001,
+      "bert": 0.7977951765060425
+    },
+    {
+      "question": "Given question: Chemotaxis is the process of attracting neutrophils and macrophages to the site of infection. Which of the molecules of the complement system are chemotaxins? (A chemotaxin is a molecule that causes/facilitates chemotaxis). Option A: C3 convertase Option B: C3a only Option C: C3a and C5a Option D: C3b only Option E: C3b and C5b The correct answer is Option C.",
+      "best_explanation": "C3a and C5a are chemotaxins as they cause/facilitate chemotaxis. C3b is a coating protein that can cause opsonisation and mediate complement-dependent cytotoxicity. C5b can also bind to pathogens and facilitate opsonisation.  The answer is not D as C3b only causes opsonisation and C3a and C5a cause chemotaxis. The answer is not E as C5b is a coating protein that can cause opsonisation and mediate complement-dependent cytotoxicity.  Information source: Applied immunology and microbiology post tutorial document.  Further information:Chemotaxis is the process of attracting neutrophils and macrophages to the site of infection. This is achieved by the C3a and C5a complement system. These two proteins are chemotaxins as they cause/facilitate chemotaxis. (Complement system lecture, PCS2)C3b is a coating protein that can cause opsonisation and mediate complement-dependent cytotoxicity. C3b binds to pathogens and phagocytes and this causes the recognition of the pathogen. Opsonisation is the process of binding to pathogens and causing their recognition by phagocytes. (Immunology lecture, PCS2)C5",
+      "nli": 0.9740118384361267,
+      "ver": 2.98677772,
+      "acr": 0.0,
+      "bleu": 0.01432635466433512,
+      "bert": 0.8117855191230774
+    },
+    {
+      "question": "Given question: Hypertension can be defined as persistent blood pressure greater than or equal to 140/90mmHg. There are many antihypertensive drugs including one called Losartan. What type of antihypertensive drug is Losartan? Option A: ACE inhibitor Option B: Angiotensin II receptor blocker Option C: Calcium channel blocker Option D: Beta blocker Option E: Thiazide like diuretic The correct answer is Option B.",
+      "best_explanation": "Losartan is an angiotensin II receptor blocker (ARB) ACE inhibitor- causes less angiotensin II to be produced and acts on the renin-angiotensin system CA channel blockers- stops the entry of calcium into vascular smooth muscle cells, thereby reducing the rate of cardiac contraction and arterial hypertension Beta blockers- acts on the sympathetic nervous system, reducing the rate of cardiac contraction and arterial hypertension Thiazide like diuretics- causes the kidneys to excrete more sodium, which draws water from the blood and reduces blood volume. This reduces the osmotic force of the blood and therefore the pressure within the blood.  From: Principles of Cardiac Physiology, 4th edition, Coffey, Pg 493-494.  Blood pressure ranges: Normal- less than 120/85 mmHg; Hypertension- 140/90 mmHg or higher; Hypotension- less than 90/60 mmHg  Drugs that lower blood pressure: RAS blockers, beta blockers, ACE inhibitors, calcium channel blockers, thiazide like diuretics, angiotensin II receptor blockers. From: Principles",
+      "nli": 0.9781287312507629,
+      "ver": 3.09677777,
+      "acr": 1.0,
+      "bleu": 0.015706107959736194,
+      "bert": 0.7984796166419983
+    },
+    {
+      "question": "Given question: What would happen if a child had growth hormone in excess? Option A: Acromegaly Option B: Gigantism Option C: Dwarfism Option D: No effect The correct answer is Option B.",
+      "best_explanation": "If a child has growth hormone in excess, they will have gigantism. This is because GH causes an increase in cell number. In children, this results in tall stature. In adults, it results in acromegaly, which is characterised by excessive growth and enlargement of bones, tendons, and other tissues. This leads to severe organ enlargement and potential damage to the heart, blood vessels, and lungs. It is much rarer than acromegaly, and is only seen in people with a GH excess due to a pituitary tumour, which secretes excessive amounts of GH. Most common in children with cancer, and those with severe brain trauma or tumours. Gigantism is also a result of an excess in GH, but most commonly occurs in childhood, and is less severe than acromegaly. It leads to tall stature, but unlike acromegaly, the excess GH is not severe enough to cause significant organ enlargement. Gigantism leads to acromegaly in the majority of cases, as the excess GH in gigantism leads to organomegaly, and hence, severe health risks.  A lack of growth hormone in children is called childhood growth hormone deficiency. It is rare, and can be caused by damage to the pituitary",
+      "nli": 0.17028403282165527,
+      "ver": 3.16666666,
+      "acr": 1.0,
+      "bleu": 0.0052045704829935535,
+      "bert": 0.7686275839805603
+    },
+    {
+      "question": "Given question: What are the nerve roots of the pudendal nerve? Option A: S2, S3, S4 Option B: S2, S3 Option C: S3, S4, S5 Option D: S4, S4 Option E: S2, S3, S4, S5 The correct answer is Option A.",
+      "best_explanation": "S2, S3, S4 are the nerve roots of the pudendal nerve.  This is in the pudendal canal within the anterior border of the sacrum.  S2, S3 helps with motor innervation of the external urethral and anal sphincters.  S4 helps with sensory innervation of the perineum and anus.  S3, S4, S5 helps with the motor innervation of the perineum.  S2, S3, S4, S5 helps with the sensory innervation of the perineum, anal canal, and skin surround anus.  S4, S4 helps with sensory innervation of the perineum.  S2, S3, S4, S5 helps with the motor and sensory innervation of the perineum.  S2, S3, S4 helps with motor innervation of the external urethral and anal sphincters and sensory innervation of the perineum and anus.  S2, S3, S4, S5 helps with motor innervation of the perineum and sensory innervation of the perineum, anal canal, and skin surround anus.  S3, S4, S5 helps with motor innervation of the external ureth",
+      "nli": 0.9312265515327454,
+      "ver": 3.13966666,
+      "acr": 0.0,
+      "bleu": 0.007327117164963076,
+      "bert": 0.8009386658668518
+    },
+    {
+      "question": "Given question: Our immunity can be divided into that which is Innate and that which is Adaptive, each comprising of different cell types, with different functions. Which cell type \"bridges the gap\" between the two types of immune response? Have a think about how it does this. Option A: Mast Cell Option B: Macrophage Option C: Neutrophil Option D: Dendritic Cell Option E: Natural Killer Cell The correct answer is Option D.",
+      "best_explanation": "Dendritic cells are the link between innate and adaptive immunity. They have a large number of receptors on their surface, allowing them to detect and respond to a wide range of microbes and foreign substances. They can also activate adaptive immune responses by presenting antigens to T cells and B cells. They do this by presenting parts of the microbe (antigen) on their surface, in a way that stimulates either a T cell or B cell. Once activated, T cells and B cells are able to perform a more specific action, i.e. they can 'remember' the microbe they have encountered and can \"call out\" other cells of the immune system to help fight the infection. They also divide and differentiate into effector T cells and B cells which have specific abilities, for example T cells can release cytokines which activate macrophages and induce them to kill the microbe.  Mast cells are important in parasitic infections, their granule proteins cause degranulation and this leads to the death of the parasite.  Macrophages are important in the first line of defence, they have receptors for this and when a microbe binds to one of these receptors, it triggers \"inflammation\" which is what we feel as pain.  Natural killer cells are important in the",
+      "nli": 0.9323156476020813,
+      "ver": 3.06662677,
+      "acr": 1.0,
+      "bleu": 0.01397118710305818,
+      "bert": 0.8425136208534241
+    },
+    {
+      "question": "Given question: Elizabeth visits the GP for advice surrounding contraception. Together, you decide that the pill is most appropriate. You ask Elizabeth if she has a family history of breast cancer, to which she reveals she does. Based on the available information, which pill would be most appropriate? Option A: Progesterone only pill Option B: Estrogen only pill Option C: The combined Pill Option D: ethinylestradiol Option E: levonorgestrel The correct answer is Option A.",
+      "best_explanation": "The POP is the most appropriate as it does not contain any estrogen. A woman with a family history of breast cancer can take the POP, the COCP, the EOCP, or the progesterone injection.  Information from Case 2, the reproductive hormones lecture, and the contraceptive implant/ injection/patch/ ring lecture.  https://www.gpnotebook.co.uk/simple/contraception/the-progestogen-only-pill/  https://www.gpnotebook.co.uk/simple/contraception/the-combined-pill/  https://www.gpnotebook.co.uk/simple/contraception/the-estrogen-progestogen-only-pill/  https://www.gpnotebook.co.uk/simple/contraception/the-progestogen-injectable/  https://www.gpnotebook.co.uk/simple/contraception/the-progestogen-implant/  https://www.gpnotebook.co.uk/simple/contraception/the-combined-hormonal-patch/  https://www.gpnotebook.co.uk/simple/contraception/the-progestogen-only-patch/  https://www.gpnotebook.co.uk/simple",
+      "nli": 0.9004163146018982,
+      "ver": 3.06666666,
+      "acr": 1.0,
+      "bleu": 0.016130105911268466,
+      "bert": 0.7669540643692017
+    },
+    {
+      "question": "Given question: What are the main functions of flat bones in the skeletal system? Option A: Site of haematopoiesisFacilitate movementSite of attachment for muscles Option B: Support the weight of the bodySite of attachment for musclesSite of haematopoesis Option C: Site of haematopoiesisProtection of vital internal organsSite of attachment for muscles Option D: Protection of vital internal organsFacilitate movementSupport the weight of the body Option E: All of the above The correct answer is Option C.",
+      "best_explanation": "This is a multiple choice question.  All of the functions are correct.  The answer is C because all of these functions are performed by flat bones.  Examples of flat bones are the ribs, sternum, scapula and pelvis.  Haematopoiesis is the formation of blood cells.  It is important that the bones support the weight of the body, therefore they need to be dense.  This is achieved by having a compact bone cortex and a dense, hard, inner bone substance.  Muscles attach to the bones to allow for movement.  The bones protect vital internal organs such as the heart, lungs and liver.  FLAT BONES SUPPORT THE WEIGHT OF THE BODYFACILITATE MOVEMENTSITE OF HAEMATOPOIESIS SITESITE OF ATTACHMENT FOR MUSCLES  This is a multiple choice question.  All of the functions are correct.  The answer is C because all of these functions are performed by flat bones.  Examples of flat bones are the ribs, sternum, scapula and pelvis.  Haematopoiesis is the formation of blood cells.  It is important that the bones support the weight of the body, therefore they need to be dense.  This is achieved by having a compact bone cortex",
+      "nli": 0.9800910353660583,
+      "ver": 2.98777777,
+      "acr": 0.7142857142857143,
+      "bleu": 0.049398214737307086,
+      "bert": 0.8192852735519409
+    },
+    {
+      "question": "Given question: Which of these pancreatic enzymes attack C-terminal end peptides? Option A: Carboxypeptidase Option B: Chymotrypsin Option C: Elastase Option D: Trypsin The correct answer is Option A.",
+      "best_explanation": "Carboxypeptidase - Attacks C-terminal end peptides Chymotrypsin - Attacks C-terminal end peptides Trypsin - Attacks the middle of the peptide chain  Elastase - Attacks the C-terminal end peptides of the extracellular matrix in tissues (the 4 are the 4 main pancreatic enzymes)  Extra reading: Digestion and Absorption (Biochemistry & Physiology of Nutrition) - https://www.sciencedirect.com/topics/biochemistry-genetics-and-molecular-biology/digestion-and-absorption-pancreas#:~:text=The%20pancreas%20is%20essential%20for,digestion%20and%20absorption%20of%20nutrients.&text=The%20pancreas%20is%20essential%20for,bile%20salts%20and%20pancreatic%20enzymes.&text=The%20pancreas%20is%20essential%20for,the,digestion%20and%20absorption%20of%",
+      "nli": 0.9822002649307251,
+      "ver": 2.98677772,
+      "acr": 1.0,
+      "bleu": 0.004458815748575231,
+      "bert": 0.7971449494361877
+    },
+    {
+      "question": "Given question: What are the actions of teres minor? Option A: Medial rotation of the arm; retention of the head of the humerus in the glenoid fossa. Option B: Posterior movement of the arm; retention of the head of the humerus in the glenoid fossa. Option C: Anterior movement of the arm; retention of the head of the humerus in the glenoid fossa. Option D: Adduction of the arm; retention of the head of the humerus in the glenoid fossa. Option E: Lateral rotation of the arm; retention of the head of the humerus in the glenoid fossa. The correct answer is Option E.",
+      "best_explanation": "E is correct!  A: This is the function of the rotator cuff muscles; teres minor specifically is involved in lateral rotation.  B: This is the function of the trapezius.  C: This is the function of the deltoid.  D: This is the function of the pectoralis major.  A summary of the actions of the rotator cuff muscles: SITS - Supraspinatus: Abduction of the arm past 15 degrees; initial portion of flexion and extension of the arm. - Infraspinatus: Abduction of the arm 15 degrees or less; extension of the arm. - Subscapularis: Medial rotation of the arm; initial portion of abduction of the arm. - Teres minor: Lateral rotation of the arm; retention of the head of the humerus in the glenoid fossa.  A summary of the actions of the trapezius: - Upper trapezius: Retraction of the scapula; stabilisation of the occipital condyle of the humerus during movement of the upper limb. - Middle trapezius: Stabilisation of the scapula during movement of the upper limb. - Lower trapezius: Retraction and downward rotation of the scapula; stabilisation of the inferior facet of the scapula during movement",
+      "nli": 0.10092324763536453,
+      "ver": 3.13666666,
+      "acr": 1.0,
+      "bleu": 0.0165888050204195,
+      "bert": 0.8666377663612366
+    },
+    {
+      "question": "Given question: Mr Jones comes into clinic after falling on an outstretched hand (FOOSH). After conducting some simple physical examinations, you determine Mr Jones has pain in the anatomical snuffbox. Before sending him for an x-ray to confirm your assumptions, what is the likely diagnosis? Option A: Distal radial fracture Option B: Colles' fracture Option C: Scaphoid fracture Option D: Ulnar fracture Option E: Metacarpal fracture of the thumb The correct answer is Option C.",
+      "best_explanation": "Pain in the anatomical snuffbox = scaphoid fracture  Clinical significance - difficult to assess scaphoid fractures reliably by plain radiography; may require a scaphoid view or a 3-dimensional computed tomography (3D CT) scan.  May lead to scaphoid nonunion and avascular necrosis with consequent osteoarthritis.  May be associated with Wrist flop (also known as scaphoid prolapse or scaphoid subluxation)  https://teachmeanatomy.info/upper-limb/injuries/hand/fractures/scaphoid-fracture/  https://www.rchsd.org/health-articles/quadruple-ash-fracture/  https://www.ncbi.nlm.nih.gov/books/NBK537148/  https://www.aoss World congress 2019 - case 3  https://www.researchgate.net/publication/315481637_Scaphoid_Fracture_Classification_and_Treatment_Update_2018_ACR_Appropriateness_Criteria_Expert_Panel_Recommendations_With",
+      "nli": 0.6908321380615234,
+      "ver": 3.02666622,
+      "acr": 1.0,
+      "bleu": 0.0810648935962705,
+      "bert": 0.7903599739074707
+    },
+    {
+      "question": "Given question: Paul has a cracking headache, so decides to take some aspirin. Aspirin is a non-competitive inhibitor of PGHS1 and 2 enzymes. In terms of kinetics, how is Vmax, Km and Kcat affected? Option A: Vmax will increaseKm will decreaseKcat will increase Option B: Vmax will decreaseKm will not changeKcat will decrease Option C: Vmax will not change Km will decreaseKcat will increase Option D: Vmax will increaseKm will not changeKcat will decrease Option E: Vmax will increaseKm will decreaseKcat will not change The correct answer is Option B.",
+      "best_explanation": "B is correct - competitive inhibitors lead to an increase in Km as a greater concentration of substrate is needed for the same rate of reaction, however Vmax is decreased as the enzyme is saturated and Kcat does not change as the affinity of the enzyme for the substrate is unchanged.  A - this is incorrect as Vmax is increased as the inhibitor increases the enzyme's affinity for the substrate, Km does not change and Kcat increases as the enzyme is not saturated. C - Vmax does not change as the inhibitor does not affect the enzyme's affinity for the substrate, Km decreases and Kcat does not change as the enzyme is not saturated. D - Vmax will increase as the inhibitor increases the enzyme's affinity for the substrate, Km does not change and Kcat decreases as the enzyme is saturated. E - Vmax will increase as the inhibitor increases the enzyme's affinity for the substrate, Km decreases and Kcat does not change as the enzyme is saturated. This was in the \"List of things to revise\" document under \"kinetics\". I hope this helps! Let me know if you have any questions. :)\n\nAnswer B is correct.",
+      "nli": 0.6515402793884277,
+      "ver": 2.98677727,
+      "acr": 0.7142857142857143,
+      "bleu": 0.00918583573940515,
+      "bert": 0.8129235506057739
+    },
+    {
+      "question": "Given question: A new way of diagnosing a disease is being tested. Scientists want to assess its validity by working out its specificity and sensitivity.  180 people were tested using this new diagnostic method. Of these 60 tested positive and of these 60, 37 had the disease that was being tested for. In the whole sample of 180 people, 48 had the disease that was being tested for.  What is the sensitivity of this new method of diagnosis? Option A: 0.21 Option B: 0.62 Option C: 0.77 Option D: 0.8 Option E: 138.75 The correct answer is Option C.",
+      "best_explanation": "Sensitivity = (True positive) / (True positive + False negative)  Specificity = (True negative) / (True negative + False positive)  To find the sensitivity of this test we must first find the false negative, which is done by working out the number of people who had the disease but tested negative.  The false negative = 37-48 The sensitivity = (37-48)/(37-48 + 11) = 0.77 Specificity = 48/48+11 = 0.8  To find the specificity of this test we must first find the false positive, which is done by working out the number of people who didn't have the disease but tested positive.  The false positive = 11-48 The specificity = (48-11)/(48-11 + 11) = 0.8  I used the data given in the question to work out the false positive and false negative, and then used these in the sensitivity and specificity formulae.  I didn't use any information about the prevalence of the disease in the population, and I didn't use any information about the number of people who didn't have the disease but were tested.  I didn't use any information about the number of people who didn't have the disease who tested negative.",
+      "nli": 0.9521915912628174,
+      "ver": 3.03777777,
+      "acr": 0.0,
+      "bleu": 0.006429217664249567,
+      "bert": 0.8148193955421448
+    },
+    {
+      "question": "Given question: The heart consists of two atria and two ventricles. It is obliquely positioned in the thorax. The heart has a base and an apex. Pick the description that best fits the orientation of the heart. Option A: The base faces: anteriorly and to the rightThe apex faces: posteriorly and to the leftRight atrium: positioned to the right; anterior and inferior to the left atrium; partly anterior to the left ventricleRight ventricle: forms most of the anterior aspect of the ventricle massLeft atrium: forms most of the posterior aspect of the heartLeft ventricle: forms the posterolateral, lateral and anterolateral surface of the heart and its apex Option B: The base faces: posteriorly and to the rightThe apex faces: anteriorly and to the leftRight atrium: positioned to the right; anterior and superior to the left atrium; partly anterior to the left ventricleRight ventricle: forms most of the anterior aspect of the ventricle massLeft atrium: forms most of the posterior aspect of the heartLeft ventricle: forms the posterolateral, lateral and anterolateral surface of the heart and its apex Option C: The base faces: posteriorly and to the rightThe apex faces: anteriorly and to the leftRight atrium: positioned to the right; anterior and inferior to the left atrium; partly anterior to the left ventricleRight ventricle: forms most of the anterior aspect of the ventricle massLeft atrium: forms most of the posterior aspect of the heartLeft ventricle: forms the posterolateral, lateral and anterolateral surface of the heart and its apex Option D: The base faces: posteriorly and to the rightThe apex faces: anteriorly and to the leftRight atrium: positioned to the right; posterior and inferior to the left atrium; partly anterior to the left ventricleRight ventricle: forms most of the anterior aspect of the ventricle massLeft atrium: forms most of the posterior aspect of the heartLeft ventricle: forms the posterolateral, lateral and anterolateral surface of the heart and its apex Option E: The base faces: posteriorly and to the rightThe apex faces: anteriorly and to the leftRight atrium: positioned to the right; anterior and inferior to the left atrium; partly anterior to the left ventricleRight ventricle: forms most of the posterior aspect of the ventricle massLeft atrium: forms most of the anterior aspect of the heartLeft ventricle: forms the posterolateral, lateral and anterolateral surface of the heart and its apex The correct answer is Option C.",
+      "best_explanation": "The heart consists of two atria and two ventricles. It is obliquely positioned in the thorax. The heart has a base and an apex. Pick the description that best fits the orientation of the heart.  The base faces: posteriorly and to the rightThe apex faces: anteriorly and to the leftRight atrium: positioned to the right; anterior and inferior to the left atrium; partly anterior to the left ventricleRight ventricle: forms most of the anterior aspect of the ventricle massLeft atrium: forms most of the posterior aspect of the heartLeft ventricle: forms the posterolateral, lateral and anterolateral surface of the heart and its apex  C is correct!D is incorrect as the left atrium not the right atrium is posterior and to the leftE is incorrect as the left ventricle not the right ventricle is posterior and to the leftF is incorrect as the right atrium not the left atrium is posterior and to the rightG is incorrect as the left ventricle not the right ventricle is posterior and to the leftH is incorrect as the left atrium not the right atrium is posterior and to the leftI is incorrect as the left ventricle not the right ventricle is posterior and to the leftJ is incorrect as the left atrium not the right atrium is posterior and to the",
+      "nli": 0.9427080154418945,
+      "ver": 3.09669292,
+      "acr": 1.0,
+      "bleu": 0.0775181154149407,
+      "bert": 0.9040480256080627
+    },
+    {
+      "question": "Given question: Which of the following is NOT an effect of Angiotensin II? Option A: Increased ADH Option B: Increased blood pressure Option C: Increased renin Option D: Increased thirst reflex Option E: Vasoconstriction The correct answer is Option C.",
+      "best_explanation": "C is correct - Angiotensin I is the precursor that is converted to Angiotensin II, and it is the angiotensin II that causes the renal effects (increase in Na+ reabsorption, COIL mechanism, mydriasis, increased blood pressure). The renin-angiotensin-aldosterone system (RAAS) is a hormone system that is primarily involved in the regulation of the plasma sodium concentration and blood pressure. The three hormones involved are renin, angiotensin II, and aldosterone. Renin is released by the kidneys in response to decreases in plasma volume, and it catalyzes the conversion of angiotensinogen to angiotensin I. Angiotensin II is then formed from angiotensin I. Angiotensin II acts on the adrenal cortex to release aldosterone, which increases the reabsorption of sodium (and water therefore follows) in the kidney. It also causes vasoconstriction. Angiotensin II also causes the secretion of ADH in the posterior pituitary. ADH increases the permeability of the collecting ducts, leading to water reabsorption. The extra-renal effects of the hormone system include increased blood pressure (through vaso",
+      "nli": 0.6401951909065247,
+      "ver": 3.09677777,
+      "acr": 1.0,
+      "bleu": 0.015259133204280876,
+      "bert": 0.8039187788963318
+    },
+    {
+      "question": "Given question: Your encounter a patient who has suffered from an MI and take a look at his ECG. He has deviating waves in leads II, III,  avF and V2. Which of the following places in the heart is the area where there is most likely an occlusion? Option A: Lateral part of the heart Option B: Inferior part of the heart Option C: Anterior Part of the heart Option D: Septal Part of the heart Option E: Medial Part of the heart The correct answer is Option B.",
+      "best_explanation": "The occlusion in the heart is most likely to be happening in the inferior part of the heart as leads II, III, avF and V2 have deviating waves.  The other leads (I, aVL, V3, V4, V5, V6) have straight or slightly deviating waves.  The areas of the heart that are most unlikely to have an occlusion are the anterior, lateral, medial and septal parts of the heart as these areas are not associated with any of the leads that have deviating waves.  Note: The areas of the heart that the ECG leads are associated with are:  V1-V6: anterior/lateral part of the heart  I, aVL, V7, V8, V9, V10: inferior part of the heart  II, III, avF, V2: inferior or anteroseptal part of the heart  aVF: anteroseptal or inferior part of the heart  V5, V6: inferior part of the heart  Leads I, aVL, V7, V8, V9, V10 are not specific to the inferior part of the heart but are more likely to be associated with the anterior or lateral part of the heart. Leads II, III, avF, V2 are not specific to the inferior part of the heart but are more likely to be",
+      "nli": 0.9540216326713562,
+      "ver": 3.09666666,
+      "acr": 1.0,
+      "bleu": 0.07230244093928719,
+      "bert": 0.8044396638870239
+    },
+    {
+      "question": "Given question: an ECG is performed & reveals a progressively increasing PR interval & dropping of QRS complexes at regular intervalswhich of the following is the most likely diagnoses? Option A: hyperkalaemia Option B: 3rd degree heart block Option C: 2nd degree heart block, mobitz type 2 Option D: 2nd degree heart block, mobitz type 1 Option E: 1st degree heart block The correct answer is Option D.",
+      "best_explanation": "2:2:2 pattern (2 normal QRS complexes, 2 wide QRS complexes, 2 very wide QRS complexes)Mobitz type 2 2nd degree heart block is caused by a block in the left or right bundle branch. since there is a 2:2:2 pattern, the block must not be complete (otherwise all complexes would be either wide or very wide) therefore it is mobitz type 2. 1st degree heart block is when there is a prolonged PR interval, but the QRS complexes are not dropped. hyperkalaemia causes T-wave inversion of all complexes (not just the wide complexes) therefore is not the answer. 3rd degree heart block is when there is no conduction through the AV node at all (i.e. all QRS complexes are wide) therefore is not the answer.  Mobitz type 1 2nd degree heart block is when there is a block in the left or right bundle branch. since there is a 2:2:2 pattern, the block must not be complete (otherwise all complexes would be either wide or very wide) therefore it is mobitz type 1. 1st degree heart block is when there is a prolonged PR interval, but the QRS complexes are not dropped. hyperkalaemia causes T-wave inversion of all complexes (not just",
+      "nli": 0.9805205464363098,
+      "ver": 3.09676776,
+      "acr": 1.0,
+      "bleu": 0.004433882607724951,
+      "bert": 0.8080953359603882
+    },
+    {
+      "question": "Given question: what is the function of the pre motor cortex? Option A: control of distal musculature and fine skilled movements Option B: bimanual coordination and initiation and planning of movements Option C: control of proximal musculature, preparation for movement and control of movement The correct answer is Option C.",
+      "best_explanation": "A= function of the distal cortex B= function of the anterior cingulate cortex C= correct answer function of the pre motor cortex  see moores anatomy textbook pg. 634-5 for more detail on the cortex and motor function.  also this website has good information on the cortex and its role in motor function https://www.ncbi.nlm.nih.gov/books/NBK441980/#:~:text=The%20pre%20motor%20cortex%2C%20(70%20of,movement%20planning%20and%20control.&text=The%20motor%20cortex%20is%20divided,initiating%20and%20planning%20of%20movement.&text=The%20post%20motor%20cortex%2C%20(13% of,fine%20skilled%20movements%20and%20coordination%20of%20bimanual%20movements.>  pre motor cortex- controls proximal musculature, preparation for movement and control of movement  motor cortex- controls distal musculature and fine",
+      "nli": 0.9713103175163269,
+      "ver": 2.98677772,
+      "acr": 1.0,
+      "bleu": 0.01443806375634439,
+      "bert": 0.7977821230888367
+    },
+    {
+      "question": "Given question: A medical student is reviewing their lower limb anatomy revision notes. Where does the femoral artery become the popliteal? Option A: inguinal ligament Option B: popliteal fossa Option C: adductor hiatus Option D: talus Option E: teres major The correct answer is Option C.",
+      "best_explanation": "femoral artery becomes the popliteal artery at the adductor hiatus  popliteal artery becomes the anterior tibial artery at the popliteal fossa  anterior tibial artery becomes the dorsals pedis at the tails  dorsals pedis branch into the pedis  talus is a bone in the tarsus of the foot (the ankle joint)  teres major is a muscle in the lower limb (the anterior compartment of the thigh) https://teachmeanatomy.info/lower-limb/areas/inguinal-canal/ is a good website for this question, has a good diagram and explanation of the femoral artery pathway in the inguinal canal and how it becomes the popliteal artery at the adductor hiatus. (The popliteal fossa is where the anterior tibial artery branches from the popliteal artery)  also, the femoral artery is also called the inguinal artery at its origin, and the popliteal artery is also called the anterior sacral artery at its origin. (sacral hiatus) https://teachmeanatomy.info/lower-limb/areas/inguinal-canal/ is a good website for this question, has a good diagram and explanation of the",
+      "nli": 0.8940924406051636,
+      "ver": 3.13666666,
+      "acr": 1.0,
+      "bleu": 0.11141179801603547,
+      "bert": 0.7951056957244873
+    },
+    {
+      "question": "Given question: There are three main phases of the uterine cycle: menstrual phase, proliferative phase and secretory phase. What are the main events of the proliferative phase? Option A: Corpus luteum secretes progesterone and oestrogen preparing the endometrium for implantation and uterine glands secrete uterine milk which is high in protein and glycogen Option B: thickening of the endometrium due to decreased oestrogen from folliclesSpiral arteries develop but are inactiveUterine glands develop but are inactive Option C: Thickening of the endometrium due to increased oestrogen from folliclesSpiral arteries develop and are active allowing a good blood supply to the uterusUterine glands develop but are inactive Option D: No fertilisation has occurred so the corpus lute degenerates and therefore progesterone levels dropSpiral arteries break down and bleeding occursUterine lining disintegrates Option E: Thickening of the endometrium due to increased oestrogen from folliclesSpiral arteries develop but are inactiveUterine glands develop but are inactive The correct answer is Option E.",
+      "best_explanation": "The proliferative phase is where the thickening of the endometrium occurs due to increased oestrogen from the follicles, this allows the endometrium to be nourished by a good blood supply via the spiral arteries, the uterine glands develop but are inactive.  No fertilisation has occurred so the corpus luteum degenerates and therefore progesterone levels drop, this causes the spiral arteries to break down and the uterine lining disintegrates resulting in bleeding. This is the menstrual phase.  Then oestrogen and progesterone levels rise again to allow the endometrium to continue thickening in preparation for a new ovulation.  If fertilisation does occur then the corpus luteum continues to secrete progesterone and oestrogen and the endometrium is maintained until the foetus is able to sustain its own growth.  If the fertilisation does not occur then the corpus luteum degenerates after a time and the levels of progesterone and oestrogen drop causing the endometrium to break down and be shed as a menstrual fluid. This is the hormonal control of the menstrual cycle.  The hormones oestrogen and progesterone are produced by the corpus luteum in the absence of a fertil",
+      "nli": 0.8873463869094849,
+      "ver": 3.13666666,
+      "acr": 0.8333333333333334,
+      "bleu": 0.04844900063783959,
+      "bert": 0.8525739312171936
+    },
+    {
+      "question": "Given question: A patient comes into the GP complaining of a fever, dark urine and pain in right upper quadrant. You notice the patient has yellow eyes and when you'r feeling the stomach, you notice it's been enlarged. For further investigation, you order a serology test, and the result are as below; HBsAg= -veAnti-HBc= -veAnti-HBs=+veIgM anti-HBc=-ve What can you conclude? Option A: Acute Hepatitis B infection Option B: Chronic Hepatitis B infection Option C: Immune due to Hepatitis B vaccination Option D: Immune due to natural infection Option E: Low level chronic infection The correct answer is Option C.",
+      "best_explanation": "- Hepatitis B surface antigen (HBsAg)=-ve : No HBV infection  - Anti-HBc (IgM)=-ve : No acute infection  - Anti-HBc (IgG)=+ve : Chronic infection  - Anti-HBs (IgG)=+ve : Immune due to Hepatitis B vaccination  - Anti-HBs (IgM)=-ve : Not acute infection  From this we can conclude that the patient is immune due to Hepatitis B vaccination.  Case 4: Anatomy of an Infection (Weeks 3-4) - Immunity to Infection (Coffey)  Slide 20: Serology of Viral Infection (Hepatitis B)  For further information, refer to Global Perspectives: Health, Illness and Medicine (Haynes) Ch. 21 - \"Viral Hepatitis\"  Hepatitis B serology - Anti-HBc IgM = acute infection Anti-HBc IgG = chronic infection Anti-HBs IgG = immunity (vaccination) Anti-HBs IgM = acute infection (low level) I put this here because it's easy to remember :) Hope you have a blessed day! -",
+      "nli": 0.4271661341190338,
+      "ver": 3.06626227,
+      "acr": 1.0,
+      "bleu": 0.0035158895384518815,
+      "bert": 0.8205335736274719
+    },
+    {
+      "question": "Given question: What is the enzyme involved in the rate-limiting step of glycolysis? Option A: Fructose-1,6-bisphosphatase Option B: Phosphofructokinse Option C: Enolase Option D: Glucose-6-phosphatase Option E: Pyruvate Kinase The correct answer is Option B.",
+      "best_explanation": "Fructose-1,6-bisphosphatase: this is not a rate limiting step.  Phosphofructokinse: rate-limiting step.  Enolase: 2 of the 3 enzymes involved in the rate-limiting step of glycolysis.  Glucose-6-phosphatase: this is not a rate limiting step.  Pyruvate Kinase: this is not a rate limiting step. From the glycolysis lecture.  Link to the PCS Unit 3 Glycolysis plenary: https://www.youtube.com/watch?v=nkC1vZaUpxs&t=2267s  Link to the PCS Unit 3 Interactive Glycolysis tutorial: https://interactive.themacquet.ca/unit-3-carbohydrates/glycolysis/  Link to the PCS Unit 3 Learning Outcomes handout: https://drive.google.com/file/d/1pOvVbCrH1JC-4oBLIVlAbkNkLw1eR5S/view?usp=sharing  Link to the PCS Unit 3 Releasing Energy from Food without Oxygen tutorial: https://www.youtube.com/watch?v=n",
+      "nli": 0.21858739852905273,
+      "ver": 2.95677772,
+      "acr": 1.0,
+      "bleu": 0.0061488326232058,
+      "bert": 0.7927494049072266
+    },
+    {
+      "question": "Given question: Shivprakash came with his mum to the GP with his 4th and 5th finger flexed. This was diagnosed as claw hand. Damage to which nerve would cause this condition? Option A: Radial Nerve Option B: Ulnar Nerve Option C: Median Nerve Option D: Axillary Nerve Option E: Lateral Cutaneous Nerve of the forearm The correct answer is Option B.",
+      "best_explanation": "- damage to the ulnar nerve in the forearm is associated with claw hand - the flexed 4th and 5th digits and inability to extend them. There are other signs associated with this condition such as wrist flexion and abduction. Other nerves are associated with other signs. For example, radial nerve damage presents as wrist and finger flexion (Hand of Benediction).  Resources -Teach me anatomy - upper limb (<https://teachmeanatomy.info/upper-limb/nerves/ulnar-nerve/>) -Movement and Function of the upper limb (<https://www.google.co.uk/url?sa=i&rct=j&q=movement+and+function+of+the+upper+limb&source=images&cd=&ved=0CAcQjRw&url=http%3A%2F%2Fwww.google.co.uk%2Furl%3Fsa%3Di%26rct%3Dj%26q%3Dmovement%20and%20function%20of%20the%20upper%20limb%26source%3Dimages%26cd%3D%26ved%3D0CAcQjRw%",
+      "nli": 0.9713942408561707,
+      "ver": 2.98966622,
+      "acr": 1.0,
+      "bleu": 0.015752815038467736,
+      "bert": 0.7649059295654297
+    },
+    {
+      "question": "Given question: Which of the following best describes Serous otitis? Option A: Temporary deafness experienced after exposure to loud noises Option B: Middle ear infection often caused by a blockage in Eustachian tube causing a sucking of fluid into the middle ear, Option C: The cells that control K+ ion secretion in the stria vascularis fail to migrate into the tissue during development leading to deafness because there is no endocochlear potential Option D: Abnormal growth of skin in the middle ear. Option E: Ringing or buzzing sensation in the ears The correct answer is Option B.",
+      "best_explanation": "Serous otitis is middle ear infection often caused by a blockage in Eustachian tube causing a sucking of fluid into the middle ear.  Serous otitis is a common complication of cold and influenza  Serous otitis is sometimes referred to as \"fluid in the ear\"  The ear has a few mechanisms to get rid of the fluid  One is that the eustachian tube serves as a drain for the middle ear  Another is that the movement of the jaw (in chewing and talking) helps to express the middle ear  A third is that the body has a few mechanisms to get rid of the fluid  One is that the stria vascularis, which is responsible for producing K+ ion secretion in the tissue, fails to migrate into the tissue during development causing deafness because there is no endocochlear potential  Another is that there is abnormal growth of skin in the middle ear  A third is that there is temporary deafness experienced after exposure to loud noises  A fourth is that people may experience tinnitus (a ringing or buzzing sensation in the ears)  Otitis media is the medical term for middle ear infection  Serous otitis is a type of otitis media  Serous otitis is sometimes referred to as \"fluid in the ear\"  The ear has a few mechan",
+      "nli": 0.9165474772453308,
+      "ver": 3.16666666,
+      "acr": 1.0,
+      "bleu": 0.0008329291773267951,
+      "bert": 0.8660660982131958
+    },
+    {
+      "question": "Given question: Mr Smith has recently been diagnosed with multiple sclorosis, meaning that the neurones of his CNS are becoming demyelinated.  Which cell is being effected? Option A: Microglia Option B: Schwann cell Option C: Astrocyte Option D: Oligodendrocyte Option E: Ependyma cell The correct answer is Option D.",
+      "best_explanation": "The oligodendrocyte is the cell that is being effected by demyelination in MS.  These cells are the equivalent of Schwann cells in the PNS, they are the cells that produce the myelin sheath.  The myelin sheath is vital for the proper functioning of neurones in the CNS, as it allows for the quick and efficient passage of action potentials.  When the myelin sheath is lost, due to demyelination, the speed at which action potentials can be passed along the neurone is greatly reduced, leading to a wide range of symptoms.  A- Microglia are the immune cells of the CNS, and as such are responsible for surveillance and phagocytosis of dead cells and debris.  B- Although Schwann cells produce myelin in the PNS, they do not do so in the CNS.  C- Astrocytes have a number of functions in the CNS, including form part of the blood-brain barrier, but they do not produce myelin.  E- Ependymal cells line the ventricles of the CNS, and produce csf.  They are not involved in myelination.",
+      "nli": 0.0014583261217921972,
+      "ver": 3.16666666,
+      "acr": 1.0,
+      "bleu": 0.009527237104573802,
+      "bert": 0.8204139471054077
+    },
+    {
+      "question": "Given question: Partial ptosis is one of the signs associated with Horner's syndrome. What is the possible cause for a partially drooped upper eyelids? Option A: Loss of innervation from the occulomotor nerve (III) to levator palpebrae superioris muscle Option B: Loss of innervation from the occulomotor nerve (III) to superior rectus muscle Option C: Loss of innervation from the facial nerve (VII) to the orbicularis oculi Option D: Loss of sympathetic innervation to the superior tarsal muscle The correct answer is Option D.",
+      "best_explanation": "A - This would be the cause for complete ptosisB - This would be the cause for a droop of the eyelid (ptosis) C - This would be the cause for a 'claw' hand shape (hand of Benediction)D - Correct - Horner's syndrome is the result of injury to the superior cervical ganglion of the sympathetic trunk. As a result, there is a loss of sympathetic innervation to the superior tarsal muscle (which pulls the upper eyelid open), resulting in a partially drooped upper eyelid (ptosis) and the 'excessive blinking' of the eyelid to try and open it (an upper eyelid myokymia).  Note: the eyelid twitch (a fine rapid flutter) is associated with dystonia of the upper eyelid (and sometimes the forehead) and is caused by a hyperactivity of the oculomotor nerve (III). A useful mneumonic to remember the signs of Horner's syndrome is:Ptsosis (partially drooped upper eyelid)Telangiectasia (small blood vessels visible under the skin)Loss of sensation (dorsal scapular is anesthetic)Hypersomia (excessive blinking)Raised",
+      "nli": 0.9337338805198669,
+      "ver": 3.13666662,
+      "acr": 1.0,
+      "bleu": 0.0014491661938921757,
+      "bert": 0.8300209641456604
+    },
+    {
+      "question": "Given question: A patient enters a GP surgery having hit her elbow on a banister whilst walking down the stairs. When making a fist, only her pinky and ring finger are able to bend. What nerve has the patient damaged? Option A: Ulnar Option B: Median Option C: Radial Option D: Musculocutaneous Option E: Axillary The correct answer is Option B.",
+      "best_explanation": "The Median nerve innervates the flexors of the forearm. The ulnar nerve innervates the flexor of the hand. The radial nerve innervates the extensor of the forearm. The musculocutaneous nerve innervates the biceps brachii. The axillary nerve innervates the deltoid and teres minor.  The patient is unable to flex at the wrist, so the median nerve would have been damaged.  The ulnar nerve innervates the medial side of the hand. The patient is unable to flex at the MCP joints, so the ulnar nerve has also been damaged. The radial nerve innervates the extensor muscles of the forearm. The patient is unable to extend at the wrist, so the radial nerve has also been damaged. The musculocutaneous nerve innervates the biceps brachii. The patient is unable to flex at the elbow, so the musculocutaneous nerve has also been damaged. The axillary nerve innervates the deltoid and teres minor. The patient is unable to abduct the arm, so the axillary nerve has also been damaged.  This is a high level of trivia that you may need to know for wikipedia based",
+      "nli": 0.277668297290802,
+      "ver": 3.13966292,
+      "acr": 1.0,
+      "bleu": 0.0077169542226831625,
+      "bert": 0.7801809906959534
+    },
+    {
+      "question": "Given question: The perineal membrane is a thin sheet of fascia containing important structures. Where would you find the perineal membrane and which structures perforate it? Option A: Covering the entire perineumVagina and urethra Option B: Covering the entire perineumVagina, urethra and anal canal Option C: Covering the anal triangle Anal canal Option D: Only found in femalesCovering the urogenital triangle Vagina and urethra Option E: Covering the urogenital triangle Urethra and vagina (in females) The correct answer is Option E.",
+      "best_explanation": "Perineal membrane:  - Only found in females - Covering the urogenital triangle  - Vagina and urethra (in females) Related to: - Perineal sac: contains the urethra and vagina in females- Perineal raphe: marks the midline closure of the perineum in males and females Perforations: - Urethra - Vagina (in females) - Anal canal (in males) Important structures that perforate the perineal membrane: - Urethra - Vagina - Anal canal (in males) - Nerve plexuses (in females) - Vaginal fornix (in females) - Prostate (in males) - Skene's glands (in females) - Ischial spinosum (in males) - Fasciae of the perineum (in both males and females)  - Perineal artery and vein (in both males and females)  - Perineal nerve (in both males and females)  - Pudendal nerve (in females) - Obturator nerve (in males) - Divides the urogenital triangle into 2 equal triangles in females - Divides the anal triangle from the urogenital triangle in males  - Endopelvic junction: marks the junction of the",
+      "nli": 0.926754355430603,
+      "ver": 3.13666666,
+      "acr": 1.0,
+      "bleu": 0.04350179741496398,
+      "bert": 0.83750319480896
+    },
+    {
+      "question": "Given question: What is the primary control centre for descending pain modulation? Option A: periaqueductal gray Option B: thalamus Option C: dorsal horn of spinal cord Option D: nucleus raphe magnus Option E: reticular formation The correct answer is Option A.",
+      "best_explanation": "periaqueductal gray in the midbrain is the primary control centre for descending pain modulation.  Thalamus is the second relay station.   Dorsal horn of spinal cord is where ascending pain fibres synapse with interneurons.  Nucleus raphe magnus is where serotonin is produced.   Reticular formation: Consists of the reticular activating system (RAS) and the reticular formonuclear neurons.  RAS is important in consciousness and attention.  Reticular formonuclear neurons are the second relay station in the ascending pathway for pain.  They receive incoming pain signals from the spinal cord, and transmit these signals to the thalamus.  From the thalamus, the signals are sent to the periaqueductal gray in the midbrain.  Here, the signals are modulated and the response is returned to the spinal cord, where the response to pain is initiated.  In summary;  PAG -> Thalamus -> RFN -> Spinal cord  PAG is the primary control centre for descending pain modulation.   Thalamus is the second relay station.   RFN is the second relay station in the ascending pathway for pain.   Reticular formation is important in consciousness and attention.  Reticular formation: Cons",
+      "nli": 0.8980913758277893,
+      "ver": 3.13677677,
+      "acr": 1.0,
+      "bleu": 0.007169766368218417,
+      "bert": 0.7962484359741211
+    },
+    {
+      "question": "Given question: Emily Davies, a 19-year-old female, comes to A+E after sustaining an injury to her hand and is unable to oppose her thumb but can abduct it, which muscle is likely to be damaged? Option A: Flexor pollicis brevis Option B: Flexor digiti minimi brevis Option C: Adductor pollicis Option D: Opponens pollicis Option E: Abductor pollicis brevis The correct answer is Option D.",
+      "best_explanation": "Opposition is supplied by opponens pollicis which is avulnerable muscle, therefore the correct answer is D  Abduction is supplied by abductor pollicis brevis which is a vulnerable muscle, therefore the incorrect answer is E  Flexion of the hand is supplied by flexor digitorum profundus which is a vulnerable muscle, therefore option B is incorrect  Extension of the hand is supplied by extensor pollicis longus which is a vulnerable muscle, therefore option A is incorrect  Abduction of the hand is supplied by the muscles of the anterior compartment of the forearm, which are all vulnerable muscles, therefore option C is incorrect  (This was in the learning outcomes from the handout on the upper limb)  (This was in the handout on the upper limb)  (This was in the handout on the upper limb)  (This was in the handout on the upper limb)  (This was in the handout on the upper limb)  (This was in the handout on the upper limb)  (This was in the handout on the upper limb)  (This was in the handout on the upper limb)  (This was in the handout on the upper limb)  (This was in the handout on the upper limb)  (This",
+      "nli": 0.8382214903831482,
+      "ver": 3.09666666,
+      "acr": 1.0,
+      "bleu": 0.003946353721082553,
+      "bert": 0.7931526303291321
+    },
+    {
+      "question": "Given question: Josh falls down the library stairs after a particularly unproductive revision session. He sustains a laceration to his elbow which requires suturing. A few days later in case Keir notices a horrific odour coming from Josh's wound. He notices smears of thick creamy yellow discharge on the whiteboard after he has finished scribing.Luckily Keir was paying attention in case and quickly identifies the type of discharge.What type of discharge does Keir think it is? Option A: Purulent Option B: Sanguineous Option C: Seropurulent Option D: Serosanguineous Option E: Serous The correct answer is Option A.",
+      "best_explanation": "A- Purulent (infected)  C- Seropurulent (infected and inflammatory response)D- Serosanguineous (blood rich in white blood cells)E- Serous (contains no pus or other inflammatory response)  Sanguineous (blood)  Surgical suture material is often used to close a wound. Suture material is often absorbed by the body. Suture material is not usually in contact with pus. Therefore the discharge is most likely to be purulent.  Case 2 - Wound healing lecture  Purulent discharge is a sign of infection. Suture material is often used to close a wound. Suture material is often absorbed by the body. Suture material is not usually in contact with pus. Therefore the discharge is most likely to be serous.  Surgical suture material is often used to close a wound. Suture material is often absorbed by the body. Suture material is not usually in contact with pus. Therefore the discharge is most likely to be serous.  Suture material is often used to close a wound. Suture material is often absorbed by the body. Suture material is not usually in contact with pus.Therefore the discharge is most likely to be serous.  Case 2 - Wound",
+      "nli": 0.9862006306648254,
+      "ver": 3.06666666,
+      "acr": 1.0,
+      "bleu": 0.0012824061579613005,
+      "bert": 0.776344895362854
+    },
+    {
+      "question": "Given question: ACE-I (ACE inhibitors) are used to treat hypertension. What does this block? Option A: Parathyroid hormone Option B: Bilirubin Option C: Aldosterone Option D: Angiotensin II Option E: Atrial natriuetic petide The correct answer is Option D.",
+      "best_explanation": "ACE-I block the conversion of angiotensin I to II (by breaking the peptide bond between the carboxyl group of one amino acid and the amino group of another). This prevents the formation of angiotensin II, thus preventing the effects of angiotensin II which includes the renin-angiotensin-aldosterone system (RAAS) and thus prevents the increase of blood pressure.  PCS Unit 2 - Blood Vessels/ Blood/ Haemostasis Lecture - Dr Coffey  Case 2 Pharmacology Light Bulb Moments  (PCS 3 Blood Vessels/ Blood/ Haemostasis)  A - Blocks the formation of parathyroid hormone because calmodulin like proteins are inhibited B - Bilirubin is a product of heme catabolism and its production is inhibited C - Aldosterone is inhibited because adrenal gland stimulation is inhibited D - correct E - ANP is released which causes an increase in sodium excretion in the urine and a decrease in blood pressure. Thus reducing the preload on the heart and reducing the afterload on the heart. This reduces the workload of the heart and thus reduces the risk of cardiac failure.  PCS Unit 2 - Blood Vessels/ Blood/ Ha",
+      "nli": 0.7498065829277039,
+      "ver": 3.06666666,
+      "acr": 1.0,
+      "bleu": 0.012077686059052857,
+      "bert": 0.7993593215942383
+    },
+    {
+      "question": "Given question: Mr Vallance is having his tooth extracted. It is decided he needs a local anaesthetic which inhibits fast-gated sodium channels. Which one of the following medications is suitable? Option A: Diazepam Option B: Propofol Option C: Amobarbital Option D: Lignocaine Option E: Nitrous oxide The correct answer is Option D.",
+      "best_explanation": "A - Diazepam is a benzodiazepine that works on voltage-gated sodium channels (voltage-operated) and also enhances GABA activityB - Propofol is a voltage-gated sodium channel blocker that also enhances GABA activity C - Amobarbital is a voltage-gated sodium channel blocker that also inhibits glutamatergic activity D - Lignocaine is a fast-gated sodium channel blocker (local anaesthetic)E - Nitrous oxide works on voltage-gated sodium channels (voltage-operated) and also enhances activity of the inhibitory neurotransmitter serotonin Note that fast-gated sodium channels are involved in action potential initiation and propagation. Local anaesthetics are usually fast-gated sodium channel blockers. Voltage-gated sodium channel blockers are used as anti-arrhythmic drugs.  The benzodiazepines work on voltage-gated sodium channels. GABA activity is inhibited.  For further information refer to the PCS 3 lecture on 'Nervous System' and the 'Pharmacology of Synaptic Transmission' tutorial.  This question was in the 'Pharmacology of Synaptic Trans",
+      "nli": 0.11673028022050858,
+      "ver": 3.03666292,
+      "acr": 1.0,
+      "bleu": 0.00588257437515624,
+      "bert": 0.7999613285064697
+    },
+    {
+      "question": "Given question: What nerve innervates pectoralis major muscle? Option A: Lateral Pectoral Nerve Option B: Medial Pectoral Nerve Option C: Pectoralis Nerve Option D: Medial and Lateral Pectoral Nerves Option E: Musculocutaneous Nerve The correct answer is Option D.",
+      "best_explanation": "The pectoralis major muscle is innervated by both the medial and lateral pectoral nerves.  The medial pectoral nerve originates from the lateral cord of the brachial plexus, while the lateral pectoral nerve originates from the medial cord.  The two nerves converge to form the pectoral nerve, which then innervates the pectoralis major muscle.  The musculocutaneous nerve innervates the pectoralis minor muscle.  This information can be found in the upper limb 30 cutaneous nerve map and the anterior compartment of the arm muscles diagram.  https://teachmeanatomy.info/upper-limb/muscles/anterior-arm/pectoralis-major/  https://teachmeanatomy.info/upper-limb/muscles/anterior-arm/pectoralis-minor/  https://teachmeanatomy.info/upper-limb/muscles/anterior-arm/musculocutaneous/  https://teachmeanatomy.info/upper-limb/muscles/anterior-arm/subscapularis/  https://teachmeanatomy.info/upper-limb/muscles/anterior-arm/subclavius/  https://",
+      "nli": 0.2575415074825287,
+      "ver": 2.98666666,
+      "acr": 1.0,
+      "bleu": 0.08024703090732975,
+      "bert": 0.8037489652633667
+    },
+    {
+      "question": "Given question: A patient comes into A&E with an injured left knee. She was running an ultra marathon when she changed direction and felt a 'pop' in her knee. An MRI confirms what the orthopaedic consultant suspects is the likely diagnosis from the patient history and medical record-the patient tells the consultant that she has done this injury for the third time now. What is the most likely diagnosis and best treatment for the patient? Option A: ACL tear and non-operative therapy program of 6 to 8 weeks Option B: ACL tear and operative therapy program of 6 to 9 months Option C: PCL tear and operative therapy program of 6 to 9 months Option D: PCL tear and non-operative program of 6 to 8 weeks Option E: A stable patella fracture and non-perative therapy program of 6 to 8 weeks The correct answer is Option B.",
+      "best_explanation": "The patient has a complete ACL tear. This is usually treated surgically with a graft (either the patient's own patellar tendon or hamstring tendon) and a rehabilitation program of 6-9 months. This is the best treatment option as the ACL provides structural stability to the knee joint and without it, the knee is unstable and prone to further injury.  The patient has a history of this injury which suggests that she may have biomechanical issues with her knee which could be addressed with further investigation (such as a knee assessment with a sports medicine physician). The patient may also benefit from a knee brace to provide extra support.  The PCL is a lesser structural stability issue and can be managed non-operatively with a program of physiotherapy. However, if the patient is experiencing persistent pain or instability then an MRI may identify any associated injuries (such as a PCL tear with a concurrent ACL tear) that would require surgical intervention.  A stable patella fracture can be managed non-operatively with a program of physiotherapy. However, if the patella is unstable or there is persistent pain then an MRI may identify any associated injuries (such as a PCL tear) that would require surgical intervention.  ACL injuries can often occur",
+      "nli": 0.9550735950469971,
+      "ver": 3.16692926,
+      "acr": 1.0,
+      "bleu": 0.006678946878662766,
+      "bert": 0.8336252570152283
+    },
+    {
+      "question": "Given question: Which are the three muscles of the forearm that flex the wrist? Option A: flexor carpi radialisflexor carpi ulnarisflexor digitorum superficialis Option B: flexor carpi radialisflexor carpi ulnarispalmaris longus Option C: flexor carpi radialisflexor pollicis longuspalmaris longus Option D: flexor carpi ulnarispalmaris longusflexor digitorum profundus The correct answer is Option B.",
+      "best_explanation": "flexor carpi radialisflexor carpi ulnarispalmaris longus These three muscles are in the superficial layer of the anterior compartment of the forearm.  flexor carpi radialisorigin: anterior surface of the radius, medial edge of the tendon of the biceps brachialisinsertion: radius, distal phalanx of the handflexor carpi ulnarisorigin: medial side of the ulnar, medial edge of the tendon of the biceps brachialisinsertion: ulna, distal phalanx of the handpalmaris longusorigin: anterior surface of the humerus, inferior to the teres minorinsertion: wrist joint, palmar surface of the hand These three muscles are innervated by the median nerve and are the flexors of the wrist.  flexor carpi radialis is also the lateral abductor of the hand (moves the hand away from the midline)  flexor carpi ulnaris is also the medial abductor of the hand (moves the hand towards the midline)  palmaris longus is also a flexor of the wrist and a pronator of the forearm.  The superficial layer of the anterior compartment of the forearm also contains the median nerve.  The intermediate",
+      "nli": 0.054097678512334824,
+      "ver": 3.13669292,
+      "acr": 1.0,
+      "bleu": 0.004471901466930678,
+      "bert": 0.8244056105613708
+    },
+    {
+      "question": "Given question: Mast cells are cellular components of the innate immune response and are important to wound healing and defence against pathogens via an inflammatory response. Which of the following chemicals is released by mast cells to dilate vessel walls and make vessels more permeable? Option A: Cytokines Option B: IL-1 Option C: Interferons Option D: Prostaglandins Option E: TNFalpha The correct answer is Option D.",
+      "best_explanation": "IL-1, Interferons and TNFalpha are all pro-inflammatory cytokines which are released by mast cells along with histamine to cause dilation of the vessel walls and increased permeability, leading to an inflammatory response. Prostaglandins are also released which contribute to vasodilation and increased vascular permeability.  All of these contribute to the inflammatory response, which is important in wound healing and fighting infection.  Reference: Applied immunology and microbiology post tutorial document.  Link: https://www.ncbi.nlm.nih.gov/books/NBK441980/#:~:text=Prostaglandins%20are%20also%20released%20by,the%20vessel%20walls%20and%20increased%20permeability.&text=These%20inflammatory%20response,important%20in%20wound%20healing%20and%20fighting%20infection.&text=Reference%3A%20Applied%20immunology%20and%20microbiology,the%20inflammatory%20response%20during%",
+      "nli": 0.9890578389167786,
+      "ver": 2.98622222,
+      "acr": 1.0,
+      "bleu": 0.028780702985033428,
+      "bert": 0.7603681683540344
+    },
+    {
+      "question": "Given question: Neurotransmitters are vital chemicals for communication between neurones and span a variety of responsibilities. Which major class of these chemicals are considered responsible for things like consciousness, attention, cognition and emotion? Option A: Amino acid neurotransmitters Option B: Monoamines Option C: Catecholamines Option D: Peptide neurotransmitters The correct answer is Option B.",
+      "best_explanation": "Monoamines are a major class of neurotransmitters and include:SerotoninNorepinephrineDopamine HistamineConsciousness/attention/cognition/emotion are considered to be the domain of monoamines.  A - Amino acid neurotransmitters are also a major class and include:GlutamateAsparginineGlycineCatecholamines - these are a minor class which include:AdrenalineEpinephrinePeptide neurotransmitters - another minor class:EndorphinEnkephalinNociception (pain)Reward (pleasure)Some other minor classes of neurotransmitters include:CholinergicAcetycholineMetaboliteNeuropeptides (various roles)Steroid hormones (various roles)Local anaesthetics (e.g. tetracaine)  I've tried to include most of the major classes, but there may be some I've missed/forgotten - if so, please let me know in the comments! This was taken from the PCS 3 lecture on Chemical Communication. (Dr. Derek Watson - week 6)  Link to lecture: https://www.youtube.com/watch?v=AzVR-izcQB4",
+      "nli": 0.972274661064148,
+      "ver": 2.98662622,
+      "acr": 1.0,
+      "bleu": 0.0473637827611222,
+      "bert": 0.804601788520813
+    },
+    {
+      "question": "Given question: Which of the following is not a cause of amnesia? Option A: Ageing Option B: Alzheimer's disease Option C: Anoxia or hypoxia Option D: Herpes simplex encephalitis Option E: Korsakoff syndrome The correct answer is Option A.",
+      "best_explanation": "A is correct! Age related memory loss is not amnesia. Amnesia is loss of memory, usually temporary, caused by brain damage. There are many different causes of amnesia including: Anoxia or hypoxia - lack of oxygen to the brainHerpes simplex encephalitis - virus that causes inflammation of the brainKorsakoff syndrome - chronic alcoholismAgeing - age related memory loss is not amnesia Trauma - head trauma can cause amnesia Memory impairment caused by other factors e.g. stress, anxiety, depression, certain drugs, radiation exposure, near death experiences, sleep deprivation, hallucinogenic drugs, electroconvulsive therapy. (From case 6 auditory pathways lecture)  PCS Unit 3 - Lecture 4 - Memory, Consciousness and Thought Disorder  Amnesia is loss of memory, usually temporary, caused by brain damage. There are many different causes of amnesia including:  Anoxia or hypoxia - lack of oxygen to the brainHerpes simplex encephalitis - virus that causes inflammation of the brainKorsakoff syndrome - chronic alcoholismAgeing - age related memory loss is not amnesia Trauma - head trauma can cause amnesia Memory impairment caused by",
+      "nli": 0.5464509129524231,
+      "ver": 3.09777777,
+      "acr": 1.0,
+      "bleu": 0.0056979621318060366,
+      "bert": 0.7483576536178589
+    },
+    {
+      "question": "Given question: Descending motor pathways can be divided into lateral and medial motor systems based on their location in the spinal cord. The lateral motor pathways control movements of the extremities and the medial pathways control the movements of the proximal axial and girdle muscles. Which of the following motor pathways control the voluntary rapid dexterous movement at individual digits or joints. Option A: Anterior Corticospinal Option B: Rubrospinal Option C: Vestibulospinal tract Option D: Lateral Corticospinal tract Option E: Tectospinal tract The correct answer is Option D.",
+      "best_explanation": "Anterior Corticospinal tract - controls proximal muscles of the upper limb Rubrospinal - controls distal muscles of the upper limm Vestibulospinal tract - controls axial and proximal neck muscles Lateral Corticospinal tract - controls voluntary rapid dexterous movement at individual digits or joints Tectospinal tract - controls intrinsic muscles of the hand (digits 2-3) Cerebellar tracts - controls motor adaptation (timing and coordination) of learned movements.  http://www.neuroanatomy.wisc.edu/courseware/neuro/body/term/loco/html#axonpathways  http://www.anatomystuff.co.uk/neuroanatomy/vessels/cns/axons-and-pathways.html  https://open.oregonstate.education/aandp/chapter/14-5-sensory-pathways/  https://open.oregonstate.education/aandp/chapter/14-7-motor-pathways/  https://www.kenhub.com/en/library/anatomy/the-basics/neuroanatomy/axons-and-synapses/conduction-velocity-in-myelinated-",
+      "nli": 0.4839714765548706,
+      "ver": 2.98776777,
+      "acr": 1.0,
+      "bleu": 0.048719101467971586,
+      "bert": 0.8127145171165466
+    },
+    {
+      "question": "Given question: A 25 year old women came at the A&I with a fracture at the surgical neck of the humerus. What is the most likely nerve she damaged because of the fracture? Option A: Ulnar nerve Option B: Musculocutanous nerve Option C: Median nerve Option D: Axillary nerve Option E: Long thoracic nerve The correct answer is Option D.",
+      "best_explanation": "The axillary nerve passes medially to the surgical neck of the humerus and may be damaged by a fracture at this site. Symptoms of this would include weakness and loss of sensation in the shoulder region. The other nerves do not pass this region. The musculocutanous nerve is the lateral border of the surgical neck. The ulnar nerve is medial to the surgical neck. The long thoracic nerve is posterior to the surgical neck.  The humeral shaft is the most common site of fracture of the humerus.  The humeral shaft is anterolateral to the surgical neck.  The humeral shaft is a common site of fracture.  The axillary nerve is the most likely nerve to be damaged at the surgical neck of the humerus.  The axillary nerve passes medially to the surgical neck of the humerus.  The axillary nerve is the most likely nerve to be damaged at the surgical neck of the humerus because it is the nerve closest to the surgical neck.  The axillary nerve is the most likely nerve to be damaged at the surgical neck of the humerus because it is the nerve closest to the surgical neck.  The ax",
+      "nli": 0.41680994629859924,
+      "ver": 3.13999898,
+      "acr": 1.0,
+      "bleu": 0.052694146029605336,
+      "bert": 0.7937902212142944
+    },
+    {
+      "question": "Given question: What is the name of the condition describing when pressure on the heart increases as a result of fluid filling the pericardial cavity? Option A: Cardiac tamponade Option B: Pericardial effusion Option C: Tension pneumothorax Option D: Pericarditis The correct answer is Option A.",
+      "best_explanation": "tamponade: https://www.google.co.uk/url?sa=i&rct=j&q=cardiac+tamponade&source=images&cd=&ved=0CAcQjRw&url=http%3A%2F%2Fwww.google.co.uk%2Furl%3Fsa%3Dt%26rct%3Dj%26q%3Dcardiac%20tamponade%26source%3Dimages%26cd%3D%26ved%3D0CAcQjRw%26url%3Dhttp%25%253A%252F%252Fwww.google.co.uk%252Furl%253Fsa%253Dt%2526rct%253Dj%2526q%253Dcardiac%20tamponade%2526source%253Dimages%2526cd%253D%2526ved%253D0CAcQjRw%2526url%253Dhttp%2525%252F%252Fwww.google.co.uk%252F",
+      "nli": 0.9683260917663574,
+      "ver": 2.98926222,
+      "acr": 1.0,
+      "bleu": 0,
+      "bert": 0.7432359457015991
+    },
+    {
+      "question": "Given question: What is the mechanism through which nitric oxide (NO) causes vasodilation? Option A: NO activates guanylate cyclase, this causes the conversion of GTP to cGMP. cGMP then activates pKG which phosphorylates myosin light chain kinase, therefore causing vasodilation. Option B: NO activates guanylate cyclase, this causes the conversion of GTP to cGMP. cGMP then activates pKG which leads to the activation of myosin phosphatase which dephosphorylates myosin light chain kinase, therefore causing vasodilation. Option C: NO activates adenyl cyclase, this causes the conversion of ATP to cAMP. cAMP then activates pKA which leads to the activation of myosin phosphatase which dephosphorylates myosin light chain kinase, therefore causing vasodilation. Option D: NO activates adenyl cyclase, this causes the conversion of ATP to cAMP. cAMP then activates pKA  which phosphorylates myosin light chain kinase, therefore causing vasodilation. The correct answer is Option B.",
+      "best_explanation": "NO activates guanylate cyclase, this causes the conversion of GTP to cGMP. cGMP then activates pKG which leads to the activation of myosin phosphatase which dephosphorylates myosin light chain kinase, therefore causing vasodilation.  The other answers are incorrect because; A- the order of the steps is incorrect.B- is correct.C- adenyl cyclase is incorrect, it should be guanylate cyclase.D- the order of the steps is incorrect.  I used the following website to help me create this question; https://www.cvpharmacology.com/cardioinhibitory/nitrates#:~:text=Nitric%20oxide%20(NO)%20activates%20guanylate,causing%20the%20conversion%20of%20GTP%20to%20cGMP.&text=cGMP%20then%20activates%20pKG%20which%20leads,causing%20vasodilation.&text=The%20other%20answers%20are%20incorrect%20because,adenyl%20cyclase%20is%20incorrect%2C",
+      "nli": 0.9683721661567688,
+      "ver": 2.98677772,
+      "acr": 1.0,
+      "bleu": 0.036867058447033016,
+      "bert": 0.8668094873428345
+    },
+    {
+      "question": "Given question: there are many receptors for the chemicals adrenaline and noradrenaline. One of these is beta 2 receptor. Binding of an agonist to this receptor will lead to? Option A: prevention of smooth muscle relaxation Option B: trigger smooth muscle releaxation Option C: cause the active contraction of smooth muscle Option D: lead to an increased heart rate Option E: potentially trigger an asthma attack The correct answer is Option B.",
+      "best_explanation": "beta 2 receptors are found in smooth muscle and the heart.  binding of an agonist (such as noradrenaline) will trigger smooth muscle relaxation in places like the lungs where we want to allow air in (as opposed to keeping it out).  in the heart beta 2 receptors will cause a positive inotrope effect (where as beta 1 receptors will cause a negative inotrope effect as they are found in the heart and cause contraction)  a beta 2 adrenoceptor agonist is salbutamol  a beta 1 adrenoceptor agonist is epinephrine/adrenaline  a drug that specifically targets the beta 2 receptor is salmeterol  a drug that targets the beta 1 receptor is metoprolol  there are also beta 3 and beta 4 receptors  beta 3 receptors are found in adipose tissue and beta 4 receptors are found in the blood brain barrier.  the a1 adrenoceptors are found in the heart and in the blood vessels  a1a2 adrenoceptors are found in the lungs  a1 adrenoceptors can act as a negative chronotrope (as they stop the heart from beating as strongly)  a2 adrenoceptors can act as a positive chronotrope",
+      "nli": 0.7335597276687622,
+      "ver": 3.09677777,
+      "acr": 0.75,
+      "bleu": 0.018450468701825515,
+      "bert": 0.7922326326370239
+    },
+    {
+      "question": "Given question: An exhausted junior doctor is about to do his ward rounds in the 117th hour of his shift in the new and improved 7 day a week NHS. Before doing so he drinks a cup of black coffee and an energy drink to ensure that he is fully awake, to avoid making a mistake due to tiredness. After doing so he notices that his heart rate increases drastically. His colleague suggests this is due to the caffeine in the drinks. How does caffeine have this effect? Option A: It activates the breakdown of cAMP Option B: It inhibits the breakdown of cAMP Option C: It activates the enzyme Myosin Light-Chain Kinase Option D: It inhibits the breakdown of PKA Option E: It inhibits the breakdown of IP3 The correct answer is Option B.",
+      "best_explanation": "Caffeine is a phosphodiesterase inhibitor, which is the enzyme that breaks down cAMP. Therefore leading to more cAMP and therefore more Calcium ions in the cardiac muscle due to activation of Protein Kinase A and therefore we see more cross-bridge formation and more contractions of heart muscle. (Ideally we would have covered this in the PCS 2 lecture on \"Heart Rate and Contractility\" but as this is an extra question I added it in here)  For information on how caffeine works as a phosphodiesterase inhibitor see this video: https://www.youtube.com/watch?v=4mPQejgUpxs (it's the second mechanism of action mentioned)  For information on the other mechanisms of action of caffeine see this website: https://www.sciencedirect.com/topics/biochemistry-genetics-and-molecular-biology/caffeine-biochemical-and-physiological-effects#:~:text=Caffeine%20is%20a%20phosphodiesterase,its%20breakdown%20(Tanudji%202018).%22&text=It%20inhibits%20",
+      "nli": 0.3659900724887848,
+      "ver": 2.98622222,
+      "acr": 1.0,
+      "bleu": 0.4192504533557425,
+      "bert": 0.8188320994377136
+    },
+    {
+      "question": "Given question: Upon fertilisation what hormone is produced by a developing embryo prior to placenta formation? Option A: Progesterone Option B: Oestrogen Option C: hCG Option D: GNRH The correct answer is Option C.",
+      "best_explanation": "Upon fertilisation the blastocytes produce hCG to maintain the corpus luteum which produces progesterone  Once the placenta is developed enough to produce steroids, hCG production is taken over by the placenta in conjunction with the developing embryo  hCG has a key role in maintaining the endometrium and is detected in early pregnancy tests  GNRH is released by the hypothalamus in response to low progesterone and oestrogen and stimulates the release of FSH and LH from the anterior pituitary  Oestrogen is produced by the developing embryo after the placenta has developed enough to maintain the corpus luteum  Progesterone maintains the endometrium and is crucial for implantation  If there is not enough progesterone and oestrogen, GNRH is released which stimulates the release of FSH and LH. These stimulate the development of follicles which produce oestrogen and progesterone.  Progesterone is essential for maintaining pregnancy and is produced by the corpus luteum  If the corpus luteum is not sustained, GNRH is released which stimulates the release of oestrogen and FSH from the developing embryo. Oestrogen maintains the corpus luteum and",
+      "nli": 0.957643449306488,
+      "ver": 3.13676777,
+      "acr": 0.0,
+      "bleu": 0.035664512974789814,
+      "bert": 0.7615684866905212
+    },
+    {
+      "question": "Given question: Which pathway of the complement system is activated by antibodies? Option A: Alternative Option B: Classical Option C: Opsonisation Option D: Mannan Lectin Option E: Membrane Attack Complex The correct answer is Option B.",
+      "best_explanation": "Classical is the only pathway activated by antibodies, the others are activated by different ways:  Alternative is activated by the spontaneous hydrolysis of water  C and D are activated by binding to a microbial surface  E is a result of the classical pathway and is the final common pathway where C3 convert to C3b and the MAC form  C3 convert to C3b and the MAC form, and C3b binds to microbial surface  C3 convert to C3b and the MAC form, and C3b binds to microbable surface and the MAC binds to the membrane  C3 convert to C3b and the MAC form, and C3b binds to microbable surface and the MAC binds to the membrane causing pore formation  C3 convert to C3b and the MAC form, and C3b binds to microbable surface and the MAC form, causing pore formation and cell lysis  C3 convert to C3b and the MAC form, and C3b binds to microbable surface and the MAC form, causing pore formation, cell lysis and cell death  C3 convert to C3b and the MAC form, and C3b binds to microbable surface and the MAC form, causing pore formation, cell lysis, cell death and platelet aggreg",
+      "nli": 0.5863286256790161,
+      "ver": 3.06666666,
+      "acr": 1.0,
+      "bleu": 0.00496227709424285,
+      "bert": 0.7667458057403564
+    },
+    {
+      "question": "Given question: LDL usually binds to the receptor LDL Apo B, which transports it from the blood, to the liver. This then reduces LDL levels, there is an inherited condition that can disrupt this process, with clinical signs including: - Corneal Arcus- Xanthalasma - Tendon Xanthoma What is this condition called? Option A: Familial Hypocholesterolaemia Option B: Familial Hypercholesterolaemia Option C: Lipid Disorder Option D: High Cholesterol levels The correct answer is Option B.",
+      "best_explanation": "B is the correct answer, this is where you have a mutation in one of the genes that control the receptor, Apo B/E or the LDL particle, this means that LDL builds up in the blood, and so you have high LDL levels.  A is the condition where you have a mutation in the LDL receptor, this means that you have low LDL levels and so you have a high risk of cardiovascular disease as LDL cholesterol builds up in the blood. C is correct, this is just a statement, not a condition  D is incorrect, familial hypercholesterolaemia is where you have high LDL levels, so this condition does not exist.  To remember this condition, think \"FH\" (Familial Hypercholesterolaemia) \"F\" stands for \"Fred\" as in \"Fred Astaire\" \"H\" stands for \"Happy\" as in \"happy ever after\" This was covered in the \"Nutrition and lifestyle\" plenary, in Case 4. The clinical signs were in the \"Case 4 Clinical Signs\" handout. The \"Nutrition and lifestyle\" plenary also covered treatment options. The \"Case 4 Clinical Signs\" handout and the \"Nutrition and lifestyle\" plenary",
+      "nli": 0.010701554827392101,
+      "ver": 3.06666666,
+      "acr": 1.0,
+      "bleu": 0.003543237751292789,
+      "bert": 0.8240664601325989
+    },
+    {
+      "question": "Given question: Fructose-1,6-Bisphosphatase is an enzyme used in gluconeogenesis to convert fructose-1,6-bisphosphate to fructose-6-phosphate. What up regulates and down regulates this enzyme? Option A: Up regulated by Citrate Down regulated by AMP and fructose-2,6-bisphosphate Option B: Up regulated by AMP and fructose-2,6-bisphosphateDown regulated by Citrate Option C: Up regulated by AMPDown regulated by Citrate and fructose-2,6-bisphosphate Option D: Up regulated by AMP and CitrateDown regulated by Fructose-2,6-bisphosphate The correct answer is Option A.",
+      "best_explanation": "Fructose-1,6-Bisphosphatase is up regulated by AMP as as the conversion of fructose-1,6-bisphosphate to fructose-6-phosphate allows for gluconeogenesis to take place in the liver when there is low ATP, by increasing the availability of glucose. It is also up regulated by citrate as citrate is a product of the TCA cycle, and the conversion of citrate to oxaloacetate (by ATP and a CoA) in the liver allows for the continuation of gluconeogenesis.Fructose-1,6-Bisphosphatase is down regulated by fructose-2,6-bisphosphate as when theres a high amount of fructose-2,6-bisphosphate (a product of the Calvin cycle) this means theres a lot of possible glucose so less needs to be made, and it is also down regulated by citrate as if theres a lot of citrate this means there is a lot of glucose available. AMP and fructose-2,6-bisphosphate down regulate the enzyme by increasing the concentration of fructose-6-phosphate, which is the product of the enzyme reaction, will inhibit the en",
+      "nli": 0.9830754995346069,
+      "ver": 2.95777777,
+      "acr": 1.0,
+      "bleu": 0.07957427165189071,
+      "bert": 0.8285369873046875
+    },
+    {
+      "question": "Given question: You're a senior consultant. You've made it this far.Its another busy night in A&E and somehow you've been roped in to do another 12 hour shift (short staffing or something).A young woman comes in with fever, diarrhoea, jaundice and upper right quadrant abdominal pain.One of those switched on junior doctors has run some tests and found the following:HBsAg = Neg.anti-HBc= Neg.anti-HBs= Pos.IgM = Neg.IgG= Neg.However, that same junior doctor's gran had Hepatitis D, so he is now convinced that this patient has the same, as she is 'presenting with similar symptoms'.Which of the following is the most indicative that he is unfortunately wrong? Option A: As the IgM is Neg. Option B: As the anti-HBs is pos. Option C: As the Anti-HBc is neg. Option D: As the IgG is neg. Option E: He's run tests for Hepatitis B.... That proves nothing! The correct answer is Option B.",
+      "best_explanation": "The answer is B.The presence of anti-HBs indicates that the patient has been vaccinated against Hep B, or that they have had Hep B in the past and are now immune. Therefore, this rules out Hep D. The other answers are irrelevant. Although running the tests for Hep B does prove nothing, it does mean that the junior doctor has done something. PCS Unit 2 - Case 2.  Useful resource: https://geekymedics.com/hepatitis-b-vs-hepatitis-d-differences-symptoms-treatment/ 'Hepatitis B and D are both blood bourne virus and are transmitted via needle sticks, tattoos, body piercings and sex.' 'Hepatitis D can occur only in the presence of the DNA of Hepatitis B.' 'Hepatitis B immunization does not provide protection against Hepatitis D.' 'Hepatitis B is more likely to present with symptoms of jaundice, whereas Hepatitis D presents with a more acute and fulminant course.' 'Hepatitis D can be more severe and leads to more liver failure and deaths than Hepatitis B.' 'Hepatitis D can occur in those who are immune to Hepatitis B, whereas Hepatitis B cannot occur",
+      "nli": 0.00212371745146811,
+      "ver": 3.09662677,
+      "acr": 1.0,
+      "bleu": 0.033608322677964014,
+      "bert": 0.8075158596038818
+    },
+    {
+      "question": "Given question: Luke has been admitted to A&E with a severe brain injury after falling off his bike without a helmet. After a few days at the hospital, Luke regains consciousness and you assess him to check for any memory loss. You ask how many months there are in a year and he says 20. Luke is able to feed himself and pick things up without difficulty. Which part of Luke\u2019s brain is most likely to have been effected? Option A: Amygdala Option B: Cerebellum and striatum Option C: Medial temporal lobe and hippocampus Option D: Neocortex Option E: Frontal lobe The correct answer is Option C.",
+      "best_explanation": "Medial temporal lobe and hippocampus \u2013> memory loss Amygdala \u2013> emotions Cerebellum and striatum \u2013> motor function Neocortex \u2013> sensory input and higher cognitive functions Frontal lobe \u2013> executive function, decision making, planning and organization  From case 6 cognition lecture. Memory and the Hippocampus. The medial temporal lobe including the hippocampus is responsible for the formation and storage of new memories. Damage to this area can result in severe memory loss, often permanently preventing the formation of new memories.  https://www.ncbi.nlm.nih.gov/books/NBK441980/Delicately placed deep inside the brain, the hippocampus plays a vital role in the consolidation of information from short-term memory to long-term memory. Disruption to the hippocampus often results in severe memory impairment, sometimes permanently preventing the formation of new memories. From case 6 memory lecture. Introduction to Memory. The hippocampus is part of the medial temporal lobe which also includes the amygdala and the mammillary body. The medial temporal lobe is the key area for memory formation in the brain.  https://teachmeanatomy.info/neuroanatomy/v",
+      "nli": 0.9882809519767761,
+      "ver": 2.98666666,
+      "acr": 1.0,
+      "bleu": 0.007787431181567242,
+      "bert": 0.834378719329834
+    },
+    {
+      "question": "Given question: Dan has made it to year 2, it is the first Wednesday of the year and he swaggers to the bar to order his first Jug of Snakey B as social sec, 1 Jug consists of 2 pints of larger, 2 pints of cider and a dash of blackcurrent juice. A strong performer in exams, Dan has yet been unable to switch his mind off from revision mode all summer and as such remembers the equation to calculate the number of units in his beverage (units = strength (%) multiplied by volume (ml) divided by 1000). dan wonders if by solving this calculation he might finally be free to relax.So how many units has Dan got in his Jug? 1 pint = 568mlCider 4.5%Lager 3.8% Option A: 10.2 Option B: 4.7 Option C: 9.6 Option D: 8.6 Option E: 9.4 The correct answer is Option E.",
+      "best_explanation": "Units = (4.5*568) + (3.8*568) / 1000 = 9.4 Units  Pints 5.4  Dan's Jug 10.2  Jugs 10.2/5.4 = 1.9 Jugs 1.9 Jugs = 10.2/1.9 = 5.333333333333334  Pints 5.3333333333333334 5.3333333333333334/568 = 0.094 0.094 * 10 = 0.94 0.94 * 10 = 9.4 9.4  Units  Pints 5.3333333333333334 9.4 Dan's Jug 10.2  Jugs 10.2/5.333333333333333 = 1.86666666666666665  Pints 1.86666666666666665 1",
+      "nli": 0.9147866368293762,
+      "ver": 2.98626222,
+      "acr": 0.0,
+      "bleu": 0.006002463235659354,
+      "bert": 0.7978339791297913
+    },
+    {
+      "question": "Given question: 3 of the rotator cuff muscles insert at the greater tubercle of the humerus. The other rotator cuff muscle inserts at the lesser tubercle of the humerus. What muscle is this? Option A: Teres Minor Option B: Teres Major Option C: Supraspinatus Option D: Subscapularis Option E: Infraspinatus The correct answer is Option D.",
+      "best_explanation": "1. Subscapularis- inserts at lesser tubercle. 2. Supraspinatus- inserts at greater tubercle. 3. The other 2 rotator cuff muscles insert at the greater tubercle. 4. Teres Minor- inserts at the lateral border of the scapula above the teres major. 5. Teres Major- inserts at the lateral border of the scapula below the teres minor. 6. Infraspinatus and subscapularis make up the rotator cuff muscles. 7. The rotator cuff muscles depress the humeral head against the glenoid. 8. The teres muscles are the two rotator cuff muscles that insert at the greater tubercle. 9. The subscapularis is the only rotator cuff muscle that inserts at the lesser tubercle. 10. The subscapularis also aids the initiation of shoulder abduction. 11. The teres minor and major are responsible for scapular movement. 12. The infraspinatus and supraspinatus muscles are the two rotator cuff muscles that insert at the greater tubercle. 13. The infraspinatus aids in the initiation of shoulder",
+      "nli": 0.8606759309768677,
+      "ver": 3.16666666,
+      "acr": 1.0,
+      "bleu": 0.022264181468324897,
+      "bert": 0.7748873829841614
+    },
+    {
+      "question": "Given question: A young male child is brought into the clinic. His mother says that he bleeds easily and has bleeding joints characterised by stiffness, pain swelling and heat. You suspect haemophilia A and decide to carry out a test for the intrinsic pathway. What test should you carry out ? Option A: PT Option B: APTT Option C: CT Option D: ATP The correct answer is Option B.",
+      "best_explanation": "APTT would test the intrinsic pathway as it is a test of the intrinsic pathway of Haemostasis. PT (Prothrombin time) tests the extrinsic pathway.  CT (Consent and transport) would be the process of obtaining informed consent and transporting the patient. ATP (Activated Tissue Necrosis Pressure) is a test of the platelet count.  For further information refer to Haemostasis lecture from case 6.  For more information on haemophilia refer to the bleeding disorders lecture in case 6.  Resources: -Haemostasis lecture PCS 3 -Bleeding disorders lecture PCS 3 -Case 6 folder on LC (contains lecture slides, articles and videos) -Haemophilia article from case 6 folder -Haemophilia A article from case 6 folder -Haemophilia B article from case 6 folder -Haemophilia C article from case 6 folder -Medics in the zone- bleeding disorders (audio) -Medics in the zone- haemophilia (audio) -Dr Coffey- haemophilia lecture (audio) -Dr Coffey- haemophilia workbook (pdf) -Dr Coffey- haemophilia case 5 (pdf) -Dr Coffey- haemophilia case",
+      "nli": 0.13815899193286896,
+      "ver": 3.06666666,
+      "acr": 1.0,
+      "bleu": 0.003861594530061654,
+      "bert": 0.7674317359924316
+    },
+    {
+      "question": "Given question: Which of the following acts as an agonist on alpha 1 adrenoceptors? Option A: Salbutamol Option B: Prazosin Option C: Bisoprolol Option D: Timolol Option E: Phenylephrine The correct answer is Option E.",
+      "best_explanation": "Phenylephrine is an agonist on alpha 1 adrenoceptors, the others are antagonists.  Salbutamol is an agonist on beta 2 adrenoceptors.  Prazosin is an antagonist on alpha 1 adrenoceptors.  Bisoprolol is an antagonist on beta adrenoceptors.  Timolol is an antagonist on beta adrenoceptors.  Phenylephrine is also an agonist on alpha adrenoceptors (alpha 2 and alpha 2c).  Note that some of the above drugs are also used as beta adrenoceptor agonists.  For example bisoprolol is also a beta adrenoceptor agonist, as is phenylephrine (on alpha 2 adrenoceptors).  Similarly, prazosin is also an alpha adrenoceptor antagonist as well as a beta 1 adrenoceptor antagonist.  Also note that there are alpha 1a and alpha 1b adrenoceptors as well as the more commonly mentioned alpha 1 and alpha 2.  The alpha 1a adrenoceptors are more commonly referred to as beta 1 adrenoceptors and are located in vascular and uterine smooth muscle.  The alpha 1b adrenoceptors are more commonly referred to as beta 2",
+      "nli": 0.9731354713439941,
+      "ver": 3.09662977,
+      "acr": 1.0,
+      "bleu": 0.08828105089432937,
+      "bert": 0.8033730983734131
+    },
+    {
+      "question": "Given question: Mannose & Fucose are carbohydrates found on the cell wall of bacteria. What aspect of the complement system do they activate? Option A: C3b Option B: Classical pathway Option C: Lectin pathway Option D: C3a Option E: Alternative pathway The correct answer is Option C.",
+      "best_explanation": "Mannose & Fucose are detected by the lectin pathway, leading to the production of C3b which then leads to opsonisation & MAC.  C3a is produced in the alternative pathway, which acts in the same way as C3a in the classical pathway- leading to degranulation of mast cells & recruitment of phagocytes.  C3b is produced in both the classical & lectin pathways, leading to opsonisation & MAC.  Lectin pathway is spontaneous C3 hydrolysis, whilst classical is C3 convertase.  Alternative pathway is C3 hydrolysis, C3a, C5a, C5b.  C3a & C5a from the alternative pathway lead to degranulation of mast cells, & recruitment of phagocytes.  C3b leads to opsonisation & MAC.  Fucose is also a component of glycoproteins & glycolipids on the bacterial cell wall.  It is recognised by the alternative pathway.  Mannose is recognised by the classical pathway.  Both pathways lead to the production of C3b.  C3b leads to opsonisation & MAC.  C5a leads to degranulation of mast cells & recruitment of phagocytes",
+      "nli": 0.8370993137359619,
+      "ver": 3.06666666,
+      "acr": 1.0,
+      "bleu": 0.01642331767166362,
+      "bert": 0.8011071681976318
+    },
+    {
+      "question": "Given question: A patient comes into A & E with an injury to their arm. An examination of the patient is taken and shows that they are only able to abduct their arm the first 15 degrees. X-ray scan shows that they have a fracture their surgical neck of the humerus  What nerve is most likely to be damaged? Option A: Axillary nerve Option B: Radial nerve Option C: Musculocutaneous nerve Option D: Ulnar nerve Option E: Subscapular nerve The correct answer is Option A.",
+      "best_explanation": "The axillary nerve passes medially to the surgical neck of the humerus and may be damaged by a fracture to this area.  The radial nerve is at risk of damage by a fracture to the humeral shaft.  The muscolocutaneous nerve is at risk of damage by a fracture to the lateral border of the humerus.  The ulnar nerve is at risk of damage by a fracture to the medial side of the humerus.  The subscapular nerve is at risk of damage by a fracture to the subscapular fossa.  https://teachmeanatomy.info/upper-limb/nerves/axillary-nerve/  https://teachmeanatomy.info/upper-limb/nerves/radial-nerve/  https://teachmeanatomy.info/upper-limb/nerves/musculocutaneous-nerve/  https://teachmeanatomy.info/upper-limb/nerves/ulnar-nerve/  https://teachmeanatomy.info/upper-limb/nerves/subscapular-nerve/  https://teachmeanatomy.info/upper-limb/bones/humerus/surgical-ne",
+      "nli": 0.6683056950569153,
+      "ver": 3.12666666,
+      "acr": 1.0,
+      "bleu": 0.051226847315801745,
+      "bert": 0.779313325881958
+    },
+    {
+      "question": "Given question: The gastric phase accounts for 60% of gastric secretion. The activation of mechanoreceptors initiates the vago-vagal and local reflexes which stimulates the secretion of acetylcholine. What causes the activation of these mechanoreceptors? Option A: sight, smell and taste of food Option B: distention of the stomach Option C: protein digestion products in the duodenum Option D: leptin Option E: ghrelin The correct answer is Option B.",
+      "best_explanation": "The distention of the stomach activates mechanoreceptors which send impulses to the brain via the vagus nerve. The vagus nerve decussates in the medulla, and via the secretion of acetylcholine, stimulates the gastric phase of secretion. Leptin and ghrelin are orexin hormones which are associated with the digestion of protein and carbohydrates. They have an influence on the gastric phase of secretion, however, they are not the primary stimulus. Sight, smell and taste do influence the hunger response, however, they do not directly cause the activation of mechanoreceptors. (The oral and Gustatory phases of digestion take place in the duodenum, not in the stomach)  The answer to this question is B. Distention of the stomach causes the activation of mechanoreceptors which send impulses to the brain via the vagus nerve. The vagus nerve decussates in the medulla, and via the secretion of acetylcholine, stimulates the gastric phase of secretion. Leptin and ghrelin are orexin hormones which are associated with the digestion of protein and carbohydrates. They have an influence on the gastric phase of secretion",
+      "nli": 0.9711325764656067,
+      "ver": 3.13677777,
+      "acr": 1.0,
+      "bleu": 0.007211092381248921,
+      "bert": 0.8206731677055359
+    },
+    {
+      "question": "Given question: What epithelial cell type functions as a mediator of filtration and diffusion? Option A: simple squamous Option B: simple cuboidal Option C: simple columnar Option D: stratified squamous Option E: pseudostratified The correct answer is Option A.",
+      "best_explanation": "simple squamous - function as a mediator of filtration and diffusion  simple cuboidal - secretion and absorption  simple columnar - mucosubstance secretion  stratified squamous - multiple functions including desquamation, secretion, and protection  pseudostratified - multiple functions including secretion, absorption, and protection  cuboidal - secretion and absorption  columnar - mucosubstance secretion  squamous - formation of epidermis  transitional - formation of bladder epithelium and digestive tract  glandular - secretion  muscular - contraction  nerve - reception of nervous impulses and release of neurotransmitters  lymphoid - immune response  Blood capillary - exchange of substances between the blood and the interstitial fluid  In general, the main function of epithelial cells is to separate and protect, with different types serving different purposes.  Stratified squamous epithelial cells are useful in protection from abrasion and desquamation. Pseudostratified epithelial cells are useful in protecting from abrasion, providing elasticity, and allowing stretch.  Cuboidal epithelial cells are useful in protection from abrasion, secreting and absorption. Columnar epithelial cells",
+      "nli": 0.9525488615036011,
+      "ver": 3.06666666,
+      "acr": 1.0,
+      "bleu": 0.0052377407877277704,
+      "bert": 0.8094030022621155
+    },
+    {
+      "question": "Given question: Jim's just gotten a new iPhone and is playing around with portrait mode on the camera app. The way the camera is able to focus on a nearby object and blur out objects in the distance reminds him of how the human eye works in a similar way. The ciliary muscle in the eye controls accommodation for viewing objects at varying distances. Which cranial nerve innervates this muscle? Option A: Ophthalmic nerve (branch of CN V trigeminal nerve) Option B: Optic nerve (CN II) Option C: Oculomotor nerve (CN III) Option D: Abducens nerve (CN VI) Option E: Trochlear nerve (CN IV) The correct answer is Option C.",
+      "best_explanation": "The oculomotor nerve supplies motor innervation to the superior, inferior and medial rectus and inferior oblique ciliary muscles, which control accommodation of the lens in the eye.  The other options show no relationship to the ciliary muscles.  The optic nerve (CN II) provides sensory information from the retinaThe ophthalmic nerve (CN V1) provides sensory information from the corneaThe abducens nerve (CN VI) provides motor innervation to the lateral rectus muscle of the eyeThe trochlear nerve (CN IV) provides motor innervation to the superior oblique muscle of the eye  https://teachmeanatomy.info/eye/vocabulary/ciliary-muscle/ https://www.anatomystuff.co.uk/repository/product/user/img_img_9781587799259_dis_08041121.jpg?width=350&height=255&quality=80&mode=crop&edge=bleed&crop=fill&bust=1&q=90 - ciliary muscle anatomy https://www.anatomystuff.co.uk/repository/product/user/img_img",
+      "nli": 0.0004317479906603694,
+      "ver": 2.98929262,
+      "acr": 1.0,
+      "bleu": 0.25046248657237896,
+      "bert": 0.8213207125663757
+    },
+    {
+      "question": "Given question: Jerry suffers from Acromegaly. This is a condition found in adults where too much GH is being released from the anterior pituitary gland, often because of a non-cancerous tumour in the gland. Uptake of glucose is slowed or stopped so Jerry may be diabetic. What is the first step that growth hormone (GH) carries out to increase levels of glucose in the blood? Option A: Decreases the number of GLUT1 transporters so less glucose is digested. Option B: Decreases the rate of glycolysis in the liver. Option C: Increases lypolysis in adipose tissue. Option D: Causes gluconeogenesis. Option E: Decreases lypolysis in adipose tissue. The correct answer is Option C.",
+      "best_explanation": "GH increases lypolysis in adipose tissue. The free fatty acids released are taken up by the liver and converted to glucose uptake by tissues. This increases the levels of glucose in the blood.  GH also causes an increase in protein synthesis which increases the growth of tissues, including those of the liver, which increases gluconeogenesis.  GLUT1 transporters are not decreased by GH.  Glycolysis in the liver is increased by GH.  Adipose tissue is where the majority of the bodies fat is stored.  The answer E is incorrect as lypolysis is increased not decreased.  The answer D is also incorrect as gluconeogenesis is caused by GH not the result of an increase in glucose in the blood.  The answer B is also incorrect as the rate of glycolysis is increased not decreased.  The answer A is incorrect as the number of GLUT1 transporters is not decreased.  The answer C is correct as GH increases lypolysis in adipose tissue. The free fatty acids released are taken up by the liver and converted to glucose uptake by tissues. This increases the levels of glucose in the blood.  The answer B is also correct as GH causes an increase",
+      "nli": 0.03246091678738594,
+      "ver": 3.09666666,
+      "acr": 1.0,
+      "bleu": 0.05475438641066032,
+      "bert": 0.8338512182235718
+    },
+    {
+      "question": "Given question: Calcinosis is the calcification of soft tissues ( including kidneys,heart , lungs etc) What vitamin could cause this if it is ingested in excess? Option A: A Option B: B6 Option C: B9 Option D: D The correct answer is Option D.",
+      "best_explanation": "Vitamin D if ingested in excess can cause calcinosis. This is because vitamin D is a fat soluble vitamin and can be stored in fat cells. If a person has excess vitamin D they may have high levels of calcium in their blood. This can cause the calcification of soft tissues.  To much Vitamin A can cause Hyperkeratosis which is the excessive keratinisation of the skin. This can cause the skin to become thick and hard.  To much Vitamin B6 can cause peripheral neuropathy. This is damage to the nerves that connect the body to the limbs.  To much Vitamin B9 can cause megaloblastic anaemia. This is a type of anaemia where the red blood cells are large and irregularly shaped. This reduces their ability to carry oxygen.  To much vitamin C can cause kidney stones. This is because vitamin C is an antioxidant and can reduce the reactive oxygen species that are produced when oxidising agents attack DNA or other important molecules in the body. These reactive oxygen species can combine with minerals like calcium to form salts that are insoluble and stick together. They can then be deposited in tissues as crystals which can block blood vessels and cause damage. In the case of vitamin C, the excess vitamin can",
+      "nli": 0.27706435322761536,
+      "ver": 3.06666666,
+      "acr": 0.0,
+      "bleu": 0.005517875188399067,
+      "bert": 0.7691285014152527
+    },
+    {
+      "question": "Given question: Which rib is not palpable? Option A: Cervical rib in thoracic outlet syndrome Option B: Rib 1 Option C: Rib 2 Option D: Rib 3 Option E: Rib 10 The correct answer is Option B.",
+      "best_explanation": "1st rib is not palpable, it lies against the thoracic wall. 2nd rib = 1st costal surface 3rd rib = 2nd costal surface 4th rib = 3rd costal surface 5th rib = 4th costal surface 6th rib = 5th costal surface 7th rib = 6th costal surface 8th rib = 7th costal surface 9th rib = 8th costal surface 10th rib = 9th costal surface 11th rib = 10th costal surface 12th rib = 11th costal surface 13th rib = 12th costal surface 14th rib = 13th costal surface 15th rib = 14th costal surface 16th rib = 15th costal surface 17th rib = 16th costal surface 18th rib = 17th costal surface 19th rib = 18th costal surface 20th rib = 19th costal surface 21st rib = 20th costal surface 22nd rib = 21st costal surface 23rd rib = 22nd costal surface 24th rib = 23rd costal surface",
+      "nli": 0.4219762980937958,
+      "ver": 2.98777777,
+      "acr": 0.0,
+      "bleu": 0.003205995862201587,
+      "bert": 0.7181323766708374
+    },
+    {
+      "question": "Given question: You are well into your shift at the A&E department, You have requested a blood gas on one of the patients and the results show that their partial pressure of oxygen is less than 8KPa, but their partial pressure of carbon dioxide is normal. You suspected type 1 respiratory failure and began treatment with oxygen and go on your way. A few hours later you return to see that the oxygen treatment isnt working and the patient is showing no signs of improvement. What was the cause of his respiratory failure? Option A: Low PiO2 Option B: VQ mismatch Option C: Pulmonary shunt Option D: diffusion impairment Option E: hypoventilation. The correct answer is Option C.",
+      "best_explanation": "The correct answer is C, pulmonary shunt. A pulmonary shunt is a block in the alveoli which prevents the exchange of gases, in this case, oxygen. This could be caused by a fissure, atelectasis or a bronchial blood supply.  A- is incorrect as the partial pressure of oxygen is less than 8Ka- is incorrect as the partial pressure of carbon dioxide is normalb- is incorrect as the partial pressure of carbon dioxide is normalc- is correct as there is no evidence of hypoventilation, and the low PiO2 suggests respiratory failure, however the cause of this is a pulmonary shunt not diffusion impairmentd- is incorrect as there is no evidence of diffusion impairmente- is incorrect as there is no evidence of hypoventilation. case 5, PCS 2, Qs 1-3. 10 mins.  Pulmonary shunt- causes of low PiO2 in respiratory failure, can be caused by a block in the alveoli preventing gas exchange, could be caused by a fissure, atelectasis or a bronchial blood supply.  VQ mismatch- causes of low PiO2 in respiratory failure, when there is a difference in ventilation and perfusion, this causes some areas to have low levels of",
+      "nli": 0.9735853672027588,
+      "ver": 3.09777777,
+      "acr": 1.0,
+      "bleu": 0.10584233161232394,
+      "bert": 0.7996469736099243
+    },
+    {
+      "question": "Given question: A 77 year old man visits the GPs surgery. His history states he has genetic haemochromatosis. What mineral is causing his condition? Option A: Phosphorus Option B: Iron Option C: Iodine Option D: Copper Option E: Calcium The correct answer is Option B.",
+      "best_explanation": "Haemochromatosis is the accumulation of iron in the body leading to iron overload. The HFE gene controls the storage of iron. A mutation of this gene causes haemochromatosis.  Phosphorus, Iodine, Copper and Calcium are all essential minerals, but they do not cause haemochromatosis.  A patient with haemochromatosis may present with fatigue, joint pain and failure of the pituitary gland. Iron levels should be checked. The iron level is often very high in haemochromatosis. Phlebotomy (venesection) is the treatment. This involves removing blood (up to 500ml per session) to reduce the amount of iron in the body.  This patient should be monitored for any endocrine failure, as a result of failure of the pituitary gland.  Avoidance of alcohol, smoking and caffeine should be encouraged as they can all contribute to iron overload.  A good website for this condition is https://www.haemochromatosis.org.uk/  This patient may also be presenting with liver failure, diabetes, heart failure and hypogonadotrophic hypogonadism.  A good tutorial on this condition can be found at https://www.youtube.com/watch",
+      "nli": 0.0002577518462203443,
+      "ver": 3.16666666,
+      "acr": 1.0,
+      "bleu": 0.02208536735953956,
+      "bert": 0.7650309205055237
+    },
+    {
+      "question": "Given question: The peritoneum is a serous membrane forming the lining of the abdominal cavity. When an organ is almost completely covered with visceral (inside) peritoneum it is said to be intraperitoneal. Which of the following organs is not classed as intraperitoneal? Option A: Liver Option B: Stomach Option C: Kidneys Option D: Appendix Option E: Transverse colon The correct answer is Option C.",
+      "best_explanation": "The kidneys are covered in a layer of parietal peritoneum which is non-serous, meaning they are extraperitoneal.  The peritoneum is derived from the visceral peritoneum which covers the organs, and the parietal peritoneum which lines the abdominal wall.  You can remember SERTOBIZ (S for the small intestine, E for the omentum, R for the rectum, T for the transverse colon, B for the bowel, I for the ileocecal junction, Z for the zonules of the round ligament)  for the order of the abdominal cavity.  SIPS (S for the small intestine, P for the pancreas, S for the spleen, I for the ileum, V for the colon, S for the rectum, I for the transverse colon, P for the descending aorta, S for the duodenum, I for the Jejunum, V for the ascending aorta, S for the omentum, E for the liver, T for the transverse colon, I for the infracolic compartment, P for the appendix, S for the rectum, I for the sigmoid colon, E for the small intestine, V for the caecum,",
+      "nli": 0.751556396484375,
+      "ver": 3.19677777,
+      "acr": 1.0,
+      "bleu": 0.0016228669548269635,
+      "bert": 0.7502618432044983
+    },
+    {
+      "question": "Given question: Your driving down the M4 when you look in your mirror and and see someone is right up behind you, too close for comfort. As they pass on the inside lane you realise its Dr McCarthy who has a go at you at you as she believes you are driving like an idiot. She is driving a BMW so she thinks she owns the road. As she is distracted she loses control of the car and ends up on the side of the road. You decide to rush to her aid and luckily she seems unharmed but is unconscious with no signs of breathing so you decide to start CPR. At what rate should you compress the chest and and how deep should you press down? Option A: 100 - 120 per minute, press down 7-8 cm Option B: 50 - 60 per minute, press down 7-8 cm Option C: 50 - 60 per minute, press down 5-6 cm Option D: 100 - 120 per minute, press down 5-6 cm Option E: Take a moment to watch a video so Vinnie Jones can remind you!https://www.youtube.com/watch?v=zKUY4kUllog&feature=emb_title The correct answer is Option D.",
+      "best_explanation": "100-120 compressions per minute with 5-6 cm depth of compression. 3 breaths (consider giving 2 breaths if there is resistance) then repeat. Quality of compressions is more important than quantity of depth.  It is important to allow the diaphragm to move up and down with each compression to facilitate breathing.  It is also important to note that CPR should only be performed by trained individuals.  Dr McCarthy is a fictional character and this scenario is entirely made up.  This was taken from the HSE website. https://www.hse.ie/first-aid/documents/cp-resuscitation.pdf  There is also a video on the resuscitation council website which is very useful. https://www.resuscitation.org/guidelines/cpr/introduction/what-is-cpr/  I used this website to help form the question https://www.themedicportal.co.uk/first-aid/cardiopulmonary-resuscitation-cpr/  The scenario was created from real events but the people and details have been changed to protect anonymity.  This was created to help people who may be unsure about CPR and want a quick refresher.  I hope you found this helpful.  Please like and share so I know to update it.",
+      "nli": 0.0005770590505562723,
+      "ver": 3.09662926,
+      "acr": 1.0,
+      "bleu": 0.0019190934712537595,
+      "bert": 0.8208675384521484
+    },
+    {
+      "question": "Given question: The drug Tetracaine is a local anaesthetic which decreases the coral reflex of the eye, how is this effect causes? Option A: Decreased secretion of neurotransmitter from the pre-synaptic cleft Option B: Voltage-gated Na+ channel agonist Option C: Inhibition of neurotransmitter re-uptake Option D: Increased secretion of neurotransmitter into synaptic cleft Option E: Voltage gated Na+ channel antagonist The correct answer is Option E.",
+      "best_explanation": "Tetracaine is a voltage-gated Na+ channel antagonist, it binds to the extracellular side of the channel. Na+ ions cannot enter cell, so cannot depolarise = no action potential = no coral reflex  A: this is caused by drugs such as Phentolamine which inhibit the post-synaptic NA+/K+ ATPase pump, hence reduces the intracellular Na+ leading to decreased firing rate of post-ganglionic neuron B: this is caused by drugs such as Pilocarpine which increase the permeability of the blood-brain barrier, leading to an influx of Ca2+ which leads to action potentials in post-ganglionic neuron C: this is caused by drugs such as Amytal which blocks Acetylcholine degradation, leading to an accumulation of ACh in the synaptic cleft D: this is caused by drugs such as DiPyrone which inhibits the enzyme Cholinesterase which breaks down ACh E: this is caused by drugs such as Tetracaine which binds to the extracellular side of the voltage gated Na+ channel, hence Na+ ions cannot enter cell, so cannot depolarise = no action potential = no coral reflex  From Pharmacology lightbulb",
+      "nli": 0.9860439300537109,
+      "ver": 3.09777777,
+      "acr": 1.0,
+      "bleu": 0.005738360535809692,
+      "bert": 0.78221195936203
+    },
+    {
+      "question": "Given question: You are a junior Doctor doing your ward round . You have just administered Penicillin  to an elderly female patient with renal impairment  suffering from a bacterial infection . You are aware that Penicillin has synergism ( an enhanced effect ) with two other types of drugs. In the case what drug would be most appropriate to administer with the penicillin for Synergism to occur ? Option A: Amoxicillin Option B: trimethoprim Option C: gentamycin Option D: metronidazole Option E: ciprofloxacin The correct answer is Option E.",
+      "best_explanation": "Penicillin has synergism with quinolone antibiotics such as Levofloxacin / Ciprofloxacin and also beta lactam antibiotics such as Ampicillin / Ciprofloxacin  So to maximise effectiveness in killing bacteria  you would give Penicillin with a quinolone ( levofloxacin / ciprofloxacin )  Penicillin is a cell wall inhibitor and quinolone are used when there is a concern of  resistance of beta lactam antibiotics ( e.g. penicillin )  so they are used in combination to bypass the resistance  refer to DR shore's pharmacology lightbulb case 2  also case 2 in PCS2 clinical skills 2  and clinical skills 2 in PCS1  also dr coffey's case 2 in PCS1  ( sorry couldn't find a link )  also refer to antibiotic lecture case 6  and pharmacology lecture case 6  also dr shore's lightbulb case 6  and pharmacology lightbulb case 6  also dr coffey's case 6 in PCS1  ( sorry couldn't find a link",
+      "nli": 0.9100983142852783,
+      "ver": 3.09666666,
+      "acr": 1.0,
+      "bleu": 0.009224203465731835,
+      "bert": 0.7904596924781799
+    },
+    {
+      "question": "Given question: Which of the following does the Growth Hormone Decrease? Option A: hepatic gluconeogenisis Option B: glucose uptake into cells Option C: protein synthesis in muscle Option D: bone length in children Option E: utilisation of fat The correct answer is Option B.",
+      "best_explanation": "GH decreases glucose uptake in cells (by decreasing the number of glucose transporters on the cell membrane) to decrease the amount of glucose in the blood and increase the concentration of glucose in the cells (so that the insulin receptor can be activated).  This is part of the GH axis, where GH is released from the anterior pituitary in response to low blood glucose (hypoglycaemia) to increase the concentration of glucose in the blood to normal levels.   The increase in bone length in children is due to the increase in protein synthesis in muscle (so more amino acids are available for protein synthesis and bone growth) and increase in hepatic gluconeogenesis (so more glucose is available for protein synthesis).  The other options are not a direct result of GH.  The increase in hepatic gluconeogenesis results in an increase in glucose production, which increases the amount of glucose in the blood (making it available for ATP production in cells).  The increase in protein synthesis in muscle is due to the increase in amino acids available for protein synthesis (more amino acids are available due to a decrease in uptake into cells).  The increase in bone length in children is due to the increase in",
+      "nli": 0.09633893519639969,
+      "ver": 3.09666666,
+      "acr": 1.0,
+      "bleu": 0.015285943930771807,
+      "bert": 0.8254389762878418
+    },
+    {
+      "question": "Given question: An 18 year old patient comes into A+E complaining of a tight chest and SOB. An ABG is performed on the patient, who is not currently receiving any oxygen therapy: pO2 = 14kPa (normal 11-13kPa)pH = 7.48 (normal 7.35 - 7.45)pCO2 = 3.6 (normal 4.7 - 6.0 kPa)HCO3- = 24 (normal 22 - 26 mEq/L) What is your diagnosis for this patient? Option A: Metabolic Acidosis Option B: Metabolic Alkalosis Option C: Respiratory Acidosis Option D: Respiratory Alkalosis Option E: Mixed Metabolic and Respiratory Alkalosis The correct answer is Option D.",
+      "best_explanation": "This is a respiratory alkalosis secondary to a panic attack, as the patient is experiencing hyperventilation, which is increasing the CO2 output without a similar rise in pO2. This is reducing the pH of the body as H+ is dissociating from the carbonic acid, decreasing the pH. The decrease in pH is not being fully compensated for by the lungs, and so the HCO3- is falling.  The low pO2 is not due to a direct effect on oxygen dissociation, but rather a result of the low pH reducing the capacity of oxygen to be transported in the blood.  The low pCO2 is a direct result of the hyperventilation, as more CO2 is being released.  This is a respiratory alkalosis as the cause of the low pH is directly linked to the respiratory system.  This is not a mixed alkalosis as the metabolic system is not involved in causing the low pH.  Case 5- Acid Base Balance and Disorder, from PCS 2 Lecture, Unit 2.  Reading: Acid Base Balance and Disorder, from PCS 2 Lecture, Unit 2.  Learning outcome: Understand the different types of acid base disorder and how to diagnose them from an ABG.  Resources: Case 5",
+      "nli": 0.30070552229881287,
+      "ver": 3.09666666,
+      "acr": 1.0,
+      "bleu": 0.01302184923657659,
+      "bert": 0.7895449995994568
+    },
+    {
+      "question": "Given question: During inflammation, neutrophils migrate to the site of injury. There are three steps to neutrophil migration: Rolling, Adhesion and Transmigration. Each of these phases requires proteins to help them occur, which of the following proteins is essential in the rolling phase of neutrophil migration? Option A: Selectins Option B: Integrins Option C: PECAM-1 Option D: Fibrin Option E: Keratin The correct answer is Option A.",
+      "best_explanation": "Selectins are carbohydrate-based molecules which are expressed on the neutrophil and endothelial cell surfaces. They allow the neutrophil to roll along the endothelium, taking up the slack vessel (it doesn't actually \"roll\" along the endothelium, it's just being pushed through). Integrins are the actual adhesion molecules which are expressed on the neutrophil and endothelial cell surfaces. When a neutrophil comes into contact with an endothelial cell, integrins interact, allowing the neutrophil to adhere to the endothelium. PECAM-1 (platelet endothelial cell adhesion molecule 1) is an integrin which is expressed on the neutrophil and endothelial cell surfaces. It is not specifically involved in the rolling phase. Fibrin is a protein which is laid down in the clot, forming a mesh-like structure. It is not involved in the migration of neutrophils. Keratin is a protein found in the cytoskeleton of epithelial cells. It is not involved in the migration of neutrophils.  This was taken from the cutaneous wound healing lecture from Case 1. Hope this helps. Let me know if you have any questions.\n\nP.S. I didn't put in the other answers as I",
+      "nli": 0.0009363793069496751,
+      "ver": 3.09622222,
+      "acr": 1.0,
+      "bleu": 0.009852152492445565,
+      "bert": 0.7857979536056519
+    },
+    {
+      "question": "Given question: You are shadowing an eye surgeon and he suddenly turns to you and asks, 'WHAT TYPE OF COLLAGEN IS FOUND IN THE CORNEA!!!!'. You are caught off-guard and can't quite remember what type. What type of collagen is found in the cornea? Option A: Type I Option B: Type II Option C: Type III Option D: Type IV Option E: Type V The correct answer is Option A.",
+      "best_explanation": "The cornea is made up of type I collagen.  The cornea has a high refractive index so provides a large portion of the eye's total refractive power. It also has a very high curvature which means it is under a lot of pressure. The cornea is a very tough and resistant tissue to compensate for this.  It is also very transparent which is important as it allows light to pass through it.  The cornea is also very sensitive and contains a lot of nerve endings. This means that it is very sensitive to pain and pressure.  The cornea is a common site of injury and can be easily damaged. This can lead to problems such as corneal ulcers.  The cornea is also susceptible to infection. Common pathogens that infect the cornea include bacteria, viruses, and fungi. Infections of the cornea are relatively common and can lead to a number of different conditions including corneal ulcers, keratitis, and conjunctivitis.  The cornea is also susceptible to damage from mechanical trauma. This can include injuries from foreign bodies such as sand or dust, or burns.  The cornea is also sensitive to chemicals. This means that it can be damaged by exposure to different chemicals, such as acids or alkalis.  The cornea is also",
+      "nli": 0.0033926283940672874,
+      "ver": 3.03666627,
+      "acr": 1.0,
+      "bleu": 0.004149035888614915,
+      "bert": 0.7752183079719543
+    },
+    {
+      "question": "Given question: You are investigating an Abdominal Aortic Aneurysm in theatre and notice that the liver appears rather ischaemic for some reason. Which part of the of the Abdominal aorta supplies the liver and from which vertebrae level does the vessel emerge from the aorta? Option A: Coeliac Trunk; T12 Option B: Coeliac Trunk; L1 Option C: Superior Mesenteric Artery; L1 Option D: Superior Mesenteric Artery; L2 Option E: Inferior Mesenteric Artery; L3 The correct answer is Option A.",
+      "best_explanation": "The correct answer is A! The coeliac trunk supplies the foregut organs, the liver, the stomach and the pancreas. It emerges from the aorta at T12. The superior mesenteric artery supplies the midgut, the small intestine, the colon and the uterus. It emerges at L3. The inferior mesenteric artery supplies the hindgut, the large intestine, the rectum and the anus. It emerges at L4.  I put a useful diagram on here somewhere... https://teachmeanatomy.info/thorax/organs/liver/supply/  All answers with the exception of D are therefore correct. D is incorrect as the superior mesenteric artery supplies the liver, not the inferior mesenteric.  Hope this helps!  :) Matt  (I am not a doctor, I just play one on the internet...)\n\nP.S. If you're interested in seeing the answer to this question as a diagram, have a look at this website. It's really useful for understanding the various branches of the abdominal aorta.  https://teachmeanatomy.info/thorax/organs/liver/supply/  I've found it really helpful for understanding various questions.  Cheers,Matt",
+      "nli": 0.2922000288963318,
+      "ver": 3.09666227,
+      "acr": 1.0,
+      "bleu": 0.011363097706979583,
+      "bert": 0.7883300185203552
+    },
+    {
+      "question": "Given question: Which of the following imaging methods does not use ionising radiation? Option A: CT scan Option B: Fluoroscopy Option C: MRI Option D: PET scan Option E: X-rays The correct answer is Option C.",
+      "best_explanation": "CT scans - use ionising radiation (X-rays) and are good at detecting boney structures and tumours Fluoroscopy - uses ionising radiation (X-rays) and is good at real time imaging MRI - does not use ionising radiation and is good at detecting soft tissue structures and blood flow PET scans - use ionising radiation (radioactive sugar) and are good at detecting molecular activity and can indicate if a tumour is malignant or benign X-rays - use ionising radiation (X-rays) and are good at detecting boney structures and tumours Ultrasound - does not use ionising radiation and is good at detecting soft tissue structures and blood flow  http://www.cancer.gov/about-cancer/diagnosis-staging/imaging/types/mri#:~:text=MRI%20scans%20use%20magnetic%20fields%20and,tissue%20damage%20or%20infection.&text=Ultrasound%20scans%20use%20non-ionising%20ultrasound,blood%20flow%20and%20organ%20function.&text=X%20rays%20use%",
+      "nli": 0.8460794687271118,
+      "ver": 2.98677772,
+      "acr": 0.0,
+      "bleu": 0.0066982503946072,
+      "bert": 0.7484186887741089
+    },
+    {
+      "question": "Given question: Where does fertilisation usually occur? Option A: The isthmus of the uterine tube Option B: The fimbrae of the uterine tube Option C: The infundibulum of the uterine tube Option D: The ampulla of the uterine tube Option E: The intramural area of the uterine tube The correct answer is Option D.",
+      "best_explanation": "The ampulla of the uterine tube is the dilated portion near the bend of the uterine tube.  Fertilisation usually occurs here.  The fimbriae are the fringed ends of the uterine tube, which are sensitive to the presence of sperm.  The isthmus is a narrowing of the uterine tube, just prior to the fimbriae.  The infundibulum is the funnel-shaped portion of the uterine tube, leading from the isthmus to the ampulla.  The intramural area is the site of implantation, where the blastocyst embeds itself into the uterine lining.  https://teachmeanatomy.info/reproductive-anatomy/the-uterine-tube/anatomy/  https://www.nidirect.gov.uk/conditions/uterine-tube-damage-after-pregnancy-can-cause-miscarriage-or-preterm-birth/how-often-does-this-happen  https://www.sciencedirect.com/topics/biochemistry-genetics-and-molecular-biology/uterine-tube-fertility-preservation  https://www.ncbi.nlm",
+      "nli": 0.3109045922756195,
+      "ver": 2.98666666,
+      "acr": 1.0,
+      "bleu": 0.09673143480186833,
+      "bert": 0.8407325148582458
+    },
+    {
+      "question": "Given question: A slow of prolonged depolarization is known as accommodation, this may result in an increase in the threshold potential. What may be the possible cause of this prolonged depolarization? Option A: Sodium- potassium pump ceases to work Option B: inactivation of potassium ion voltage gated channel Option C: Inactivation of sodium ion voltage gated channel Option D: activation  of potassium voltage gated channel Option E: activation of Calcium ion voltage gated channel The correct answer is Option C.",
+      "best_explanation": "A slow of prolonged depolarization is known as accommodation, this may result in an increase in the threshold potential. The possible cause of this prolonged depolarization is the inactivation of the sodium ion voltage gated channel. This results in a slow depolarization as the entry of sodium ions is hindered. As a result, the threshold potential is increased.  Sodium- potassium pump ceases to work = hyperpolarizationSodium ion voltage gated channel is activated = depolarization / action potentialCalcium ion voltage gated channel activation = muscle contraction / hypertrophy  Inactivation of potassium ion voltage gated channel = repolarization / end of action potential  I'm aware that there are a lot of channels and their functions in this post, I hope you're able to follow along! If not, do let me know and I'll be happy to clarify! :)",
+      "nli": 0.886525571346283,
+      "ver": 3.03629262,
+      "acr": 1.0,
+      "bleu": 0.03458232470548423,
+      "bert": 0.8451839685440063
+    },
+    {
+      "question": "Given question: Mr. Mann comes in to see you at your GP practice. He presents with numbness in the thenar eminence of his palm in addition to pain and tingling in his thumb and lateral two and a half fingers. You diagnose him with: Option A: Klumpke Paralysis Option B: Erb-Duchenne Palsy Option C: Carpal Tunnel Syndrome Option D: Claw Hand The correct answer is Option C.",
+      "best_explanation": "Numbness in the thenar eminence = possible Klumpke paralysis (rare condition where there is a complete lesion of the upper group of the arm\u2019s main nerves, usually caused by a brachial artery dissection by a fractured humerus)  Pain and tingling in thumb and lateral 2.5 fingers = possible Erb-Duchenne palsy (brachial palsy caused by Erb\u2019s palsy or Erb-Duchenne palsy, a group of paralyses of the arm\u2019s main nerves caused by the upper group of the arm\u2019s main nerves being damaged. This can occur as a result of a brachial artery tear caused by a fractured humerus)  Pain and tingling in the thenar eminence = possible Carpal Tunnel Syndrome (condition which occurs when the median nerve is squeezed or compressed as it travels through the wrist at the carpal tunnel. This results in pain and tingling in the thumb and lateral two and a half fingers)  Numbness in the thenar eminence and pain/tingling in the thumb and lateral 2.5 fingers = possible Claw Hand (congenital deficiency in the median side of the upper limb, resulting from damage to",
+      "nli": 0.9539233446121216,
+      "ver": 3.19669292,
+      "acr": 1.0,
+      "bleu": 0.019967883197547137,
+      "bert": 0.7959892749786377
+    },
+    {
+      "question": "Given question: \"This type of bone is typically found in areas of the body where extensive organ protection is required.\" Which type of bone does this statement best fit? Option A: Flat bone Option B: Long bone Option C: Sesamoid bone Option D: Short bone Option E: Sutural bone The correct answer is Option A.",
+      "best_explanation": "Flat bones are typically found in areas of the body where extensive organ protection is required. For example, the ribs protect the heart and lungs.  Long bone- the shafts of long bones are hollow and filled with marrow.  Sesamoid bones are bones embedded in tendons.  Short bones are prisms of bone which may be either wedge-shaped or cuboidal in shape.  Sutural bones are found in the skull.  They are very thin and consist of two layers of bone with a layer of cartilage in between.  The main function of sutural bones is to protect the delicate organs of the head.  The bones of the skull are sutural bones.  They are also found in the nasal cavity, where they protect the delicate olfactory nerve.  The eye sockets are also sutural bones.  They protect the eyeballs from external injury.  The insets of the jaw are also sutural bones.  They protect the jaw joints from external injury.  The bones in the middle ear are sutural bones.  They protect the delicate organs of the middle ear from external injury.  The bones of the nasal cavity are sutural bones.  They protect the delicate olfactory n",
+      "nli": 0.154549703001976,
+      "ver": 2.98629262,
+      "acr": 1.0,
+      "bleu": 0.021701302093354607,
+      "bert": 0.8011409640312195
+    },
+    {
+      "question": "Given question: A medical student is revising the branches of the celiac trunk which is a branch of the abdominal aorta. Which of the following is not a branch of the splenic artery which is one of the main branches of the celiac trunk? Option A: short gastric branches Option B: branches to spleen Option C: branches to body and tail of pancreas Option D: left gastro-omental artery Option E: oesophageal branches The correct answer is Option E.",
+      "best_explanation": "The oesophageal branches are a branch of the left gastric artery which is a branch of the celiac trunk, not the splenic artery.  The other branches of the splenic artery are; short gastric branches, branches to spleen, branches to body and tail of pancreas, left gastro-omental artery.  For more information on the branches of the celiac trunk and the splanchnic arteries see this website https://teachmeanatomy.info/thorax/organs/spleen/vasculature/  The splenic artery is one of the three main branches of the celiac trunk, the other two being the short gastric branches and the pancreatic branches. The short gastric branches supply the fundus of the stomach and the body of the pancreas. The pancreatic branches supply the tail of the pancreas, the second and third parts of the duodenum, the ascending colon and the proximal parts of the jejunum. The left gastro-omental artery is a branch of the splenic artery. It supplies the greater curvature of the stomach, the omentum and the anterior surface of the transverse colon.  The branches of the oesophagus come from the left gastric arteries,",
+      "nli": 0.8833730220794678,
+      "ver": 3.13666666,
+      "acr": 1.0,
+      "bleu": 0.08833182718609583,
+      "bert": 0.8220726251602173
+    },
+    {
+      "question": "Given question: Wadloo, a happy shiny 19 year old, has just got into Cardiff Medical School. The medical school then promptly arranges for Wadloo to be stabbed multiple times with various needles at Occupational Health as part of their vaccination program (or so they say). For which of the following diseases is there not currently a viable vaccination available? Option A: Hepatitis A Option B: Hepatitis B Option C: Hepatitis B and C Option D: Hepatitis C and D Option E: Hepatitis C and E The correct answer is Option E.",
+      "best_explanation": "There are currently vaccinations available for Hepatitis A and B, but not Hepatitis C and E. Hep C and E are both spread by faecal oral transmission and are seen together in about 20% of cases. There is currently a vaccine in development for Hepatitis C and E.  Reference: https://www.who.int/health-topics/hepatitis#tab=tab_1  https://www.ncbi.nlm.nih.gov/books/NBK537144/#:~:text=A%20vaccine%2C%20Hepatitis%20C%20E%20(%20HEV%20239%20and%20240%20isolate)%2C%20has%20been%20developed%20and%20approved%20in%20South%20Korea.%20It%20is%20intended%20to%20be%20administered%20to%20people%20with%20risk%20factors%20for%20HEV%20infection.%20HEV%20vaccines%",
+      "nli": 0.9679486751556396,
+      "ver": 2.98622222,
+      "acr": 1.0,
+      "bleu": 0.03119318904706113,
+      "bert": 0.7740800976753235
+    },
+    {
+      "question": "Given question: Which one of the following cells in the lung parenchyma produces surfactant? Option A: Alveolar macrophage Option B: Endothelial cell Option C: Type I pneumocyte Option D: Goblet cell Option E: Type II pneumocyte The correct answer is Option E.",
+      "best_explanation": "Type II pneumocyte  Alveolar macrophage   Endothelial cell   Goblet cell   All produce surfactant but Type II pneumocyte is the main producer  Sources - Respiratory physiology - Pocock 7th ed - Chapter 21.4 - Surfactant production  and  - Human Physiology - Pocock 4th Ed - Chapter 21.4 - Surfactant production  and  - Pulmonary surfactant -Wikipedia  https://en.wikipedia.org/wiki/Pulmonary_surfactant%E2%80%9D  and  https://teachmephysiology.com/respiratory-system/regulation/gas-exchange/pulmonary-surfactant/  - Lecture by Dr. Andrew Shore  - Case 6 - Pulmonary surfactant  - Case 6 - Surfactant production  - Pocock - Human Physiology - Pulmonary surfactant  - Pulmonary surfactant -Wikipedia  https://en.wikipedia.org/wiki/Pulmonary_surfactant%E2%80%9D  and  https://teachmephysiology.com/respiratory-system/regulation/gas-exchange/pulmonary-surfact",
+      "nli": 0.8791709542274475,
+      "ver": 2.95777772,
+      "acr": 1.0,
+      "bleu": 0.0030392743539474692,
+      "bert": 0.7976488471031189
+    }
+  ]
+}

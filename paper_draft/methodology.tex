@@ -1,0 +1,114 @@
+% NeurIPS Best Paper Style – clean, flat, minimal
+\definecolor{NBlue}{HTML}{1A56A0}
+\definecolor{NRed}{HTML}{C0392B}
+\definecolor{NGreen}{HTML}{1A7A45}
+\definecolor{NGold}{HTML}{B07D1A}
+\definecolor{NSlate}{HTML}{4A5568}
+\definecolor{NBlueFill}{HTML}{EBF2FB}
+\definecolor{NRedFill}{HTML}{FBEAEA}
+\definecolor{NGreenFill}{HTML}{EBF5EF}
+\definecolor{NGoldFill}{HTML}{FDF6E3}
+\definecolor{NSlateFill}{HTML}{F0F2F5}
+\definecolor{NStroke}{HTML}{BBBDC2}
+
+\begin{figure}[t!]
+\centering
+\begin{tikzpicture}[
+    scale=0.88,
+    >=stealth,
+    % Core node styles
+    iobox/.style={
+        draw=NStroke, fill=NSlateFill,
+        rounded corners=4pt, align=center,
+        font=\small, inner sep=7pt, line width=0.6pt
+    },
+    modbox/.style={
+        draw=#1, fill=#1Fill,
+        rounded corners=5pt, align=center,
+        font=\small\bfseries, inner sep=7pt,
+        minimum height=1.0cm, minimum width=3.2cm,
+        line width=0.7pt
+    },
+    gatebox/.style={
+        draw=NGold, fill=NGoldFill,
+        rounded corners=5pt, align=center,
+        font=\small\bfseries, inner sep=7pt,
+        minimum height=0.9cm, minimum width=7.2cm,
+        line width=0.7pt
+    },
+    dpobox/.style={
+        draw=NBlue, fill=NBlueFill,
+        rounded corners=5pt, align=center,
+        font=\small\bfseries, inner sep=8pt,
+        minimum height=1.0cm, minimum width=9.0cm,
+        line width=0.8pt
+    },
+    arr/.style={->, line width=0.7pt, color=NSlate, shorten >=3pt, shorten <=3pt},
+    arrd/.style={->, line width=0.7pt, color=NBlue!50, dashed, shorten >=3pt, shorten <=3pt},
+    steplabel/.style={font=\footnotesize\bfseries, color=NSlate},
+    sublabel/.style={font=\scriptsize, color=NSlate!80}
+]
+
+%% -------------------------------------------------------
+%% STAGE 1 background (subtle)
+\draw[draw=NStroke!50, fill=NSlateFill!40, rounded corners=8pt, line width=0.5pt, dashed]
+    (-5.6, 2.8) rectangle (5.6, 5.0);
+\node[sublabel, anchor=north west] at (-5.5, 4.95) {Stage 1: Stochastic Generation};
+
+%% STAGE 1: Input → Generator → Candidates
+\node[iobox] (input) at (-3.8, 3.9) {Context\\$(C,\, Q)$};
+\node[modbox=NBlue] (gen) at (0, 3.9) {Generator\\$\pi_{\theta}$};
+\node[iobox] (cands) at (3.8, 3.9) {Explanations\\$\mathcal{E} = \{E_i\}_{i=1}^{n}$};
+
+\draw[arr] (input) -- (gen);
+\draw[arr] (gen) -- node[above, sublabel, yshift=1pt] {$n$ samples} (cands);
+
+%% -------------------------------------------------------
+%% STAGE 2 background
+\draw[draw=NStroke!50, fill=NSlateFill!30, rounded corners=8pt, line width=0.5pt, dashed]
+    (-5.6, -4.1) rectangle (5.6, 2.5);
+\node[sublabel, anchor=north west] at (-5.5, 2.45) {Stage 2: Logic-Driven Reward \& Alignment};
+
+%% Fan-out connector
+\draw[arr] (cands.south) -- ++(0,-0.6) coordinate (fanout);
+\draw[arr] (fanout) -- (-3.6, 1.4);
+\draw[arr] (fanout) -- (0,   1.4);
+\draw[arr] (fanout) -- ( 3.6, 1.4);
+
+%% REWARD COMPONENTS
+\node[modbox=NRed,   minimum width=3.0cm] (nli) at (-3.6, 0.7)
+    {NLI Entailment\\$S_{\text{nli}}(E_i)$};
+\node[modbox=NGreen, minimum width=3.0cm] (ver) at (0,    0.7)
+    {Stylistic Verifier\\$S_{\text{ver}}(E_i)$};
+\node[modbox=NSlate, minimum width=3.0cm] (len) at ( 3.6, 0.7)
+    {Length Penalty\\$-\gamma |E_i|$};
+
+%% Converge arrows
+\draw[arr] (nli.south) -- ++(0,-0.3) -| (-2.0,-0.85);
+\draw[arr] (ver.south) -- ++(0,-0.3) -- (0,-0.85);
+\draw[arr] (len.south) -- ++(0,-0.3) -| ( 2.0,-0.85);
+
+%% GATE
+\node[gatebox] (gate) at (0, -1.4)
+    {Multiplicative ACR Gate \quad
+     $R_i = (S_{\text{nli}} \cdot S_{\text{ver}} - \gamma|E_i|)\cdot\mathbb{I}[\text{acr}(E_i)=1]$};
+
+%% DPO
+\draw[arr] (gate.south) -- node[right, sublabel, xshift=3pt] {reward signal} ++(0,-0.65) coordinate (mid);
+\draw[arr] (mid) -- ++(0,-0.3);
+
+\node[dpobox] (dpo) at (0, -3.45)
+    {Hybrid Direct Preference Optimisation (Hybrid-DPO)};
+
+%% FEEDBACK LOOP
+\draw[arrd]
+    (dpo.west)
+    .. controls (-7.2, -3.45) and (-7.2, 3.9) ..
+    (gen.west)
+    node[midway, sloped, above, font=\scriptsize\bfseries, color=NBlue!60]
+        {preference update};
+
+\end{tikzpicture}
+\caption{The \textbf{RLearner-LLM} framework. Stage~1 samples $n$ candidate explanations from the generator $\pi_\theta$. Stage~2 scores each candidate via three complementary signals—NLI entailment, a stylistic verifier, and a length penalty—gated by answer coverage (ACR) to suppress hallucinated responses. Preference pairs are then formed from the scored pool and used to update $\pi_\theta$ via Hybrid-DPO.}
+\label{fig:hybrid_dpo}
+\end{figure}

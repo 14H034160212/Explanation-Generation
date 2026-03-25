@@ -1,0 +1,54 @@
+[
+    {
+        "instruction": "As an explanation generation expert, can you generate the explanation for the given input?",
+        "input": "Given question: Most of the time base sequencing influences how the DNA molecule interacts with histone proteins. Option A: True Option B: False The correct answer is Option B.",
+        "reference": "Interactions between DNA and histone proteins largely does not depend on a sequence of bases. This is because the negatively charged sugar-phosphate backbone of the DNA and positively charged histones play a crucial role in this interaction. However, as always in biology, there are some exceptions. Sometimes we could make specific modifications to histones that could happen in certain regions.Thanks to everybody who has commented on my question. I have added an explanation as was suggested by most of the commentators and rewritten the question a bit to avoid ambiguity.",
+        "best_explanation": "Interactions between DNA and histone proteins largely does not depend on a sequence of bases. This is because the negatively charged sugar-phosphate backbone of the DNA and positively charged histones play a crucial role in this interaction. However, as always in biology, there are some exceptions. Sometimes we could make specific modifications to histones that could happen in certain regions.Thanks to everybody who has commented on my question. I have added an explanation as was suggested by most of the commentators and rewritten the question a bit to avoid ambiguity.",
+        "Generated_Explanation": "Interactions between DNA and histone proteins largely does not depend on a sequence of bases. This is because the negatively charged sugar-phosphate backbone of the DNA and positively charged histones play a crucial role in this interaction. However, as always in biology, there are some exceptions. Sometimes we could make specific modifications to histones that could happen in certain regions.Thanks to everybody who has commented on my question. I have added an explanation as was suggested by most of the commentators and rewritten the question a bit to avoid ambiguity.",
+        "metrics": {
+            "nli": 0.9939444661140442,
+            "verifier": 2.55555555,
+            "acr": 0.0,
+            "bleu": 1.0
+        }
+    },
+    {
+        "instruction": "As an explanation generation expert, can you generate the explanation for the given input?",
+        "input": "Given question: For the following statement answer true or false:Identifying the problem within poor DNA sequencing results could be quite difficult due to there being many possible causing factors. Performing a process of elimination is often the best option by simply reviewing the steps of the experiment and ensuring the correct chemicals and equipment were used. Option A: True Option B: False The correct answer is Option A.",
+        "reference": "Performing a process of elimination is often the best option as there is a large possibility for error. Poor quality DNA in particular is very common when sequencing plasmid DNA templates, thus, reviewing the sample and the methods used to extract it are necessary when trying to identify the reason for results.",
+        "best_explanation": "True, identifying the problem could be quite difficult. Poor quality DNA in particular is very common when sequencing plasmid DNA templates, thus, reviewing the sample and the methods used to extract it are necessary when trying to identify the reason for results.",
+        "Generated_Explanation": "True, identifying the problem could be quite difficult. Poor quality DNA in particular is very common when sequencing plasmid DNA templates, thus, reviewing the sample and the methods used to extract it are necessary when trying to identify the reason for results.",
+        "metrics": {
+            "nli": 0.000586210167966783,
+            "verifier": 2.0,
+            "acr": 1.0,
+            "bleu": 0.6369136105468162
+        }
+    },
+    {
+        "instruction": "As an explanation generation expert, can you generate the explanation for the given input?",
+        "input": "Given question: Chemicals such as AZT are able to terminate growing viral DNA chains because DNA polymerases have an inherent proof-reading function. Option A: True Option B: False The correct answer is Option B.",
+        "reference": "DNA polymerases NEED a primer to begin replication 5\u2019 to 3\u2019\u2026 thus, by disrupting the elongation of the primer with an absent 3\u2019-OH group, replication halts and the chain terminates.AZT replaces the 3\u2019OH group with an azide group\u2026 DNA pol\u2019s affinity remains the same for AZT as it does for natural mononucleotides, thus it is not a direct result of DNA pol's 'fact-checking' functions! :)",
+        "best_explanation": "DNA polymerases NEED a primer to begin replication 5\u2019 to 3\u2019\u2026 thus, by disrupting the elongation of the primer with an absent 3\u2019-OH group, replication halts and the chain terminates.AZT replaces the 3\u2019OH group with an azide group\u2026 DNA pol\u2019s affinity remains the same for AZT as it does for natural mononucleotides, thus it is not a direct result of DNA pol's 'fact-checking' functions! :)",
+        "Generated_Explanation": "DNA polymerases NEED a primer to begin replication 5\u2019 to 3\u2019\u2026 thus, by disrupting the elongation of the primer with an absent 3\u2019-OH group, replication halts and the chain terminates.AZT replaces the 3\u2019OH group with an azide group\u2026 DNA pol\u2019s affinity remains the same for AZT as it does for natural mononucleotides, thus it is not a direct result of DNA pol's 'fact-checking' functions! :)",
+        "metrics": {
+            "nli": 0.984879195690155,
+            "verifier": 2.55555555,
+            "acr": 0.0,
+            "bleu": 1.0
+        }
+    },
+    {
+        "instruction": "As an explanation generation expert, can you generate the explanation for the given input?",
+        "input": "Given question: The selection of origin sites to initate DNA replication in eukaryotes will occur in the G1 phase of the cell cycle. Option A: True Option B: False The correct answer is Option A.",
+        "reference": "The answer is true. Selection of the origin site occurs in the G1 phase. At this stage pre-replicative complexes (pre-RCs) gather and wait until the cell transitions to the S phase. The S phase is where replication of DNA starts.",
+        "best_explanation": "The answer is true. Selection of the origin site occurs in the G1 phase. At this stage pre-replicative complexes (pre-RCs) gather and wait until the cell transitions to the S phase. The S phase is where replication of DNA starts.",
+        "Generated_Explanation": "The answer is true. Selection of the origin site occurs in the G1 phase. At this stage pre-replicative complexes (pre-RCs) gather and wait until the cell transitions to the S phase. The S phase is where replication of DNA starts.",
+        "metrics": {
+            "nli": 0.9901946187019348,
+            "verifier": 3.0,
+            "acr": 1.0,
+            "bleu": 1.0
+        }
+    }
+]

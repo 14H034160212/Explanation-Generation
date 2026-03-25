@@ -1,0 +1,142 @@
+{
+  "description": "NLI calibration study: small vs large model ranking comparison",
+  "total_entries_with_both": 15,
+  "correlations": {},
+  "entries": [
+    {
+      "model": "RL-DPO (K=1)",
+      "nli_small": 0.2257,
+      "nli_large": 0.3246,
+      "bleu": 0.0189,
+      "bert_ans": 0.8284,
+      "acr": 0.8007,
+      "domain": "cardiff"
+    },
+    {
+      "model": "Qwen3-8B-SFT",
+      "nli_small": 0.1959,
+      "nli_large": 0.281,
+      "bleu": 0.0406,
+      "bert_ans": 0.8462,
+      "acr": 0.7421,
+      "domain": "cardiff"
+    },
+    {
+      "model": "Baseline-SFT (K=1)",
+      "nli_small": 0.049,
+      "nli_large": 0.2408,
+      "bleu": 0.0164,
+      "bert_ans": 0.7822,
+      "acr": 0.7904,
+      "domain": "cardiff"
+    },
+    {
+      "model": "RL-DPO (K=1)",
+      "nli_small": 0.3287,
+      "nli_large": 0.4364,
+      "bleu": 0.054,
+      "bert_ans": 0.8232,
+      "acr": 0.6261,
+      "domain": "law"
+    },
+    {
+      "model": "Qwen3-8B-SFT",
+      "nli_small": 0.3191,
+      "nli_large": 0.2966,
+      "bleu": 0.1382,
+      "bert_ans": 0.8557,
+      "acr": 0.5175,
+      "domain": "law"
+    },
+    {
+      "model": "Baseline-SFT (K=1)",
+      "nli_small": 0.2702,
+      "nli_large": 0.4644,
+      "bleu": 0.0298,
+      "bert_ans": 0.7709,
+      "acr": 0.5516,
+      "domain": "law"
+    },
+    {
+      "model": "RL-DPO (K=1)",
+      "nli_small": 0.2583,
+      "nli_large": 0.3896,
+      "bleu": 0.0192,
+      "bert_ans": 0.8333,
+      "acr": 0.7575,
+      "domain": "med_y1"
+    },
+    {
+      "model": "Qwen3-8B-SFT",
+      "nli_small": 0.2457,
+      "nli_large": 0.3149,
+      "bleu": 0.0458,
+      "bert_ans": 0.8466,
+      "acr": 0.7387,
+      "domain": "med_y1"
+    },
+    {
+      "model": "Baseline-SFT (K=1)",
+      "nli_small": 0.086,
+      "nli_large": 0.2578,
+      "bleu": 0.0136,
+      "bert_ans": 0.7799,
+      "acr": 0.7556,
+      "domain": "med_y1"
+    },
+    {
+      "model": "RL-DPO (K=1)",
+      "nli_small": 0.2322,
+      "nli_large": 0.3962,
+      "bleu": 0.0161,
+      "bert_ans": 0.8291,
+      "acr": 0.7552,
+      "domain": "med_y2"
+    },
+    {
+      "model": "Qwen3-8B-SFT",
+      "nli_small": 0.1632,
+      "nli_large": 0.2019,
+      "bleu": 0.0399,
+      "bert_ans": 0.8352,
+      "acr": 0.643,
+      "domain": "med_y2"
+    },
+    {
+      "model": "Baseline-SFT (K=1)",
+      "nli_small": 0.0487,
+      "nli_large": 0.1892,
+      "bleu": 0.0147,
+      "bert_ans": 0.7843,
+      "acr": 0.7077,
+      "domain": "med_y2"
+    },
+    {
+      "model": "RL-DPO (K=1)",
+      "nli_small": 0.231,
+      "nli_large": 0.3712,
+      "bleu": 0.0357,
+      "bert_ans": 0.8372,
+      "acr": 0.6481,
+      "domain": "sydney"
+    },
+    {
+      "model": "Qwen3-8B-SFT",
+      "nli_small": 0.1737,
+      "nli_large": 0.3205,
+      "bleu": 0.0844,
+      "bert_ans": 0.8416,
+      "acr": 0.5929,
+      "domain": "sydney"
+    },
+    {
+      "model": "Baseline-SFT (K=1)",
+      "nli_small": 0.0493,
+      "nli_large": 0.2184,
+      "bleu": 0.0241,
+      "bert_ans": 0.788,
+      "acr": 0.6373,
+      "domain": "sydney"
+    }
+  ]
+}

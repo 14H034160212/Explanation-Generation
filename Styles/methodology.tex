@@ -1,0 +1,74 @@
+\section{Methodology}
+
+In this section, we detail the \textbf{RLearner-LLM} framework, which automates the construction of high-quality preference datasets for aligning educational LLMs.
+
+\subsection{Explanation Generation Pipeline}
+The task formulated is to generate an educational explanation $E$ given a question $Q$, context $C$, and correct answer $A$. An initial teacher model (GPT-4) synthesizes $K$ diverse explanations for each instance in our dataset. These raw explanations serve as the candidates for our preference ranking system.
+
+\subsection{System Architecture: Hybrid-DPO}
+
+The core philosophy of \textbf{RLearner-LLM} is the explicit fusion of factual determinism and linguistic fluency into a singular, holistic reward signal. As illustrated in Figure \ref{fig:hybrid_dpo}, our architecture utilizes a logical evaluator (DeBERTa-based NLI) to measure truthfulness and a qualitative verifier (Alpaca-based) to ensure readability.
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[
+    node distance=1.5cm and 2cm,
+    box/.style={draw, rectangle, rounded corners, align=center, minimum height=1cm, fill=blue!5},
+    eval/.style={draw, rectangle, rounded corners, align=center, minimum height=1cm, fill=orange!10},
+    alignbox/.style={draw, rectangle, rounded corners, align=center, minimum height=1cm, fill=green!10},
+    arrow/.style={->, thick}
+]
+
+% Nodes
+\node[box] (input) {Context\\(Question + Ground Truth)};
+\node[box, right=of input] (policy) {Base Explanation Model};
+\node[box, below=of policy] (cands) {Candidate Explanations\\(N samples)};
+
+\node[eval, below left=of cands] (logic) {Logical Evaluator\\(NLI Model)};
+\node[eval, below right=of cands] (fluency) {Linguistic Verifier};
+
+\node[alignbox, below=3cm of cands] (rank) {Multiplicative ACR Gate Ranking\\$H(E_i) = (w_{\text{nli}} \cdot S_{\text{nli}} \cdot w_{\text{ver}} \cdot S_{\text{ver}} - \gamma \cdot \ell_{\text{norm}}) \cdot \mathbf{1}[\text{ACR}(E_i) \geq \theta]$};
+\node[alignbox, below=of rank] (dpo) {\textbf{RLearner-LLM} (Hybrid-DPO)};
+
+% Arrows
+\draw[arrow] (input) -- (policy);
+\draw[arrow] (policy) -- node[right] {Sampling} (cands);
+\draw[arrow] (cands) -| (logic);
+\draw[arrow] (cands) -| (fluency);
+\draw[arrow, dashed] (input.south) -- ++(0,-0.5) -| (logic.north);
+
+\draw[arrow] (logic) |- node[above left] {Logic Signal (P)} (rank);
+\draw[arrow] (fluency) |- node[above right] {Fluency Signal (0-5)} (rank);
+
+\draw[arrow] (rank) -- node[right] {(Chosen, Rejected) Pairs} (dpo);
+\draw[arrow, dashed, bend left=110, looseness=2] (dpo) to node[near start, left, xshift=-0.8cm] {Policy Update} (policy);
+
+\end{tikzpicture}
+\caption{The \textbf{RLearner-LLM} Alignment Architecture.}
+\label{fig:hybrid_dpo}
+\end{figure}
+
+\subsection{Multiplicative ACR Gate Preference Construction}
+Unlike traditional DPO \cite{rafailov2023direct}, which typically relies on human annotations, we rank the candidate explanations $E_i$ using the \textbf{Multiplicative ACR Gate} scoring function:
+
+\begin{equation}
+    H(E_i) = \bigl(w_{\text{nli}} \cdot P_{NLI}(E_i \models A)\ \cdot\ w_{\text{ver}} \cdot S_{\text{ver}}(E_i) - \gamma \cdot \ell_{\text{norm}}(E_i)\bigr) \cdot \mathbf{1}\bigl[\text{ACR}(E_i) \geq \theta\bigr]
+\end{equation}
+
+where:
+\begin{itemize}
+    \item $P_{NLI}(E_i \models A)$ is the entailment probability from a DeBERTa-v3-small cross-encoder, measuring how strongly the explanation logically supports the correct answer.
+    \item $S_{\text{ver}}(E_i) \in [0,1]$ is the normalized quality score from a domain-trained Alpaca-7B verifier, capturing holistic fluency and pedagogical coherence.
+    \item $\ell_{\text{norm}}(E_i)$ is the length-normalized token count, penalized by weight $\gamma$ to discourage verbose reward hacking.
+    \item $\mathbf{1}[\text{ACR}(E_i) \geq \theta]$ is a hard binary gate that zeroes the reward for any explanation whose Answer Coverage Rate falls below threshold $\theta$, ensuring the chosen response explicitly covers the correct-answer keywords.
+    \item $w_{\text{nli}}$ and $w_{\text{ver}}$ are scalar weights (both set to 0.5 in our experiments).
+\end{itemize}
+
+The multiplicative structure—as opposed to additive combination—is critical: a high fluency score cannot compensate for zero logical grounding, and the ACR gate prevents the model from learning to produce fluent but factually unanchored explanations (see Section~\ref{sec:ablation} for empirical validation). For each query, the response $y_w$ maximizing $H$ is labeled ``chosen'' and $y_l$ minimizing $H$ is ``rejected''.
+
+\subsection{Direct Preference Optimization}
+The student model $\pi_\theta$ is initialized from an SFT checkpoint $\pi_{ref}$. We then optimize $\pi_\theta$ directly on the constructed pairs $(x, y_w, y_l) \in \mathcal{D}_{pref}$ using the standard DPO objective:
+
+\begin{equation}
+    \mathcal{L}_{DPO}(\pi_\theta; \pi_{ref}) = -\mathbb{E}_{(x, y_w, y_l)\sim \mathcal{D}_{pref}} \left[ \log \sigma \left( \beta_{DPO} \log \frac{\pi_\theta(y_w|x)}{\pi_{ref}(y_w|x)} - \beta_{DPO} \log \frac{\pi_\theta(y_l|x)}{\pi_{ref}(y_l|x)} \right) \right]
+\end{equation}

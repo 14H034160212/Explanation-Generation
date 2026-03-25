@@ -115,6 +115,7 @@ def main():
     parser.add_argument("--nli_device", default="cpu")
     parser.add_argument("--cache_dir", default="cache")
     parser.add_argument("--limit", type=int, default=100)
+    parser.add_argument("--load_8bit", action="store_true", help="Load verifier in 8-bit")
     args = parser.parse_args()
 
     api_key = os.environ.get("OPENAI_API_KEY")
@@ -130,9 +131,19 @@ def main():
     # Load verifier
     logger.info(f"Loading verifier on {args.verifier_device}")
     ver_tok = AutoTokenizer.from_pretrained(args.verifier_path, use_fast=False, cache_dir=args.cache_dir)
+    
+    kwargs = {"torch_dtype": torch.float16, "cache_dir": args.cache_dir, "low_cpu_mem_usage": False}
+    if args.load_8bit:
+        kwargs["load_in_8bit"] = True
+        kwargs["device_map"] = {"": args.verifier_device}
+        kwargs["low_cpu_mem_usage"] = True
+    
     ver_model = AutoModelForCausalLM.from_pretrained(
-        args.verifier_path, torch_dtype=torch.float16, cache_dir=args.cache_dir
-    ).to(args.verifier_device).eval()
+        args.verifier_path, **kwargs
+    )
+    if not args.load_8bit:
+        ver_model = ver_model.to(args.verifier_device)
+    ver_model.eval()
 
     # Load NLI
     logger.info(f"Loading NLI on {args.nli_device}")
