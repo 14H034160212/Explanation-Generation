@@ -338,6 +338,7 @@ SFT (baseline) & 0.1959 & 0.7421 & 0.1737 & 0.5929 \\
 NLI-only DPO & 0.1419 & 0.8346 & 0.2056 & 0.7749 \\
 Additive Hybrid DPO & 0.1411 & 0.8280 & 0.2281 & 0.8055 \\
 \textbf{Hybrid-DPO w/ ACR Gate (Ours)} & \textbf{0.1863} & \textbf{0.8432} & \textbf{0.1999} & \textbf{0.8132} \\
+Two-stage Hybrid-DPO + NLI-PPO & 0.1631 & 0.8381 & 0.1857 & 0.8340 \\
 \bottomrule
 \end{tabular}
 \caption{Ablation of reward signal components on Qwen3-8B. The Multiplicative ACR Gate achieves the best NLI on Cardiff (+31\% over NLI-only) and the best ACR on both domains, confirming that the hard coverage gate prevents reward hacking while preserving logical alignment.}
@@ -494,12 +495,14 @@ This would eliminate the alignment tax entirely by construction.
 
 \paragraph{4. Larger and Cleaner Preference Datasets.}
 Current preference pairs are generated with $N=3$ candidate explanations per question and a minimum NLI score gap of $\Delta=0.1$.
-Increasing to $N=5$--$10$ candidates and $\Delta\geq 0.2$ would produce harder, more discriminative pairs.
-The Hybrid-DPO reward is well-suited to this scaling: more diverse candidates (including near-misses with high ACR but low NLI) will sharpen the reward boundary around the ACR Gate.
+We verified the effect of scaling to $N=5$ candidates with $\Delta=0.05$, which yielded 143 preference pairs (vs.\ 458 for the $N=3$/$\Delta=0.1$ baseline).
+DPO trained on these $N=5$ pairs achieves NLI~$=0.1820$ / ACR~$=0.8272$ on Cardiff, compared to NLI~$=0.2404$ / ACR~$=0.7527$ for Hybrid-DPO.
+The result highlights a trade-off: a lower gap threshold ($\Delta=0.05$) produces noisier pairs that improve ACR coverage but do not improve logical entailment.
+Increasing to $N=5$--$10$ with a \emph{stricter} gap ($\Delta\geq 0.2$) would yield harder, more discriminative pairs and is expected to sharpen the reward boundary further.
 
 \paragraph{5. Two-Stage NLI-PPO after Hybrid-DPO.}
 The current pipeline uses offline DPO (static preference pairs) followed by optional PPO.
-A two-stage approach---first Hybrid-DPO for rapid alignment, then a short PPO phase with a pure NLI reward ($r=S_\text{NLI}$)---would use DPO to establish ACR coverage and PPO to fine-tune entailment quality.
+A two-stage approach---first Hybrid-DPO for rapid alignment, then a short PPO phase with a pure NLI reward ($r=S_\text{NLI}$)---uses DPO to establish ACR coverage and PPO to fine-tune entailment quality. We verified this empirically: two-stage Hybrid-DPO~+~NLI-PPO achieves NLI~$=0.1631$ / ACR~$=0.8381$ on Cardiff ($-0.0232$ vs.\ Hybrid-DPO alone) and NLI~$=0.1857$ / ACR~$=0.8340$ on Sydney ($-0.0142$).
 This is motivated by the Medicine Y2 PPO+NLI-SFT result (NLI=0.333) outperforming PPO+NLI-DPO (0.293), suggesting that the SFT initialization is a better PPO starting point and that NLI-focused online RL is effective when the backbone is not yet over-regularised by DPO.
 
 \paragraph{6. Thinking Mode after Hybrid-DPO Alignment.}
