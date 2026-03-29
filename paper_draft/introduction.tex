@@ -32,7 +32,7 @@ In this paper, we propose \textbf{RLearner-LLM} (utilizing Hybrid-DPO), a cross-
 
 Our contributions are summarized as follows:
 \begin{enumerate}
-    \item We demonstrate the severe limitations of current LLM-as-a-judge evaluation paradigms, highlighting a systematic self-preference verbosity bias that penalizes concise, logical explanations.
-    \item We introduce the \textbf{RLearner-LLM} framework, an automated pipeline for generating preference pairs ($\mathcal{D}_{pref}$) that balance factual density with stylistic coherence.
-    \item We provide an empirical validation across five distinct academic domains (Biology, Medicine, Law), demonstrating that \textbf{RLearner-LLM} achieves up to a 5$\times$ improvement in logical entailment scores over SFT baselines while maintaining high user win rates in side-by-side evaluations.
+    \item \textbf{First-principles reward derivation.} We identify the structural root cause of the alignment tax in DPO/PPO: the KL regularisation term forces the policy toward the MLE-trained reference, which rewards fluency over entailment. We show formally that additive reward blending embeds a logical \emph{OR} assumption that cannot overcome this attractor, and derive a multiplicative ACR-gated reward that correctly encodes the \emph{AND} (conjunctive) requirement between coverage and entailment (Section~\ref{sec:first_principles}).
+    \item \textbf{The RLearner-LLM framework.} We introduce an automated pipeline for generating Hybrid preference pairs ($\mathcal{D}_\text{pref}$) where every chosen sample is guaranteed to satisfy the necessary coverage condition and the sufficient entailment condition, breaking the fluency attractor by construction.
+    \item \textbf{Empirical validation across five domains.} We provide experimental evidence that each theoretical prediction holds: additive reward produces alignment tax, the multiplicative ACR gate mitigates it, and the effect size tracks the SFT NLI baseline, achieving up to \textbf{8$\times$} NLI improvement for LLaMA-2-13B and consistent ACR gains across all three architectures and all five domains.
 \end{enumerate}
