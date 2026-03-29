@@ -112,3 +112,66 @@
 \caption{The \textbf{RLearner-LLM} framework. Stage~1 samples $n$ candidate explanations from the generator $\pi_\theta$. Stage~2 scores each candidate via three complementary signals—NLI entailment, a stylistic verifier, and a length penalty—gated by answer coverage (ACR) to suppress hallucinated responses. Preference pairs are then formed from the scored pool and used to update $\pi_\theta$ via Hybrid-DPO.}
 \label{fig:hybrid_dpo}
 \end{figure}
+
+\section{Methodology}
+\label{sec:methodology}
+
+\subsection{First-Principles Derivation of the Hybrid Reward}
+\label{sec:first_principles}
+
+\paragraph{The RLHF Objective and Its Core Tension.}
+The canonical RLHF objective~\cite{ouyang2022training} is:
+\begin{equation}
+\max_{\pi_\theta}\; \mathbb{E}_{y \sim \pi_\theta(y|x)}\bigl[r(x,y)\bigr] - \beta\,\text{KL}\bigl(\pi_\theta \,\|\, \pi_\text{ref}\bigr)
+\label{eq:rlhf}
+\end{equation}
+where $\pi_\text{ref}$ is the supervised fine-tuned reference policy and $\beta$ controls how much the learned policy is allowed to deviate from it.
+DPO~\cite{rafailov2023direct} derives the closed-form optimal policy
+$\pi^*(y|x) \propto \pi_\text{ref}(y|x)\cdot\exp(r(x,y)/\beta)$ and reformulates the objective as a direct binary cross-entropy loss on preference pairs, eliminating the need for an explicit reward model.
+
+The KL term in Eq.~\ref{eq:rlhf} is the structural source of the \textbf{alignment tax}: it regularises the policy toward $\pi_\text{ref}$, which was trained via maximum-likelihood estimation (MLE) on human-written text. MLE by definition maximises fluency and surface coherence. Any reward signal that competes with this fluency prior---such as a pure NLI entailment objective---must overcome the KL gradient pulling the policy back toward verbose, fluent-but-logically-weak outputs.
+This tension is not an implementation artefact; it is a structural consequence of Eq.~\ref{eq:rlhf} that persists regardless of the DPO variant used.
+
+\paragraph{Why Additive Reward Combination Fails.}
+A natural response is to blend NLI and fluency signals additively:
+\begin{equation}
+R_\text{add}(E) = \alpha\,S_\text{NLI}(E) + (1-\alpha)\,S_\text{ver}(E)
+\label{eq:additive}
+\end{equation}
+This formulation embeds a logical \textbf{OR} assumption: high reward is achievable via high NLI \emph{or} high verifier score, regardless of the other component. In practice, the Alpaca-7B verifier---trained on fluency-annotated corpora---consistently assigns high scores to fluent-but-logically-weak explanations. Additive blending therefore allows preference pairs whose chosen member satisfies only the fluency condition. The DPO gradient then pushes the policy toward the fluent attractor, \emph{amplifying} the alignment tax rather than resolving it. Our ablation confirms this empirically: Additive Hybrid DPO achieves NLI~$=0.1411$ on Cardiff, \textbf{lower} than the SFT baseline ($0.1959$), as does NLI-only DPO ($0.1419$).
+
+\paragraph{The Conjunctive Requirement: AND, Not OR.}
+From first principles, a logically sound explanation $E$ of a multiple-choice answer must \emph{simultaneously} satisfy two conditions:
+\begin{enumerate}
+    \item \textbf{Necessary condition} (Answer Coverage): $E$ must reference the key concepts of the correct option.
+    An explanation that does not mention the answer cannot logically entail it---this is a strict semantic prerequisite.
+    \item \textbf{Sufficient condition} (Logical Entailment): Given that the answer concepts are present, $E$ must construct a valid reasoning path from those concepts to the correct option.
+\end{enumerate}
+These requirements are \textbf{conjunctive} (AND), not disjunctive (OR). The correct algebraic encoding of a conjunction is multiplication, not addition. We therefore define the Hybrid reward as:
+\begin{equation}
+R(E) = \bigl(w_\text{nli}\cdot S_\text{NLI}(E)\;\cdot\; w_\text{ver}\cdot S_\text{ver}(E)\;-\;\gamma\cdot\ell_\text{norm}(E)\bigr)\cdot\mathbf{1}\bigl[\mathrm{ACR}(E)\geq\theta\bigr]
+\label{eq:hybrid_reward}
+\end{equation}
+where $\mathbf{1}[\cdot]$ is a hard indicator enforcing the necessary condition, the multiplicative product $S_\text{NLI}\cdot S_\text{ver}$ encodes the conjunctive sufficient condition, and $\gamma\cdot\ell_\text{norm}$ removes a known length-based confounder (described below).
+
+\paragraph{The Hard ACR Gate as a Necessary-Condition Filter.}
+The indicator $\mathbf{1}[\mathrm{ACR}(E)\geq\theta]$ sets the reward to zero for any explanation that fails to cover the answer keywords. Without this gate, an answer-evasive explanation ($\mathrm{ACR}\approx 0$) could still receive positive reward from $S_\text{NLI}$ or $S_\text{ver}$ and be selected as the \emph{chosen} member of a preference pair, directing the DPO gradient toward answer evasion. The hard gate eliminates this class of spurious pairs by construction. This failure mode is not hypothetical: our SFT error analysis (Table~\ref{tab:failure_modes}) identifies answer evasion in 12--18\% of SFT outputs across domains.
+
+\paragraph{Length Normalisation as Confounder Removal.}
+\label{sec:length_norm}
+Both $S_\text{NLI}$ and $S_\text{ver}$ correlate positively with output length in LLMs: longer outputs have more opportunities to contain answer keywords and to trigger quality heuristics. Without correction, this confounder directs the DPO gradient toward verbosity, reinstating a length-driven form of the alignment tax. The penalty $-\gamma\cdot\ell_\text{norm}$ removes this correlation from the reward surface, ensuring that preference pairs encode genuine logical-quality differences rather than length differences.
+
+\subsection{Preference Pair Construction}
+\label{sec:pref_construction}
+
+Given $n$ candidate explanations $\{E_i\}_{i=1}^n$ sampled from $\pi_\theta$ for a question-context pair $(C, Q)$, we score each candidate with $R(E_i)$ via Eq.~\ref{eq:hybrid_reward}. Pairs $(E_i, E_j)$ with $R(E_i) > R(E_j) + \Delta$ are retained as (chosen, rejected) pairs, where $\Delta \geq 0.1$ is a minimum score gap that ensures the signal-to-noise ratio of the preference label. This yields a dataset $\mathcal{D}_\text{pref} = \{(x_k, y_k^+, y_k^-)\}_{k=1}^K$ used to train Hybrid-DPO.
+
+\subsection{Hybrid-DPO Training Objective}
+\label{sec:hybrid_dpo}
+
+The Hybrid-DPO objective follows the standard DPO formulation~\cite{rafailov2023direct} but is trained on $\mathcal{D}_\text{pref}$ constructed with the Hybrid reward (Eq.~\ref{eq:hybrid_reward}):
+\begin{equation}
+\mathcal{L}_\text{DPO}(\pi_\theta) = -\mathbb{E}_{(x,y^+,y^-)\sim\mathcal{D}_\text{pref}}\!\left[\log\sigma\!\left(\beta\!\left(\log\frac{\pi_\theta(y^+|x)}{\pi_\text{ref}(y^+|x)} - \log\frac{\pi_\theta(y^-|x)}{\pi_\text{ref}(y^-|x)}\right)\right)\right]
+\label{eq:dpo_loss}
+\end{equation}
+Because every chosen example $y^+$ in $\mathcal{D}_\text{pref}$ is guaranteed to pass the ACR gate and to outscore its rejected counterpart on the conjunctive NLI$\times$Verifier product, the gradient of $\mathcal{L}_\text{DPO}$ consistently points toward higher logical entailment. This is the mechanism by which the Hybrid reward breaks the fluency attractor that causes alignment tax in additive variants.
