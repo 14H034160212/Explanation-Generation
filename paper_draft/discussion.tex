@@ -1,0 +1,27 @@
+\section{Discussion}
+
+\subsection{Why the Hybrid Signal Works: Complementary Objectives}
+
+The effectiveness of Hybrid-DPO stems from a key property of the two reward components: NLI entailment and verifier quality are \textit{complementary} rather than redundant. NLI entailment $P_{NLI}(E \models A)$ measures whether the explanation logically implies the correct answer---a binary, verifiable property. The verifier score $S_{Verifier}$ measures holistic pedagogical quality, capturing properties such as clarity, structure, and contextual appropriateness that NLI cannot detect.
+
+When used alone, each signal degrades in isolation. Pure NLI optimization converges to short, answer-repeating snippets that maximize entailment probability by simply restating the answer---satisfying the scorer while failing as an explanation. Pure verifier optimization recovers fluency but reintroduces the verbosity bias that masks shallow reasoning. The composite score $H = 0.5 \cdot P_{NLI} + 0.5 \cdot S_{Verifier}$ creates a more discriminating ordering of candidate explanations: a response that scores high on both dimensions must be simultaneously logically sound \textit{and} linguistically natural. This joint constraint filters out both degenerate extremes, producing preference pairs that guide the model toward the upper-right quadrant of the alignment frontier (Figure \ref{fig:alignment_tax}).
+
+\subsection{Architecture Effects: Base Model Strength and Marginal Gain}
+
+A consistent pattern across our experiments is that the marginal NLI gain from Hybrid-DPO is inversely related to the base model's pre-training quality. LLaMA-2-13B SFT achieves NLI scores of 0.05--0.09 across domains, and RLearner-LLM raises these to 0.32--0.43 (a 4--6$\times$ improvement). Qwen3-8B SFT already achieves NLI scores of 0.16--0.32, reflecting stronger reasoning capabilities from modern pre-training. Under Hybrid-DPO, Qwen3 gains are more modest on NLI (e.g., +31.5\% on Sydney) but consistently large on ACR (+9--29 pp across all domains).
+
+This pattern has a natural interpretation: for weaker base models, the SFT policy lacks an internal representation of the logical structure connecting explanations to answers---Hybrid-DPO injects this structure through preference learning. For stronger models, the logical structure is already partially present, and Hybrid-DPO's primary effect shifts to \textit{answer coverage}---ensuring the model explicitly references and justifies the correct option rather than providing correct but tangential reasoning. Both effects represent genuine improvements in educational explanation quality.
+
+\subsection{Domain Sensitivity and Limitations}
+
+The Auckland Law domain reveals an important boundary condition of the Hybrid-DPO approach. In this domain, RLearner-LLM (LLaMA-2) achieves NLI = 0.3229 (vs. SFT baseline 0.2702), but falls short of the iterative ILearner-LLM (K=5) baseline at 0.3996. Legal reasoning is characterized by multi-step precedent chains and domain-specific argumentation structures that a single-pass DPO update may not fully internalize. The iterative K=5 refinement process, by contrast, incrementally builds these chains over multiple generations. This suggests a hybrid regime---using RLearner-LLM for efficiency with targeted iterative refinement for high-stakes structured domains---as a promising future direction.
+
+A second limitation is the choice of NLI model. Our current setup uses \texttt{cross-encoder/nli-deberta-v3-small}, a relatively compact model. Stronger NLI classifiers (e.g., DeBERTa-v3-large) could provide more discriminative entailment signals, potentially improving preference pair quality at higher computational cost.
+
+\subsection{Implications for DPO in Knowledge-Intensive Tasks}
+
+Our findings carry a broader implication for the application of DPO beyond educational NLG. In any knowledge-intensive generation task where outputs have a verifiable logical property---medical diagnosis, mathematical proof, code correctness, legal reasoning---the standard practice of using stylistic human preferences as the DPO reward signal is likely to leave a substantial logical alignment gap. Our work suggests that \textit{the reward signal specification is the most critical design decision in applying DPO to such tasks}, and that automated, task-specific logical metrics should be incorporated alongside quality assessments to avoid the verbosity bias trap.
+
+\subsection{Verbosity Bias as a Systematic Evaluation Failure}
+
+The 69\% LLM-judge win rate observed for the verbose LLaMA-2 SFT model---despite its NLI score of 0.055---quantifies a fundamental flaw in LLM-as-a-judge evaluation paradigms. This is not a calibration error but a systematic preference for surface-level linguistic markers (hedging language, explicit enumeration, formal register) over actual logical content. Our result that \textbf{RLearner-LLM (Qwen3)} achieves 95\% win rate against GPT-4o-mini demonstrates that this bias can be overcome, but only once the model has been aligned to produce concise, logically dense explanations that defeat the verbosity heuristic. This finding motivates the adoption of logic-aware automatic metrics (NLI, ACR) as primary evaluation criteria in educational NLG, rather than relying solely on LLM judges or surface overlap metrics.
