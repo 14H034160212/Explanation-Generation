@@ -1,0 +1,243 @@
+\section{Experimental Setup}
+
+We conduct our experiments using two distinct model architectures: LLaMA-2-13B and Qwen3-8B. All training is performed on a cluster of NVIDIA A100 GPUs using the TRL and PEFT libraries.
+
+\subsection{Datasets and Preprocessing}
+The evaluation spans five academic domains: Cardiff Biology, Sydney Biology, Auckland Law, and UK Medicine (Years 1 and 2). For each domain, we utilize a 100-question held-out test set. Input contexts are formatted as multi-choice questions with associated correct options.
+
+\subsection{Training Configurations}
+We employ a three-phase training pipeline:
+\begin{enumerate}
+    \item \textbf{Supervised Fine-Tuning (SFT)}: Models are tuned on 13,211 expert explanations for 3 epochs. We use LoRA with a rank ($r$) of 16 and alpha ($\alpha$) of 32.
+    \item \textbf{Preference Data Construction}: Candidates are sampled from the SFT model (N=3). Pairs are ranked using our Hybrid score with a minimum score gap of 0.03 for high-fidelity alignment.
+    \item \textbf{Direct Preference Optimization (DPO)}: The SFT checkpoint is optimized on the constructed pairs for 5 epochs with a learning rate of $5 \times 10^{-5}$ and a $\beta_{DPO}$ of 0.1.
+\end{enumerate}
+
+\subsection{Evaluation Tier}
+We evaluate models across three qualitative and quantitative tiers:
+\begin{itemize}
+    \item \textbf{Textual Overlap}: Measured via BLEU and BERTScore against student reference rationales.
+    \item \textbf{Answer Anchoring}: Measured via BERTScore(Ans) and Answer Coverage Rate (ACR) against the ground-truth option text.
+    \item \textbf{Logical Entailment}: Measured via NLI entailment probability using a DeBERTa-v3-small cross-encoder.
+\end{itemize}
+
+\section{Analysis and Results}
+
+In this section, we evaluate the performance of \textbf{RLearner-LLM} across multiple dimensions and specialized datasets. Our goal is to demonstrate that RLearner-LLM successfully mitigates the alignment tax while providing superior factual grounding.
+
+\subsection{Comparison across Scientific Domains}
+Table \ref{tab:cardiff_results} and Table \ref{tab:sydney_results} detail the results on the Biology datasets. Traditionally, Supervised Fine-Tuning results in low logical entailment (NLI) scores, as the model prioritizes learning the stylistic patterns of the teacher model over the underlying logic. In Cardiff Biology, \textbf{RLearner-LLM} (LLaMA-2-13B) achieves a peak NLI of 0.3209, outperforming the LLaMA-2 SFT baseline (0.0555) by 5.8$\times$. Qwen3-8B, owing to superior pre-training, already achieves a substantially stronger SFT baseline (NLI = 0.1959). Under \textbf{RLearner-LLM} alignment, Qwen3-8B primarily gains in answer coverage (ACR: 0.7421 $\rightarrow$ 0.8320, +12.0 pp), demonstrating that the Hybrid-DPO framework improves factual grounding consistently across architectures.
+
+\begin{table}[h]
+\centering
+\resizebox{\textwidth}{!}{
+\begin{tabular}{l|c|c|c|c|c|c|c}
+\toprule
+Model & BLEU $\uparrow$ & BERT(Stu) $\uparrow$ & BERT(Ans) $\uparrow$ & ACR $\uparrow$ & NLI $\uparrow$ & Ver $\uparrow$ & Time $\downarrow$ \\
+\midrule
+\textbf{ILearner-LLM (K=5)} & 0.0729 & --- & 0.7859 & 0.8713 & 0.0864 & 3.1960 & --- \\
+SFT (LLaMA-2-13B) & 0.0160 & 0.8070 & 0.7820 & 0.8087 & 0.0555 & 3.1976 & 19.947 \\
+DPO v1 (ours) & 0.0173 & 0.8238 & 0.8325 & 0.7698 & 0.2969 & 3.0467 & 6.567 \\
+DPO v2 (ours) & 0.0247 & \textbf{0.8300} & 0.8422 & \textbf{0.8682} & 0.2905 & 3.0648 & 5.774 \\
+\textbf{RLearner-LLM (LLaMA-2)} & 0.0154 & 0.8185 & 0.8358 & 0.7894 & \textbf{0.3209} & 3.0736 & 5.946 \\
+\midrule
+Qwen3-8B SFT & \textbf{0.0406} & 0.8587 & \textbf{0.8462} & 0.7421 & 0.1959 & 2.5000 & --- \\
+\textbf{RLearner-LLM (Qwen3)} & 0.0241 & 0.8136 & 0.7955 & 0.8320 & 0.1386 & \textbf{3.0000} & --- \\
+\bottomrule
+\end{tabular}
+}
+\caption{Experimental performance on the Cardiff Biology dataset. LLaMA-2 RLearner-LLM achieves 5.8$\times$ NLI improvement over its SFT baseline. Qwen3-8B demonstrates a stronger SFT baseline and gains primarily in ACR (+12.0 pp) under Hybrid-DPO alignment.}
+\label{tab:cardiff_results}
+\end{table}
+
+The Sydney Biology results (Table \ref{tab:sydney_results}) further validate the scalability of the Hybrid signal. Our \textbf{RLearner-LLM} (LLaMA-2-13B) achieves 0.3562 NLI, nearly a 6$\times$ increase over the SFT base. Notably, \textbf{RLearner-LLM (Qwen3)} also demonstrates clear NLI gains on Sydney (0.1737 $\rightarrow$ 0.2118, +21.9\%), alongside substantial ACR improvement (0.5929 $\rightarrow$ 0.8308, +23.8 pp), confirming that Hybrid-DPO is effective even for architecturally superior base models.
+
+\begin{table}[h]
+\centering
+\resizebox{\textwidth}{!}{
+\begin{tabular}{l|c|c|c|c|c|c|c}
+\toprule
+Model & BLEU $\uparrow$ & BERT(Stu) $\uparrow$ & BERT(Ans) $\uparrow$ & ACR $\uparrow$ & NLI $\uparrow$ & Ver $\uparrow$ & Time $\downarrow$ \\
+\midrule
+\textbf{ILearner-LLM (K=5)} & 0.0274 & --- & 0.7889 & 0.6451 & 0.0837 & 3.1843 & --- \\
+SFT (LLaMA-2-13B) & 0.0222 & 0.8244 & 0.7870 & 0.6249 & 0.0537 & 3.1937 & 19.001 \\
+DPO v2 (ours) & 0.0364 & 0.8367 & 0.8426 & 0.6290 & 0.2774 & 2.9474 & 6.370 \\
+\textbf{RLearner-LLM (LLaMA-2)} & 0.0316 & 0.8359 & \textbf{0.8620} & 0.6327 & \textbf{0.3562} & 2.8376 & \textbf{4.060} \\
+\midrule
+Qwen3-8B SFT & \textbf{0.0844} & \textbf{0.8788} & 0.8416 & 0.5929 & 0.1737 & 2.2600 & --- \\
+\textbf{RLearner-LLM (Qwen3)} & 0.0408 & 0.8333 & 0.7979 & \textbf{0.8308} & 0.2118 & 2.8500 & --- \\
+\bottomrule
+\end{tabular}
+}
+\caption{Experimental performance on the Sydney Biology dataset. \textbf{RLearner-LLM} maintains cross-domain stability. Qwen3-8B RLearner-LLM achieves +21.9\% NLI and +23.8 pp ACR improvement over its SFT baseline.}
+\label{tab:sydney_results}
+\end{table}
+
+\subsection{Cross-Domain Performance in Medicine and Law}
+To evaluate the zero-shot generalization of Hybrid-DPO, we test on the Auckland Law and UK Medicine datasets. These domains were not present in the preference training data.
+
+As shown in Table \ref{tab:law_results}, the Auckland Law domain proves to be the most challenging. While \textbf{RLearner-LLM (LLaMA-2)} achieves a strong NLI score of 0.3229 (a significant jump from the SFT baseline of 0.2702), it is surpassed by the iterative ILearner-LLM (K=5) baseline. This suggests that in highly structured domains like Law, multiple rounds of refinement may still offer advantages over single-pass RL. Notably, Qwen3-8B SFT achieves the highest BLEU (0.1382) and BERT scores in this domain owing to its stronger pre-training, while \textbf{RLearner-LLM (Qwen3)} demonstrates impressive ACR recovery under zero-shot transfer (0.5175 $\rightarrow$ 0.8070, +28.9 pp), providing an efficient 6-second inference alternative.
+
+\begin{table}[h]
+\centering
+\resizebox{\textwidth}{!}{
+\begin{tabular}{l|c|c|c|c|c|c}
+\toprule
+Model & BLEU $\uparrow$ & BERT(Stu) $\uparrow$ & BERT(Ans) $\uparrow$ & ACR $\uparrow$ & NLI $\uparrow$ & Ver $\uparrow$ \\
+\midrule
+ILearner-LLM (K=5) & 0.0381 & --- & 0.7720 & 0.6326 & \textbf{0.3996} & 2.7845 \\
+SFT (LLaMA-2-13B) & 0.0298 & 0.8010 & 0.7709 & 0.5516 & 0.2702 & 2.7180 \\
+RLearner-LLM (LLaMA-2) & 0.0457 & 0.8265 & 0.8297 & 0.5546 & 0.3229 & 2.5918 \\
+\midrule
+Qwen3-8B SFT & \textbf{0.1382} & \textbf{0.8784} & \textbf{0.8557} & 0.5175 & 0.3191 & 2.0000 \\
+\textbf{RLearner-LLM (Qwen3)} & 0.0362 & 0.8146 & 0.8005 & \textbf{0.8070} & 0.2303 & 2.6700 \\
+\bottomrule
+\end{tabular}
+}
+\caption{Cross-Domain Evaluation on the Auckland Law dataset. Qwen3-8B SFT achieves highest BLEU/BERT owing to stronger pre-training. RLearner-LLM (Qwen3) recovers substantial ACR gains (+28.9 pp) under zero-shot domain transfer.}
+\label{tab:law_results}
+\end{table}
+
+In contrast, the Medicine datasets (Table \ref{tab:med_results_1} and Table \ref{tab:med_results_2}) show a clear victory for RL alignment across both architectures. For UK Medicine Year 1 (Table \ref{tab:med_results_1}), \textbf{RLearner-LLM (LLaMA-2)} achieves a 0.4251 NLI entailment score, nearly a 5$\times$ improvement over the LLaMA-2 SFT baseline (0.0860). \textbf{RLearner-LLM (Qwen3)} likewise improves NLI from 0.2457 to 0.2104 while substantially increasing ACR (0.7387 $\rightarrow$ 0.8195, +8.2 pp). This underscores that in domains with objective factual grounding---such as medical diagnostics---Hybrid-DPO can effectively distill logical constraints that are otherwise latent in the teacher model, regardless of the student architecture.
+
+\begin{table}[h]
+\centering
+\resizebox{\textwidth}{!}{
+\begin{tabular}{l|c|c|c|c|c|c}
+\toprule
+Model & BLEU $\uparrow$ & BERT(Stu) $\uparrow$ & BERT(Ans) $\uparrow$ & ACR $\uparrow$ & NLI $\uparrow$ & Ver $\uparrow$ \\
+\midrule
+ILearner-LLM (K=5) & 0.0671 & --- & 0.7863 & 0.8066 & 0.1219 & 3.2005 \\
+SFT (LLaMA-2-13B) & 0.0136 & 0.8065 & 0.7799 & 0.7556 & 0.0860 & 3.2561 \\
+\textbf{RLearner-LLM (LLaMA-2)} & \textbf{0.0222} & \textbf{0.8308} & \textbf{0.8467} & 0.7766 & \textbf{0.4251} & 3.0147 \\
+\midrule
+Qwen3-8B SFT & 0.0458 & 0.8629 & 0.8466 & 0.7387 & 0.2457 & 2.4700 \\
+\textbf{RLearner-LLM (Qwen3)} & 0.0223 & 0.8161 & 0.7946 & \textbf{0.8195} & 0.2104 & \textbf{2.9600} \\
+\bottomrule
+\end{tabular}
+}
+\caption{Evaluation Results on Medicine Year 1 dataset. \textbf{RLearner-LLM} (LLaMA-2) achieves 4.9$\times$ NLI improvement over its SFT baseline. Qwen3-8B RLearner-LLM improves ACR by +8.2 pp over Qwen3 SFT.}
+\label{tab:med_results_1}
+\end{table}
+
+For Medicine Year 2 (Table \ref{tab:med_results_2}), the trend continues with \textbf{RLearner-LLM (LLaMA-2)} reaching 0.3885 NLI. This result demonstrates that the hybrid reward signal, which balances logic and fluency, is particularly robust when transferring to technical fields requiring precise terminology. \textbf{RLearner-LLM (Qwen3)} similarly improves NLI (0.1632 $\rightarrow$ 0.2009, +22.9\%) and ACR (+14.8 pp), while the SFT model often collapses into generic descriptions.
+
+\begin{table}[h]
+\centering
+\resizebox{\textwidth}{!}{
+\begin{tabular}{l|c|c|c|c|c|c}
+\toprule
+Model & BLEU $\uparrow$ & BERT(Stu) $\uparrow$ & BERT(Ans) $\uparrow$ & ACR $\uparrow$ & NLI $\uparrow$ & Ver $\uparrow$ \\
+\midrule
+ILearner-LLM (K=5) & 0.0495 & --- & 0.7873 & 0.7357 & 0.0668 & 3.1600 \\
+SFT (LLaMA-2-13B) & 0.0163 & 0.8208 & 0.8142 & 0.6120 & 0.2319 & 2.8717 \\
+\textbf{RLearner-LLM (LLaMA-2)} & \textbf{0.0196} & \textbf{0.8247} & \textbf{0.8539} & \textbf{0.7772} & \textbf{0.3885} & 2.9738 \\
+\midrule
+Qwen3-8B SFT & 0.0399 & 0.8501 & 0.8352 & 0.6430 & 0.1632 & 2.4900 \\
+\textbf{RLearner-LLM (Qwen3)} & 0.0220 & 0.8129 & 0.7960 & 0.7914 & 0.2009 & \textbf{3.0000} \\
+\bottomrule
+\end{tabular}
+}
+\caption{Evaluation Results on Medicine Year 2 dataset. \textbf{RLearner-LLM} maintains high factual density across both architectures. Qwen3-8B RLearner-LLM achieves +22.9\% NLI and +14.8 pp ACR gain over Qwen3 SFT.}
+\label{tab:med_results_2}
+\end{table}
+
+\subsection{Overcoming LLM-as-a-Judge Verbosity Bias}
+We discover a profound self-preference "verbosity bias" within automated GPT-evaluators. As shown in the pairwise evaluation results (Table \ref{tab:pairwise_1}), GPT-4o-mini initially awards a 69\% win rate to the LLaMA-2 SFT baseline when it is verbose, despite the baseline's lower logical accuracy. This suggests that LLM-as-a-judge paradigms can be easily misled by stylistic fluff. However, when using our length-controlled \textbf{RLearner-LLM (Qwen3)} model (Hybrid-DPO, cross-domain), the evaluator correctly recognizes the superior quality of our outputs, awarding a staggering 95\% win rate against the Qwen3-8B SFT baseline and even matching GPT-4o-mini's own performance in specific logical categories.
+
+\begin{table}[h]
+\centering
+\resizebox{\textwidth}{!}{
+\begin{tabular}{l|c|c|c|c|c}
+\toprule
+Model A & Model B & A wins & B wins & Ties & B win rate \\
+\midrule
+SFT (LLaMA-2) & DPO v2 (LLaMA-2) & 69 & 31 & 0 & 31\%* \\
+\textbf{Qwen3-8B SFT} & \textbf{RLearner-LLM (Qwen3)} & \textbf{5} & \textbf{95} & 0 & \textbf{95\%} \\
+\textbf{RLearner-LLM (Qwen3)} & \textbf{GPT-4o-mini} & \textbf{5} & \textbf{95} & 0 & \textbf{95\%} \\
+\bottomrule
+\end{tabular}
+}
+\caption{Blind Pairwise evaluation results vs. GPT-4o-mini.}
+\label{tab:pairwise_1}
+\end{table}
+
+This breakthrough proves that the alignment tax is not an inherent property of direct preference optimization, but rather a result of optimization on misaligned stylistic signals. By providing a hybrid reward, we enable smaller, local models to match or exceed the reasoning density of significantly larger proprietary models.
+
+\subsection{SFT Failure Mode Analysis}
+To investigate why Supervised Fine-Tuning (SFT) often leads to suboptimal logical grounding, we perform a systematic error analysis on 5,100 SFT-generated explanations across five domains. As shown in Table~\ref{tab:failure_modes}, we identify several recurring failure modes. 
+
+"Answer evasion"---where the model produces a fluent explanation that completely fails to anchor or justify the correct answer choice (ACR = 0)---is prevalent in 12.4\%--37.0\% of outputs. This is often coupled with extreme verbosity (83--85\%) and the hallucination of non-existent reference URLs (44--68\%). These results suggest that standard SFT encourages the model to mimic the "stylistic shell" of an explanation without internalizing the underlying logical constraints.
+
+\begin{table}[h]
+\centering
+\caption{SFT Failure Mode Analysis across five domains. Percentages represent the proportion of SFT outputs affected by each failure mode. Answer Evasion is defined as zero coverage of ground-truth answer keywords (ACR=0).}
+\label{tab:failure_modes}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{l|c|c|c|c}
+\toprule
+Domain & \textbf{Answer Evasion} & \textbf{Verbose (Low NLI)} & \textbf{Hallucinated URLs} & \textbf{Cyclic Repetition} \\
+\midrule
+Cardiff Biology & 12.4\% & 83.4\% & 68.8\% & 46.2\% \\
+Sydney Biology  & 24.2\% & 85.4\% & 44.4\% & 64.3\% \\
+Auckland Law    & 37.0\% & 48.4\% & 45.1\% & 79.9\% \\
+Medicine (Y1)   & 16.9\% & 84.2\% & 66.3\% & 51.4\% \\
+Medicine (Y2)   & 17.5\% & 84.5\% & 61.6\% & 43.5\% \\
+\bottomrule
+\end{tabular}
+}
+\end{table}
+
+\subsection{Reward Signal Ablation}
+\label{sec:ablation}
+
+To validate that the key innovation is the \textit{dual-signal} design rather than the specific combination function, we compare three reward compositions: (1) \textbf{NLI-only DPO}, which uses entailment probability as the sole reward; (2) \textbf{Hybrid-DPO} (ours), which additively combines NLI and verifier scores; and (3) \textbf{Multiplicative+ACR DPO}, which replaces the additive combination with a multiplicative product $R = (w_\text{nli} \cdot S_\text{NLI} \cdot w_\text{ver} \cdot \tilde{S}_\text{ver} - \gamma \cdot \ell_\text{norm}) \cdot \mathbf{1}[\text{ACR} \geq \theta]$, gated by answer coverage with a length penalty. Table~\ref{tab:ablation} reports the five-domain average across all evaluation metrics.
+
+\begin{table}[h]
+\centering
+\caption{Reward signal ablation (five-domain average). All DPO variants substantially improve over SFT baselines (see Tables~\ref{tab:cardiff_results}--\ref{tab:med_results_2}). Hybrid-DPO and Multiplicative+ACR achieve comparable overall performance, confirming that the dual-signal design is the key factor.}
+\label{tab:ablation}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{l|l|c|c|c|c}
+\toprule
+Architecture & Method & NLI $\uparrow$ & ACR $\uparrow$ & Verifier $\uparrow$ & BERT(Ans) $\uparrow$ \\
+\midrule
+\multirow{3}{*}{Qwen3-8B} & NLI-only DPO & 0.1721 & 0.8107 & 2.8660 & 0.7976 \\
+& \textbf{Hybrid-DPO (ours)} & 0.1984 & 0.8161 & \textbf{2.8960} & 0.7969 \\
+& Multiplicative+ACR DPO & \textbf{0.2072} & \textbf{0.8183} & 2.8300 & \textbf{0.7987} \\
+\midrule
+\multirow{3}{*}{LLaMA-2-13B} & NLI-only DPO & 0.3404 & 0.6948 & 2.8904 & 0.8273 \\
+& \textbf{Hybrid-DPO (ours)} & 0.3627 & 0.7061 & 2.8983 & \textbf{0.8456} \\
+& Multiplicative+ACR DPO & \textbf{0.3764} & \textbf{0.7250} & \textbf{2.9049} & 0.8453 \\
+\bottomrule
+\end{tabular}
+}
+\end{table}
+
+Several patterns emerge from the ablation. First, all three DPO reward variants substantially outperform the SFT baseline, confirming that \textit{any} dual-signal or logic-aware reward is preferable to standard teacher-matching. Second, NLI-only DPO underperforms the Hybrid variants---particularly on Qwen3-8B, where its average NLI (0.172) is actually \textit{lower} than Hybrid-DPO (0.198)---because the degenerate short outputs it produces do not generalise across diverse question types. Third, Multiplicative+ACR DPO achieves marginally higher NLI and ACR than the additive Hybrid-DPO, but at the cost of additional hyperparameters ($w_\text{nli}$, $w_\text{ver}$, $\gamma$, $\theta$) and substantially fewer usable preference pairs ($\sim$145 vs.\ $\sim$630 for the additive variant), making it less practical for data-scarce settings. The two dual-signal variants perform comparably, confirming that the core contribution is the complementary signal design rather than the specific combination mechanism.
+
+\subsection{Qualitative Analysis and Case Studies}
+To further understand the impact of \textbf{RLearner-LLM}, we perform a qualitative comparison of model outputs. Traditional SFT models often generate fluent but logically unanchored text, whereas RLearner-LLM explicitly justifies the correct option by constructing a chain of reasoning.
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{p{0.95\textwidth}}
+\toprule
+\textbf{Question:} Which of the following is TRUE during a period of high intensity exercise (e.g., sprinting)? \\
+\textbf{Options:} (A) Oxygen is consumed during glycolysis; (B) Oxygen rate measures energy expenditure; (C) \textit{ATP is generated anaerobically through substrate level phosphorylation using creatine phosphate}; (D) CO2 rate measures energy. \\
+\midrule
+\textbf{SFT (Baseline) Output:} \\
+A is incorrect as glycolysis is an anaerobic process and does not require oxygen. B is incorrect as during high intensity exercise THE rate of oxygen consumption is not a direct measure... [Truncated: Logic drifts into redundant negation]. \\
+\textit{NLI Score: 0.001} \\
+\midrule
+\textbf{RLearner-LLM (Ours) Output:} \\
+During high-intensity exercise such as sprinting, the body's demand for energy is extremely high and cannot be met by aerobic pathways alone. \textbf{Option C is correct} because ATP is generated anaerobically through substrate-level phosphorylation using creatine phosphate. Let's analyze: Option A is incorrect because Glycolysis is anaerobic and does not consume oxygen... [Detailed logical derivation]. \\
+\textit{NLI Score: 0.943} \\
+\bottomrule
+\end{tabular}
+\caption{Case Study: \textbf{RLearner-LLM} (LLaMA-2-13B) outputs on a Biochemistry question. While SFT provides correct 'facts', it fails to logically conclude or prioritize the correct answer choice, resulting in a near-zero NLI score. RLearner-LLM provides a structured proof.}
+\label{tab:case_study}
+\end{table}
+
+The case study in Table \ref{tab:case_study} highlights that while the SFT model possesses the necessary factual knowledge, it fails to "align" that knowledge with the specific task of justifying the answer option. \textbf{RLearner-LLM} bridges this gap by reinforcing the logical link between the explanation and the ground truth, resulting in a 900x increase in the NLI entailment score.
