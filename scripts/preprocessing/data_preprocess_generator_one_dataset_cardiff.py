@@ -1,7 +1,16 @@
 ## The steps about data preprocessing for explanation generator
 ## Step 1: remove the question, options which is nan and including '<img' tag and the total rating lower than 10.
+## Step 1a (added 2026-04): drop rows where deleted==1 (deleted questions still appeared in earlier runs).
 ## Step 2: clean the question, options and explantion where has the html tag and extra white space.
 ## Step 3: remove the the explanation where there is nothing after cleaning the explanation.
+##
+## Optional Tier-B quality filter (commented out by default, see below):
+##   require top_rating_count / total_ratings >= 0.10
+## This is the closest approximation we can implement to a "questionable question"
+## filter using the columns present in *_all_questions.xlsx (per-option response
+## distribution is not in the metadata, so the strict version of Paul's
+## suggestion --- author answer != most popular student answer --- needs the
+## response logs and is not implemented here).
 
 import pandas as pd
 import json
@@ -39,10 +48,17 @@ for i in range(len(total_questions)):
         answer = str(row["answer"])
         explanation = str(row["explanation"])
         
+        deleted_flag = row.get("deleted", 0)
+        top_rating_count = row.get("top_rating_count", 0)
         if str(question) == 'nan' or '<img' in str(question) or '<img' in str(altA) or '<img' in str(altB) \
             or '<img' in str(altC) or '<img' in str(altD) or '<img' in str(altE) or '<img' in str(explanation) \
-                or total_ratings < 10:
+                or total_ratings < 10 \
+                or (isinstance(deleted_flag, (int, float)) and deleted_flag == 1):
             continue
+        # Optional Tier-B quality filter:
+        # require top_rating_count / total_ratings >= 0.10
+        # if total_ratings > 0 and (top_rating_count / total_ratings) < 0.10:
+        #     continue
         question = BeautifulSoup(question, "html.parser").get_text().strip()
         numAlts = int(numAlts)
         altA = BeautifulSoup(altA, "html.parser").get_text().strip()

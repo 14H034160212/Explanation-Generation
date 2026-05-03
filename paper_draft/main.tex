@@ -1,15 +1,37 @@
 \documentclass{article}
+
+% NeurIPS 2026 Main Track, double-blind reviewing (default for submission).
+% nonatbib because we use manual thebibliography (no .bib + bibtex).
+% After acceptance, switch to: \usepackage[main, final, nonatbib]{neurips_2026}.
+\usepackage[nonatbib]{neurips_2026}
+
+% Standard NeurIPS-recommended packages (mirrors neurips_2026.tex shell).
 \usepackage[utf8]{inputenc}
-\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\usepackage{url}
 \usepackage{booktabs}
-\usepackage{geometry}
+\usepackage{amsfonts}
+\usepackage{nicefrac}
+\usepackage{microtype}
+\usepackage{xcolor}
+
+% Project-specific packages used by figures and equations.
+\usepackage{graphicx}
 \usepackage{amsmath, amssymb}
 \usepackage{tikz}
 \usetikzlibrary{shapes.geometric, arrows, positioning}
-\geometry{a4paper, margin=1in}
-\title{\textbf{RLearner-LLM}: Balancing Logical Grounding and Fluency in Large Language Models via Hybrid Direct Preference Optimization}
-\author{Anonymous Authors}
-\date{}
+
+\title{RLearner-LLM: Balancing Logical Grounding and Fluency in Large Language Models via Hybrid Direct Preference Optimization}
+
+% Anonymous double-blind submission. Replace with author block + affiliations
+% in camera-ready (when switching to \usepackage[main, final]{neurips_2026}).
+\author{%
+  Anonymous Author(s) \\
+  Affiliation \\
+  Address \\
+  \texttt{email}
+}
 
 \begin{document}
 \maketitle
@@ -24,5 +46,9 @@
 \input{conclusion}
 
 \input{references}
+
+\input{appendix}
+
+\input{checklist}
 
 \end{document}

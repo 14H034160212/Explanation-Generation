@@ -39,10 +39,17 @@ for i in range(len(total_questions)):
         answer = str(row["answer"])
         explanation = str(row["explanation"])
         
+        deleted_flag = row.get("deleted", 0)
+        top_rating_count = row.get("top_rating_count", 0)
         if str(question) == 'nan' or '<img' in str(question) or '<img' in str(altA) or '<img' in str(altB) \
             or '<img' in str(altC) or '<img' in str(altD) or '<img' in str(altE) or '<img' in str(explanation) \
-                or total_ratings < 10:
+                or total_ratings < 10 \
+                or (isinstance(deleted_flag, (int, float)) and deleted_flag == 1):
             continue
+        # Optional Tier-B quality filter (commented out by default):
+        # require top_rating_count / total_ratings >= 0.10
+        # if total_ratings > 0 and (top_rating_count / total_ratings) < 0.10:
+        #     continue
         question = BeautifulSoup(question, "html.parser").get_text().strip()
         numAlts = int(numAlts)
         altA = BeautifulSoup(altA, "html.parser").get_text().strip()

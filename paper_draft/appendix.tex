@@ -1,0 +1,163 @@
+\appendix
+
+\section{Per-Domain Detail Tables}
+\label{sec:per_domain_appendix}
+
+For completeness we provide the full per-architecture breakdown on each of the four non-Cardiff domains. The Cardiff Biology table (Table~\ref{tab:cardiff_results}) appears in the main paper because it is the most extensively dissected domain and is the target of the robustness ablation in Section~\ref{sec:discussion-limits}; the headline NLI summary across all five domains is given in Table~\ref{tab:nli_summary}.
+
+\begin{table}[h]
+\centering
+\resizebox{\textwidth}{!}{
+\begin{tabular}{l|c|c|c|c|c|c|c}
+\toprule
+Model & BLEU $\uparrow$ & BERT(Stu) $\uparrow$ & BERT(Ans) $\uparrow$ & ACR $\uparrow$ & NLI $\uparrow$ & Ver $\uparrow$ & Time $\downarrow$ \\
+\midrule
+\textbf{ILearner-LLM (K=5)} & 0.0274 & --- & 0.7889 & 0.6451 & 0.0837 & 3.1843 & --- \\
+SFT (LLaMA-2-13B) & 0.0222 & 0.8244 & 0.7870 & 0.6249 & 0.0537 & 3.1937 & 19.001 \\
+DPO v2 (ours) & 0.0364 & 0.8367 & 0.8426 & 0.6290 & 0.2774 & 2.9474 & 6.370 \\
+\textbf{RLearner-LLM (LLaMA-2)} & 0.0316 & 0.8359 & \textbf{0.8620} & 0.6327 & \textbf{0.3562} & 2.8376 & \textbf{4.060} \\
+\midrule
+Qwen3-8B SFT & 0.0844 & 0.8788 & 0.8416 & 0.5929 & 0.1737 & 2.2600 & --- \\
+\textbf{RLearner-LLM (Qwen3)} & 0.0418 & 0.8353 & 0.7995 & \textbf{0.8283} & 0.2284 & 2.7800 & --- \\
+\midrule
+Gemma4-E4B-it SFT & 0.0844 & 0.8794 & 0.8452 & 0.6209 & 0.2469 & 3.0364 & 5.804 \\
+RLearner-LLM (Gemma4-E4B) & \textbf{0.0893} & \textbf{0.8803} & 0.8472 & 0.5421 & 0.2309 & 3.0142 & 4.667 \\
+\bottomrule
+\end{tabular}
+}
+\caption{Sydney Biology, full per-architecture breakdown.}
+\label{tab:sydney_results}
+\end{table}
+
+\begin{table}[h]
+\centering
+\resizebox{\textwidth}{!}{
+\begin{tabular}{l|c|c|c|c|c|c}
+\toprule
+Model & BLEU $\uparrow$ & BERT(Stu) $\uparrow$ & BERT(Ans) $\uparrow$ & ACR $\uparrow$ & NLI $\uparrow$ & Ver $\uparrow$ \\
+\midrule
+ILearner-LLM (K=5) & 0.0381 & --- & 0.7720 & 0.6326 & 0.3996 & 2.7845 \\
+SFT (LLaMA-2-13B) & 0.0298 & 0.8010 & 0.7709 & 0.5516 & 0.2702 & 2.7180 \\
+RLearner-LLM (LLaMA-2) & 0.0457 & 0.8265 & 0.8297 & 0.5546 & 0.3229 & 2.5918 \\
+\midrule
+Qwen3-8B SFT & \textbf{0.1382} & 0.8784 & 0.8557 & 0.5175 & 0.3191 & 2.0000 \\
+\textbf{RLearner-LLM (Qwen3)} & 0.0362 & 0.8146 & 0.8005 & \textbf{0.8070} & 0.2303 & 2.6700 \\
+\midrule
+Gemma4-E4B-it SFT & 0.1353 & \textbf{0.8798} & 0.8611 & 0.5172 & 0.3911 & 2.6431 \\
+\textbf{RLearner-LLM (Gemma4-E4B)} & 0.1315 & 0.8757 & \textbf{0.8654} & 0.5563 & \textbf{0.4377} & 2.6304 \\
+\bottomrule
+\end{tabular}
+}
+\caption{Auckland Law, full per-architecture breakdown. Gemma 4 E4B-it RLearner surpasses the iterative ILearner-LLM (K=5) NLI benchmark of $0.3996$ as the first single-pass RL method in our study.}
+\label{tab:law_results}
+\end{table}
+
+\begin{table}[h]
+\centering
+\resizebox{\textwidth}{!}{
+\begin{tabular}{l|c|c|c|c|c|c}
+\toprule
+Model & BLEU $\uparrow$ & BERT(Stu) $\uparrow$ & BERT(Ans) $\uparrow$ & ACR $\uparrow$ & NLI $\uparrow$ & Ver $\uparrow$ \\
+\midrule
+ILearner-LLM (K=5) & 0.0671 & --- & 0.7863 & 0.8066 & 0.1219 & 3.2005 \\
+SFT (LLaMA-2-13B) & 0.0136 & 0.8065 & 0.7799 & 0.7556 & 0.0860 & 3.2561 \\
+\textbf{RLearner-LLM (LLaMA-2)} & \textbf{0.0222} & \textbf{0.8308} & \textbf{0.8467} & 0.7766 & \textbf{0.4251} & 3.0147 \\
+\midrule
+Qwen3-8B SFT & 0.0458 & 0.8629 & 0.8466 & 0.7387 & 0.2457 & 2.4700 \\
+\textbf{RLearner-LLM (Qwen3)} & 0.0223 & 0.8161 & 0.7946 & \textbf{0.8195} & 0.2104 & \textbf{2.9600} \\
+\midrule
+Gemma4-E4B-it SFT & 0.0428 & 0.8622 & 0.8447 & 0.7556 & 0.2962 & 3.1411 \\
+\textbf{RLearner-LLM (Gemma4-E4B)} & 0.0280 & 0.8487 & 0.8469 & 0.6531 & 0.3910 & 3.1089 \\
+\bottomrule
+\end{tabular}
+}
+\caption{UK Medicine Year 1, full per-architecture breakdown.}
+\label{tab:med_results_1}
+\end{table}
+
+\begin{table}[h]
+\centering
+\resizebox{\textwidth}{!}{
+\begin{tabular}{l|c|c|c|c|c|c}
+\toprule
+Model & BLEU $\uparrow$ & BERT(Stu) $\uparrow$ & BERT(Ans) $\uparrow$ & ACR $\uparrow$ & NLI $\uparrow$ & Ver $\uparrow$ \\
+\midrule
+ILearner-LLM (K=5) & 0.0495 & --- & 0.7873 & 0.7357 & 0.0668 & 3.1600 \\
+SFT (LLaMA-2-13B) & 0.0163 & 0.8208 & 0.8142 & 0.6120 & 0.2319 & 2.8717 \\
+\textbf{RLearner-LLM (LLaMA-2)} & \textbf{0.0196} & \textbf{0.8247} & \textbf{0.8539} & \textbf{0.7772} & \textbf{0.3885} & 2.9738 \\
+\midrule
+Qwen3-8B SFT & 0.0399 & 0.8501 & 0.8352 & 0.6430 & 0.1632 & 2.4900 \\
+\textbf{RLearner-LLM (Qwen3)} & 0.0220 & 0.8129 & 0.7960 & 0.7914 & 0.2009 & 3.0000 \\
+\midrule
+Gemma4-E4B-it SFT & 0.0476 & 0.8525 & 0.8372 & 0.6786 & 0.1604 & 3.0943 \\
+\textbf{RLearner-LLM (Gemma4-E4B)} & 0.0325 & 0.8453 & 0.8397 & 0.6655 & \textbf{0.3892} & 3.0666 \\
+\bottomrule
+\end{tabular}
+}
+\caption{UK Medicine Year 2, full per-architecture breakdown. Gemma 4 RLearner virtually matches the LLaMA-2-13B peak ($0.3892$ vs $0.3885$) with $\sim 3\times$ fewer effective parameters.}
+\label{tab:med_results_2}
+\end{table}
+
+\section{Qualitative Case Study}
+\label{sec:case_study_appendix}
+
+To complement the quantitative results of Section 6, we provide a representative qualitative comparison of an SFT baseline output against a RLearner-LLM output on a Cardiff Biology biochemistry question. The example illustrates the failure mode that the Hybrid reward is designed to correct: SFT possesses the relevant facts but does not commit to a deductive chain that justifies the correct option, while RLearner-LLM produces a structured proof and consequently scores three orders of magnitude higher on NLI entailment.
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{p{0.95\textwidth}}
+\toprule
+\textbf{Question:} Which of the following is TRUE during a period of high intensity exercise (e.g., sprinting)? \\
+\textbf{Options:} (A) Oxygen is consumed during glycolysis; (B) Oxygen rate measures energy expenditure; (C) \textit{ATP is generated anaerobically through substrate level phosphorylation using creatine phosphate}; (D) CO2 rate measures energy. \\
+\midrule
+\textbf{SFT (Baseline) Output:} \\
+A is incorrect as glycolysis is an anaerobic process and does not require oxygen. B is incorrect as during high intensity exercise THE rate of oxygen consumption is not a direct measure... [Truncated: Logic drifts into redundant negation]. \\
+\textit{NLI Score: 0.001} \\
+\midrule
+\textbf{RLearner-LLM (Ours) Output:} \\
+During high-intensity exercise such as sprinting, the body's demand for energy is extremely high and cannot be met by aerobic pathways alone. \textbf{Option C is correct} because ATP is generated anaerobically through substrate-level phosphorylation using creatine phosphate. Let's analyze: Option A is incorrect because Glycolysis is anaerobic and does not consume oxygen... [Detailed logical derivation]. \\
+\textit{NLI Score: 0.943} \\
+\bottomrule
+\end{tabular}
+\caption{Qualitative case study on a Cardiff Biology biochemistry question: the SFT baseline (LLaMA-2-13B) provides correct facts but fails to commit to a deductive chain that justifies the correct option, yielding an NLI entailment score near zero. RLearner-LLM provides a structured proof, increasing NLI by roughly $900\times$.}
+\label{tab:case_study}
+\end{table}
+
+\section{Implementation Notes for Multimodal Base Models}
+\label{sec:impl_notes_appendix}
+
+This appendix gives the base-model-specific LoRA target details that were summarised in Section 3.
+
+\textbf{Qwen3-8B.} Qwen3 applies RMSNorm to $q$ and $k$ \emph{after} the projection reshape (QK-norm). LoRA adapters placed on \texttt{q\_proj} or \texttt{k\_proj} introduce shape-incompatible tensors into this normalisation path, triggering a CUBLAS error at the first attention layer. We therefore restrict the Qwen3 LoRA target set to \texttt{v\_proj}, \texttt{o\_proj}, \texttt{gate\_proj}, \texttt{up\_proj}, \texttt{down\_proj}.
+
+\textbf{Gemma 4 E4B-it.} Gemma 4 ships as a multimodal \texttt{Gemma4ForConditionalGeneration} checkpoint in which the text-tower weights live under the \texttt{model.language\_model.$*$} prefix. Loading with \texttt{AutoModelForCausalLM} silently random-initialises the text tower because the prefix does not match. In addition, the vision and audio towers wrap their attention projections inside a custom \texttt{Gemma4ClippableLinear} class that PEFT cannot adapt; using leaf-name LoRA targets such as \texttt{q\_proj} therefore inadvertently matches the vision and audio wrappers and aborts adapter injection. We resolve both issues by instantiating \texttt{Gemma4ForConditionalGeneration} explicitly (the vision and audio towers remain present but idle during text-only generation) and specifying LoRA target modules as a full-path regular expression that restricts adaptation to the text tower's plain \texttt{nn.Linear} projections:
+\begin{equation*}
+\texttt{.*language\_model.layers.\textbackslash d+.(self\_attn.(q|k|v|o)\_proj|mlp.(gate|up|down)\_proj)\$}
+\end{equation*}
+This pattern matches exactly $258$ Linear modules ($42$ layers $\times$ $\{q, o, \text{gate}, \text{up}, \text{down}\}$ + $24$ layers $\times$ $\{k, v\}$; Gemma 4 uses unified $k$/$v$ in local-sliding layers). Because Gemma 4 has no in-attention QK-norm, all four attention projections can be LoRA-adapted safely. A practical caveat: Gemma 4's vocabulary size of $262$K inflates its cross-entropy baseline to $\log 262{,}144 \approx 12.5$\,nats, so raw SFT losses of $9$--$10$ are normal and are better interpreted via \texttt{mean\_token\_accuracy} or generation sanity checks than by the loss magnitude alone.
+
+\textbf{Multi-stage adapter composition.} When evaluating the RL-aligned policy, the DPO LoRA adapter must be applied on top of the \emph{SFT-merged} base weights, since the DPO delta was trained relative to that reference point. Loading the DPO adapter directly on the raw base produces a model whose behaviour reverts toward the base instruction-tuning distribution; the correct inference pipeline is $\text{base} \to \text{apply SFT} \to \text{merge} \to \text{apply DPO} \to \text{merge}$.
+
+\section{SFT Failure Mode Analysis}
+\label{sec:failure_mode_appendix}
+
+For completeness we report the per-domain SFT failure-mode rates referenced in Section 6.5. Each metric is a deterministic function of the generated text: Answer Evasion = $\mathbb{I}[\mathrm{ACR}{=}0]$; Verbose-low-NLI = $\mathbb{I}[|E|_\text{chars}{>}400 \land \mathrm{NLI}{<}0.05]$; Hallucinated URLs = regex match for \texttt{https?://\textbackslash S+|www\textbackslash .\textbackslash S+}; Cyclic Repetition = any $6$-gram repeated.
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{l|c|c|c|c}
+\toprule
+Domain & Answer Evasion & Verbose (Low NLI) & Hallucinated URLs & Cyclic Repetition \\
+\midrule
+Cardiff Biology & $12.4\%$ & $83.4\%$ & $68.8\%$ & $46.2\%$ \\
+Sydney Biology  & $24.2\%$ & $85.4\%$ & $44.4\%$ & $64.3\%$ \\
+Auckland Law    & $37.0\%$ & $48.4\%$ & $45.1\%$ & $79.9\%$ \\
+Medicine (Y1)   & $16.9\%$ & $84.2\%$ & $66.3\%$ & $51.4\%$ \\
+Medicine (Y2)   & $17.5\%$ & $84.5\%$ & $61.6\%$ & $43.5\%$ \\
+\bottomrule
+\end{tabular}
+\caption{Per-domain SFT failure-mode rates (5{,}100 SFT-generated explanations, LLaMA-2-13B). Standard SFT produces fluent but logically vacuous outputs in $48$--$85\%$ of cases (Verbose-low-NLI), hallucinates citation-style URLs in $44$--$69\%$, and fails to anchor the correct answer at all in $12$--$37\%$ of cases (Answer Evasion). These rates motivate the Hybrid reward's combination of an NLI signal, an ACR gate, and a length penalty.}
+\label{tab:failure_modes}
+\end{table}
