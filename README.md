@@ -3,7 +3,7 @@
 This repository contains two progressive lines of work for automatically generating and evaluating educational explanations for PeerWise exam questions:
 
 1. **ILearner-LLM** (original paper) — Instruction-tuned LLM pipeline with iterative Generator–Verifier refinement.
-2. **RLearner-LLM** (this extension) — Replaces the K-round iterative prompt loop with reinforcement learning (DPO/PPO) using modern models (Llama-3, Qwen3) and LoRA for parameter-efficient fine-tuning.
+2. **RLearner-LLM** (this extension) — Replaces the K-round iterative prompt loop with reinforcement learning (DPO/PPO) using modern models (LLaMA-2-13B, LLaMA-3-8B, **Qwen3-8B**, **Gemma 4 E4B-it**) and LoRA for parameter-efficient fine-tuning. The latest **Hybrid-DPO** variant adds a multiplicative NLI×Verifier reward gated by Answer Coverage Rate, validated across **5 academic domains × 3 base architectures**.
 
 ---
 
@@ -72,7 +72,7 @@ Question ──► DPO Generator ──► High-quality explanation  (single for
 **Key improvements over original**:
 - **1-Shot inference** (vs K-round): ~K× lower latency at deployment
 - **LoRA Hot-swap**: One base model in GPU memory; switch Generator/Verifier adapters in milliseconds
-- **Modern base**: Llama-3-8B/70B, Qwen3-14B/32B — far stronger reasoning than LLaMA-2-13B
+- **Modern base**: LLaMA-3-8B, **Qwen3-8B**, **Gemma 4 E4B-it** (4.5B-effective dense, Per-Layer Embeddings) — far stronger reasoning than LLaMA-2-13B
 - **Synthetic hard negatives**: Prevent Reward Hacking via GPT-4o CoT flawed explanation generation
 
 ---
