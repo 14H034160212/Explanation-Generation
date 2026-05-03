@@ -1,0 +1,95 @@
+% NeurIPS Paper Checklist for RLearner-LLM
+% Macros below replicate the standard NeurIPS template macros so this file
+% remains compilable under \documentclass{article}; switch to the official
+% neurips_2026 class (which provides the same macros) before camera-ready.
+\providecommand{\answerYes}{\textcolor{blue!70!black}{\textbf{[Yes]}}}
+\providecommand{\answerNo}{\textcolor{red!70!black}{\textbf{[No]}}}
+\providecommand{\answerNA}{\textbf{[NA]}}
+\providecommand{\answerTODO}{\textbf{[TODO]}}
+\providecommand{\justificationTODO}{\textcolor{red!70!black}{[TODO]}}
+
+\section*{NeurIPS Paper Checklist}
+
+\begin{enumerate}
+
+\item {\bf Claims}
+    \item[] Question: Do the main claims made in the abstract and introduction accurately reflect the paper's contributions and scope?
+    \item[] Answer: \answerYes{}
+    \item[] Justification: The abstract and introduction state three contributions---(i) diagnosis of the verbosity-bias \emph{reward signal blindspot} in DPO for knowledge-intensive tasks, (ii) the Hybrid-DPO framework with multiplicative NLI$\times$verifier reward gated by ACR, and (iii) cross-architecture validation across LLaMA-2-13B, Qwen3-8B, and Gemma~4 E4B-it on five academic domains---and each is supported by the corresponding experimental section (Section~\ref{sec:methodology}, Tables~\ref{tab:cardiff_results}--\ref{tab:med_results_2}, Section~\ref{sec:arch-effects}). Per-domain numerical claims (e.g.\ +136\% NLI improvement bounds, 95\% GPT-4o-mini win rate) match the tables exactly.
+
+\item {\bf Limitations}
+    \item[] Question: Does the paper discuss the limitations of the work performed by the authors?
+    \item[] Answer: \answerYes{}
+    \item[] Justification: Section~\ref{sec:discussion-limits} (``Domain Sensitivity and Limitations'') discusses three concrete limitations: (i)~the Auckland Law domain remains harder for single-pass DPO than for iterative refinement, (ii)~the NLI scorer (DeBERTa-v3-small) is itself a small model and a stronger NLI signal may yield further gains, and (iii)~the SFT corpus is authored by undergraduate students on the PeerWise platform, not by experts, which places a soft upper bound on overlap-style metrics. The discussion also covers the Sydney non-improvement case and the ACR/NLI trade-off observed on Gemma~4 (Section~\ref{sec:arch-effects}, paragraph on ACR reduction).
+
+\item {\bf Theory assumptions and proofs}
+    \item[] Question: For each theoretical result, does the paper provide the full set of assumptions and a complete (and correct) proof?
+    \item[] Answer: \answerNA{}
+    \item[] Justification: The paper provides a first-principles \emph{derivation} (not a formal theorem-proof) of the multiplicative form of the Hybrid reward in Section~\ref{sec:first_principles}, explicitly listing the necessary (Answer Coverage) and sufficient (Logical Entailment) conditions and arguing why their algebraic encoding requires multiplication rather than addition. The DPO loss reformulation is taken as a stated result from \cite{rafailov2023direct}; no novel theorems are claimed.
+
+\item {\bf Experimental result reproducibility}
+    \item[] Question: Does the paper fully disclose all the information needed to reproduce the main experimental results of the paper to the extent that it affects the main claims and/or conclusions of the paper (regardless of whether the code and data are provided or not)?
+    \item[] Answer: \answerYes{}
+    \item[] Justification: Section~\ref{sec:methodology} states the full Hybrid reward equation (Eq.~\ref{eq:hybrid_reward}) and all weights ($w_\text{nli}{=}0.7$, $w_\text{ver}{=}0.3$, $\gamma{=}0.002$, $\theta{=}0.5$, $\Delta{=}0.05$); Section~\ref{sec:eval_tier} specifies the NLI scorer (\texttt{cross-encoder/nli-deberta-v3-small}, premise/hypothesis layout, max length 512); the SFT/DPO training subsections give LoRA rank, $\alpha$, target modules, learning rates, $\beta_{\text{DPO}}$, batch sizes, and gradient accumulation. Section~\ref{sec:impl_notes_appendix} gives the base-model-specific gotchas (Qwen3 QK-norm exclusion, Gemma~4 multimodal class + LoRA regex, multi-stage adapter composition).
+
+\item {\bf Open access to data and code}
+    \item[] Question: Does the paper provide open access to the data and code, with sufficient instructions to faithfully reproduce the main experimental results, as described in supplemental material?
+    \item[] Answer: \answerYes{}
+    \item[] Justification: All training, preference-data, and evaluation scripts are released as part of the supplementary archive (\texttt{scripts/python\_training/rl\_train\_sft\_*.py}, \texttt{rl\_build\_preference\_data\_nli.py}, \texttt{rl\_train\_dpo\_*.py}, \texttt{rl\_evaluate\_*.py}), with one script per base architecture (LLaMA-2, Qwen3, Gemma~4). The PeerWise question/explanation corpus is shared in JSON form under the \texttt{preference\_data/} directory; the per-domain test splits used in Tables~\ref{tab:cardiff_results}--\ref{tab:med_results_2} are the \texttt{*\_gpt4\_random\_100.json} files. All exact CLI invocations are reproduced in the script docstrings.
+
+\item {\bf Experimental setting/details}
+    \item[] Question: Does the paper specify all the training and test details (e.g., data splits, hyperparameters, how they were chosen, type of optimizer) necessary to understand the results?
+    \item[] Answer: \answerYes{}
+    \item[] Justification: Section~``Experimental Setup'' lists data splits (13{,}211 SFT examples merged across five domains; 100-question held-out test set per domain), the three-phase training pipeline, LoRA configuration ($r{=}16$, $\alpha{=}32$), SFT hyperparameters (3~epochs, batch size~2, gradient accumulation~8, lr~2e-4, bf16), preference-data construction (Eq.~\ref{eq:hybrid_reward}, 500~prompts $\times$ 3~candidates, $\Delta{=}0.05$ minimum gap), and DPO hyperparameters (5~epochs, batch size~1, gradient accumulation~8, lr~5e-5, $\beta_{\text{DPO}}{=}0.1$). Hyperparameters were selected by light tuning on Cardiff Biology and held fixed across all five domains.
+
+\item {\bf Experiment statistical significance}
+    \item[] Question: Does the paper report error bars suitably and correctly defined or other appropriate information about the statistical significance of the experiments?
+    \item[] Answer: \answerNo{}
+    \item[] Justification: Each (model, domain) cell in Tables~\ref{tab:cardiff_results}--\ref{tab:med_results_2} reports the mean of seven metrics over a 100-question held-out test set under deterministic decoding, but we do not report seeds or training-replication error bars due to compute cost: the Hybrid-DPO pipeline (SFT + preference-data + DPO + 5-domain eval) consumes approximately 8~GPU-hours per architecture on a single A100. We mitigate the absence of variance estimates by (a)~holding hyperparameters fixed across domains and (b)~reporting metric magnitudes that are large enough to remain robust to plausible per-question variance (e.g.\ +143\% NLI on UK Medicine Year~2). Variance reporting via 3-seed retraining is left to a future extended evaluation.
+
+\item {\bf Experiments compute resources}
+    \item[] Question: For each experiment, does the paper provide sufficient information on the computer resources (type of compute workers, memory, time of execution) needed to reproduce the experiments?
+    \item[] Answer: \answerYes{}
+    \item[] Justification: Experiments use NVIDIA A100 80GB GPUs. Per-architecture wall times for the Gemma~4 E4B-it pipeline (the most recently profiled): merged SFT $\approx{}$4h~16m on a single A100; preference-data construction (500~Q $\times$ 3 samples) $\approx{}$2h~35m; Hybrid-DPO training $\approx{}$13~min; 5-domain evaluation $\approx{}$54~min when split across two A100s in parallel. Total $\approx{}$8~GPU-hours per architecture. LLaMA-2-13B and Qwen3-8B pipelines fall in the same order of magnitude. The full research project---including failed early Gemma~4 runs that surfaced the multimodal-loading and PEFT regex issues documented in Section~\ref{sec:impl_notes_appendix}---consumed roughly 3$\times$ the reported compute.
+
+\item {\bf Code of ethics}
+    \item[] Question: Does the research conducted in the paper conform, in every respect, with the NeurIPS Code of Ethics?
+    \item[] Answer: \answerYes{}
+    \item[] Justification: The research uses publicly available pretrained models (LLaMA-2, Qwen3, Gemma~4, DeBERTa-v3) under their respective licenses, and the PeerWise undergraduate-authored explanations were collected for educational research with platform consent. No new human-subject experiments were conducted; no demographic or sensitive personal data are processed; LLM judges (GPT-4o-mini) are used for evaluation only.
+
+\item {\bf Broader impacts}
+    \item[] Question: Does the paper discuss both potential positive societal impacts and negative societal impacts of the work performed?
+    \item[] Answer: \answerYes{}
+    \item[] Justification: Positive: Hybrid-DPO improves the logical grounding of educational explanations from compact, locally hosted LLMs, which lowers the barrier to deploying explanation-generation tools in resource-constrained academic settings (e.g.\ without sending student data to commercial APIs). Negative: any system that produces medical, legal, or biological explanations with confident, fluent language can be misused as authoritative reference outside the test-prep context for which it was trained. We mitigate this by recommending explicit framing as a study aid and by reporting NLI rather than only fluency, so that downstream users can audit logical entailment per question; we also note that the verifier-blindness finding (Section~4.2) implies that LLM-as-judge alone is unsafe for high-stakes deployment. We explicitly do not claim deployment readiness for clinical or legal advice.
+
+\item {\bf Safeguards}
+    \item[] Question: Does the paper describe safeguards that have been put in place for responsible release of data or models that have a high risk for misuse?
+    \item[] Answer: \answerNA{}
+    \item[] Justification: The released artefacts are LoRA adapters that constrain pretrained instruction-tuned base models to produce more concise, entailment-grounded explanations of multiple-choice answers. They do not introduce new generative capabilities beyond their base models and do not pose an elevated misuse risk relative to those bases. The PeerWise undergraduate data we use is text-only with no PII.
+
+\item {\bf Licenses for existing assets}
+    \item[] Question: Are the creators or original owners of assets (e.g., code, data, models), used in the paper, properly credited and are the license and terms of use explicitly mentioned and properly respected?
+    \item[] Answer: \answerYes{}
+    \item[] Justification: Models are used under their respective licenses: LLaMA-2-13B (Meta LLaMA-2 Community License), Qwen3-8B (Apache~2.0/Qwen license), Gemma~4 E4B-it (Gemma Terms of Use), DeBERTa-v3 (MIT), and Alpaca-7B-derived verifier (Stanford Alpaca CC~BY~NC~4.0; verifier is used only for in-loop scoring and not redistributed). All are cited at first mention. The PeerWise data is used under academic-research permission from the platform owners. Versions and the HuggingFace identifier of every model are documented in the methodology and Implementation Notes (Section~\ref{sec:impl_notes_appendix}).
+
+\item {\bf New assets}
+    \item[] Question: Are new assets introduced in the paper well documented and is the documentation provided alongside the assets?
+    \item[] Answer: \answerYes{}
+    \item[] Justification: We release (i)~the SFT and DPO LoRA adapters for each of the three base architectures, (ii)~the constructed preference-pair JSON files used for DPO training, (iii)~the per-domain evaluation JSONs containing per-question metrics and generated explanations, and (iv)~the pipeline scripts. Each script's docstring documents inputs, outputs, environment requirements (\texttt{transformers}, TRL, PEFT versions), and the exact CLI invocation that produced the reported numbers. The supplementary archive includes a top-level README mapping every reported number to its generating command.
+
+\item {\bf Crowdsourcing and research with human subjects}
+    \item[] Question: For crowdsourcing experiments and research with human subjects, does the paper include the full text of instructions given to participants and screenshots, if applicable, as well as details about compensation (if any)?
+    \item[] Answer: \answerNA{}
+    \item[] Justification: The paper does not perform new crowdsourcing or human-subjects studies. The PeerWise dataset used for SFT and as the source of test-time student references was generated by undergraduate students for their own coursework on the PeerWise peer-learning platform prior to and independently of this study; no participant recruitment or compensation was involved on our part.
+
+\item {\bf Institutional review board (IRB) approvals or equivalent for research with human subjects}
+    \item[] Question: Does the paper describe potential risks incurred by study participants, whether such risks were disclosed to the subjects, and whether Institutional Review Board (IRB) approvals (or an equivalent approval/review based on the requirements of your country or institution) were obtained?
+    \item[] Answer: \answerNA{}
+    \item[] Justification: No new human-subjects research was conducted. The PeerWise corpus access for academic research is governed by the platform's existing data-sharing terms; no new IRB approval was required for the secondary use of these textual artefacts in this study.
+
+\item {\bf Declaration of LLM usage}
+    \item[] Question: Does the paper describe the usage of LLMs if it is an important, original, or non-standard component of the core methods in this research?
+    \item[] Answer: \answerYes{}
+    \item[] Justification: LLMs are central to both the studied system and its evaluation: (i)~LLaMA-2-13B, Qwen3-8B, and Gemma~4 E4B-it are the base policies that we SFT and align via Hybrid-DPO; (ii)~an Alpaca-7B-derived verifier is used as one component of the Hybrid reward at preference-pair construction time; (iii)~GPT-4o-mini is used as a pairwise evaluator for the verbosity-bias study (Table~\ref{tab:pairwise_1}). Each role is documented with model identifier, version, prompting, and decoding settings in Sections~\ref{sec:methodology}, \ref{sec:eval_tier}, and \ref{sec:impl_notes_appendix}. LLMs were also used to assist with manuscript editing; the scientific content, experimental design, and analyses are the authors' own.
+
+\end{enumerate}

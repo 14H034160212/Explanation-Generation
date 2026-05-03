@@ -60,6 +60,10 @@ from transformers import (
     AutoModelForSequenceClassification,
     AutoTokenizer,
 )
+try:
+    from transformers import Gemma4ForConditionalGeneration
+except ImportError:
+    Gemma4ForConditionalGeneration = None  # only required when --model_type gemma4
 
 # Verifier constants (reused from rl_build_preference_data_qwen3.py)
 VERIFIER_TEMPLATE = (
@@ -334,12 +338,84 @@ def make_qwen3_dpo_prompt(tokenizer, instruction: str, input_text: str) -> str:
 
 
 # ---------------------------------------------------------------------------
+# Generator: Gemma 4 E4B-it (multimodal checkpoint; text tower only for SFT)
+# ---------------------------------------------------------------------------
+
+def load_gemma4_generator(generator_path: str, lora_path: str, device: str):
+    """Load Gemma 4 E4B-it + SFT LoRA adapter, merge, move to device.
+
+    The checkpoint ships as Gemma4ForConditionalGeneration (multimodal).
+    Loading via AutoModelForCausalLM silently random-inits the text tower
+    because text weights live under `model.language_model.*`. We must use
+    Gemma4ForConditionalGeneration directly; the vision/audio towers sit
+    idle during text-only candidate generation.
+    """
+    if Gemma4ForConditionalGeneration is None:
+        raise RuntimeError(
+            "transformers>=5.5 is required for --model_type gemma4; "
+            "upgrade with `pip install -U transformers`."
+        )
+    logger.info(f"Loading Gemma 4 E4B-it generator from {generator_path} ...")
+    tokenizer = AutoTokenizer.from_pretrained(
+        generator_path, trust_remote_code=True, padding_side="left"
+    )
+    if tokenizer.pad_token is None:
+        tokenizer.pad_token = tokenizer.eos_token
+
+    model = Gemma4ForConditionalGeneration.from_pretrained(
+        generator_path, torch_dtype=torch.bfloat16, trust_remote_code=True
+    )
+    if lora_path and os.path.exists(lora_path):
+        logger.info(f"Loading SFT LoRA from {lora_path} ...")
+        model = PeftModel.from_pretrained(model, lora_path)
+        model = model.merge_and_unload()
+        logger.info("LoRA merged.")
+    model = model.to(device).eval()
+    return model, tokenizer
+
+
+def generate_gemma4(
+    model, tokenizer, instruction: str, input_text: str,
+    num_samples: int, device: str, max_new_tokens: int = 300,
+) -> List[str]:
+    """Generate N explanations with Gemma 4 chat template (enable_thinking=False)."""
+    messages = [{"role": "user", "content": f"{instruction}\n\n{input_text}"}]
+    prompt = tokenizer.apply_chat_template(
+        messages, tokenize=False, add_generation_prompt=True, enable_thinking=False,
+    )
+    inputs = tokenizer(prompt, return_tensors="pt").to(device)
+
+    explanations = []
+    with torch.no_grad():
+        for _ in range(num_samples):
+            out = model.generate(
+                **inputs,
+                max_new_tokens=max_new_tokens,
+                do_sample=True,
+                temperature=0.7,
+                top_p=0.9,
+                pad_token_id=tokenizer.eos_token_id,
+            )
+            generated = out[0][inputs["input_ids"].shape[1]:]
+            text = tokenizer.decode(generated, skip_special_tokens=True).strip()
+            explanations.append(text)
+    return explanations
+
+
+def make_gemma4_dpo_prompt(tokenizer, instruction: str, input_text: str) -> str:
+    messages = [{"role": "user", "content": f"{instruction}\n\n{input_text}"}]
+    return tokenizer.apply_chat_template(
+        messages, tokenize=False, add_generation_prompt=True, enable_thinking=False,
+    )
+
+
+# ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
 
 def main():
     parser = argparse.ArgumentParser(description="Build NLI-guided DPO preference pairs.")
-    parser.add_argument("--model_type", choices=["llama2", "llama3", "qwen3"], default="qwen3",
+    parser.add_argument("--model_type", choices=["llama2", "llama3", "qwen3", "gemma4"], default="qwen3",
                         help="Generator model type")
     parser.add_argument("--generator_path", default="/data/shared/qwen3/Qwen3-8B")
     parser.add_argument("--lora_adapter_path", default="./rl_sft_qwen3_8b_generator")
@@ -412,6 +488,12 @@ def main():
         )
         generate_fn = generate_llama2
         make_prompt_fn = make_llama2_dpo_prompt
+    elif args.model_type == "gemma4":
+        gen_model, gen_tokenizer = load_gemma4_generator(
+            args.generator_path, args.lora_adapter_path, args.generator_device
+        )
+        generate_fn = generate_gemma4
+        make_prompt_fn = make_gemma4_dpo_prompt
     else:
         gen_model, gen_tokenizer = load_qwen3_generator(
             args.generator_path, args.lora_adapter_path, args.generator_device

@@ -28,9 +28,35 @@ temp_pdf.txt
 # Runtime / secrets — never commit these
 .env_openai
 .watcher_state
+.watcher_state.tmp
 *.pid
 watcher_pids.txt
 # Large model weights
 rl_ppo_qwen3_hybrid_v1_2000steps/
 rl_ppo_qwen3_hybrid_v2_2000steps/
 rl_kto_qwen3_8b_baseline/
+
+# 929GB pretrained model snapshots — must never be pushed
+models/
+
+# Personal / private materials (not for public repo)
+DAAD_application/
+
+# Raw data corpora (large; PeerWise platform data, not redistributable)
+preference_data/
+
+# Archived failed/broken DPO adapter snapshots (kept locally, regeneratable)
+rl_dpo_gemma4_*_v[0-9]*/
+rl_sft_gemma4_*_failed*/
+
+# Snapshot zips of paper drafts and code (regeneratable bloat)
+*.zip
+
+# Misc local logs / screenshots / one-off outputs
+*.out
+nohup.out
+gpu_watcher_llama3.out
+logs_screenshot.txt
+nvidia_smi_screenshot.txt
+final_questions*.txt
+examples_output.txt

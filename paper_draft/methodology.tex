@@ -133,12 +133,7 @@ The KL term in Eq.~\ref{eq:rlhf} is the structural source of the \textbf{alignme
 This tension is not an implementation artefact; it is a structural consequence of Eq.~\ref{eq:rlhf} that persists regardless of the DPO variant used.
 
 \paragraph{Why Additive Reward Combination Fails.}
-A natural response is to blend NLI and fluency signals additively:
-\begin{equation}
-R_\text{add}(E) = \alpha\,S_\text{NLI}(E) + (1-\alpha)\,S_\text{ver}(E)
-\label{eq:additive}
-\end{equation}
-This formulation embeds a logical \textbf{OR} assumption: high reward is achievable via high NLI \emph{or} high verifier score, regardless of the other component. In practice, the Alpaca-7B verifier---trained on fluency-annotated corpora---consistently assigns high scores to fluent-but-logically-weak explanations. Additive blending therefore allows preference pairs whose chosen member satisfies only the fluency condition. The DPO gradient then pushes the policy toward the fluent attractor, \emph{amplifying} the alignment tax rather than resolving it. Our ablation confirms this empirically: Additive Hybrid DPO achieves NLI~$=0.1411$ on Cardiff, \textbf{lower} than the SFT baseline ($0.1959$), as does NLI-only DPO ($0.1419$).
+A natural response is the additive blend $R_\text{add}(E) = \alpha\,S_\text{NLI}(E) + (1-\alpha)\,S_\text{ver}(E)$, which embeds a logical \textbf{OR} assumption: high reward is achievable via high NLI \emph{or} high verifier score. Because the Alpaca-7B verifier consistently rewards fluent-but-logically-weak explanations, the additive form admits chosen pairs satisfying only the fluency component, pushing DPO toward the fluent attractor and \emph{amplifying} the alignment tax. Our ablation confirms this: additive Hybrid DPO reaches NLI $=0.1411$ on Cardiff, \textbf{below} the SFT baseline ($0.1959$); NLI-only DPO is similarly below ($0.1419$).
 
 \paragraph{The Conjunctive Requirement: AND, Not OR.}
 From first principles, a logically sound explanation $E$ of a multiple-choice answer must \emph{simultaneously} satisfy two conditions:
@@ -154,12 +149,9 @@ R(E) = \bigl(w_\text{nli}\cdot S_\text{NLI}(E)\;\cdot\; w_\text{ver}\cdot S_\tex
 \end{equation}
 where $\mathbf{1}[\cdot]$ is a hard indicator enforcing the necessary condition, the multiplicative product $S_\text{NLI}\cdot S_\text{ver}$ encodes the conjunctive sufficient condition, and $\gamma\cdot\ell_\text{norm}$ removes a known length-based confounder (described below).
 
-\paragraph{The Hard ACR Gate as a Necessary-Condition Filter.}
-The indicator $\mathbf{1}[\mathrm{ACR}(E)\geq\theta]$ sets the reward to zero for any explanation that fails to cover the answer keywords. Without this gate, an answer-evasive explanation ($\mathrm{ACR}\approx 0$) could still receive positive reward from $S_\text{NLI}$ or $S_\text{ver}$ and be selected as the \emph{chosen} member of a preference pair, directing the DPO gradient toward answer evasion. The hard gate eliminates this class of spurious pairs by construction. This failure mode is not hypothetical: our SFT error analysis (Table~\ref{tab:failure_modes}) identifies answer evasion in 12--18\% of SFT outputs across domains.
-
-\paragraph{Length Normalisation as Confounder Removal.}
+\paragraph{ACR Gate and Length Penalty.}
 \label{sec:length_norm}
-Both $S_\text{NLI}$ and $S_\text{ver}$ correlate positively with output length in LLMs: longer outputs have more opportunities to contain answer keywords and to trigger quality heuristics. Without correction, this confounder directs the DPO gradient toward verbosity, reinstating a length-driven form of the alignment tax. The penalty $-\gamma\cdot\ell_\text{norm}$ removes this correlation from the reward surface, ensuring that preference pairs encode genuine logical-quality differences rather than length differences.
+The indicator $\mathbf{1}[\mathrm{ACR}(E){\geq}\theta]$ zeroes out any explanation that fails to cover the answer keywords, removing answer-evasive pairs by construction (a non-hypothetical failure mode---Appendix~\ref{sec:failure_mode_appendix} shows answer evasion in $12$--$37\%$ of SFT outputs across domains). The penalty $-\gamma\,\ell_\text{norm}(E)$ corrects a known length confounder: both $S_\text{NLI}$ and $S_\text{ver}$ correlate positively with output length, so without correction the DPO gradient drifts toward verbosity, reinstating a length-driven form of the alignment tax.
 
 \subsection{Preference Pair Construction}
 \label{sec:pref_construction}
@@ -175,3 +167,6 @@ The Hybrid-DPO objective follows the standard DPO formulation~\cite{rafailov2023
 \label{eq:dpo_loss}
 \end{equation}
 Because every chosen example $y^+$ in $\mathcal{D}_\text{pref}$ is guaranteed to pass the ACR gate and to outscore its rejected counterpart on the conjunctive NLI$\times$Verifier product, the gradient of $\mathcal{L}_\text{DPO}$ consistently points toward higher logical entailment. This is the mechanism by which the Hybrid reward breaks the fluency attractor that causes alignment tax in additive variants.
+
+\paragraph{Implementation notes.}
+Two base models in this study require non-default LoRA target selection. Qwen3-8B applies RMSNorm to $q,k$ after the projection reshape, so LoRA adapters on \texttt{q\_proj}/\texttt{k\_proj} would corrupt that path; we restrict its targets to \texttt{v\_proj}, \texttt{o\_proj}, and the three MLP projections. Gemma 4 E4B-it ships as a multimodal \texttt{Gemma4ForConditionalGeneration} checkpoint whose text-tower weights live under \texttt{model.language\_model.*}; we therefore load that class explicitly and use a full-path LoRA target regex that matches exactly the $258$ plain \texttt{nn.Linear} attention/MLP projections in the text tower (full pattern in Appendix~\ref{sec:impl_notes_appendix}). At inference, the DPO adapter must be composed on top of the SFT-merged base ($\text{base}\to\text{apply SFT}\to\text{merge}\to\text{apply DPO}\to\text{merge}$), since the DPO delta was trained relative to that reference point.
