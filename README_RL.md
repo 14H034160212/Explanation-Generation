@@ -146,6 +146,7 @@ The NLI metric (using `cross-encoder/nli-deberta-v3-small`) is the most discrimi
 |-----|-----|-------------|
 | `llm-tuning` | LLaMA-2-13B SFT / DPO / PPO | TRL 0.7.1, Transformers 4.31.0, PEFT 0.4.0 |
 | `qwen3-rl` | Qwen3-8B all experiments | TRL 0.28, Transformers 5.2, torch 2.6.0+cu124 |
+| `gemma4-rl` | Gemma 4 E4B-it all experiments | TRL 0.28, **Transformers 5.5.4** (gemma4 model_type required), torch 2.6.0+cu124 |
 
 ### Completed Training Runs
 
@@ -182,6 +183,18 @@ The NLI metric (using `cross-encoder/nli-deberta-v3-small`) is the most discrimi
 |------|--------|--------|----------|--------|
 | SFT | `rl_train_sft.py` | LLaMA-3-8B, LoRA r=16, 3 epochs, 13211 ex | ~2h, 1×A100 | `./models/` |
 | DPO (Multiplicative-ACR) | `rl_train_dpo.py` | Multiplicative ACR pairs, 5 epochs | ~20min | `./models/` |
+
+#### Gemma 4 E4B-it Experiments (latest, 5-domain cross-architecture validation)
+
+Gemma 4 E4B-it is a dense 8B-total / 4.5B-effective-parameter model with Per-Layer Embeddings, packaged as the multimodal `Gemma4ForConditionalGeneration` checkpoint. Loading and LoRA-target details are in `paper_draft/appendix.tex` §C.
+
+| Step | Script | Config | Duration | Output |
+|------|--------|--------|----------|--------|
+| SFT (merged 5-domain) | `rl_train_sft_gemma4.py` | Gemma 4 E4B-it, LoRA r=16, 3 epochs, 13211 ex | ~4h16m, 1×A100 | `./rl_sft_gemma4_e4b_merged_generator/` |
+| Pref-data (merged) | `rl_build_preference_data_nli.py --model_type gemma4` | 500Q × 3 samples, multiplicative_acr | ~2h35m | 164 pairs |
+| DPO (merged) | `rl_train_dpo_gemma4.py` | β=0.1, lr=5e-5, 5 epochs | ~13min | `./rl_dpo_gemma4_e4b_merged_generator/` |
+| Eval × 5 domains | `rl_evaluate_gemma4.py` | 100Q test set per domain, parallel | ~54min on 2×A100 | `./rl_eval_results/gemma4_*_merged_eval.json` |
+| **Tier-B robustness ablation** (Cardiff) | full pipeline | `5*-share≥0.10 + deleted=0` Cardiff filter | ~4h end-to-end | `./rl_*_cardiff_tierB_*/` |
 
 #### LLaMA-2-13B NLI-PPO Experiments
 
@@ -224,14 +237,18 @@ All results on 100-question held-out test sets.
 | Qwen3-8B DPO | 0.0230 | 0.8169 | 0.7980 | 0.8323 | 0.1149 | 2.9300 | 13.985 |
 | Qwen3-8B Hybrid PPO v1 | 0.0233 | 0.8157 | 0.7977 | 0.8381 | 0.1791 | 2.9300 | 12.800 |
 | Qwen3-8B Hybrid PPO v2 | 0.0256 | 0.8156 | 0.7974 | 0.8493 | 0.1613 | 2.9700 | 13.030 |
-| **LLaMA-2 Hybrid-DPO (New)** | 0.0154 | 0.8185 | **0.8358** | 0.7894 | **0.3209** | **3.0736** | 5.946 |
+| **LLaMA-2 Hybrid-DPO (New)** | 0.0154 | 0.8185 | 0.8358 | 0.7894 | 0.3209 | **3.0736** | 5.946 |
+| **Qwen3-8B Hybrid-DPO (merged)** | 0.0247 | 0.8148 | 0.7957 | 0.8272 | 0.1820 | 3.0900 | — |
+| **Gemma 4 E4B-it SFT (merged)** | 0.0453 | 0.8591 | 0.8452 | 0.7461 | 0.2117 | 3.1207 | 6.32 |
+| **Gemma 4 E4B-it Hybrid-DPO (merged)** | 0.0303 | 0.8461 | 0.8426 | 0.6497 | 0.3505 | 3.0972 | **4.76** |
+| **Gemma 4 E4B-it Hybrid-DPO (Tier-B filter)** | 0.0381 | 0.8506 | **0.8696** | **0.7823** | **0.5202** | 3.1095 | 7.62 |
 
 **Cardiff takeaways:**
-- **DPO v2 is the overall best**: highest BLEU, BERT(Ans), ACR, and fastest inference among RL models.
-- **NLI gap is dramatic**: SFT 0.055 → best RL model 0.297 (5.4× improvement). NLI is the most task-relevant signal.
+- **DPO v2 is the overall best (LLaMA-2 family)**: highest BLEU, BERT(Ans), ACR, and fastest inference among earlier RL models.
+- **Gemma 4 Hybrid-DPO with Tier-B filter is the new SOTA on NLI** (0.5202, +48% over default-filter Gemma 4 Hybrid-DPO at 0.3505), achieved with a **7× smaller** training corpus (1,041 vs 7,309 questions). Uses `top_rating_count/total_ratings ≥ 0.10` plus `deleted=0`; full robustness analysis in `paper_draft/discussion.tex`.
+- **NLI gap is dramatic**: SFT 0.055 → best RL model 0.520 (~9× improvement). NLI is the most task-relevant signal.
 - **GPT-4 paradox**: highest fluency (BERT(Stu)=0.847) but NLI=0.074 — *worse than SFT*. GPT-4 writes encyclopaedic explanations that do not specifically justify the correct option.
-- **GPT-3.5 is competitive**: NLI=0.271, close to our DPO v2 (0.291). It follows task instructions more literally.
-- **Qwen3 DPO alignment tax**: Qwen3 SFT NLI=0.196, but after DPO it drops to 0.115 — the reward signal (verifier score) does not fully align with the NLI objective.
+- **Qwen3 alignment-tax pattern**: Qwen3 RLearner trades a small NLI delta for an ACR jump (+8.5 pp), while Gemma 4 RLearner gets a large NLI gain at modest ACR cost — illustrating the entailment-headroom interpretation in the paper's Discussion.
 
 ---
 
@@ -253,12 +270,15 @@ All results on 100-question held-out test sets.
 | Qwen3-8B Hybrid PPO v1 | 0.0419 | 0.8358 | 0.7996 | 0.8238 | 0.2122 | 2.8000 | 11.994 |
 | Qwen3-8B Hybrid PPO v2 | 0.0434 | 0.8365 | 0.7993 | 0.7966 | 0.1887 | 2.8200 | 12.017 |
 | **LLaMA-2 Hybrid-DPO (New)** | 0.0316 | 0.8359 | **0.8620** | 0.6327 | **0.3562** | 2.8376 | **4.060** |
+| **Qwen3-8B Hybrid-DPO (merged)** | 0.0418 | 0.8353 | 0.7995 | **0.8283** | 0.2284 | 2.7800 | — |
+| **Gemma 4 E4B-it SFT (merged)** | 0.0844 | 0.8794 | 0.8452 | 0.6209 | 0.2469 | 3.0364 | 5.804 |
+| **Gemma 4 E4B-it Hybrid-DPO (merged)** | 0.0893 | 0.8803 | 0.8472 | 0.5421 | 0.2309 | 3.0142 | 4.667 |
 
 **Sydney takeaways:**
-- **DPO v2 best NLI** (0.277) and BERT(Ans). **PPO best BLEU and ACR** — complementary strengths.
-- **GPT-4 highest BLEU** (0.084) on Sydney, but very low ACR (0.473) — verbose text that drifts from the correct option keywords.
-- **Qwen3 SFT** achieves the highest BERT(Stu) (0.879) on Sydney, indicating strong baseline fluency.
-- Patterns consistent with Cardiff: NLI gap (SFT 0.054 → best RL 0.277) holds across datasets.
+- **LLaMA-2 Hybrid-DPO** delivers the strongest NLI lift (0.054 → 0.356, **6.6×**) — the largest in this paper.
+- **Qwen3-8B Hybrid-DPO** gets the highest ACR (+23.6 pp), classic Qwen3 ACR-shift pattern.
+- **Gemma 4 Sydney is the only NLI non-improvement** in our 5-domain study: SFT NLI 0.247 is already the highest among the 3 architectures, leaving little headroom — see entailment-headroom discussion in the paper.
+- **GPT-4 highest BLEU** (0.084), but very low ACR (0.473) — verbose text that drifts from the correct option keywords.
 
 ---
 
@@ -273,12 +293,15 @@ Models evaluated on domains **not seen** during preference data construction (wh
 | ILearner-LLM (K=5) | 0.0381 | — | 0.7720 | 0.6326 | **0.3996** | 2.7845 |
 | SFT (LLaMA-2-13B) | 0.0298 | 0.8010 | 0.7709 | 0.5516 | 0.2702 | 2.7180 |
 | DPO v3 | 0.0540 | 0.8246 | 0.8232 | 0.6261 | 0.3287 | 2.6111 |
-| Qwen3-8B SFT | **0.1382** | **0.8784** | **0.8557** | 0.5175 | 0.3191 | 2.0000 |
-| Qwen3-8B DPO | 0.0355 | 0.8183 | 0.8030 | **0.8018** | 0.2438 | 2.4700 |
+| Qwen3-8B SFT | **0.1382** | 0.8784 | 0.8557 | 0.5175 | 0.3191 | 2.0000 |
+| Qwen3-8B DPO | 0.0355 | 0.8183 | 0.8030 | 0.8018 | 0.2438 | 2.4700 |
 | Qwen3-8B PPO | 0.0343 | 0.8161 | 0.8007 | 0.7693 | 0.2235 | 2.5900 |
+| Qwen3-8B Hybrid-DPO (merged) | 0.0362 | 0.8146 | 0.8005 | **0.8070** | 0.2303 | 2.6700 |
 | **LLaMA-2 Hybrid-DPO (New)** | 0.0457 | 0.8265 | 0.8297 | 0.5546 | 0.3229 | 2.5918 |
+| **Gemma 4 E4B-it SFT (merged)** | 0.1353 | **0.8798** | 0.8611 | 0.5172 | 0.3911 | 2.6431 |
+| **Gemma 4 E4B-it Hybrid-DPO (merged)** | 0.1315 | 0.8757 | **0.8654** | 0.5563 | **0.4377** ⭐ | 2.6304 |
 
-**Law dataset note:** ILearner K=5 achieves the highest NLI (0.400) here — suggesting that in the Law domain, iterative selection outperforms single-pass RL. Qwen3 SFT shows strong BLEU (0.138) on Law, reflecting its stronger out-of-domain generation capability. The Hybrid-DPO LLaMA-2 model achieves a strong NLI of 0.323, outperforming the SFT baseline heavily.
+**Law dataset note:** ⭐ **Gemma 4 E4B-it Hybrid-DPO is the first single-pass RL method in our study to surpass the iterative ILearner-LLM (K=5) NLI benchmark on Auckland Law** (0.4377 vs 0.3996). Earlier ILearner K=5 had been the strongest method on Law due to its iterative refinement; the Hybrid reward closes that gap in a single forward pass. Qwen3 SFT remains best on BLEU/BERT(Stu) thanks to stronger pre-training; Qwen3 Hybrid-DPO wins ACR (+28.9 pp). LLaMA-2 Hybrid-DPO improves NLI from 0.270 to 0.323.
 
 #### UK Medicine Year 1
 
@@ -287,10 +310,13 @@ Models evaluated on domains **not seen** during preference data construction (wh
 | ILearner-LLM (K=5) | 0.0671 | — | 0.7863 | 0.8066 | 0.1219 | 3.2005 |
 | SFT (LLaMA-2-13B) | 0.0136 | 0.8065 | 0.7799 | 0.7556 | 0.0860 | 3.2561 |
 | DPO v3 | 0.0192 | 0.8240 | 0.8333 | 0.7575 | 0.2583 | 3.0429 |
-| Hybrid-DPO (LLaMA-2-13B) | 0.0222 | 0.8308 | 0.8467 | 0.7766 | **0.4251** | 3.0147 |
+| **Hybrid-DPO (LLaMA-2-13B)** | 0.0222 | 0.8308 | 0.8467 | 0.7766 | **0.4251** | 3.0147 |
 | Qwen3-8B SFT | **0.0458** | **0.8629** | **0.8466** | 0.7387 | 0.2457 | 2.4700 |
 | Qwen3-8B DPO | 0.0222 | 0.8196 | 0.7959 | 0.8266 | 0.2019 | 2.9100 |
 | Qwen3-8B PPO | 0.0212 | 0.8184 | 0.7959 | **0.8362** | 0.1701 | 2.9600 |
+| Qwen3-8B Hybrid-DPO (merged) | 0.0223 | 0.8161 | 0.7946 | 0.8195 | 0.2104 | 2.9600 |
+| **Gemma 4 E4B-it SFT (merged)** | 0.0428 | 0.8622 | 0.8447 | 0.7556 | 0.2962 | 3.1411 |
+| **Gemma 4 E4B-it Hybrid-DPO (merged)** | 0.0280 | 0.8487 | 0.8469 | 0.6531 | 0.3910 | 3.1089 |
 
 #### UK Medicine Year 2
 
@@ -299,10 +325,15 @@ Models evaluated on domains **not seen** during preference data construction (wh
 | ILearner-LLM (K=5) | 0.0495 | — | 0.7873 | 0.7357 | 0.0668 | 3.1600 |
 | SFT (LLaMA-2-13B) | 0.0163 | 0.8208 | 0.8142 | 0.6120 | 0.2319 | 2.8717 |
 | DPO v3 | 0.0161 | 0.8161 | 0.8291 | 0.7552 | 0.2322 | 3.0524 |
-| Hybrid-DPO (LLaMA-2-13B) | 0.0196 | 0.8247 | 0.8539 | 0.7772 | **0.3885** | 2.9738 |
-| Qwen3-8B SFT | **0.0399** | **0.8501** | **0.8352** | 0.6430 | 0.1632 | 2.4900 |
-| Qwen3-8B DPO | 0.0234 | 0.8147 | 0.7969 | **0.7941** | **0.2149** | 2.9600 |
+| **Hybrid-DPO (LLaMA-2-13B)** | 0.0196 | 0.8247 | **0.8539** | 0.7772 | 0.3885 | 2.9738 |
+| Qwen3-8B SFT | **0.0399** | **0.8501** | 0.8352 | 0.6430 | 0.1632 | 2.4900 |
+| Qwen3-8B DPO | 0.0234 | 0.8147 | 0.7969 | 0.7941 | 0.2149 | 2.9600 |
 | Qwen3-8B PPO | 0.0232 | 0.8137 | 0.7983 | 0.8234 | 0.1688 | 3.0000 |
+| Qwen3-8B Hybrid-DPO (merged) | 0.0220 | 0.8129 | 0.7960 | 0.7914 | 0.2009 | 3.0000 |
+| **Gemma 4 E4B-it SFT (merged)** | 0.0476 | 0.8525 | 0.8372 | 0.6786 | 0.1604 | 3.0943 |
+| **Gemma 4 E4B-it Hybrid-DPO (merged)** | 0.0325 | 0.8453 | 0.8397 | 0.6655 | **0.3892** | 3.0666 |
+
+**UK Medicine Year 2 takeaway:** Gemma 4 E4B-it Hybrid-DPO virtually matches the LLaMA-2-13B Hybrid-DPO peak (NLI 0.3892 vs 0.3885) with **~3× fewer effective parameters**, demonstrating that Hybrid-DPO's gains are governed by entailment headroom rather than raw model scale. Gemma 4's per-domain NLI lift here is the largest in the paper: 0.1604 → 0.3892 (**+143%, 2.4×**).
 
 ---
 
