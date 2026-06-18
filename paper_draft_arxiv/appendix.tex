@@ -1,0 +1,282 @@
+\appendix
+
+\section{Per-Domain Detail Tables}
+\label{sec:per_domain_appendix}
+
+For completeness we provide the full per-architecture breakdown on each of the four non-Cardiff domains. The Cardiff Biology table (Table~\ref{tab:cardiff_results}) appears in the main paper because it is the most extensively dissected domain and is the target of the robustness ablation in Section~\ref{sec:discussion-limits}; the headline NLI summary across all five domains is given in Table~\ref{tab:nli_summary}.
+
+\begin{table}[h]
+\centering
+\resizebox{\textwidth}{!}{
+\begin{tabular}{l|c|c|c|c|c|c|c}
+\toprule
+Model & BLEU $\uparrow$ & BERT(Stu) $\uparrow$ & BERT(Ans) $\uparrow$ & ACR $\uparrow$ & NLI $\uparrow$ & Ver $\uparrow$ & Time $\downarrow$ \\
+\midrule
+\textbf{ILearner-LLM (K=5)} & 0.0274 & --- & 0.7889 & 0.6451 & 0.0837 & 3.1843 & --- \\
+SFT (LLaMA-2-13B) & 0.0222 & 0.8244 & 0.7870 & 0.6249 & 0.0537 & 3.1937 & 19.001 \\
+DPO v2 (ours) & 0.0364 & 0.8367 & 0.8426 & 0.6290 & 0.2774 & 2.9474 & 6.370 \\
+\textbf{RLearner-LLM (LLaMA-2)} & 0.0316 & 0.8359 & \textbf{0.8620} & 0.6327 & \textbf{0.3562} & 2.8376 & \textbf{4.060} \\
+\midrule
+Qwen3-8B SFT & 0.0844 & 0.8788 & 0.8416 & 0.5929 & 0.1737 & 2.2600 & --- \\
+\textbf{RLearner-LLM (Qwen3)} & 0.0418 & 0.8353 & 0.7995 & \textbf{0.8283} & 0.2284 & 2.7800 & --- \\
+\midrule
+Gemma4-E4B-it SFT & 0.0844 & 0.8794 & 0.8452 & 0.6209 & 0.2469 & 3.0364 & 5.804 \\
+RLearner-LLM (Gemma4-E4B) & \textbf{0.0893} & \textbf{0.8803} & 0.8472 & 0.5421 & 0.2309 & 3.0142 & 4.667 \\
+\bottomrule
+\end{tabular}
+}
+\caption{Sydney Biology, full per-architecture breakdown.}
+\label{tab:sydney_results}
+\end{table}
+
+\begin{table}[h]
+\centering
+\resizebox{\textwidth}{!}{
+\begin{tabular}{l|c|c|c|c|c|c}
+\toprule
+Model & BLEU $\uparrow$ & BERT(Stu) $\uparrow$ & BERT(Ans) $\uparrow$ & ACR $\uparrow$ & NLI $\uparrow$ & Ver $\uparrow$ \\
+\midrule
+ILearner-LLM (K=5) & 0.0381 & --- & 0.7720 & 0.6326 & 0.3996 & 2.7845 \\
+SFT (LLaMA-2-13B) & 0.0298 & 0.8010 & 0.7709 & 0.5516 & 0.2702 & 2.7180 \\
+RLearner-LLM (LLaMA-2) & 0.0457 & 0.8265 & 0.8297 & 0.5546 & 0.3229 & 2.5918 \\
+\midrule
+Qwen3-8B SFT & \textbf{0.1382} & 0.8784 & 0.8557 & 0.5175 & 0.3191 & 2.0000 \\
+\textbf{RLearner-LLM (Qwen3)} & 0.0362 & 0.8146 & 0.8005 & \textbf{0.8070} & 0.2303 & 2.6700 \\
+\midrule
+Gemma4-E4B-it SFT & 0.1353 & \textbf{0.8798} & 0.8611 & 0.5172 & 0.3911 & 2.6431 \\
+\textbf{RLearner-LLM (Gemma4-E4B)} & 0.1315 & 0.8757 & \textbf{0.8654} & 0.5563 & \textbf{0.4377} & 2.6304 \\
+\bottomrule
+\end{tabular}
+}
+\caption{Auckland Law, full per-architecture breakdown. Gemma 4 E4B-it RLearner surpasses the iterative ILearner-LLM (K=5) NLI benchmark of $0.3996$ as the first single-pass RL method in our study.}
+\label{tab:law_results}
+\end{table}
+
+\begin{table}[h]
+\centering
+\resizebox{\textwidth}{!}{
+\begin{tabular}{l|c|c|c|c|c|c}
+\toprule
+Model & BLEU $\uparrow$ & BERT(Stu) $\uparrow$ & BERT(Ans) $\uparrow$ & ACR $\uparrow$ & NLI $\uparrow$ & Ver $\uparrow$ \\
+\midrule
+ILearner-LLM (K=5) & 0.0671 & --- & 0.7863 & 0.8066 & 0.1219 & 3.2005 \\
+SFT (LLaMA-2-13B) & 0.0136 & 0.8065 & 0.7799 & 0.7556 & 0.0860 & 3.2561 \\
+\textbf{RLearner-LLM (LLaMA-2)} & \textbf{0.0222} & \textbf{0.8308} & \textbf{0.8467} & 0.7766 & \textbf{0.4251} & 3.0147 \\
+\midrule
+Qwen3-8B SFT & 0.0458 & 0.8629 & 0.8466 & 0.7387 & 0.2457 & 2.4700 \\
+\textbf{RLearner-LLM (Qwen3)} & 0.0223 & 0.8161 & 0.7946 & \textbf{0.8195} & 0.2104 & \textbf{2.9600} \\
+\midrule
+Gemma4-E4B-it SFT & 0.0428 & 0.8622 & 0.8447 & 0.7556 & 0.2962 & 3.1411 \\
+\textbf{RLearner-LLM (Gemma4-E4B)} & 0.0280 & 0.8487 & 0.8469 & 0.6531 & 0.3910 & 3.1089 \\
+\bottomrule
+\end{tabular}
+}
+\caption{UK Medicine Year 1, full per-architecture breakdown.}
+\label{tab:med_results_1}
+\end{table}
+
+\begin{table}[h]
+\centering
+\resizebox{\textwidth}{!}{
+\begin{tabular}{l|c|c|c|c|c|c}
+\toprule
+Model & BLEU $\uparrow$ & BERT(Stu) $\uparrow$ & BERT(Ans) $\uparrow$ & ACR $\uparrow$ & NLI $\uparrow$ & Ver $\uparrow$ \\
+\midrule
+ILearner-LLM (K=5) & 0.0495 & --- & 0.7873 & 0.7357 & 0.0668 & 3.1600 \\
+SFT (LLaMA-2-13B) & 0.0163 & 0.8208 & 0.8142 & 0.6120 & 0.2319 & 2.8717 \\
+\textbf{RLearner-LLM (LLaMA-2)} & \textbf{0.0196} & \textbf{0.8247} & \textbf{0.8539} & \textbf{0.7772} & \textbf{0.3885} & 2.9738 \\
+\midrule
+Qwen3-8B SFT & 0.0399 & 0.8501 & 0.8352 & 0.6430 & 0.1632 & 2.4900 \\
+\textbf{RLearner-LLM (Qwen3)} & 0.0220 & 0.8129 & 0.7960 & 0.7914 & 0.2009 & 3.0000 \\
+\midrule
+Gemma4-E4B-it SFT & 0.0476 & 0.8525 & 0.8372 & 0.6786 & 0.1604 & 3.0943 \\
+\textbf{RLearner-LLM (Gemma4-E4B)} & 0.0325 & 0.8453 & 0.8397 & 0.6655 & \textbf{0.3892} & 3.0666 \\
+\bottomrule
+\end{tabular}
+}
+\caption{UK Medicine Year 2, full per-architecture breakdown. Gemma 4 RLearner virtually matches the LLaMA-2-13B peak ($0.3892$ vs $0.3885$) with $\sim 3\times$ fewer effective parameters.}
+\label{tab:med_results_2}
+\end{table}
+
+\section{Qualitative Case Study}
+\label{sec:case_study_appendix}
+
+To complement the quantitative results of Section~\ref{sec:results}, we provide a representative qualitative comparison of an SFT baseline output against a RLearner-LLM output on a Cardiff Biology biochemistry question. The example illustrates the failure mode that the Hybrid reward is designed to correct: SFT possesses the relevant facts but does not commit to a deductive chain that justifies the correct option, while RLearner-LLM produces a structured proof and consequently scores three orders of magnitude higher on NLI entailment.
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{p{0.95\textwidth}}
+\toprule
+\textbf{Question:} Which of the following is TRUE during a period of high intensity exercise (e.g., sprinting)? \\
+\textbf{Options:} (A) Oxygen is consumed during glycolysis; (B) Oxygen rate measures energy expenditure; (C) \textit{ATP is generated anaerobically through substrate level phosphorylation using creatine phosphate}; (D) CO2 rate measures energy. \\
+\midrule
+\textbf{SFT (Baseline) Output:} \\
+A is incorrect as glycolysis is an anaerobic process and does not require oxygen. B is incorrect as during high intensity exercise THE rate of oxygen consumption is not a direct measure... [Truncated: Logic drifts into redundant negation]. \\
+\textit{NLI Score: 0.001} \\
+\midrule
+\textbf{RLearner-LLM (Ours) Output:} \\
+During high-intensity exercise such as sprinting, the body's demand for energy is extremely high and cannot be met by aerobic pathways alone. \textbf{Option C is correct} because ATP is generated anaerobically through substrate-level phosphorylation using creatine phosphate. Let's analyze: Option A is incorrect because Glycolysis is anaerobic and does not consume oxygen... [Detailed logical derivation]. \\
+\textit{NLI Score: 0.943} \\
+\bottomrule
+\end{tabular}
+\caption{Qualitative case study on a Cardiff Biology biochemistry question: the SFT baseline (LLaMA-2-13B) provides correct facts but fails to commit to a deductive chain that justifies the correct option, yielding an NLI entailment score near zero. RLearner-LLM provides a structured proof, increasing NLI by roughly $900\times$.}
+\label{tab:case_study}
+\end{table}
+
+\section{Implementation Notes for Multimodal Base Models}
+\label{sec:impl_notes_appendix}
+
+This appendix gives the base-model-specific LoRA target details that were summarised in Section 3.
+
+\textbf{Qwen3-8B.} Qwen3 applies RMSNorm to $q$ and $k$ \emph{after} the projection reshape (QK-norm). LoRA adapters placed on \texttt{q\_proj} or \texttt{k\_proj} introduce shape-incompatible tensors into this normalisation path, triggering a CUBLAS error at the first attention layer. We therefore restrict the Qwen3 LoRA target set to \texttt{v\_proj}, \texttt{o\_proj}, \texttt{gate\_proj}, \texttt{up\_proj}, \texttt{down\_proj}.
+
+\textbf{Gemma 4 E4B-it.} Gemma 4 ships as a multimodal \texttt{Gemma4ForConditionalGeneration} checkpoint in which the text-tower weights live under the \texttt{model.language\_model.$*$} prefix. Loading with \texttt{AutoModelForCausalLM} silently random-initialises the text tower because the prefix does not match. In addition, the vision and audio towers wrap their attention projections inside a custom \texttt{Gemma4ClippableLinear} class that PEFT cannot adapt; using leaf-name LoRA targets such as \texttt{q\_proj} therefore inadvertently matches the vision and audio wrappers and aborts adapter injection. We resolve both issues by instantiating \texttt{Gemma4ForConditionalGeneration} explicitly (the vision and audio towers remain present but idle during text-only generation) and specifying LoRA target modules as a full-path regular expression that restricts adaptation to the text tower's plain \texttt{nn.Linear} projections:
+\begin{equation*}
+\texttt{.*language\_model.layers.\textbackslash d+.(self\_attn.(q|k|v|o)\_proj|mlp.(gate|up|down)\_proj)\$}
+\end{equation*}
+This pattern matches exactly $258$ Linear modules ($42$ layers $\times$ $\{q, o, \text{gate}, \text{up}, \text{down}\}$ + $24$ layers $\times$ $\{k, v\}$; Gemma 4 uses unified $k$/$v$ in local-sliding layers). Because Gemma 4 has no in-attention QK-norm, all four attention projections can be LoRA-adapted safely. A practical caveat: Gemma 4's vocabulary size of $262$K inflates its cross-entropy baseline to $\log 262{,}144 \approx 12.5$\,nats, so raw SFT losses of $9$--$10$ are normal and are better interpreted via \texttt{mean\_token\_accuracy} or generation sanity checks than by the loss magnitude alone.
+
+\textbf{Multi-stage adapter composition.} When evaluating the RL-aligned policy, the DPO LoRA adapter must be applied on top of the \emph{SFT-merged} base weights, since the DPO delta was trained relative to that reference point. Loading the DPO adapter directly on the raw base produces a model whose behaviour reverts toward the base instruction-tuning distribution; the correct inference pipeline is $\text{base} \to \text{apply SFT} \to \text{merge} \to \text{apply DPO} \to \text{merge}$.
+
+\section{SFT Failure Mode Analysis}
+\label{sec:failure_mode_appendix}
+
+For completeness we report the per-domain SFT failure-mode rates referenced in Section~\ref{sec:failure_modes}. Each metric is a deterministic function of the generated text: Answer Evasion = $\mathbb{I}[\mathrm{ACR}{=}0]$; Verbose-low-NLI = $\mathbb{I}[|E|_\text{chars}{>}400 \land \mathrm{NLI}{<}0.05]$; Hallucinated URLs = regex match for \texttt{https?://\textbackslash S+|www\textbackslash .\textbackslash S+}; Cyclic Repetition = any $6$-gram repeated.
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{l|c|c|c|c}
+\toprule
+Domain & Answer Evasion & Verbose (Low NLI) & Hallucinated URLs & Cyclic Repetition \\
+\midrule
+Cardiff Biology & $12.4\%$ & $83.4\%$ & $68.8\%$ & $46.2\%$ \\
+Sydney Biology  & $24.2\%$ & $85.4\%$ & $44.4\%$ & $64.3\%$ \\
+Auckland Law    & $37.0\%$ & $48.4\%$ & $45.1\%$ & $79.9\%$ \\
+Medicine (Y1)   & $16.9\%$ & $84.2\%$ & $66.3\%$ & $51.4\%$ \\
+Medicine (Y2)   & $17.5\%$ & $84.5\%$ & $61.6\%$ & $43.5\%$ \\
+\bottomrule
+\end{tabular}
+\caption{Per-domain SFT failure-mode rates (5{,}100 SFT-generated explanations, LLaMA-2-13B). Standard SFT produces fluent but logically vacuous outputs in $48$--$85\%$ of cases (Verbose-low-NLI), hallucinates citation-style URLs in $44$--$69\%$, and fails to anchor the correct answer at all in $12$--$37\%$ of cases (Answer Evasion). These rates motivate the Hybrid reward's combination of an NLI signal, an ACR gate, and a length penalty.}
+\label{tab:failure_modes}
+\end{table}
+
+\section{Per-Architecture Reward Variant Assignment}
+\label{sec:variant_assignment_appendix}
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{l|c|c|c}
+\toprule
+Architecture & Cardiff/Sydney & Law / Med Y1 / Med Y2 & Pref-pair count \\
+\midrule
+LLaMA-2-13B   & $H_A$ (cross-domain) & $H_A$ (cross-domain) & $239$ \\
+Qwen3-8B      & $H_M$ (single-domain, $N{=}5$) & $H_A$ (cross-domain) & $143$ ($H_M$); $632$ ($H_A$) \\
+Gemma 4 E4B-it & $H_M$ (5-domain merged) & $H_M$ (5-domain merged) & $164$ \\
+\bottomrule
+\end{tabular}
+\caption{Hybrid reward variant used per (architecture, domain) cell, with preference-pair counts. A head-to-head $H_A$ vs.\ $H_M$ ablation appears in Table~\ref{tab:variant_ablation} (main text).}
+\label{tab:variant_per_arch}
+\end{table}
+
+\section{Tier-B Robustness Ablation Detail}
+\label{sec:tierb_appendix}
+
+\begin{table}[h]
+\centering
+\small
+\resizebox{\textwidth}{!}{
+\begin{tabular}{l|c|c|c|c|c|c|c}
+\toprule
+Cardiff filter & $N$ & SFT NLI & DPO BLEU & DPO BERT(Ans) & DPO ACR & DPO NLI & Inference s/q \\
+\midrule
+Default & $7{,}309$ & 0.2117 & 0.0303 & 0.8426 & 0.6497 & 0.3505 & \textbf{4.76} \\
+\textbf{Tier-B (stricter)} & $1{,}041$ & \textbf{0.2059} & \textbf{0.0381} & \textbf{0.8696} & \textbf{0.7823} & \textbf{0.5202} & 7.62 \\
+\midrule
+$\Delta$ (Tier-B $-$ default) & $-86\%$ & $-0.006$ & $+0.008$ & $+0.027$ & $+0.133$ & \textbf{+0.170 ($+48\%$)} & $+2.9$s \\
+\bottomrule
+\end{tabular}
+}
+\caption{Cardiff Biology robustness to question-quality filtering on the \textbf{Gemma 4 E4B-it} architecture (the SFT NLI of $0.2117$ identifies the row). Tier-B adds \texttt{deleted}=0 and a $5$-star endorsement share $\geq 0.10$ to the default filter, shrinking the Cardiff training corpus by $7.0\times$. The SFT baseline is essentially unchanged (NLI $0.2117 \to 0.2059$), but Hybrid-DPO trained on the smaller Tier-B corpus reaches \emph{higher} NLI ($0.3505 \to 0.5202$), ACR ($0.6497 \to 0.7823$), and answer-anchored BERTScore than under the default filter, with comparable BLEU and BERT(Stu). The rightmost column reports per-question inference time in seconds.}
+\label{tab:tierB_ablation}
+\end{table}
+
+\section{Tier-C Strict-Discriminator Ablation Detail}
+\label{sec:tierc_appendix}
+
+The original submission noted that the \emph{strict-discriminator} variant of the question-quality filter---retaining only questions whose author-designated key coincides with the \emph{modal student answer}---requires per-option response counts absent from the question-level metadata. We have since obtained the full PeerWise answer-submission logs for both Cardiff and Sydney ($3{,}439{,}340$ and $503{,}806$ individual submissions respectively), enabling this variant. For each question we compute the most-frequently-selected option across all student submissions and \textbf{drop questions whose author key disagrees with this modal answer}, a conservative proxy for mis-keyed or ambiguous items. Stacked on top of the Tier-B filter, this defines \textbf{Tier-C}, the strictest filter in our study; it further shrinks the Cardiff pool $1{,}041\to955$ and the Sydney pool $459\to384$.
+
+\begin{table}[h]
+\centering
+\small
+\resizebox{\textwidth}{!}{
+\begin{tabular}{l|l|c|c|c|c|c|c}
+\toprule
+Architecture & Corpus & $N$ & SFT NLI & DPO NLI & $\Delta$NLI & SFT ACR & DPO ACR \\
+\midrule
+LLaMA-2-13B   & Cardiff & $955$ & 0.1133 & \textbf{0.3613} & \textbf{+219\%} & 0.6247 & \textbf{0.6767} \\
+LLaMA-2-13B   & Sydney  & $384$ & 0.0730 & \textbf{0.2217} & \textbf{+204\%} & 0.5977 & \textbf{0.6357} \\
+\midrule
+Qwen3-8B      & Cardiff & $955$ & 0.2213 & 0.1782 & $-19\%$ & 0.6962 & \textbf{0.7729} \\
+Qwen3-8B      & Sydney  & $384$ & 0.1838 & 0.1576 & $-14\%$ & 0.5310 & \textbf{0.7265} \\
+\midrule
+Gemma 4 E4B-it & Cardiff & $955$ & 0.1860 & \textbf{0.3896} & \textbf{+109\%} & 0.6873 & \textbf{0.8177} \\
+Gemma 4 E4B-it & Sydney  & $384$ & 0.1915 & \textbf{0.3636} & \textbf{+90\%}  & 0.5726 & \textbf{0.7072} \\
+\bottomrule
+\end{tabular}
+}
+\caption{Robustness of Hybrid-DPO to the \textbf{Tier-C strict-discriminator filter} (Tier-B $+$ author-key${=}$modal-student-answer), evaluated per-architecture on Cardiff and Sydney. Each model's DPO row is compared against its own SFT baseline on the same Tier-C test split (NLI / ACR are not comparable across filter tiers, which use different held-out sets). Under the strictest filter, Hybrid-DPO preserves a large NLI lift on Gemma 4 E4B-it ($+109\%$ Cardiff, $+90\%$ Sydney) and raises ACR on \emph{every} architecture--corpus cell. Qwen3-8B reproduces the ACR-up/NLI-flat pattern it exhibits under the default filter (cf.\ Table~\ref{tab:cardiff_results}), confirming that the strict filter preserves rather than distorts the per-architecture behaviour of the main results. LLaMA-2-13B shows the largest NLI lifts ($+219\%$ Cardiff, $+204\%$ Sydney), consistent with its lowest SFT baselines and the entailment-headroom effect of \S\ref{sec:arch-effects}. Across all six architecture--corpus cells, $4$ improve NLI and \emph{all} improve ACR under the strictest filter.}
+\label{tab:tierC_ablation}
+\end{table}
+
+\section{HuggingFace Identifiers and Model Versions}
+\label{sec:hf_identifiers}
+
+For exact reproducibility we list the HuggingFace identifiers, parameter counts, and the precise checkpoint version used for every model in the pipeline. All weights were resolved against the HuggingFace Hub at the start of training; loading via \texttt{transformers} with the listed identifier reproduces our results bit-for-bit when combined with the released LoRA adapters and preference data.
+
+\begin{table}[h]
+\centering
+\small
+\resizebox{\textwidth}{!}{
+\begin{tabular}{l|l|c|l}
+\toprule
+Role & HuggingFace identifier & Params & Notes \\
+\midrule
+Base generator & \texttt{meta-llama/Llama-2-13b-hf} & 13.0B & ``hf'' weights, fp16 base \\
+Base generator & \texttt{Qwen/Qwen3-8B} & 8.2B & QK-norm; LoRA on $v$/$o$/MLP only \\
+Base generator & \texttt{google/gemma-4-E4B-it} & $\sim$4.5B eff.\ & multimodal class; LoRA regex on text tower \\
+NLI scorer & \texttt{cross-encoder/nli-deberta-v3-small} & 184M & SNLI+MultiNLI fine-tune \\
+Stylistic verifier & Alpaca-7B fine-tune \cite{bao2025exploring} & 7B & 1--5 Likert scale, custom checkpoint \\
+LLM judge (pairwise) & \texttt{gpt-4o-mini-2024-07-18} & --- & OpenAI API, $T{=}0.0$ \\
+\bottomrule
+\end{tabular}
+}
+\caption{HuggingFace identifiers and parameter counts for every model used in the pipeline. The Alpaca-7B verifier is a domain-finetuned checkpoint released by \cite{bao2025exploring}; we use the exact merged-corpus weights distributed with that paper. The pairwise judge runs against \texttt{gpt-4o-mini-2024-07-18} via the OpenAI API at temperature $0$ for deterministic adjudication.}
+\label{tab:hf_identifiers}
+\end{table}
+
+\section{LLM Judge Prompt and Decoding Settings}
+\label{sec:judge_prompt}
+
+The pairwise judge results in Table~\ref{tab:pairwise_1} (Section~\ref{sec:verbosity}) use the following prompt template, applied to every (question, context, $A$, $B$) tuple at temperature $0$:
+
+\begin{quote}\small\itshape
+You are an expert evaluator of AI-generated educational explanations. Given a question and its context, compare two provided explanations and decide which one is better for a student.\\[2pt]
+Consider the following criteria:\\
+1. Accuracy: Is the explanation factually correct?\\
+2. Soundness: Is the reasoning logical and easy to follow?\\
+3. Helpfulness: Does it truly help a student understand WHY the answer is correct?\\[2pt]
+Question: \texttt{\{question\}}\\
+Context: \texttt{\{context\}}\\
+Explanation 1: \texttt{\{choice\_a\}}\\
+Explanation 2: \texttt{\{choice\_b\}}\\[2pt]
+Which explanation is better? Provide a very brief justification followed by your choice in the format: ``Better: Explanation [1/2/Tie]''.
+\end{quote}
+
+\paragraph{Order randomisation.} For each test item we run the judge twice with the order of Explanation~1 and Explanation~2 swapped, then average the two verdicts; this controls for the well-documented position bias \cite{wang2023large}. The $100$ items reported per row in Table~\ref{tab:pairwise_1} therefore cost $200$ judge calls per row.
+
+\paragraph{Decoding settings.} \texttt{model="gpt-4o-mini-2024-07-18"}, \texttt{temperature=0.0}, \texttt{max\_tokens=200}, all other parameters at OpenAI defaults. Verdicts are extracted by string match on \texttt{"Better: Explanation 1"} / \texttt{"Better: Explanation 2"}; everything else (including malformed outputs) is counted as a tie.
+
+\paragraph{NLI verifier inputs.} The \texttt{cross-encoder/nli-deberta-v3-small} scorer takes the explanation $E$ as the premise and the correct-option text $A$ as the hypothesis, jointly tokenised at maximum length $512$, with no prompt wrapping (Section~\ref{sec:eval_tier}). The Alpaca-7B stylistic verifier uses the standard Alpaca instruction-input-response template with the instruction \texttt{``As a question rating verifier expert, can you generate the question rating score for the given input?''}; the score is parsed as the first \texttt{\{1,2,3,4,5\}} digit in the response.

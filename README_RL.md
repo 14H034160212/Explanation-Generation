@@ -195,6 +195,7 @@ Gemma 4 E4B-it is a dense 8B-total / 4.5B-effective-parameter model with Per-Lay
 | DPO (merged) | `rl_train_dpo_gemma4.py` | β=0.1, lr=5e-5, 5 epochs | ~13min | `./rl_dpo_gemma4_e4b_merged_generator/` |
 | Eval × 5 domains | `rl_evaluate_gemma4.py` | 100Q test set per domain, parallel | ~54min on 2×A100 | `./rl_eval_results/gemma4_*_merged_eval.json` |
 | **Tier-B robustness ablation** (Cardiff) | full pipeline | `5*-share≥0.10 + deleted=0` Cardiff filter | ~4h end-to-end | `./rl_*_cardiff_tierB_*/` |
+| **Tier-C strict-discriminator** (Cardiff + Sydney, all 3 archs) | `run_tierC_*.sh` | Tier-B + `author key = modal student answer` (uses full PeerWise answer-submission logs) | per-config, GPU-polling launcher | `./rl_eval_results/{llama2,qwen3,gemma4}_{cardiff,sydney}_tierC_eval.json` |
 
 #### LLaMA-2-13B NLI-PPO Experiments
 
@@ -279,6 +280,48 @@ All results on 100-question held-out test sets.
 - **Qwen3-8B Hybrid-DPO** gets the highest ACR (+23.6 pp), classic Qwen3 ACR-shift pattern.
 - **Gemma 4 Sydney is the only NLI non-improvement** in our 5-domain study: SFT NLI 0.247 is already the highest among the 3 architectures, leaving little headroom — see entailment-headroom discussion in the paper.
 - **GPT-4 highest BLEU** (0.084), but very low ACR (0.473) — verbose text that drifts from the correct option keywords.
+
+---
+
+### Tier-C Strict-Discriminator Ablation (Cardiff + Sydney, all 3 architectures)
+
+The strictest question-quality filter in the study. On top of the Tier-B filter
+(`deleted=0` + `5*-endorsement share ≥ 0.10`) we **drop every question whose
+author-designated key disagrees with the modal student answer** — a conservative
+mis-key/ambiguity proxy. This needs per-option response counts, which we computed
+from the full PeerWise answer-submission logs (Cardiff 3,439,340 submissions;
+Sydney 503,806). Tier-C pools: Cardiff 1,041 → **955**, Sydney 459 → **384**.
+
+Each DPO row is compared against its **own SFT baseline on the same Tier-C test
+split** (NLI/ACR are not comparable across filter tiers — different held-out sets).
+
+| Architecture | Corpus | N | SFT NLI | DPO NLI | ΔNLI | SFT ACR | DPO ACR |
+|---|---|---|---|---|---|---|---|
+| **LLaMA-2-13B** | Cardiff | 955 | 0.1133 | **0.3613** | **+219%** | 0.6247 | **0.6767** |
+| **LLaMA-2-13B** | Sydney | 384 | 0.0730 | **0.2217** | **+204%** | 0.5977 | **0.6357** |
+| Qwen3-8B | Cardiff | 955 | 0.2213 | 0.1782 | −19% | 0.6962 | **0.7729** |
+| Qwen3-8B | Sydney | 384 | 0.1838 | 0.1576 | −14% | 0.5310 | **0.7265** |
+| Gemma 4 E4B-it | Cardiff | 955 | 0.1860 | **0.3896** | **+109%** | 0.6873 | **0.8177** |
+| Gemma 4 E4B-it | Sydney | 384 | 0.1915 | **0.3636** | **+90%** | 0.5726 | **0.7072** |
+
+**Tier-C takeaways:**
+- **All 6 cells improve ACR; 4 of 6 improve NLI** under the strictest filter — the
+  strict filter *preserves rather than distorts* the per-architecture pattern of
+  the main 15-cell results.
+- **LLaMA-2-13B shows the largest NLI lifts** (+219% Cardiff, +204% Sydney),
+  consistent with its lowest SFT baselines (entailment-headroom effect).
+- **Qwen3-8B reproduces its default-filter behaviour**: ACR up, NLI flat/down —
+  matching its known non-improvement on these corpora.
+- DPO learning rate is per-architecture (Gemma/LLaMA-2 `5e-5`, Qwen3 `5e-5` on the
+  small Tier-C pool; the original Qwen3 `5e-6` under-trains at this data scale).
+  Pref-data `min_score_gap`: 0.05 (Gemma/Qwen3), 0.03 (LLaMA-2).
+
+**Reproduce:** datasets built by the strict-discriminator filter live at
+`preference_data/Paul_new_data/{Cardiff,Sydney}_tierC_generator_{train,test}.json`;
+per-config pipelines are `run_tierC_{gemma4,qwen3,llama2}_{cardiff,sydney}*.sh`
+(LLaMA-2 via the GPU-polling retry launcher `run_tierC_llama2_retry.sh` for shared
+clusters). Full write-up: `paper_draft_arxiv/appendix.tex` §Tier-C and
+`discussion.tex`.
 
 ---
 
