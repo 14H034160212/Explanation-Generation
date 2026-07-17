@@ -165,7 +165,9 @@ Medicine (Y2)   & $17.5\%$ & $84.5\%$ & $61.6\%$ & $43.5\%$ \\
 \section{Per-Architecture Reward Variant Assignment}
 \label{sec:variant_assignment_appendix}
 
-\begin{table}[h]
+Table~\ref{tab:variant_per_arch} records which Hybrid reward variant---$H_A$ (the additive cross-domain form) or $H_M$ (the multiplicative single- or merged-domain form)---was used for each (architecture, domain) cell, together with the number of preference pairs constructed for each.
+
+\begin{table}[H]
 \centering
 \small
 \begin{tabular}{l|c|c|c}
@@ -184,7 +186,9 @@ Gemma 4 E4B-it & $H_M$ (5-domain merged) & $H_M$ (5-domain merged) & $164$ \\
 \section{Tier-B Robustness Ablation Detail}
 \label{sec:tierb_appendix}
 
-\begin{table}[h]
+Table~\ref{tab:tierB_ablation} details the Tier-B robustness ablation on Cardiff Biology: a stricter question-quality filter (\texttt{deleted}{=}0 plus a $5$-star endorsement share $\geq 0.10$) shrinks the training pool $7\times$ (from $7{,}309$ to $1{,}041$ questions), yet Hybrid-DPO trained on the smaller corpus improves on every metric.
+
+\begin{table}[H]
 \centering
 \small
 \resizebox{\textwidth}{!}{
@@ -208,7 +212,7 @@ $\Delta$ (Tier-B $-$ default) & $-86\%$ & $-0.006$ & $+0.008$ & $+0.027$ & $+0.1
 
 The original submission noted that the \emph{strict-discriminator} variant of the question-quality filter---retaining only questions whose author-designated key coincides with the \emph{modal student answer}---requires per-option response counts absent from the question-level metadata. We have since obtained the full PeerWise answer-submission logs for both Cardiff and Sydney ($3{,}439{,}340$ and $503{,}806$ individual submissions respectively), enabling this variant. For each question we compute the most-frequently-selected option across all student submissions and \textbf{drop questions whose author key disagrees with this modal answer}, a conservative proxy for mis-keyed or ambiguous items. Stacked on top of the Tier-B filter, this defines \textbf{Tier-C}, the strictest filter in our study; it further shrinks the Cardiff pool $1{,}041\to955$ and the Sydney pool $459\to384$.
 
-\begin{table}[h]
+\begin{table}[H]
 \centering
 \small
 \resizebox{\textwidth}{!}{
