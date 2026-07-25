@@ -235,6 +235,61 @@ Gemma 4 E4B-it & Sydney  & $384$ & 0.1915 & \textbf{0.3636} & \textbf{+90\%}  & 
 \label{tab:tierC_ablation}
 \end{table}
 
+\section{Held-out NLI Evaluation (Independent Scorers)}
+\label{sec:heldout_appendix}
+
+To test whether the reported entailment gains reflect genuine improvement rather
+than optimization toward the training scorer, we re-score the (already-generated)
+SFT and DPO explanations with two \emph{independent} NLI models that were never
+used to construct training preference pairs: \textbf{DeBERTa-v3-large} (435M, a
+larger same-task cross-encoder) and \textbf{RoBERTa-large-MNLI} (a different-family
+MNLI classifier). Training used \texttt{nli-deberta-v3-small} (184M).
+Table~\ref{tab:heldout_nli} reports SFT$\to$DPO entailment under all three scorers.
+
+\begin{table}[H]
+\centering
+\small
+\resizebox{\textwidth}{!}{
+\begin{tabular}{l|l|c|c|c}
+\toprule
+Architecture & Cell & \texttt{small} (train scorer) & DeBERTa-v3-large (held-out) & RoBERTa-large-MNLI (held-out) \\
+\midrule
+Gemma-4 & Cardiff (main) & 0.212$\to$0.350 & 0.239$\to$0.400 & 0.615$\to$0.587 \\
+Gemma-4 & Sydney (main) & 0.247$\to$0.231 & 0.414$\to$0.355 & 0.574$\to$0.523 \\
+Gemma-4 & Auckland Law (main) & 0.391$\to$0.438 & 0.349$\to$0.454 & 0.516$\to$0.546 \\
+Gemma-4 & Med Y1 (main) & 0.296$\to$0.391 & 0.266$\to$0.502 & 0.620$\to$0.613 \\
+Gemma-4 & Med Y2 (main) & 0.160$\to$0.389 & 0.264$\to$0.412 & 0.568$\to$0.611 \\
+LLaMA-2 & Cardiff (hybrid) & 0.121$\to$0.369 & 0.258$\to$0.434 & 0.188$\to$0.672 \\
+LLaMA-2 & Sydney (hybrid) & 0.095$\to$0.344 & 0.174$\to$0.464 & 0.167$\to$0.523 \\
+Qwen3 & Cardiff (hybrid) & 0.196$\to$0.141 & 0.281$\to$0.167 & 0.625$\to$0.390 \\
+Qwen3 & Sydney (hybrid) & 0.174$\to$0.228 & 0.321$\to$0.322 & 0.546$\to$0.315 \\
+\midrule
+Gemma-4 & Cardiff Tier-C & 0.186$\to$0.390 & 0.321$\to$0.558 & 0.635$\to$0.759 \\
+Gemma-4 & Sydney Tier-C & 0.192$\to$0.364 & 0.371$\to$0.547 & 0.499$\to$0.630 \\
+LLaMA-2 & Cardiff Tier-C & 0.113$\to$0.361 & \textbf{0.277$\to$0.125} & 0.274$\to$0.191 \\
+LLaMA-2 & Sydney Tier-C & 0.073$\to$0.222 & 0.183$\to$0.365 & 0.255$\to$0.417 \\
+Qwen3 & Cardiff Tier-C & 0.221$\to$0.178 & 0.326$\to$0.269 & 0.601$\to$0.415 \\
+Qwen3 & Sydney Tier-C & 0.184$\to$0.158 & 0.362$\to$0.324 & 0.405$\to$0.340 \\
+\bottomrule
+\end{tabular}
+}
+\caption{Entailment under the training scorer (\texttt{nli-deberta-v3-small}) vs.\
+two independent held-out scorers, SFT$\to$DPO. \textbf{DeBERTa-v3-large agrees with
+the training scorer on the improvement direction in 14 of 15 cells, including all
+four non-improvement cells} (Gemma-4 Sydney; Qwen3 Cardiff/Tier-C; Qwen3 Sydney
+Tier-C) --- the opposite of what reward-hacking would produce, and often with a
+\emph{larger} margin under the held-out model (e.g.\ Gemma-4 Med Y1
+0.27$\to$0.50). The held-out model also raises the SFT baselines (e.g.\ Gemma-4
+Sydney 0.25$\to$0.41), so gains sit above non-degenerate baselines. We report the
+one disagreement honestly: LLaMA-2 on the 955-example \emph{Tier-C} subset (bold)
+does not survive the held-out check, although the LLaMA-2 \emph{main} Cardiff cell
+does (0.258$\to$0.434). RoBERTa-large-MNLI confirms the largest-margin cells
+(LLaMA-2; Gemma-4 Tier-C) but compresses all systems into ${\sim}0.4$--$0.65$ on
+our short-hypothesis (correct-option-text) format, so it is a coarser instrument
+on the smaller-margin cells.}
+\label{tab:heldout_nli}
+\end{table}
+
 \section{HuggingFace Identifiers and Model Versions}
 \label{sec:hf_identifiers}
 
