@@ -60,3 +60,5 @@ logs_screenshot.txt
 nvidia_smi_screenshot.txt
 final_questions*.txt
 examples_output.txt
+rl_eval_results/reasoning_judge_gpt4o.json
+scripts/reasoning_judge_gpt4o.py
