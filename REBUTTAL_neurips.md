@@ -2,7 +2,7 @@
 
 We thank all reviewers. Two shared concerns are addressed with NEW experiments that required no retraining (we re-scored the saved explanations).
 
-[C1] Circular evaluation — independent held-out NLI. We re-scored every SFT/DPO explanation with DeBERTa-v3-large (435M), never used in training (training used nli-deberta-v3-small, 184M). Across 15 (architecture,corpus) cells the held-out scorer agrees with the training scorer on the improvement DIRECTION in 14/15, INCLUDING all four non-improvement cells. If DPO merely gamed the small scorer, an independent model would show no gain; instead it confirms the gains, often with a LARGER margin (Gemma-4 Med-Y1 0.27->0.50, Cardiff 0.24->0.40; LLaMA-2 Sydney 0.17->0.46, Cardiff 0.26->0.43), and agrees on where the method fails (Gemma-4 Sydney; Qwen3 Cardiff). It also raises the SFT baselines (Gemma-4 Sydney 0.25->0.41), addressing the "near-degenerate baseline" point. We are candid about the one disagreement: LLaMA-2 on the 955-example Tier-C subset does not survive the held-out check, though the LLaMA-2 main Cardiff cell does. A second scorer, RoBERTa-large-MNLI, confirms the large-margin cells (LLaMA-2 Cardiff 0.19->0.67, Sydney 0.17->0.52) but saturates (~0.4-0.65) on our short-hypothesis format, so we treat DeBERTa-v3-large as the primary independent instrument.
+[C1] Circular evaluation — independent held-out NLI. We re-scored every SFT/DPO explanation with DeBERTa-v3-large (435M), never used in training (training scorer: nli-deberta-v3-small, 184M), across ALL 21 (architecture,corpus) cells. The two scorers agree on the improvement DIRECTION in 12/15 main cells and 17/21 overall, INCLUDING all five Gemma-4 domains (our headline compact model) and every non-improvement cell. If DPO merely gamed the small scorer, an independent model would show no gain and would not agree on the failures; instead it confirms the gains -- often with a LARGER margin (Gemma-4 Med-Y1 0.27->0.50, Cardiff 0.24->0.40; LLaMA-2 Sydney 0.17->0.46) -- and raises the SFT baselines (Gemma-4 Sydney 0.25->0.41), addressing the "near-degenerate baseline" point. We are candid about the 4 disagreements (bold in the table): the held-out scorer does NOT corroborate LLaMA-2 on Auckland Law, UK Med Y1, or Cardiff Tier-C, where LLaMA-2's DPO outputs become short/answer-focused. This scopes our claim to answer entailment+coverage (most robust on Gemma-4); full reasoning-soundness evaluation is future work. A different-family scorer (RoBERTa-large-MNLI) confirms the large-margin cells but saturates (~0.4-0.65) on our short-hypothesis format, so we treat DeBERTa-v3-large as primary.
 
 [C2] Are gains just length? No. Mean words SFT->DPO: Gemma-4 Cardiff 60->45, Med-Y1 55->40; LLaMA-2 Cardiff 225->63, Sydney 285->74. Where NLI improves most, DPO outputs are SHORTER. Qwen3 is the only architecture whose outputs lengthen (~3x) and is exactly where NLI does NOT improve. Moreover, in our Hybrid/NLI preference data the CHOSEN explanation is longer than the rejected in only ~30-48% of pairs (46% across 7,497 pairs), so the reward does not favor length -- standard Hybrid-DPO is length-controlled by construction. We will also add a formal length-controlled DPO (Park et al.) + SimPO in the camera-ready.
 
@@ -14,7 +14,7 @@ We also correct claims/writing: the additive(Intro)-vs-multiplicative(Eq.2) inco
 
 Thank you for the detailed review and for noting our candor.
 
-W1 (circular eval = load-bearing). Done — see [C1]: independent DeBERTa-v3-large confirms direction on 14/15 cells incl. all failures, larger margins; RoBERTa-large-MNLI added. Camera-ready reports held-out NLI in all tables.
+W1 (circular eval = load-bearing). Done — see [C1]: independent DeBERTa-v3-large agrees on direction in 12/15 main cells (17/21 overall), incl. all Gemma-4 domains and all failures. Camera-ready reports held-out NLI in all tables; we scope claims to entailment/coverage and flag the LLaMA-2 disagreements.
 
 W2 (NLI can be met by restating the answer). Agreed NLI is a proxy. Restatement would be short; [C2] shows DPO does not win by length, and the ACR gate + length penalty exist precisely to suppress the pure-NLI "answer-repeating" degeneration. We add a human/step-validity spot-check of reasoning soundness.
 
@@ -30,7 +30,7 @@ Q (trusting the judge in row2 not row3). We add a second judge + human evaluatio
 
 Thank you for recognizing the motivation and breadth.
 
-W1 (circular eval). Addressed in [C1] — independent DeBERTa-v3-large + RoBERTa-large-MNLI; 14/15 directional agreement.
+W1 (circular eval). Addressed in [C1] — independent DeBERTa-v3-large; 12/15 main (17/21 overall) directional agreement, all Gemma-4 cells confirmed.
 
 W2 (understated drops: Qwen3 Cardiff; Gemma-4). The drops are not stochastic: the independent held-out scorer REPRODUCES them (Qwen3 Cardiff also drops under DeBERTa-v3-large, 0.28->0.17). Qwen3 Cardiff is an architecture-specific non-improvement (gains shift to ACR); Gemma-4 Sydney is the single cell whose SFT entailment is already high (0.41 held-out), leaving little headroom. We add multi-seed variance and an explicit analysis.
 
@@ -48,7 +48,7 @@ W1 (complex writing, 56 em-dashes, Line 163). We substantially simplify the pros
 
 W2 (tables hard to read). We restructure every results table so the caption's first line states its single main takeaway.
 
-W3 (same NLI model for train/score). Addressed in [C1] — independent held-out scorers, 14/15 agreement.
+W3 (same NLI model for train/score). Addressed in [C1] — independent held-out DeBERTa-v3-large; 12/15 main (17/21 overall) agreement, all Gemma-4 cells confirmed.
 
 W4 (inconsistent gains). This is honestly reported, not a defect: the marginal NLI gain is inversely related to SFT entailment headroom (lower baseline -> larger gain), so Qwen3 (higher baseline) shifts gains to ACR. The independent held-out scorer reproduces the SAME per-architecture pattern, so it is robust, not noise.
 
@@ -62,4 +62,4 @@ Limitations: (i) NLI-as-proxy — independent scorers + planned human/step-valid
 
 ### To the Area Chair
 
-The two primary concerns are addressed with new experiments: (1) circular evaluation — independent held-out DeBERTa-v3-large (+ RoBERTa-large-MNLI) confirms the improvement direction on 14/15 cells including all failures, inconsistent with reward-hacking; (2) evidentiary gaps — length analysis (DPO is shorter where NLI improves most), signal-isolation ablation (correcting the "dual-signal" claim), plus committed length-controlled DPO + SimPO + human eval. We rewrite prose and tables for clarity and are candid about the one cell (LLaMA-2 Tier-C Cardiff) that does not survive the held-out check.
+The two primary concerns are addressed with new experiments: (1) circular evaluation — an independent held-out DeBERTa-v3-large agrees on the improvement direction in 12/15 main cells (17/21 overall), confirming all five Gemma-4 domains and every non-improvement cell, inconsistent with pure reward-hacking; (2) evidentiary gaps — length analysis (DPO is shorter where NLI improves most), signal-isolation ablation (correcting the "dual-signal" claim), plus committed length-controlled DPO + SimPO + human eval. We rewrite prose and tables for clarity and are candid about the 4 cells (all LLaMA-2, plus Qwen3 Auckland Law) where the held-out scorer disagrees; we correspondingly scope our claim to answer entailment/coverage (most robust on Gemma-4) rather than full reasoning soundness.

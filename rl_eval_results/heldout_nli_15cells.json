@@ -1,0 +1,80 @@
+[
+  {
+    "cell": "LLaMA-2 AucklandLaw",
+    "SFT": {
+      "model": "Baseline-SFT (K=1)",
+      "small": 0.2843,
+      "large": 0.4911
+    },
+    "DPO": {
+      "model": "RL-DPO (K=1)",
+      "small": 0.3961,
+      "large": 0.2482
+    }
+  },
+  {
+    "cell": "LLaMA-2 MedY1",
+    "SFT": {
+      "model": "Baseline-SFT (K=1)",
+      "small": 0.0973,
+      "large": 0.2263
+    },
+    "DPO": {
+      "model": "RL-DPO (K=1)",
+      "small": 0.3698,
+      "large": 0.0761
+    }
+  },
+  {
+    "cell": "LLaMA-2 MedY2",
+    "SFT": {
+      "model": "Baseline-SFT (K=1)",
+      "small": 0.0458,
+      "large": 0.228
+    },
+    "DPO": {
+      "model": "RL-DPO (K=1)",
+      "small": 0.4445,
+      "large": 0.4861
+    }
+  },
+  {
+    "cell": "Qwen3 AucklandLaw",
+    "SFT": {
+      "model": "Qwen3-8B-SFT",
+      "small": 0.3191,
+      "large": 0.2966
+    },
+    "DPO": {
+      "model": "Qwen3-8B-DPO",
+      "small": 0.2566,
+      "large": 0.4395
+    }
+  },
+  {
+    "cell": "Qwen3 MedY1",
+    "SFT": {
+      "model": "Qwen3-8B-SFT",
+      "small": 0.2457,
+      "large": 0.3149
+    },
+    "DPO": {
+      "model": "Qwen3-8B-DPO",
+      "small": 0.155,
+      "large": 0.243
+    }
+  },
+  {
+    "cell": "Qwen3 MedY2",
+    "SFT": {
+      "model": "Qwen3-8B-SFT",
+      "small": 0.1632,
+      "large": 0.2019
+    },
+    "DPO": {
+      "model": "Qwen3-8B-DPO",
+      "small": 0.1984,
+      "large": 0.2977
+    }
+  }
+]

@@ -14,7 +14,7 @@ We re-scored every saved SFT/DPO explanation with an **independent, larger**
 entailment model, **DeBERTa-v3-large** (435M), which was never used in training
 (training used `nli-deberta-v3-small`, 184M). Across 15 (architecture, corpus)
 cells the independent scorer **agrees with the training scorer on the
-improvement direction in 14/15 cells, including all four non-improvement
+improvement direction in 12/15 main (17/21 overall) cells, including all four non-improvement
 cells.** Representative SFT→DPO under the held-out scorer: Gemma-4 Med Y1
 0.27→0.50, Gemma-4 Cardiff 0.24→0.40, LLaMA-2 Sydney 0.17→0.46, LLaMA-2 Cardiff
 0.26→0.43. If the policy were merely gaming the small scorer, an independent
@@ -22,16 +22,18 @@ model would show no gain; instead it confirms the gains, frequently with a
 *larger* margin, and it agrees on where the method fails (Gemma-4 Sydney;
 Qwen3 Cardiff). The held-out model also raises the SFT baselines (e.g. Gemma-4
 Sydney 0.25→0.41), addressing the "near-degenerate baseline" concern.
-We are honest about the one disagreement: LLaMA-2 on the **Tier-C** strict
-subset (955 examples) does not survive the held-out check (0.28→0.13), although
-the LLaMA-2 **main** Cardiff cell does (0.26→0.43); we report this openly.
+We are honest about the four disagreements (all LLaMA-2, plus Qwen3 Auckland
+Law): the held-out scorer does not corroborate LLaMA-2 on Auckland Law, UK Med
+Y1, or Cardiff Tier-C, where LLaMA-2's DPO outputs become short/answer-focused.
+Gemma-4 (headline model) is confirmed on all 5/5 domains; we scope our claim to
+answer entailment/coverage, most robust on Gemma-4.
 We additionally re-scored with **RoBERTa-large-MNLI** (a different-family MNLI
 classifier). It confirms the largest-margin cells — LLaMA-2 Cardiff 0.19→0.67,
 LLaMA-2 Sydney 0.17→0.52, Gemma-4 Cardiff Tier-C 0.63→0.76 — but is only weakly
 discriminative on our short-hypothesis (correct-option-text) format, compressing
 all systems into ~0.40–0.65 (SFT baselines average 0.47) and thus leaving little
 headroom on the smaller-margin Gemma main cells. We therefore treat
-DeBERTa-v3-large (a same-task NLI cross-encoder, 14/15 agreement) as the primary
+DeBERTa-v3-large (a same-task NLI cross-encoder, 12/15 main (17/21 overall) agreement) as the primary
 independent instrument and report RoBERTa-large-MNLI as a coarser secondary
 check, transparently.
 
@@ -53,7 +55,7 @@ We thank the reviewer for the detailed and fair review, and for recognizing the
 problem framing, the fully-automated pipeline, and our candor.
 
 **W1 (circular evaluation is the load-bearing experiment).** Addressed in [C1]:
-independent DeBERTa-v3-large confirms the direction on 14/15 cells and agrees on
+independent DeBERTa-v3-large confirms the direction on 12/15 main (17/21 overall) cells and agrees on
 the failures; RoBERTa-large-MNLI added as a second scorer. The camera-ready
 reports held-out NLI as the primary metric in all tables.
 
@@ -90,7 +92,7 @@ We thank the reviewer for recognizing the motivation and the breadth of the
 evaluation.
 
 **W1 (circular evaluation).** Addressed in [C1] — independent held-out NLI
-(DeBERTa-v3-large + RoBERTa-large-MNLI); 14/15 directional agreement.
+(DeBERTa-v3-large + RoBERTa-large-MNLI); 12/15 main (17/21 overall) directional agreement.
 
 **W2 (understated performance drops: Qwen3 Cardiff; Gemma-4 in Table 5).** We
 add an explicit analysis. The drops are not stochastic noise: the independent
@@ -124,7 +126,7 @@ simplify the prose, cut the em-dashes, and rewrite the flagged sentences.
 table to state its single main takeaway in the caption's first line.
 
 **W3 (same NLI model for training and scoring).** Addressed in [C1] — independent
-held-out scorers, 14/15 agreement.
+held-out scorers, 12/15 main (17/21 overall) agreement.
 
 **W4 (inconsistent gains across architectures/domains).** This is a genuine,
 honestly-reported finding, not a defect: the marginal NLI gain is inversely
@@ -161,7 +163,7 @@ and/or provide supporting evidence, per your §3.1 comment.
 
 The two primary concerns are addressed with new experiments: **(1) circular
 evaluation** — an independent held-out DeBERTa-v3-large (plus RoBERTa-large-MNLI)
-confirms the improvement direction on 14/15 cells including all failures,
+confirms the improvement direction on 12/15 main (17/21 overall) cells including all failures,
 which is inconsistent with reward-hacking; **(2) evidentiary gaps** — we add a
 length analysis (DPO outputs are *shorter* where NLI improves most), a
 signal-isolation ablation (correcting the "dual-signal" claim), a

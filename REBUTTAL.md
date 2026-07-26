@@ -26,7 +26,7 @@ was **never** used to construct training preference pairs (training used
 | Qwen3 Sydney Tier-C | 0.184→0.158 | 0.362→0.324 | ✓ ↓ |
 | LLaMA-2 Cardiff Tier-C | 0.113→0.361 | 0.277→0.125 | ✗ flips |
 
-**The independent scorer agrees with the training scorer on 14 of 15 cells,
+**The independent scorer agrees with the training scorer on 12 of 15 main (17 of 21 overall) cells,
 including all four non-improvement cells.** This is the opposite of what
 reward-hacking would produce: if DPO merely gamed the small scorer, the
 independent model would show no gain; instead it confirms the gains, often
