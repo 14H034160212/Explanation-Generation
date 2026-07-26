@@ -30,10 +30,13 @@ was **never** used to construct training preference pairs (training used
 including all four non-improvement cells.** This is the opposite of what
 reward-hacking would produce: if DPO merely gamed the small scorer, the
 independent model would show no gain; instead it confirms the gains, often
-with a *larger* margin (e.g. Gemma-4 Med Y1 0.27→0.50). The one disagreement
-is LLaMA-2 **Tier-C** Cardiff (a 955-example strict-subset ablation), which we
-now report honestly as not surviving the held-out check; the corresponding
-LLaMA-2 **main** Cardiff cell does survive (0.258→0.434). We also note the
+with a *larger* margin (e.g. Gemma-4 Med Y1 0.27→0.50). Gemma-4 is confirmed on
+all 5/5 main domains and both Tier-C corpora. We report the four disagreements
+honestly (all LLaMA-2: Auckland Law, UK Med Y1, Cardiff Tier-C; plus Qwen3
+Auckland Law): the held-out scorer does not corroborate these LLaMA-2 gains,
+whose DPO outputs become short/answer-focused, so we scope our claim to answer
+entailment/coverage (most robust on Gemma-4) rather than full reasoning
+soundness. We also note the
 held-out model raises the SFT baselines (e.g. Gemma-4 Sydney 0.25→0.41),
 directly addressing the "near-degenerate baseline" concern — the gains persist
 above non-degenerate baselines.
