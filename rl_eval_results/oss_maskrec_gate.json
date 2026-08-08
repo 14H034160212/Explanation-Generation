@@ -1,0 +1,662 @@
+[
+  {
+    "cell": "Gemma-4 Cardiff",
+    "kind": "sft",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "Gemma-4 Cardiff",
+    "kind": "sft",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "Gemma-4 Cardiff",
+    "kind": "sft",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "Gemma-4 Cardiff",
+    "kind": "sft",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "Gemma-4 Cardiff",
+    "kind": "sft",
+    "recovered": 0,
+    "validity": 1
+  },
+  {
+    "cell": "Gemma-4 Cardiff",
+    "kind": "sft",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "Gemma-4 Cardiff",
+    "kind": "sft",
+    "recovered": 1,
+    "validity": 1
+  },
+  {
+    "cell": "Gemma-4 Cardiff",
+    "kind": "sft",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "Gemma-4 Cardiff",
+    "kind": "sft",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "Gemma-4 Cardiff",
+    "kind": "sft",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "Gemma-4 Cardiff",
+    "kind": "sft",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "Gemma-4 Cardiff",
+    "kind": "sft",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "Gemma-4 Cardiff",
+    "kind": "sft",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "Gemma-4 Cardiff",
+    "kind": "sft",
+    "recovered": 0,
+    "validity": 2
+  },
+  {
+    "cell": "Gemma-4 Cardiff",
+    "kind": "sft",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "Gemma-4 Cardiff",
+    "kind": "sft",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "Gemma-4 Cardiff",
+    "kind": "sft",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "Gemma-4 Cardiff",
+    "kind": "sft",
+    "recovered": 1,
+    "validity": 1
+  },
+  {
+    "cell": "Gemma-4 Cardiff",
+    "kind": "dpo",
+    "recovered": 1,
+    "validity": 0
+  },
+  {
+    "cell": "Gemma-4 Cardiff",
+    "kind": "dpo",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "Gemma-4 Cardiff",
+    "kind": "dpo",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "Gemma-4 Cardiff",
+    "kind": "dpo",
+    "recovered": 0,
+    "validity": 2
+  },
+  {
+    "cell": "Gemma-4 Cardiff",
+    "kind": "dpo",
+    "recovered": 0,
+    "validity": 2
+  },
+  {
+    "cell": "Gemma-4 Cardiff",
+    "kind": "dpo",
+    "recovered": 1,
+    "validity": 1
+  },
+  {
+    "cell": "Gemma-4 Cardiff",
+    "kind": "dpo",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "Gemma-4 Cardiff",
+    "kind": "dpo",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "Gemma-4 Cardiff",
+    "kind": "dpo",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "Gemma-4 Cardiff",
+    "kind": "dpo",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "Gemma-4 Cardiff",
+    "kind": "dpo",
+    "recovered": 1,
+    "validity": 1
+  },
+  {
+    "cell": "Gemma-4 Cardiff",
+    "kind": "dpo",
+    "recovered": 1,
+    "validity": 1
+  },
+  {
+    "cell": "Gemma-4 Cardiff",
+    "kind": "dpo",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "Gemma-4 Cardiff",
+    "kind": "dpo",
+    "recovered": 1,
+    "validity": 1
+  },
+  {
+    "cell": "Gemma-4 Cardiff",
+    "kind": "dpo",
+    "recovered": 0,
+    "validity": 2
+  },
+  {
+    "cell": "Gemma-4 Cardiff",
+    "kind": "dpo",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "Gemma-4 Cardiff",
+    "kind": "dpo",
+    "recovered": 1,
+    "validity": 1
+  },
+  {
+    "cell": "Gemma-4 Cardiff",
+    "kind": "dpo",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "Gemma-4 Cardiff",
+    "kind": "dpo",
+    "recovered": 1,
+    "validity": 1
+  },
+  {
+    "cell": "LLaMA-2 Cardiff",
+    "kind": "sft",
+    "recovered": 0,
+    "validity": 1
+  },
+  {
+    "cell": "LLaMA-2 Cardiff",
+    "kind": "sft",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "LLaMA-2 Cardiff",
+    "kind": "sft",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "LLaMA-2 Cardiff",
+    "kind": "sft",
+    "recovered": 0,
+    "validity": 2
+  },
+  {
+    "cell": "LLaMA-2 Cardiff",
+    "kind": "sft",
+    "recovered": 0,
+    "validity": 2
+  },
+  {
+    "cell": "LLaMA-2 Cardiff",
+    "kind": "sft",
+    "recovered": 0,
+    "validity": 2
+  },
+  {
+    "cell": "LLaMA-2 Cardiff",
+    "kind": "sft",
+    "recovered": 1,
+    "validity": 0
+  },
+  {
+    "cell": "LLaMA-2 Cardiff",
+    "kind": "sft",
+    "recovered": 0,
+    "validity": 2
+  },
+  {
+    "cell": "LLaMA-2 Cardiff",
+    "kind": "sft",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "LLaMA-2 Cardiff",
+    "kind": "sft",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "LLaMA-2 Cardiff",
+    "kind": "sft",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "LLaMA-2 Cardiff",
+    "kind": "sft",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "LLaMA-2 Cardiff",
+    "kind": "sft",
+    "recovered": 0,
+    "validity": 2
+  },
+  {
+    "cell": "LLaMA-2 Cardiff",
+    "kind": "sft",
+    "recovered": 0,
+    "validity": 0
+  },
+  {
+    "cell": "LLaMA-2 Cardiff",
+    "kind": "sft",
+    "recovered": 0,
+    "validity": 2
+  },
+  {
+    "cell": "LLaMA-2 Cardiff",
+    "kind": "sft",
+    "recovered": 1,
+    "validity": 0
+  },
+  {
+    "cell": "LLaMA-2 Cardiff",
+    "kind": "sft",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "LLaMA-2 Cardiff",
+    "kind": "sft",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "LLaMA-2 Cardiff",
+    "kind": "sft",
+    "recovered": 1,
+    "validity": 1
+  },
+  {
+    "cell": "LLaMA-2 Cardiff",
+    "kind": "dpo",
+    "recovered": 0,
+    "validity": 0
+  },
+  {
+    "cell": "LLaMA-2 Cardiff",
+    "kind": "dpo",
+    "recovered": 1,
+    "validity": 1
+  },
+  {
+    "cell": "LLaMA-2 Cardiff",
+    "kind": "dpo",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "LLaMA-2 Cardiff",
+    "kind": "dpo",
+    "recovered": 0,
+    "validity": 2
+  },
+  {
+    "cell": "LLaMA-2 Cardiff",
+    "kind": "dpo",
+    "recovered": 0,
+    "validity": 0
+  },
+  {
+    "cell": "LLaMA-2 Cardiff",
+    "kind": "dpo",
+    "recovered": 1,
+    "validity": 0
+  },
+  {
+    "cell": "LLaMA-2 Cardiff",
+    "kind": "dpo",
+    "recovered": 1,
+    "validity": 1
+  },
+  {
+    "cell": "LLaMA-2 Cardiff",
+    "kind": "dpo",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "LLaMA-2 Cardiff",
+    "kind": "dpo",
+    "recovered": 0,
+    "validity": 2
+  },
+  {
+    "cell": "LLaMA-2 Cardiff",
+    "kind": "dpo",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "LLaMA-2 Cardiff",
+    "kind": "dpo",
+    "recovered": 0,
+    "validity": 0
+  },
+  {
+    "cell": "LLaMA-2 Cardiff",
+    "kind": "dpo",
+    "recovered": 1,
+    "validity": 1
+  },
+  {
+    "cell": "LLaMA-2 Cardiff",
+    "kind": "dpo",
+    "recovered": 1,
+    "validity": 0
+  },
+  {
+    "cell": "LLaMA-2 Cardiff",
+    "kind": "dpo",
+    "recovered": 0,
+    "validity": 2
+  },
+  {
+    "cell": "LLaMA-2 Cardiff",
+    "kind": "dpo",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "LLaMA-2 Cardiff",
+    "kind": "dpo",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "LLaMA-2 Cardiff",
+    "kind": "dpo",
+    "recovered": 0,
+    "validity": 0
+  },
+  {
+    "cell": "LLaMA-2 Cardiff",
+    "kind": "dpo",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "Qwen3 Cardiff",
+    "kind": "sft",
+    "recovered": 0,
+    "validity": 1
+  },
+  {
+    "cell": "Qwen3 Cardiff",
+    "kind": "sft",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "Qwen3 Cardiff",
+    "kind": "sft",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "Qwen3 Cardiff",
+    "kind": "sft",
+    "recovered": 0,
+    "validity": 1
+  },
+  {
+    "cell": "Qwen3 Cardiff",
+    "kind": "sft",
+    "recovered": 0,
+    "validity": 2
+  },
+  {
+    "cell": "Qwen3 Cardiff",
+    "kind": "sft",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "Qwen3 Cardiff",
+    "kind": "sft",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "Qwen3 Cardiff",
+    "kind": "sft",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "Qwen3 Cardiff",
+    "kind": "sft",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "Qwen3 Cardiff",
+    "kind": "sft",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "Qwen3 Cardiff",
+    "kind": "sft",
+    "recovered": 1,
+    "validity": 1
+  },
+  {
+    "cell": "Qwen3 Cardiff",
+    "kind": "sft",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "Qwen3 Cardiff",
+    "kind": "sft",
+    "recovered": 0,
+    "validity": 1
+  },
+  {
+    "cell": "Qwen3 Cardiff",
+    "kind": "sft",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "Qwen3 Cardiff",
+    "kind": "sft",
+    "recovered": 0,
+    "validity": 2
+  },
+  {
+    "cell": "Qwen3 Cardiff",
+    "kind": "sft",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "Qwen3 Cardiff",
+    "kind": "sft",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "Qwen3 Cardiff",
+    "kind": "sft",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "Qwen3 Cardiff",
+    "kind": "sft",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "Qwen3 Cardiff",
+    "kind": "dpo",
+    "recovered": 0,
+    "validity": 1
+  },
+  {
+    "cell": "Qwen3 Cardiff",
+    "kind": "dpo",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "Qwen3 Cardiff",
+    "kind": "dpo",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "Qwen3 Cardiff",
+    "kind": "dpo",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "Qwen3 Cardiff",
+    "kind": "dpo",
+    "recovered": 0,
+    "validity": 2
+  },
+  {
+    "cell": "Qwen3 Cardiff",
+    "kind": "dpo",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "Qwen3 Cardiff",
+    "kind": "dpo",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "Qwen3 Cardiff",
+    "kind": "dpo",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "Qwen3 Cardiff",
+    "kind": "dpo",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "Qwen3 Cardiff",
+    "kind": "dpo",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "Qwen3 Cardiff",
+    "kind": "dpo",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "Qwen3 Cardiff",
+    "kind": "dpo",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "Qwen3 Cardiff",
+    "kind": "dpo",
+    "recovered": 0,
+    "validity": 2
+  },
+  {
+    "cell": "Qwen3 Cardiff",
+    "kind": "dpo",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "Qwen3 Cardiff",
+    "kind": "dpo",
+    "recovered": 1,
+    "validity": 1
+  },
+  {
+    "cell": "Qwen3 Cardiff",
+    "kind": "dpo",
+    "recovered": 1,
+    "validity": 2
+  },
+  {
+    "cell": "Qwen3 Cardiff",
+    "kind": "dpo",
+    "recovered": 1,
+    "validity": 2
+  }
+]

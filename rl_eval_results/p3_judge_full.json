@@ -1,0 +1,44 @@
+{
+  "qwen2.5:7b | SimPO vs SFT": {
+    "n": 191,
+    "model_win": 130,
+    "SFT_win": 55,
+    "tie": 6
+  },
+  "qwen2.5:7b | OPD vs SFT": {
+    "n": 191,
+    "model_win": 104,
+    "SFT_win": 65,
+    "tie": 22
+  },
+  "qwen2.5:7b | DPO_v2 vs SFT": {
+    "n": 191,
+    "model_win": 97,
+    "SFT_win": 49,
+    "tie": 45
+  },
+  "llama3:8b | SimPO vs SFT": {
+    "n": 191,
+    "model_win": 138,
+    "SFT_win": 53,
+    "tie": 0
+  },
+  "llama3:8b | OPD vs SFT": {
+    "n": 191,
+    "model_win": 96,
+    "SFT_win": 94,
+    "tie": 1
+  },
+  "llama3:8b | DPO_v2 vs SFT": {
+    "n": 191,
+    "model_win": 107,
+    "SFT_win": 82,
+    "tie": 2
+  },
+  "deepseek-r1:32b | SimPO vs SFT": {
+    "n": 179,
+    "model_win": 124,
+    "SFT_win": 31,
+    "tie": 24
+  }
+}

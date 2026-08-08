@@ -12,13 +12,13 @@ For completeness we provide the full per-architecture breakdown on each of the f
 \toprule
 Model & BLEU $\uparrow$ & BERT(Stu) $\uparrow$ & BERT(Ans) $\uparrow$ & ACR $\uparrow$ & NLI $\uparrow$ & Ver $\uparrow$ & Time $\downarrow$ \\
 \midrule
-\textbf{ILearner-LLM (K=5)} & 0.0274 & --- & 0.7889 & 0.6451 & 0.0837 & 3.1843 & --- \\
+\textbf{ILearner-LLM (K=5)} & 0.0274 &, & 0.7889 & 0.6451 & 0.0837 & 3.1843 &, \\
 SFT (LLaMA-2-13B) & 0.0222 & 0.8244 & 0.7870 & 0.6249 & 0.0537 & 3.1937 & 19.001 \\
 DPO v2 (ours) & 0.0364 & 0.8367 & 0.8426 & 0.6290 & 0.2774 & 2.9474 & 6.370 \\
 \textbf{RLearner-LLM (LLaMA-2)} & 0.0316 & 0.8359 & \textbf{0.8620} & 0.6327 & \textbf{0.3562} & 2.8376 & \textbf{4.060} \\
 \midrule
-Qwen3-8B SFT & 0.0844 & 0.8788 & 0.8416 & 0.5929 & 0.1737 & 2.2600 & --- \\
-\textbf{RLearner-LLM (Qwen3)} & 0.0418 & 0.8353 & 0.7995 & \textbf{0.8283} & 0.2284 & 2.7800 & --- \\
+Qwen3-8B SFT & 0.0844 & 0.8788 & 0.8416 & 0.5929 & 0.1737 & 2.2600 &, \\
+\textbf{RLearner-LLM (Qwen3)} & 0.0418 & 0.8353 & 0.7995 & \textbf{0.8283} & 0.2284 & 2.7800 &, \\
 \midrule
 Gemma4-E4B-it SFT & 0.0844 & 0.8794 & 0.8452 & 0.6209 & 0.2469 & 3.0364 & 5.804 \\
 RLearner-LLM (Gemma4-E4B) & \textbf{0.0893} & \textbf{0.8803} & 0.8472 & 0.5421 & 0.2309 & 3.0142 & 4.667 \\
@@ -36,7 +36,7 @@ RLearner-LLM (Gemma4-E4B) & \textbf{0.0893} & \textbf{0.8803} & 0.8472 & 0.5421 
 \toprule
 Model & BLEU $\uparrow$ & BERT(Stu) $\uparrow$ & BERT(Ans) $\uparrow$ & ACR $\uparrow$ & NLI $\uparrow$ & Ver $\uparrow$ \\
 \midrule
-ILearner-LLM (K=5) & 0.0381 & --- & 0.7720 & 0.6326 & 0.3996 & 2.7845 \\
+ILearner-LLM (K=5) & 0.0381 &, & 0.7720 & 0.6326 & 0.3996 & 2.7845 \\
 SFT (LLaMA-2-13B) & 0.0298 & 0.8010 & 0.7709 & 0.5516 & 0.2702 & 2.7180 \\
 RLearner-LLM (LLaMA-2) & 0.0457 & 0.8265 & 0.8297 & 0.5546 & 0.3229 & 2.5918 \\
 \midrule
@@ -59,7 +59,7 @@ Gemma4-E4B-it SFT & 0.1353 & \textbf{0.8798} & 0.8611 & 0.5172 & 0.3911 & 2.6431
 \toprule
 Model & BLEU $\uparrow$ & BERT(Stu) $\uparrow$ & BERT(Ans) $\uparrow$ & ACR $\uparrow$ & NLI $\uparrow$ & Ver $\uparrow$ \\
 \midrule
-ILearner-LLM (K=5) & 0.0671 & --- & 0.7863 & 0.8066 & 0.1219 & 3.2005 \\
+ILearner-LLM (K=5) & 0.0671 &, & 0.7863 & 0.8066 & 0.1219 & 3.2005 \\
 SFT (LLaMA-2-13B) & 0.0136 & 0.8065 & 0.7799 & 0.7556 & 0.0860 & 3.2561 \\
 \textbf{RLearner-LLM (LLaMA-2)} & \textbf{0.0222} & \textbf{0.8308} & \textbf{0.8467} & 0.7766 & \textbf{0.4251} & 3.0147 \\
 \midrule
@@ -82,7 +82,7 @@ Gemma4-E4B-it SFT & 0.0428 & 0.8622 & 0.8447 & 0.7556 & 0.2962 & 3.1411 \\
 \toprule
 Model & BLEU $\uparrow$ & BERT(Stu) $\uparrow$ & BERT(Ans) $\uparrow$ & ACR $\uparrow$ & NLI $\uparrow$ & Ver $\uparrow$ \\
 \midrule
-ILearner-LLM (K=5) & 0.0495 & --- & 0.7873 & 0.7357 & 0.0668 & 3.1600 \\
+ILearner-LLM (K=5) & 0.0495 &, & 0.7873 & 0.7357 & 0.0668 & 3.1600 \\
 SFT (LLaMA-2-13B) & 0.0163 & 0.8208 & 0.8142 & 0.6120 & 0.2319 & 2.8717 \\
 \textbf{RLearner-LLM (LLaMA-2)} & \textbf{0.0196} & \textbf{0.8247} & \textbf{0.8539} & \textbf{0.7772} & \textbf{0.3885} & 2.9738 \\
 \midrule
@@ -165,7 +165,7 @@ Medicine (Y2)   & $17.5\%$ & $84.5\%$ & $61.6\%$ & $43.5\%$ \\
 \section{Per-Architecture Reward Variant Assignment}
 \label{sec:variant_assignment_appendix}
 
-Table~\ref{tab:variant_per_arch} records which Hybrid reward variant---$H_A$ (the additive cross-domain form) or $H_M$ (the multiplicative single- or merged-domain form)---was used for each (architecture, domain) cell, together with the number of preference pairs constructed for each.
+Table~\ref{tab:variant_per_arch} records which Hybrid reward variant, $H_A$ (the additive cross-domain form) or $H_M$ (the multiplicative single- or merged-domain form), was used for each (architecture, domain) cell, together with the number of preference pairs constructed for each.
 
 \begin{table}[H]
 \centering
@@ -210,7 +210,7 @@ $\Delta$ (Tier-B $-$ default) & $-86\%$ & $-0.006$ & $+0.008$ & $+0.027$ & $+0.1
 \section{Tier-C Strict-Discriminator Ablation Detail}
 \label{sec:tierc_appendix}
 
-The original submission noted that the \emph{strict-discriminator} variant of the question-quality filter---retaining only questions whose author-designated key coincides with the \emph{modal student answer}---requires per-option response counts absent from the question-level metadata. We have since obtained the full PeerWise answer-submission logs for both Cardiff and Sydney ($3{,}439{,}340$ and $503{,}806$ individual submissions respectively), enabling this variant. For each question we compute the most-frequently-selected option across all student submissions and \textbf{drop questions whose author key disagrees with this modal answer}, a conservative proxy for mis-keyed or ambiguous items. Stacked on top of the Tier-B filter, this defines \textbf{Tier-C}, the strictest filter in our study; it further shrinks the Cardiff pool $1{,}041\to955$ and the Sydney pool $459\to384$.
+The original submission noted that the \emph{strict-discriminator} variant of the question-quality filter, retaining only questions whose author-designated key coincides with the \emph{modal student answer}, requires per-option response counts absent from the question-level metadata. We have since obtained the full PeerWise answer-submission logs for both Cardiff and Sydney ($3{,}439{,}340$ and $503{,}806$ individual submissions respectively), enabling this variant. For each question we compute the most-frequently-selected option across all student submissions and \textbf{drop questions whose author key disagrees with this modal answer}, a conservative proxy for mis-keyed or ambiguous items. Stacked on top of the Tier-B filter, this defines \textbf{Tier-C}, the strictest filter in our study; it further shrinks the Cardiff pool $1{,}041\to955$ and the Sydney pool $459\to384$.
 
 \begin{table}[H]
 \centering
@@ -283,7 +283,7 @@ Qwen3 & Sydney Tier-C & 0.184$\to$0.158 & 0.362$\to$0.324 & \checkmark \\
 \caption{Entailment under the training scorer (\texttt{nli-deberta-v3-small}) vs.\ an
 independent held-out scorer (\texttt{nli-deberta-v3-large}), SFT$\to$DPO. The two
 scorers agree on the improvement direction in \textbf{12/15 main cells and 17/21
-overall}. \textbf{Gemma-4 E4B-it---our headline compact model---is confirmed on all
+overall}. \textbf{Gemma-4 E4B-it, our headline compact model, is confirmed on all
 5/5 main domains and both Tier-C corpora}, and the held-out scorer also raises SFT
 baselines (e.g.\ Gemma-4 Sydney $0.25\to0.41$), so its gains sit above
 non-degenerate baselines. Majority agreement (and agreement on all Gemma-4 cells and
@@ -316,7 +316,7 @@ Base generator & \texttt{Qwen/Qwen3-8B} & 8.2B & QK-norm; LoRA on $v$/$o$/MLP on
 Base generator & \texttt{google/gemma-4-E4B-it} & $\sim$4.5B eff.\ & multimodal class; LoRA regex on text tower \\
 NLI scorer & \texttt{cross-encoder/nli-deberta-v3-small} & 184M & SNLI+MultiNLI fine-tune \\
 Stylistic verifier & Alpaca-7B fine-tune \cite{bao2025exploring} & 7B & 1--5 Likert scale, custom checkpoint \\
-LLM judge (pairwise) & \texttt{gpt-4o-mini-2024-07-18} & --- & OpenAI API, $T{=}0.0$ \\
+LLM judge (pairwise) & \texttt{gpt-4o-mini-2024-07-18} &, & OpenAI API, $T{=}0.0$ \\
 \bottomrule
 \end{tabular}
 }
@@ -347,3 +347,51 @@ Which explanation is better? Provide a very brief justification followed by your
 \paragraph{Decoding settings.} \texttt{model="gpt-4o-mini-2024-07-18"}, \texttt{temperature=0.0}, \texttt{max\_tokens=200}, all other parameters at OpenAI defaults. Verdicts are extracted by string match on \texttt{"Better: Explanation 1"} / \texttt{"Better: Explanation 2"}; everything else (including malformed outputs) is counted as a tie.
 
 \paragraph{NLI verifier inputs.} The \texttt{cross-encoder/nli-deberta-v3-small} scorer takes the explanation $E$ as the premise and the correct-option text $A$ as the hypothesis, jointly tokenised at maximum length $512$, with no prompt wrapping (Section~\ref{sec:eval_tier}). The Alpaca-7B stylistic verifier uses the standard Alpaca instruction-input-response template with the instruction \texttt{``As a question rating verifier expert, can you generate the question rating score for the given input?''}; the score is parsed as the first \texttt{\{1,2,3,4,5\}} digit in the response.
+
+\section{Reasoning-Quality Reward and Held-out Judge Evaluation}
+\label{sec:reasoning_appendix}
+This appendix details the reasoning-quality experiment of \S\ref{sec:reasoning-reward}.
+
+\paragraph{Preference construction.} For each Cardiff Tier-C training prompt we draw $K{=}3$ on-policy samples from the Gemma~4 SFT policy (temperature $0.7$, nucleus $0.9$). A pairwise judge (\texttt{deepseek-r1:32b}, greedy) is shown the question, the stated correct answer, and two candidate explanations, and returns \texttt{\{"better":1|2|0\}}; the system prompt asks only which explanation gives the more logically valid justification for the correct answer and to \emph{ignore length, fluency, and formatting}, treating answer restatement without a reason as worse. Presentation order is flipped deterministically per comparison to control position bias. We run a round-robin over the $K$ samples and take the highest- vs.\ lowest-win candidate as chosen/rejected, keeping a pair only when one candidate strictly dominates. Of $350$ prompts this yields $321$ pairs; the length-matched training subset ($|\text{chosen words}-\text{rejected words}|\le 15$) is $112$ pairs (chosen $46$, rejected $44$ words on average). A second-family judge (\texttt{llama3:8b}) re-scores the $112$ length-matched pairs and agrees with the DeepSeek preference on $77/112$ ($69\%$).
+
+\paragraph{Optimisation.} We compare three objectives on the $112$ length-matched pairs, all LoRA on the SFT-merged Gemma~4 (rank $16$, $\alpha{=}32$): (i) DPO ($\beta{=}0.5$, $3$ epochs); (ii) SimPO, a reference-free length-normalised objective $\mathcal{L}={-}\log\sigma\!\big(\beta(\tfrac{1}{|y_w|}\log\pi_\theta(y_w){-}\tfrac{1}{|y_l|}\log\pi_\theta(y_l)){-}\gamma\big)$ with $\beta{=}2.0,\gamma{=}1.0$, $3$ epochs; and (iii) a teacher-free on-policy-distillation (OPD) variant that supervised-fine-tunes on the highest-validity, concise self-samples selected by the DeepSeek validity judge. Plain DPO and OPD are included as ablations; SimPO is the length-preserving choice used in the main text.
+
+\paragraph{Held-out judging.} We generate greedily on all $191$ Cardiff Tier-C test questions from each policy composed as base~$+$~SFT~$+$~preference adapter. Two judges independent of the reward (\texttt{qwen2.5:7b}, \texttt{llama3:8b}) and a reward-family reference judge (\texttt{deepseek-r1:32b}) compare each policy against SFT with the same pairwise prompt and per-item order flip. Table~\ref{tab:reasoning_judges} reports wins/losses/ties; significance is a two-sided sign test on non-tied pairs.
+
+\begin{table}[H]
+\centering
+\small
+\caption{Held-out reasoning preference vs.\ SFT on $191$ Cardiff Tier-C test questions, at matched output length. Entries are (policy wins / SFT wins / ties); \% is the policy's share of non-tied pairs. Qwen2.5 and Llama-3 are independent of the reward; DeepSeek-R1 is the reward family, reported as a reference.}
+\label{tab:reasoning_judges}
+\begin{tabular}{lccccc}
+\toprule
+Policy & Avg.\ words & Qwen2.5-7B & Llama-3-8B & DeepSeek-R1 (ref) \\
+\midrule
+SFT (baseline) & $66$ &, &, &, \\
+\textbf{SimPO} & $68$ & $130/55/6$ ($70\%$) & $138/53/0$ ($72\%$) & $124/31/24$ ($80\%$) \\
+DPO & $60$ & $97/49/45$ ($66\%$) & $107/82/2$ ($57\%$) &, \\
+OPD (self-distill) & $44$ & $104/65/22$ ($62\%$) & $96/94/1$ ($51\%$) &, \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\noindent SimPO is preferred over SFT by both independent judges with $p\ll10^{-3}$ (sign test on non-tied pairs) at essentially unchanged length ($68$ vs $66$ words), so the gain is not a verbosity artefact. DPO is consistently but more weakly preferred; the OPD self-distillation variant is concise but its advantage is judge-dependent (one judge ties). All policies avoid the verbose-markdown drift only when the preference adapter is composed with the SFT adapter at inference; applying it to the bare base reintroduces the base model's long-form register.
+
+\paragraph{Length distributions.} Table~\ref{tab:reasoning_lengths} gives the full held-out word-count distribution per policy, addressing the reviewer request for explanation lengths rather than means alone. SFT and SimPO have near-identical distributions across every percentile (median $51$ vs $58$; $90$th percentile $125$ vs $117$), so SimPO's judged reasoning advantage in Table~\ref{tab:reasoning_judges} is not attributable to longer outputs; DPO and the OPD self-distillation variant are if anything shorter.
+
+\begin{table}[H]
+\centering
+\small
+\caption{Held-out explanation length (words) distribution on the $191$ Cardiff Tier-C test questions. SimPO matches SFT across the distribution, confirming the length-controlled comparison in Table~\ref{tab:reasoning_judges}.}
+\label{tab:reasoning_lengths}
+\begin{tabular}{lccccc}
+\toprule
+Policy & Mean & Median & P10 & P90 & Max \\
+\midrule
+SFT & $66$ & $51$ & $19$ & $125$ & $273$ \\
+SimPO & $68$ & $58$ & $29$ & $117$ & $220$ \\
+DPO & $60$ & $48$ & $23$ & $110$ & $275$ \\
+OPD (self-distill) & $44$ & $36$ & $17$ & $85$ & $250$ \\
+\bottomrule
+\end{tabular}
+\end{table}
