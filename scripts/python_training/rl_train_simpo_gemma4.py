@@ -46,8 +46,12 @@ def main():
     ap.add_argument("--gamma", type=float, default=1.0)   # gamma_beta_ratio = gamma/beta = 0.5
     ap.add_argument("--accum", type=int, default=8)
     ap.add_argument("--device", default="cuda:0")
+    ap.add_argument("--seed", type=int, default=0, help="random seed (LoRA init + data order)")
     args = ap.parse_args()
 
+    import random as _random
+    torch.manual_seed(args.seed)
+    _random.seed(args.seed)
     dev = args.device
     tok = AutoTokenizer.from_pretrained(args.base, padding_side="left", trust_remote_code=True, cache_dir="cache")
     if tok.pad_token is None:
@@ -78,8 +82,7 @@ def main():
     step = 0
     for ep in range(args.epochs):
         order = list(range(len(pairs)))
-        # deterministic shuffle by epoch (no Math.random dependency)
-        order = order[ep % len(order):] + order[:ep % len(order)]
+        _random.shuffle(order)   # seeded shuffle (args.seed set above)
         opt.zero_grad()
         run_loss = run_acc = n = 0
         for bi, idx in enumerate(order):

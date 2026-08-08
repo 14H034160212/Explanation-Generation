@@ -1,0 +1,23 @@
+{
+  "SimPO_s1": {
+    "n": 191,
+    "win": 140,
+    "sft": 46,
+    "tie": 5,
+    "nontie_winrate": 0.753
+  },
+  "SimPO_s2": {
+    "n": 191,
+    "win": 143,
+    "sft": 43,
+    "tie": 5,
+    "nontie_winrate": 0.769
+  },
+  "SimPO_s3": {
+    "n": 191,
+    "win": 145,
+    "sft": 43,
+    "tie": 3,
+    "nontie_winrate": 0.771
+  }
+}
