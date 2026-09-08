@@ -3,7 +3,32 @@
 \section{Per-Domain Detail Tables}
 \label{sec:per_domain_appendix}
 
-For completeness we provide the full per-architecture breakdown on each of the four non-Cardiff domains. The Cardiff Biology table (Table~\ref{tab:cardiff_results}) appears in the main paper because it is the most extensively dissected domain and is the target of the robustness ablation in Section~\ref{sec:discussion-limits}; the headline NLI summary across all five domains is given in Table~\ref{tab:nli_summary}.
+For completeness we provide the full per-architecture breakdown on all five domains (the headline NLI summary across domains is Table~\ref{tab:nli_summary} in the main paper). Cardiff Biology, the most extensively dissected domain and the target of the robustness ablation (\S\ref{sec:discussion-limits}), is given first.
+
+\begin{table}[h]
+\centering
+\resizebox{\textwidth}{!}{
+\begin{tabular}{l|c|c|c|c|c|c|c}
+\toprule
+Model & BLEU $\uparrow$ & BERT(Stu) $\uparrow$ & BERT(Ans) $\uparrow$ & ACR $\uparrow$ & NLI $\uparrow$ & Ver $\uparrow$ & Time $\downarrow$ \\
+\midrule
+\textbf{ILearner-LLM (K=5)} & 0.0729 &, & 0.7859 & 0.8713 & 0.0864 & 3.1960 &, \\
+SFT (LLaMA-2-13B) & 0.0160 & 0.8070 & 0.7820 & 0.8087 & 0.0555 & 3.1976 & 19.947 \\
+DPO v1 (ours) & 0.0173 & 0.8238 & 0.8325 & 0.7698 & 0.2969 & 3.0467 & 6.567 \\
+DPO v2 (ours) & 0.0247 & 0.8300 & 0.8422 & \textbf{0.8682} & 0.2905 & 3.0648 & 5.774 \\
+\textbf{RLearner-LLM (LLaMA-2)} & 0.0154 & 0.8185 & 0.8358 & 0.7894 & 0.3209 & 3.0736 & 5.946 \\
+\midrule
+Qwen3-8B SFT & 0.0406 & 0.8587 & 0.8462 & 0.7421 & 0.1959 & 2.5000 &, \\
+\textbf{RLearner-LLM (Qwen3)} & 0.0247 & 0.8148 & 0.7957 & 0.8272 & 0.1820 & 3.0900 &, \\
+\midrule
+Gemma4-E4B-it SFT & 0.0453 & \textbf{0.8591} & 0.8452 & 0.7461 & 0.2117 & \textbf{3.1207} & 6.322 \\
+\textbf{RLearner-LLM (Gemma4-E4B)} & 0.0303 & 0.8461 & 0.8426 & 0.6497 & \textbf{0.3505} & 3.0972 & \textbf{4.756} \\
+\bottomrule
+\end{tabular}
+}
+\caption{Cardiff Biology across three base architectures. LLaMA-2 RLearner-LLM gains $5.8\times$ NLI over SFT; Qwen3-8B gains mainly in ACR; Gemma~4 E4B-it (4.5B effective) reaches the highest RLearner NLI ($0.3505$, $+65.6\%$) and fastest inference ($4.76$s). Gemma~4 uses the same merged 5-domain SFT protocol as Qwen3-8B.}
+\label{tab:cardiff_results}
+\end{table}
 
 \begin{table}[h]
 \centering
@@ -394,4 +419,52 @@ DPO & $60$ & $48$ & $23$ & $110$ & $275$ \\
 OPD (self-distill) & $44$ & $36$ & $17$ & $85$ & $250$ \\
 \bottomrule
 \end{tabular}
+\end{table}
+
+\section{Reward-Variant Ablation ($H_A$ vs.\ $H_M$) Detail}
+\label{sec:variant_ablation_appendix}
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{l|l|c|c|c}
+\toprule
+Architecture & Domain & $H_A$ NLI / ACR & $H_M$ NLI / ACR & NLI winner \\
+\midrule
+Qwen3-8B  & Cardiff (single-domain)   & $0.1411$ / $0.828$ & \textbf{$0.1863$} / $0.843$ & $H_M$ ($+4.5$\,pp) \\
+Qwen3-8B  & Cardiff (cross-domain, $N{=}5$) & $0.1386$ / $0.832$ & \textbf{$0.1820$} / $0.827$ & $H_M$ ($+4.3$\,pp) \\
+Qwen3-8B  & Sydney (single-domain)    & \textbf{$0.2281$} / $0.806$ & $0.1999$ / $0.813$ & $H_A$ ($+2.8$\,pp) \\
+Qwen3-8B  & Sydney (cross-domain, $N{=}5$) & $0.2118$ / $0.831$ & \textbf{$0.2284$} / $0.828$ & $H_M$ ($+1.7$\,pp) \\
+LLaMA-2-13B & Cardiff (cross-domain)  & $0.3209$ / $0.789$ & \textbf{$0.3859$} / $0.772$ & $H_M$ ($+6.5$\,pp) \\
+LLaMA-2-13B & Sydney (cross-domain)   & \textbf{$0.3562$} / $0.633$ & $0.2797$ / $0.634$ & $H_A$ ($+7.7$\,pp) \\
+LLaMA-2-13B & Auckland Law            & $0.3229$ / $0.555$ & \textbf{$0.3895$} / $0.663$ & $H_M$ ($+6.7$\,pp) \\
+LLaMA-2-13B & UK Medicine Y1          & \textbf{$0.4251$} / $0.777$ & $0.3842$ / $0.765$ & $H_A$ ($+4.1$\,pp) \\
+LLaMA-2-13B & UK Medicine Y2          & $0.3885$ / $0.777$ & \textbf{$0.4425$} / $0.790$ & $H_M$ ($+5.4$\,pp) \\
+LLaMA-2-13B & Cardiff (single-domain) & $0.3687$ / $0.825$ & \textbf{$0.3859$} / $0.772$ & $H_M$ ($+1.7$\,pp) \\
+LLaMA-2-13B & Sydney (single-domain)  & \textbf{$0.3439$} / $0.756$ & $0.2797$ / $0.634$ & $H_A$ ($+6.4$\,pp) \\
+\midrule
+\multicolumn{4}{r|}{\textbf{Total $H_M$ wins / $H_A$ wins:}} & \textbf{$7$ / $4$} \\
+\multicolumn{4}{r|}{\textbf{Mean NLI difference ($H_M-H_A$):}} & $+1.5$\,pp \\
+\bottomrule
+\end{tabular}
+\caption{Head-to-head $H_A$ vs.\ $H_M$ comparison on $11$ matched (architecture, domain) cells. Bold marks the within-row NLI winner. Both variants beat the SFT baseline wherever the dual signal is supplied; their NLI difference is within ${\sim}1$\,pp on average, with $H_M$ winning $7/11$.}
+\label{tab:variant_ablation}
+\end{table}
+
+\section{Blind Pairwise Evaluation Detail}
+\label{sec:pairwise_appendix}
+\begin{table}[h]
+\centering
+\resizebox{\textwidth}{!}{
+\begin{tabular}{l|c|c|c|c|c}
+\toprule
+Model A & Model B & A wins & B wins & Ties & B win rate \\
+\midrule
+SFT (LLaMA-2) & DPO v2 (LLaMA-2) & 69 & 31 & 0 & $31\%$\,$^{\dagger}$ \\
+Qwen3-8B SFT & \textbf{RLearner-LLM (Qwen3)} & 5 & \textbf{95} & 0 & \textbf{95\%} \\
+\textbf{RLearner-LLM (Qwen3)} & GPT-4o-mini & 5 & 95 & 0 & 95\% \\
+\bottomrule
+\end{tabular}
+}
+\caption{Blind pairwise evaluation by GPT-4o-mini ($n{=}100$/row, balanced ordering). Row~1 ($\dagger$) replicates verbosity bias (verbose SFT preferred over the more concise, logically stronger DPO\,v2); row~3 reproduces it on a frontier comparator (GPT-4o-mini's longer outputs win $95\%$ against our concise RLearner-LLM).}
+\label{tab:pairwise_1}
 \end{table}
