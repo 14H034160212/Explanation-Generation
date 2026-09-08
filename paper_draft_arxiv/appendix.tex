@@ -468,3 +468,26 @@ Qwen3-8B SFT & \textbf{RLearner-LLM (Qwen3)} & 5 & \textbf{95} & 0 & \textbf{95\
 \caption{Blind pairwise evaluation by GPT-4o-mini ($n{=}100$/row, balanced ordering). Row~1 ($\dagger$) replicates verbosity bias (verbose SFT preferred over the more concise, logically stronger DPO\,v2); row~3 reproduces it on a frontier comparator (GPT-4o-mini's longer outputs win $95\%$ against our concise RLearner-LLM).}
 \label{tab:pairwise_1}
 \end{table}
+
+\section{Human Evaluation of Reasoning Quality}
+\label{sec:human_appendix}
+Four independent raters with a biology/medical background (not among the authors) each judged the same $24$ length-matched, blinded pairs used in \S\ref{sec:reasoning-reward}, choosing which explanation gives the more logically valid justification for the stated correct answer, or Tie, while ignoring length, fluency, and formatting. Table~\ref{tab:human_eval} reports per-rater and aggregate preferences. Raters prefer the SimPO policy in $56$ of $89$ non-tied judgements ($63\%$; two-sided sign test $p\approx0.02$); by per-item majority the SimPO policy wins $13$ items, SFT wins $5$, and $6$ are split. Average pairwise agreement (three-way, including Tie) is $49\%$, indicating that fine-grained reasoning preference is genuinely subjective on these near-length-matched outputs; the direction nonetheless agrees with the automatic judges, at a smaller margin.
+
+\begin{table}[H]
+\centering
+\small
+\caption{Blinded human evaluation of reasoning quality, SimPO policy vs.\ SFT, on the $24$ length-matched pairs. Four independent raters (R1--R4); entries are (SimPO wins / SFT wins / Tie).}
+\label{tab:human_eval}
+\begin{tabular}{lcccc}
+\toprule
+Rater & SimPO & SFT & Tie & non-tie SimPO \\
+\midrule
+R1 & $19$ & $5$  & $0$ & $79\%$ \\
+R2 & $16$ & $7$  & $1$ & $70\%$ \\
+R3 & $12$ & $11$ & $1$ & $52\%$ \\
+R4 & $9$  & $10$ & $5$ & $47\%$ \\
+\midrule
+\textbf{Total} & $\mathbf{56}$ & $\mathbf{33}$ & $\mathbf{7}$ & $\mathbf{63\%}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
