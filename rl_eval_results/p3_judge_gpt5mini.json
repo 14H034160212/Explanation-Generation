@@ -1,0 +1,10 @@
+{
+  "model": "gpt-5-mini",
+  "A": "SimPO",
+  "n": 191,
+  "SimPO_win": 137,
+  "SFT_win": 31,
+  "tie": 23,
+  "nontie_simpo": 0.815,
+  "tokens": 137608
+}
