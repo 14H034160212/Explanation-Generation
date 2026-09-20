@@ -47,6 +47,12 @@
 \input{discussion}
 \input{conclusion}
 
+\section*{Reproducibility Statement}
+All code, LoRA adapters, preference data, and per-domain evaluation artefacts are released at an anonymised repository (abstract footnote). Exact HuggingFace identifiers, parameter counts, and checkpoints are in Appendix~\ref{sec:hf_identifiers}; SFT/DPO/SimPO hyperparameters, LoRA target modules, and the score-gap filter are in \S\ref{sec:train_config} and Appendix~\ref{sec:variant_assignment_appendix}; NLI/verifier inputs and the LLM-judge prompts and decoding settings are in Appendix~\ref{sec:judge_prompt}. All results use the fixed held-out test splits of \S\ref{sec:eval_tier}; the reasoning-reward construction, length-matching, and multi-judge protocol are detailed in \S\ref{sec:reasoning-reward} and Appendix~\ref{sec:reasoning_appendix}.
+
+\section*{Ethics Statement}
+The SFT corpus consists of multiple-choice explanations authored by undergraduate students on the PeerWise peer-learning platform, used for research on educational explanation generation; it contains learner-authored study content rather than personal data. The human evaluation used volunteer, domain-literate raters who judged anonymised model outputs; only optional initials were recorded (reported as R1--R4). RLearner-LLM is intended to \emph{assist} rather than replace educators: generated explanations can still contain factual errors and should be reviewed before classroom use, and we report failure modes (hallucinated citation-style URLs, non-improvement cells, and judge disagreement) transparently throughout.
+
 \input{references}
 
 \input{appendix}
