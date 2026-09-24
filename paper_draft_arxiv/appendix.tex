@@ -204,7 +204,7 @@ Table~\ref{tab:variant_per_arch} records which Hybrid reward variant, $H_A$ (the
 Architecture & Cardiff/Sydney & Law / Med Y1 / Med Y2 & Pref-pair count \\
 \midrule
 LLaMA-2-13B   & $H_A$ (cross-domain) & $H_A$ (cross-domain) & $239$ \\
-Qwen3-8B      & $H_M$ (single-domain, $N{=}5$) & $H_A$ (cross-domain) & $143$ ($H_M$); $632$ ($H_A$) \\
+Qwen3-8B      & $H_M$ (cross-domain, $N{=}5$) & $H_A$ (cross-domain) & $143$ ($H_M$); $632$ ($H_A$) \\
 Gemma 4 E4B-it & $H_M$ (5-domain merged) & $H_M$ (5-domain merged) & $164$ \\
 \bottomrule
 \end{tabular}
@@ -392,11 +392,11 @@ This appendix details the reasoning-quality experiment of \S\ref{sec:reasoning-r
 \small
 \caption{Held-out reasoning preference vs.\ SFT on $191$ Cardiff Tier-C test questions, at matched output length. Entries are (policy wins / SFT wins / ties); \% is the policy's share of non-tied pairs. Qwen2.5 and Llama-3 are independent of the reward; DeepSeek-R1 is the reward family, reported as a reference.}
 \label{tab:reasoning_judges}
-\begin{tabular}{lccccc}
+\begin{tabular}{lcccc}
 \toprule
 Policy & Avg.\ words & Qwen2.5-7B & Llama-3-8B & DeepSeek-R1 (ref) \\
 \midrule
-SFT (baseline) & $66$ &, &, &, \\
+SFT (baseline) & $66$ & -- & -- & -- \\
 \textbf{SimPO} & $68$ & $130/55/6$ ($70\%$) & $138/53/0$ ($72\%$) & $124/31/24$ ($80\%$) \\
 DPO & $60$ & $97/49/45$ ($66\%$) & $107/82/2$ ($57\%$) &, \\
 OPD (self-distill) & $44$ & $104/65/22$ ($62\%$) & $96/94/1$ ($51\%$) &, \\
