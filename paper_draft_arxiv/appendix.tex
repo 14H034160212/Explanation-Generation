@@ -125,6 +125,8 @@ Gemma4-E4B-it SFT & 0.0476 & 0.8525 & 0.8372 & 0.6786 & 0.1604 & 3.0943 \\
 
 \paragraph{Statistical significance (Gemma-4 flagship).} On our headline compact model (Gemma-4 E4B-it), paired Wilcoxon signed-rank tests over the $100$-question test sets (SFT vs.\ RLearner-LLM per-question NLI, one-sided) confirm the NLI gains are significant on Cardiff ($p{=}4.7\times10^{-6}$), UK Medicine Y1 ($p{=}3.4\times10^{-3}$), and UK Medicine Y2 ($p{=}4.0\times10^{-7}$). The smaller Auckland Law gain ($+11.9\%$) does not reach significance ($p{=}0.18$), and Sydney Biology is a non-improvement ($p{=}0.46$), consistent with the entailment-headroom analysis (\S\ref{sec:arch-effects}): the significant gains are exactly the domains with lower SFT NLI. For the reasoning-quality result (\S\ref{sec:reasoning-reward}) the SimPO improvement over SFT is significant under every judge (two-sided sign test on non-tied pairs, $p\ll10^{-3}$).
 
+\paragraph{Statistical significance (other architectures).} On each architecture's per-domain Hybrid-DPO evaluation (SFT vs.\ RLearner-LLM per-question NLI on the same $100$-question test split, one-sided paired Wilcoxon), the SFT$\to$RLearner NLI improvement is highly significant for \textbf{LLaMA-2-13B} on both training domains (Cardiff $p{=}7.3\times10^{-6}$, Sydney $p{=}1.1\times10^{-6}$) and significant for \textbf{Qwen3-8B} on Sydney ($p{=}0.033$); Qwen3-8B on Cardiff is a non-improvement ($p{=}0.41$), reproducing the entailment-headroom pattern (\S\ref{sec:arch-effects}) whereby Qwen3's higher SFT NLI shifts its gains onto answer coverage. All three architectures are thus significant on their lower-SFT-NLI domains, and none shows a significant loss.
+
 \section{Qualitative Case Study}
 \label{sec:case_study_appendix}
 
