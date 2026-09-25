@@ -323,7 +323,12 @@ Qwen3 DPO on Auckland Law). These concentrate on LLaMA-2, whose DPO outputs beco
 short and answer-focused; a stronger scorer rewards this less than the small training
 scorer does. This scopes our claim: Hybrid-DPO reliably improves \emph{answer
 entailment and coverage}, most robustly on Gemma-4; full reasoning-soundness
-evaluation is future work (\S\ref{sec:discussion-limits}).}
+evaluation is future work (\S\ref{sec:discussion-limits}). For LLaMA-2-13B and
+Qwen3-8B the two scorers are applied to the per-domain Hybrid-DPO generations, so
+the \texttt{small} column here reflects those per-domain runs rather than the
+cross-domain policy summarised in Table~\ref{tab:nli_summary} (Gemma-4 re-scores
+the identical generations); only the SFT$\to$DPO improvement direction is compared
+across the two scorers.}
 \label{tab:heldout_nli}
 \end{table}
 
