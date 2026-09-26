@@ -5,6 +5,42 @@
 
 For completeness we provide the full per-architecture breakdown on all five domains (the headline NLI summary across domains is Table~\ref{tab:nli_summary} in the main paper). Cardiff Biology, the most extensively dissected domain and the target of the robustness ablation (\S\ref{sec:discussion-limits}), is given first.
 
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+% axes
+\draw[->,thick] (0,0) -- (7.7,0) node[right]{\small SFT NLI baseline};
+\draw[->,thick] (0,0) -- (0,6.6) node[above,rotate=0]{};
+\node[rotate=90] at (-0.7,3.3) {\small NLI gain (RLearner $-$ SFT)};
+% x ticks 0.1..0.4 -> 1.8,3.6,5.4,7.2 ; y ticks 0,0.1,0.2,0.3 -> 1.4,2.8,4.2,5.6
+\foreach \x/\lab in {1.8/0.1,3.6/0.2,5.4/0.3,7.2/0.4} {\draw (\x,0)--(\x,-0.1) node[below]{\scriptsize \lab};}
+\foreach \y/\lab in {1.4/0.0,2.8/0.1,4.2/0.2,5.6/0.3} {\draw (0,\y)--(-0.1,\y) node[left]{\scriptsize \lab};}
+% y=0 reference
+\draw[dotted] (0,1.4) -- (7.4,1.4);
+% regression line (slope -1.0, r=-0.73): (0.05,0.261)->(0.40,-0.089)
+\draw[dashed,thick] (0.9,5.05) -- (7.2,0.15);
+% LLaMA-2 (blue circles)
+\foreach \p in {(1.01,5.11),(0.97,5.63),(4.86,2.14),(1.55,6.15),(4.18,3.60)} {\fill[blue] \p circle (2.4pt);}
+% Qwen3 (red squares)
+\foreach \p in {(3.53,1.20),(3.13,2.17),(5.74,0.15),(4.43,0.91),(2.93,1.93)} {\fill[red] \p ++(-2pt,-2pt) rectangle ++(4pt,4pt);}
+% Gemma-4 (green triangles)
+\foreach \p in {(3.82,3.35),(4.45,1.18),(7.04,2.06),(5.33,2.73),(2.88,4.61)} {\fill[green!55!black] \p ++(0,2.6pt) -- ++(2.4pt,-4pt) -- ++(-4.8pt,0) -- cycle;}
+% legend
+\fill[blue] (4.7,6.2) circle (2.4pt); \node[right] at (4.8,6.2){\scriptsize LLaMA-2-13B};
+\fill[red] (4.66,5.75) rectangle ++(4pt,4pt); \node[right] at (4.8,5.95){\scriptsize Qwen3-8B};
+\fill[green!55!black] (4.7,5.5) ++(0,2.6pt) -- ++(2.4pt,-4pt) -- ++(-4.8pt,0) -- cycle; \node[right] at (4.8,5.5){\scriptsize Gemma-4 E4B-it};
+\node at (5.7,4.6) {\small $r=-0.73,\ p=0.002$};
+\end{tikzpicture}
+\caption{NLI gain vs.\ SFT NLI baseline across all $15$ (architecture, domain) cells.
+The gain is inversely related to the baseline (Pearson $r{=}{-}0.73$ absolute,
+${-}0.81$ relative; \S\ref{sec:arch-effects}): Hybrid-DPO helps most where the SFT
+model leaves \emph{entailment headroom}, and shrinks toward zero (or shifts to
+answer coverage) once the SFT baseline is already high. This predicts the
+per-architecture pattern (large LLaMA-2 lifts, Qwen3 NLI-flat) from the baseline
+alone, independent of scale.}
+\label{fig:headroom}
+\end{figure}
+
 \begin{table}[h]
 \centering
 \resizebox{\textwidth}{!}{
