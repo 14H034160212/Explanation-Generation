@@ -47,6 +47,9 @@
 \input{discussion}
 \input{conclusion}
 
+% Statements and references do not count toward the page limit; start them on a
+% fresh page so page 9 ends with the main text (Conclusion).
+\newpage
 \section*{Reproducibility Statement}
 All code, LoRA adapters, preference data, and per-domain evaluation artefacts are released at an anonymised repository (abstract footnote). Exact HuggingFace identifiers, parameter counts, and checkpoints are in Appendix~\ref{sec:hf_identifiers}; SFT/DPO/SimPO hyperparameters, LoRA target modules, and the score-gap filter are in \S\ref{sec:train_config} and Appendix~\ref{sec:variant_assignment_appendix}; NLI/verifier inputs and the LLM-judge prompts and decoding settings are in Appendix~\ref{sec:judge_prompt}. All results use the fixed held-out test splits of \S\ref{sec:eval_tier}; the reasoning-reward construction, length-matching, and multi-judge protocol are detailed in \S\ref{sec:reasoning-reward} and Appendix~\ref{sec:reasoning_appendix}.
 
