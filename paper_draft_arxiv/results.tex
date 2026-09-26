@@ -42,7 +42,7 @@ UK Medicine Y2   & 0.2319 $\to$ \textbf{0.3885} (+68\%)       & 0.1632 $\to$ \te
 
 \subsection{Comparison across Scientific Domains}
 \label{sec:domains}
-Table~\ref{tab:cardiff_results} gives the full per-architecture breakdown on Cardiff Biology (other Biology and Medicine domains in Appendix~\ref{sec:per_domain_appendix}). On Cardiff, LLaMA-2 RLearner lifts NLI $5.8\times$ over SFT, Qwen3 trades a small NLI delta for a substantial ACR gain ($+8.5$\,pp), and Gemma 4 E4B-it, despite $4.5$B effective parameters, achieves the highest NLI among RLearner variants ($0.3505$, $+65.6\%$ over SFT) at the fastest inference ($4.76$s). On Sydney, LLaMA-2 reaches a $6.6\times$ lift, Qwen3 gains $+31.5\%$ NLI / $+23.5$\,pp ACR, and Gemma 4 SFT already sits at the highest SFT NLI in our study ($0.2469$); we connect the flat Gemma 4 result to entailment-headroom in \S\ref{sec:arch-effects}.
+Table~\ref{tab:cardiff_results} gives the full per-architecture breakdown on Cardiff Biology (other Biology and Medicine domains in Appendix~\ref{sec:per_domain_appendix}). On Cardiff, LLaMA-2 RLearner lifts NLI $5.8\times$ over SFT, Qwen3 trades a small NLI delta for a substantial ACR gain ($+8.5$\,pp), and Gemma 4 E4B-it, despite $4.5$B effective parameters, achieves the highest NLI among RLearner variants ($0.3505$, $+65.6\%$ over SFT) at the fastest inference ($4.76$s). On Sydney, LLaMA-2 reaches a $6.6\times$ lift, Qwen3 gains $+31.5\%$ NLI / $+23.5$\,pp ACR, and Gemma 4 SFT already sits at a high SFT NLI ($0.2469$, upper third of our cells); we connect the flat Gemma 4 result to entailment-headroom in \S\ref{sec:arch-effects}.
 
 
 
@@ -60,7 +60,7 @@ The juxtaposition of rows 2 and 3 is the headline takeaway: the alignment tax is
 
 \subsection{Reward-Variant Ablation: $H_A$ vs.\ $H_M$}
 \label{sec:variant_ablation}
-$H_M$ wins $7/11$ NLI head-to-heads (mean $+1.5$\,pp, Table~\ref{tab:variant_ablation}); $H_A$ wins the remaining $4$, all on heterogeneous cross-domain pools. Both variants beat SFT wherever the dual signal is supplied, supporting the view that the dual-signal hypothesis, not the algebraic form, is the load-bearing claim: $H_A$ vs.\ $H_M$ is a hyperparameter chosen by pair-pool feasibility (\S\ref{sec:first_principles}).
+$H_M$ wins $7/11$ NLI head-to-heads (mean $+1.5$\,pp, Table~\ref{tab:variant_ablation}); $H_A$ wins the remaining $4$ (three on Sydney). Both variants beat SFT wherever the dual signal is supplied, supporting the view that the dual-signal hypothesis, not the algebraic form, is the load-bearing claim: $H_A$ vs.\ $H_M$ is a hyperparameter chosen by pair-pool feasibility (\S\ref{sec:first_principles}).
 
 
 
