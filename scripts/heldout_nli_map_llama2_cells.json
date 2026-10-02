@@ -1,0 +1,22 @@
+[
+ [
+  "LLaMA2 Cardiff (hybrid)",
+  "rl_eval_results/llama2_dpo_hybrid_cardiff_eval.json",
+  "./preference_data/Paul_new_data/Cardiff/Cardiff_vicuna_13b_finetuned_random_100.json"
+ ],
+ [
+  "LLaMA2 Sydney (hybrid)",
+  "rl_eval_results/llama2_dpo_hybrid_sydney_eval.json",
+  "./preference_data/Paul_new_data/Sydney/Sydney_vicuna_13b_finetuned_random_100.json"
+ ],
+ [
+  "LLaMA2 Cardiff Tier-C",
+  "rl_eval_results/llama2_cardiff_tierC_eval.json",
+  "./preference_data/Paul_new_data/Cardiff_tierC_generator_test.json"
+ ],
+ [
+  "LLaMA2 Sydney Tier-C",
+  "rl_eval_results/llama2_sydney_tierC_eval.json",
+  "./preference_data/Paul_new_data/Sydney_tierC_generator_test.json"
+ ]
+]

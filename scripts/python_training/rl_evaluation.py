@@ -90,6 +90,17 @@ def extract_correct_option_text(input_text: str):
     return letter, opt_text
 
 
+def build_nli_hypothesis(input_text: str, option_text: str, mode: str = "option") -> str:
+    """NLI hypothesis: 'option' = bare correct-option text (default, unchanged);
+    'qa' = '<question stem> The answer is <option>.' for terse-option datasets
+    (e.g. MedMCQA). ACR / answer-anchored BERTScore keep using the bare option."""
+    if mode != "qa" or not option_text:
+        return option_text
+    qm = re.search(r"Given question:\s*(.*?)\s*Option A:", input_text, re.DOTALL)
+    stem = qm.group(1).strip() if qm else ""
+    return (f"{stem} The answer is {option_text}." if stem else option_text)
+
+
 def answer_coverage_rate(explanation: str, correct_option_text: str) -> float:
     """
     Answer Coverage Rate (ACR): lexical measure of whether the generated
@@ -132,6 +143,12 @@ class EvalResult:
     verifier_scores: List[float]
     inference_times: List[float]
     generated_explanations: List[str]  # saved for qualitative analysis
+    # The test-set index each of the lists above refers to. An item whose
+    # generation came back empty is skipped, so these are a subsequence of
+    # range(len(test_data)) -- and without them a consumer that re-pairs by
+    # position against the test file scores explanation j against question j,
+    # which is the wrong question for every j after the first skip.
+    test_indices: List[int]
 
     @property
     def avg_bleu(self) -> float:
@@ -388,6 +405,7 @@ def evaluate_model(
     nli_tokenizer=None,
     nli_entailment_idx: int = 1,
     nli_device: str = "cpu",
+    nli_hyp_mode: str = "option",
 ) -> EvalResult:
     """Run full evaluation for one model on the test set."""
     model, tokenizer = load_model_and_tokenizer(config, device=device, cache_dir=cache_dir)
@@ -401,14 +419,18 @@ def evaluate_model(
         verifier_scores=[],
         inference_times=[],
         generated_explanations=[],
+        test_indices=[],
     )
 
     smoother = SmoothingFunction().method1
     generated_explanations = []
     ground_truths_for_bert = []
-    correct_option_texts = []   # for answer-anchored BERTScore
+    correct_option_texts = []   # for answer-anchored BERTScore / ACR (bare option)
+    nli_hyps = []               # NLI hypothesis (may be QA-statement under nli_hyp_mode="qa")
 
-    for item in tqdm(test_data, desc=f"Evaluating {config.name}"):
+    # enumerate, so the index can be recorded: there are two `continue`s in
+    # this loop and both of them desynchronise a positional consumer.
+    for idx, item in enumerate(tqdm(test_data, desc=f"Evaluating {config.name}")):
         instruction = item.get("instruction", GENERATOR_INSTRUCTION).replace("</s>", "").strip()
         input_text = item.get("input", "").replace("</s>", "").strip()
         ground_truth = item.get("output", item.get("Explanation", "")).replace("</s>", "").strip()
@@ -459,6 +481,7 @@ def evaluate_model(
         generated_explanations.append(explanation)
         ground_truths_for_bert.append(ground_truth)
         correct_option_texts.append(correct_opt_text or "")
+        nli_hyps.append(build_nli_hypothesis(input_text, correct_opt_text or "", nli_hyp_mode))
 
         # Compute BLEU (vs student explanation — traditional)
         bleu = sentence_bleu(
@@ -480,6 +503,7 @@ def evaluate_model(
         result.verifier_scores.append(v_score)
         result.inference_times.append(elapsed)
         result.generated_explanations.append(explanation)
+        result.test_indices.append(idx)
 
     # Compute BERTScore in batch for all predictions
     if generated_explanations:
@@ -515,7 +539,7 @@ def evaluate_model(
 
         # NLI entailment: explanation → correct option text (answer-anchored)
         if nli_model is not None:
-            valid_nli = [(g, c) for g, c in zip(generated_explanations, correct_option_texts) if c]
+            valid_nli = [(g, c) for g, c in zip(generated_explanations, nli_hyps) if c]
             if valid_nli:
                 logger.info(f"  Computing NLI entailment scores for {config.name} ...")
                 gen_nli, hyp_nli = zip(*valid_nli)
@@ -526,7 +550,7 @@ def evaluate_model(
                     device=nli_device,
                 )
                 idx = 0
-                for c in correct_option_texts:
+                for c in nli_hyps:
                     if c:
                         result.nli_scores.append(nli_vals[idx])
                         idx += 1
@@ -554,6 +578,9 @@ def main():
     parser.add_argument("--verifier_device", default="cuda:1", help="Device for verifier model.")
     parser.add_argument("--cache_dir", default="cache")
     parser.add_argument("--max_new_tokens", type=int, default=512)
+    parser.add_argument("--nli_hyp_mode", choices=["option", "qa"], default="option",
+                        help="NLI hypothesis form: 'option' (bare correct-option, default) or "
+                             "'qa' (question stem + 'The answer is <option>'; for terse-option datasets like MedMCQA)")
     parser.add_argument("--nli_model", default="cross-encoder/nli-deberta-v3-small",
                         help="NLI model for entailment scoring (default: cross-encoder/nli-deberta-v3-small).")
     parser.add_argument("--nli_device", default="cpu",
@@ -691,6 +718,7 @@ def main():
             nli_tokenizer=nli_tokenizer,
             nli_entailment_idx=nli_entailment_idx,
             nli_device=args.nli_device,
+            nli_hyp_mode=args.nli_hyp_mode,
         )
         all_results.append(result)
 
@@ -741,6 +769,7 @@ def main():
                 "verifier_scores": r.verifier_scores,
                 "inference_times": r.inference_times,
                 "generated_explanations": r.generated_explanations,
+                "test_indices": r.test_indices,
             }
             for r in all_results
         ],

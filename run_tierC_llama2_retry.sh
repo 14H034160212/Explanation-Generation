@@ -4,7 +4,12 @@ PY=/data/qbao775/miniconda3/envs/llm-tuning/bin/python3
 BASE=/data/shared/llama2/llama-2-13b-hf
 VERIFIER=./models/qiming_alpaca_7B_Cardiff_Sydney_merged_verifier_way_2
 export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
-log(){ echo "[retry $(date '+%m-%d %H:%M')] $*"; }
+# >&2 on purpose: pick_gpu is called inside $( ), so anything log writes to
+# stdout is captured as part of its "GPU index". A wait message therefore
+# became the value of CUDA_VISIBLE_DEVICES, torch saw no usable device, and
+# every one of the 12 retries burned on an invalid device list -- which is
+# the common case, because waiting is what pick_gpu does on a busy box.
+log(){ echo "[retry $(date '+%m-%d %H:%M')] $*" >&2; }
 
 pick_gpu(){ # $1=min MiB ; waits until a gpu has >= min free, echoes idx
   while true; do

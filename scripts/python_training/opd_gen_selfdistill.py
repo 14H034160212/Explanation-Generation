@@ -103,11 +103,19 @@ def main():
         if (i+1)%20==0:
             json.dump(targets,open(args.out,"w",encoding="utf-8"),indent=2,ensure_ascii=False)
             import statistics as st
-            logger.info(f"Q{i+1}/{len(data)} kept={kept} avg_words={st.mean(t['words'] for t in targets):.0f} "
+            # st.mean over an empty sequence raises. With --min_validity 2 and
+            # a judge returning None, nothing is kept and the progress line
+            # itself ended the run.
+            avg = f"{st.mean(t['words'] for t in targets):.0f}" if targets else "-"
+            logger.info(f"Q{i+1}/{len(data)} kept={kept} avg_words={avg} "
                         f"| skip lowV={skip_lowV} long={skip_long}")
     json.dump(targets,open(args.out,"w",encoding="utf-8"),indent=2,ensure_ascii=False)
     import statistics as st
-    logger.info(f"DONE kept={kept}/{len(data)} avg_words={st.mean(t['words'] for t in targets):.0f} -> {args.out}")
+    # Same guard. This one fired *after* the json.dump, so the file was
+    # written and .opd_gen_DONE never was -- anything gating on that sentinel
+    # waited for a run that had in fact finished.
+    avg = f"{st.mean(t['words'] for t in targets):.0f}" if targets else "-"
+    logger.info(f"DONE kept={kept}/{len(data)} avg_words={avg} -> {args.out}")
     open(".opd_gen_DONE","w").write("done")
 
 if __name__=="__main__":

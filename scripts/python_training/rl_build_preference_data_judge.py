@@ -194,10 +194,18 @@ def main():
         if (i + 1) % 20 == 0:
             with open(args.output_path, "w", encoding="utf-8") as f:
                 json.dump(pairs, f, indent=2, ensure_ascii=False)
-            cw = sum(p["chosen_words"] for p in pairs) / len(pairs)
-            rw = sum(p["rejected_words"] for p in pairs) / len(pairs)
-            logger.info(f"Q{i+1}/{len(questions)} pairs={len(pairs)} chosen_w={cw:.0f} rej_w={rw:.0f} "
-                        f"| skip noopt={skip_noopt} dup={skip_dup} notie={skip_notie}")
+            # Guarded: if the judge is down every comparison returns None,
+            # every question is skipped, and this line divided by zero at
+            # question 20 -- killing a multi-hour run after the GPU work was
+            # already done, in the progress logging.
+            if pairs:
+                cw = sum(p["chosen_words"] for p in pairs) / len(pairs)
+                rw = sum(p["rejected_words"] for p in pairs) / len(pairs)
+                logger.info(f"Q{i+1}/{len(questions)} pairs={len(pairs)} chosen_w={cw:.0f} rej_w={rw:.0f} "
+                            f"| skip noopt={skip_noopt} dup={skip_dup} notie={skip_notie}")
+            else:
+                logger.warning(f"Q{i+1}/{len(questions)} no pairs yet "
+                               f"| skip noopt={skip_noopt} dup={skip_dup} notie={skip_notie}")
 
     with open(args.output_path, "w", encoding="utf-8") as f:
         json.dump(pairs, f, indent=2, ensure_ascii=False)

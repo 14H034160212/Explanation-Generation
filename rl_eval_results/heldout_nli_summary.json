@@ -178,7 +178,12 @@
     "DPO": {
       "model": "RL-DPO (K=1)",
       "small": 0.3613,
-      "large": 0.125
+      "large": 0.4432,
+      "large_before_realignment": 0.125
+    },
+    "realigned": {
+      "on": "2026-10-02",
+      "why": "re-scored after fixing positional pairing in heldout_nli_eval.py: rl_evaluation.py skips items whose generation was empty, so a short row was being zipped against the full test file. Alignment recovered from the stored acr_scores (eval_alignment.recover_indices); the complete SFT row of each file aligns to the identity, which is the control. SFT scores are unchanged by construction."
     }
   },
   {

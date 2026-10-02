@@ -9,7 +9,12 @@
     "DPO": {
       "model": "RL-DPO (K=1)",
       "small": 0.3961,
-      "large": 0.2482
+      "large": 0.552,
+      "large_before_realignment": 0.2482
+    },
+    "realigned": {
+      "on": "2026-10-02",
+      "why": "re-scored after fixing positional pairing in heldout_nli_eval.py: rl_evaluation.py skips items whose generation was empty, so a short row was being zipped against the full test file. Alignment recovered from the stored acr_scores (eval_alignment.recover_indices); the complete SFT row of each file aligns to the identity, which is the control. SFT scores are unchanged by construction."
     }
   },
   {
@@ -22,7 +27,12 @@
     "DPO": {
       "model": "RL-DPO (K=1)",
       "small": 0.3698,
-      "large": 0.0761
+      "large": 0.4393,
+      "large_before_realignment": 0.0761
+    },
+    "realigned": {
+      "on": "2026-10-02",
+      "why": "re-scored after fixing positional pairing in heldout_nli_eval.py: rl_evaluation.py skips items whose generation was empty, so a short row was being zipped against the full test file. Alignment recovered from the stored acr_scores (eval_alignment.recover_indices); the complete SFT row of each file aligns to the identity, which is the control. SFT scores are unchanged by construction."
     }
   },
   {

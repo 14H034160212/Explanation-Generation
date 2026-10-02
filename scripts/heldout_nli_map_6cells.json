@@ -1,0 +1,8 @@
+[
+ ["LLaMA-2 AucklandLaw", "rl_eval_results/llama2_dpo_hybrid_law_eval.json", "./preference_data/PeerWiseData/Law/Auckland_law_vicuna_13b_finetuned_random_100.json"],
+ ["LLaMA-2 MedY1", "rl_eval_results/llama2_dpo_hybrid_med_y1_eval.json", "./preference_data/PeerWiseData/Medicine/Medicine_year1_vicuna_13b_finetuned_random_100.json"],
+ ["LLaMA-2 MedY2", "rl_eval_results/llama2_dpo_hybrid_med_y2_eval.json", "./preference_data/PeerWiseData/Medicine/Medicine_year2_vicuna_13b_finetuned_random_100.json"],
+ ["Qwen3 AucklandLaw", "rl_eval_results/qwen3_dpo_hybrid_law_eval.json", "./preference_data/PeerWiseData/Law/Auckland_law_vicuna_13b_finetuned_random_100.json"],
+ ["Qwen3 MedY1", "rl_eval_results/qwen3_dpo_hybrid_med_y1_eval.json", "./preference_data/PeerWiseData/Medicine/Medicine_year1_vicuna_13b_finetuned_random_100.json"],
+ ["Qwen3 MedY2", "rl_eval_results/qwen3_dpo_hybrid_med_y2_eval.json", "./preference_data/PeerWiseData/Medicine/Medicine_year2_vicuna_13b_finetuned_random_100.json"]
+]

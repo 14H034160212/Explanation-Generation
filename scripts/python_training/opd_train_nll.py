@@ -78,7 +78,12 @@ def main():
                 if step % 5 == 0:
                     logger.info(f"ep{ep} step{step}/{steps} nll={run/max(n,1):.4f} lr={sched.get_last_lr()[0]:.2e}")
                     run = n = 0
-        opt.step(); sched.step(); opt.zero_grad()
+        # Same as rl_train_simpo_gemma4: unconditional, this applied an extra
+        # AdamW update from zero gradients and advanced the LR schedule once
+        # more per epoch whenever the epoch divided evenly into accum steps.
+        if order and (bi + 1) % args.accum != 0:
+            clip_grad_norm_([p for p in model.parameters() if p.requires_grad], 1.0)
+            opt.step(); sched.step(); opt.zero_grad(); step += 1
 
     os.makedirs(args.out, exist_ok=True)
     model.save_pretrained(args.out); tok.save_pretrained(args.out)

@@ -3,7 +3,15 @@ Cardiff Tier-C test set (reuses p3_full_generations.json). Randomised order,
 ignore-length rubric, same as the open judges. Economical: mini model, ~0.2M tokens."""
 import json, os, re, time, urllib.request
 os.chdir("/data/qbao775/Explanation-Generation")
-KEY=open("/tmp/claude-1022/-data-qbao775-Explanation-Generation/21961b56-282e-4ae0-86d0-81befbe44722/scratchpad/.openai_key").read().strip()
+# Was a hard-coded path into a previous session's scratchpad, which no longer
+# exists -- so this script could not be re-run by anybody, including me.
+KEY = os.environ.get("OPENAI_API_KEY", "").strip()
+if not KEY:
+    _f = os.environ.get("OPENAI_API_KEY_FILE", "")
+    if _f and os.path.exists(_f):
+        KEY = open(_f).read().strip()
+if not KEY:
+    raise SystemExit("set OPENAI_API_KEY (or OPENAI_API_KEY_FILE) to run this")
 URL="https://api.openai.com/v1/chat/completions"; MODEL="gpt-5-mini"
 d=json.load(open("rl_eval_results/p3_full_generations.json")); inp=d["test_inputs"]; g=d["generations"]
 SYS=("Compare two EXPLANATIONS for a multiple-choice question whose correct answer is given. "

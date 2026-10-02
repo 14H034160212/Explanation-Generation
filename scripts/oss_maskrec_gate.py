@@ -1,7 +1,8 @@
 """OPEN-SOURCE masked-recoverability gate (free, fully local via ollama).
 
 Replaces the GPT-4o probe with local open models to check whether the ONE signal
-that worked (answer-masked recoverability, +0.47 vs GPT-4o validity) still holds
+that worked (answer-masked recoverability, reported +0.47 vs GPT-4o validity --
+see the note on spear() below, that figure has not been recomputed) still holds
 when both reward-solver and judge are open-weight -- i.e. whether we have a FREE,
 local, in-loop reasoning reward we can retrain against.
 
@@ -113,11 +114,25 @@ for label,ej in CELLS:
         print(f"{label}/{kind}: {done}  (elapsed {int(time.time()-t0)}s)",flush=True)
 
 def spear(xs,ys):
+    """Spearman with average ranks for ties.
+
+    The first version of this assigned a distinct rank to every element, which
+    on data that is almost all ties -- recovered is 0/1, validity is 0/1/2 --
+    invents an ordering inside each tied group and reports the agreement of
+    that invention. On the 110 committed rows it returned +0.521 where the
+    tie-aware coefficient is +0.173, and +0.52 was the number cited as the
+    reason to adopt the recoverability reward.
+    """
     n=len(xs)
     if n<3: return 0
     def rk(v):
-        o=sorted(range(n),key=lambda i:v[i]); r=[0]*n
-        for k,i in enumerate(o): r[i]=k
+        o=sorted(range(n),key=lambda i:v[i]); r=[0.0]*n; i=0
+        while i<n:
+            j=i
+            while j+1<n and v[o[j+1]]==v[o[i]]: j+=1
+            mean=(i+j)/2+1              # 1-based, averaged across the tie
+            for k in range(i,j+1): r[o[k]]=mean
+            i=j+1
         return r
     rx,ry=rk(xs),rk(ys); mx=sum(rx)/n; my=sum(ry)/n
     cov=sum((rx[i]-mx)*(ry[i]-my) for i in range(n)); sx=(sum((r-mx)**2 for r in rx))**.5; sy=(sum((r-my)**2 for r in ry))**.5
@@ -125,7 +140,11 @@ def spear(xs,ys):
 rec=[x["recovered"] for x in rows]; val=[x["validity"] for x in rows]
 import statistics as st
 print(f"\nN={len(rows)}  (solver={SOLVER}, judge={JUDGE})")
-print(f"masked-recoverability Spearman vs open-judge validity = {spear(rec,val):+.3f}   (GPT-4o gave +0.47)")
+# The GPT-4o figure is quoted from an earlier run whose script is not in this
+# repo, so it has not been recomputed with the tie-aware rank and should not be
+# compared against this number until it has been.
+print(f"masked-recoverability Spearman vs open-judge validity = {spear(rec,val):+.3f}"
+      f"   (earlier GPT-4o probe reported +0.47, tie handling unverified)")
 for kind in ["sft","dpo"]:
     sub=[x for x in rows if x["kind"]==kind]
     if sub: print(f"  {kind}: recover_rate={st.mean(x['recovered'] for x in sub):.3f} validity={st.mean(x['validity'] for x in sub):.2f} (n={len(sub)})")

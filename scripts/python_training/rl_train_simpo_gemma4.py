@@ -20,11 +20,23 @@ logger = logging.getLogger(__name__)
 
 def resp_logprob_sum_and_len(model, tok, prompt, response, device):
     """Return (sum_logprob, n_response_tokens) for response tokens given prompt."""
-    p_ids = tok(prompt, return_tensors="pt", truncation=True, max_length=768).input_ids
+    # Both truncate at the same length on purpose. They used to be 768 and
+    # 1024: a prompt longer than 768 gave a p_len that was shorter than the
+    # prompt actually in `full`, so resp_logp started inside the prompt and
+    # SimPO's length-normalised average was taken over prompt tokens, in both
+    # the sum and the divisor. It does not crash and it does not warn -- the
+    # pair is silently trained on a corrupted objective. Cardiff's pairs top
+    # out at 429 prompt words so it never fired there; the law and medicine
+    # corpora and run_simpo_multiseed.sh point this same trainer at longer
+    # stems.
+    MAX_LEN = 1024
+    p_ids = tok(prompt, return_tensors="pt", truncation=True, max_length=MAX_LEN).input_ids
     full = tok(prompt + response + tok.eos_token, return_tensors="pt",
-               truncation=True, max_length=1024).input_ids.to(device)
+               truncation=True, max_length=MAX_LEN).input_ids.to(device)
     p_len = p_ids.shape[1]
     if full.shape[1] <= p_len:
+        # Nothing of the response survived truncation: skip rather than train
+        # on an empty or negative-length response span.
         return None, 0
     out = model(full).logits  # [1, T, V]
     logp = torch.log_softmax(out[:, :-1, :].float(), dim=-1)  # predict token t+1
@@ -104,8 +116,17 @@ def main():
                     logger.info(f"ep{ep} step{step}/{total_steps} loss={run_loss/max(n,1):.4f} "
                                 f"acc={run_acc/max(n,1):.3f} lr={sched.get_last_lr()[0]:.2e}")
                     run_loss = run_acc = n = 0
-        # flush leftover grads
-        opt.step(); sched.step(); opt.zero_grad()
+        # Flush leftover grads -- only if there are any.
+        #
+        # Unconditional, this fired even when the inner loop had just stepped
+        # and zeroed: AdamW with all-zero grads is not a no-op, it still
+        # applies a momentum-driven update, and sched.step() advanced the LR
+        # schedule an extra time every epoch. When leftover grads did exist it
+        # also skipped clip_grad_norm_, unlike every other step.
+        # `order` can be empty, in which case bi never binds.
+        if order and (bi + 1) % args.accum != 0:
+            clip_grad_norm_([p for p in model.parameters() if p.requires_grad], 1.0)
+            opt.step(); sched.step(); opt.zero_grad(); step += 1
 
     os.makedirs(args.out, exist_ok=True)
     model.save_pretrained(args.out)

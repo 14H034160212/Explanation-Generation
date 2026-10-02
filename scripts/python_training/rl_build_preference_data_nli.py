@@ -131,6 +131,23 @@ def extract_correct_option_text(input_text: str) -> Tuple[Optional[str], Optiona
     return letter, opt_text
 
 
+def build_nli_hypothesis(input_text: str, option_text: str, mode: str = "option") -> str:
+    """NLI hypothesis for the entailment reward.
+
+    mode="option" (default, unchanged): the bare correct-option text — works when
+      options are rich phrases (e.g. PeerWise).
+    mode="qa": a declarative answer proposition ``<question stem> The answer is <option>.``
+      — used for datasets whose options are terse single terms (e.g. MedMCQA), where
+      the bare option gives the NLI model too little to entail. ACR still uses the bare
+      option_text, so only the NLI hypothesis changes.
+    """
+    if mode != "qa" or not option_text:
+        return option_text
+    qm = re.search(r"Given question:\s*(.*?)\s*Option A:", input_text, re.DOTALL)
+    stem = qm.group(1).strip() if qm else ""
+    return (f"{stem} The answer is {option_text}." if stem else option_text)
+
+
 def load_nli_model(model_name: str, device: str = "cpu", cache_dir: str = "cache"):
     """
     Load DeBERTa-based NLI model.
@@ -451,6 +468,9 @@ def main():
                         help="[pareto_normalized] Weight for ACR in combined score (default 0.3)")
     parser.add_argument("--pareto_min_wins", type=int, default=2,
                         help="[pareto_normalized] Min metrics where chosen > rejected (default 2)")
+    parser.add_argument("--nli_hyp_mode", choices=["option", "qa"], default="option",
+                        help="NLI hypothesis form: 'option' (bare correct-option text, default) "
+                             "or 'qa' (question stem + 'The answer is <option>' — for terse-option datasets like MedMCQA)")
     parser.add_argument("--nli_model", default="cross-encoder/nli-deberta-v3-small")
     parser.add_argument("--nli_device", default="cpu",
                         help="Device for NLI model (cpu recommended to save GPU VRAM)")
@@ -529,6 +549,9 @@ def main():
             skipped_no_option += 1
             logger.debug(f"Q{i}: could not extract correct option text — skipped")
             continue
+        # NLI hypothesis (may differ from correct_option_text under --nli_hyp_mode qa);
+        # ACR keeps using the bare correct_option_text below.
+        nli_hyp = build_nli_hypothesis(input_text, correct_option_text, args.nli_hyp_mode)
 
         try:
             explanations = generate_fn(
@@ -544,7 +567,7 @@ def main():
         if args.score_method == "nli":
             raw_scores = score_by_nli(
                 nli_model, nli_tokenizer,
-                explanations, correct_option_text,
+                explanations, nli_hyp,
                 entailment_idx, args.nli_device,
             )
             score_label = "nli"
@@ -560,7 +583,7 @@ def main():
             # Additive: 0.5 * NLI + 0.5 * normalised verifier
             nli_s = score_by_nli(
                 nli_model, nli_tokenizer,
-                explanations, correct_option_text,
+                explanations, nli_hyp,
                 entailment_idx, args.nli_device,
             )
             ver_s_raw = [
@@ -576,7 +599,7 @@ def main():
             #        * I[acr(E_i) >= acr_threshold]
             nli_s = score_by_nli(
                 nli_model, nli_tokenizer,
-                explanations, correct_option_text,
+                explanations, nli_hyp,
                 entailment_idx, args.nli_device,
             )
             ver_s_raw = [
@@ -600,7 +623,7 @@ def main():
             # Step 1: compute all three signals
             nli_s = score_by_nli(
                 nli_model, nli_tokenizer,
-                explanations, correct_option_text,
+                explanations, nli_hyp,
                 entailment_idx, args.nli_device,
             )
             ver_s_raw = [

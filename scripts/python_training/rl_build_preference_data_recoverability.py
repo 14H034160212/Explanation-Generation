@@ -10,9 +10,16 @@ recoverable when the answer itself is masked out:
 An independent open-weight solver (default qwen2.5:7b via ollama) reads the question
 plus the answer-masked explanation and reports its confidence (0-1) that the correct
 option is right. A genuine reasoning explanation raises that confidence through its
-logic; a restatement (whose only answer cue is masked) does not. This signal correlated
-+0.52 with an independent DeepSeek-R1 reasoning-validity judge (oss_maskrec_gate),
-so ranking candidates by it targets reasoning rather than answer-restatement.
+logic; a restatement (whose only answer cue is masked) does not.
+
+On the correlation that justifies this: oss_maskrec_gate measures it against an
+independent DeepSeek-R1 reasoning-validity judge, and that script originally
+reported +0.52 using a Spearman that gave tied values distinct ranks. Both
+variables are almost all ties -- recovered is 0/1, validity is 0/1/2 -- so that
+figure was the agreement of an invented within-tie ordering. Recomputed with
+average ranks on the same 110 rows it is +0.17 (matches scipy.stats.spearmanr).
+The signal is therefore weak, not strong; it still points the right way, and
+the ablations rather than this number are what the choice now rests on.
 
 Different model families keep training and evaluation decoupled:
   reward solver = Qwen family (this script)   |   eval judge = DeepSeek-R1 / Llama (P3)
@@ -193,10 +200,16 @@ def main():
         if (i + 1) % 25 == 0:
             with open(args.output_path, "w", encoding="utf-8") as f:
                 json.dump(pairs, f, indent=2, ensure_ascii=False)
-            cc = sum(p["chosen_recover_conf"] for p in pairs) / len(pairs)
-            rc = sum(p["rejected_recover_conf"] for p in pairs) / len(pairs)
-            logger.info(f"Q{i+1}/{len(questions)} pairs={len(pairs)} chosen_conf={cc:.3f} rejected_conf={rc:.3f} "
-                        f"| skip noopt={skip_noopt} gap={skip_gap} score={skip_score}")
+            # Same guard as the judge builder: a solver that is down makes
+            # every question skip, and this divided by zero at question 25.
+            if pairs:
+                cc = sum(p["chosen_recover_conf"] for p in pairs) / len(pairs)
+                rc = sum(p["rejected_recover_conf"] for p in pairs) / len(pairs)
+                logger.info(f"Q{i+1}/{len(questions)} pairs={len(pairs)} chosen_conf={cc:.3f} rejected_conf={rc:.3f} "
+                            f"| skip noopt={skip_noopt} gap={skip_gap} score={skip_score}")
+            else:
+                logger.warning(f"Q{i+1}/{len(questions)} no pairs yet "
+                               f"| skip noopt={skip_noopt} gap={skip_gap} score={skip_score}")
 
     with open(args.output_path, "w", encoding="utf-8") as f:
         json.dump(pairs, f, indent=2, ensure_ascii=False)

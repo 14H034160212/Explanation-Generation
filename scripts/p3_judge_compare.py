@@ -1,9 +1,30 @@
-"""P3 independent-judge comparison: does preference tuning improve JUDGED reasoning
-over SFT (even though it is ~3x longer)? Judges are independent of the DPO reward
-(reward judge = DeepSeek-R1); here we use qwen2.5:7b and llama3:8b. Randomised order,
-ignore-length instruction. Because preference-tuned outputs (~194w) are much longer
-than SFT (~61w), any preference is length/format-CONFOUNDED — reported as such.
+"""SUPERSEDED by scripts/p3_judge_fixed.py. Do not run; it refuses below.
+
+This judges the `reasoningSimPO` / `reasoningDPO_v2` generation keys, which
+p3_gen_simpo.py and p3_gen_v2only.py produced by merging the preference
+adapter onto the BARE BASE with the SFT adapter dropped. That composition is
+wrong, and its failure mode is not a crash but verbose degeneration: on the
+committed rl_eval_results/p3_reasoning_generations.json those keys run to
+~18,000 words against ~6,100 for SFT and ~4,000-6,200 for the correctly
+composed `_fixed` keys.
+
+So rl_eval_results/p3_judge_compare*.json is a judgement of degenerate output,
+and the "~3x longer, length-confounded" caveat in the original docstring was
+describing the artefact rather than the method. p3_judge_fixed.py judges
+`reasoningOPD_fixed` / `reasoningSimPO_fixed` / `reasoningDPO_v2_fixed`, which
+are the adapter applied on top of the SFT-merged base.
+
+Kept rather than deleted so the superseded numbers remain traceable to the
+script that made them.
 """
+import sys
+
+sys.exit(
+    "p3_judge_compare.py is superseded: it judges generations made by merging "
+    "the preference adapter onto the bare base (SFT dropped), which degenerates "
+    "to ~3x length. Use scripts/p3_judge_fixed.py."
+)
+
 import json, os, re, time, urllib.request
 os.chdir("/data/qbao775/Explanation-Generation")
 OLLAMA="http://localhost:11434/api/chat"
