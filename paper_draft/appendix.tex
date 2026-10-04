@@ -161,3 +161,75 @@ Medicine (Y2)   & $17.5\%$ & $84.5\%$ & $61.6\%$ & $43.5\%$ \\
 \caption{Per-domain SFT failure-mode rates (5{,}100 SFT-generated explanations, LLaMA-2-13B). Standard SFT produces fluent but logically vacuous outputs in $48$--$85\%$ of cases (Verbose-low-NLI), hallucinates citation-style URLs in $44$--$69\%$, and fails to anchor the correct answer at all in $12$--$37\%$ of cases (Answer Evasion). These rates motivate the Hybrid reward's combination of an NLI signal, an ACR gate, and a length penalty.}
 \label{tab:failure_modes}
 \end{table}
+
+\section{Held-Out NLI: Re-scoring with a Scorer Not Used for Training}
+\label{sec:heldout_nli_appendix}
+
+The entailment column of every table above is produced by
+\texttt{cross-encoder/nli-deberta-v3-small}, and the same model family scores
+candidates when preference pairs are built. A reader is entitled to ask
+whether the reported gains are a property of the explanations or of the
+scorer. We therefore re-score the \emph{saved generations} --- the same text,
+unchanged --- with \texttt{cross-encoder/nli-deberta-v3-large}, which plays no
+part in constructing preference pairs, in reward computation, or in model
+selection. Nothing is regenerated and no model is retrained; only the
+measuring instrument changes.
+
+\begin{table}[h]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lcc}
+\toprule
+(Architecture, Domain) & Reward-family scorer (small) & Held-out scorer (large) \\
+\midrule
+Gemma4 Cardiff (main) & 0.2117 $\to$ 0.3505 & 0.2387 $\to$ \textbf{0.3995} \\
+Gemma4 Sydney (main) & 0.2469 $\to$ 0.2309 & 0.4143 $\to$ 0.3546 \\
+Gemma4 AucklandLaw (main) & 0.3911 $\to$ 0.4377 & 0.3493 $\to$ \textbf{0.4544} \\
+Gemma4 MedY1 (main) & 0.2962 $\to$ 0.3910 & 0.2662 $\to$ \textbf{0.5016} \\
+Gemma4 MedY2 (main) & 0.1604 $\to$ 0.3892 & 0.2642 $\to$ \textbf{0.4119} \\
+LLaMA2 Cardiff (hybrid) & 0.1215 $\to$ 0.3687 & 0.2576 $\to$ \textbf{0.4339} \\
+LLaMA2 Sydney (hybrid) & 0.0949 $\to$ 0.3439 & 0.1737 $\to$ \textbf{0.4642} \\
+Qwen3 Cardiff (hybrid) & 0.1959 $\to$ 0.1411 & 0.2810 $\to$ 0.1667 \\
+Qwen3 Sydney (hybrid) & 0.1737 $\to$ 0.2281 & 0.3205 $\to$ \textbf{0.3219} \\
+Gemma4 Cardiff Tier-C & 0.1860 $\to$ 0.3896 & 0.3206 $\to$ \textbf{0.5576} \\
+Gemma4 Sydney Tier-C & 0.1915 $\to$ 0.3636 & 0.3710 $\to$ \textbf{0.5472} \\
+Qwen3 Cardiff Tier-C & 0.2213 $\to$ 0.1782 & 0.3264 $\to$ 0.2687 \\
+Qwen3 Sydney Tier-C & 0.1838 $\to$ 0.1576 & 0.3619 $\to$ 0.3236 \\
+LLaMA2 Cardiff Tier-C & 0.1133 $\to$ 0.3613 & 0.2773 $\to$ \textbf{0.4432} \\
+LLaMA2 Sydney Tier-C & 0.0730 $\to$ 0.2217 & 0.1834 $\to$ \textbf{0.3654} \\
+LLaMA2 AucklandLaw & 0.2843 $\to$ 0.3961 & 0.4911 $\to$ \textbf{0.5520} \\
+LLaMA2 MedY1 & 0.0973 $\to$ 0.3698 & 0.2263 $\to$ \textbf{0.4393} \\
+LLaMA2 MedY2 & 0.0458 $\to$ 0.4445 & 0.2280 $\to$ \textbf{0.4861} \\
+Qwen3 AucklandLaw$^{\dagger}$ & 0.3191 $\to$ 0.2566 & 0.2966 $\to$ \textbf{0.4395} \\
+Qwen3 MedY1 & 0.2457 $\to$ 0.1550 & 0.3149 $\to$ 0.2430 \\
+Qwen3 MedY2 & 0.1632 $\to$ 0.1984 & 0.2019 $\to$ \textbf{0.2977} \\
+\bottomrule
+\end{tabular}%
+}
+\caption{SFT $\to$ RLearner-LLM entailment under the scorer used during
+training (left) and under an independent, larger scorer that was not
+(right). Bold marks an improvement under the held-out scorer:
+16 of 21 cells. The two scorers agree on the
+\emph{direction} of the change in 20 of 21 cells; $\dagger$ marks the one
+they disagree on, where the held-out scorer is the more favourable of the two.
+Four of the five cells that do not improve under the held-out scorer are
+Qwen3, which is the same pattern Table~\ref{tab:nli_summary} reports and
+attributes to Qwen3-8B's comparatively high SFT entailment leaving little
+headroom.}
+\label{tab:heldout_nli}
+\end{table}
+
+\paragraph{A pairing error, and what it changed.} Our evaluation harness skips
+a test item whose generation returns empty, so a model's saved outputs can be
+a strict subsequence of the test set. The first version of the re-scoring
+script paired the $j$th explanation with the $j$th test item, which is the
+wrong item for every $j$ after the first skip. Three cells were affected, all
+LLaMA-2 (the only architecture with empty generations in this suite), and all
+three reversed: Cardiff Tier-C $0.2773 \to 0.1250$ became $0.2773 \to 0.4432$,
+Auckland Law $0.4911 \to 0.2482$ became $0.4911 \to 0.5520$, and Medicine Y1
+$0.2263 \to 0.0761$ became $0.2263 \to 0.4393$. The counts above are after the
+fix. We report this because the error inflated the apparent disagreement
+between the two scorers, i.e.\ it biased \emph{against} the claim this section
+makes, and because the control that detects it is cheap and worth stating: a
+model whose outputs are complete must align to the identity permutation, and
+its score must therefore be unchanged by the fix. All SFT scores above are.
