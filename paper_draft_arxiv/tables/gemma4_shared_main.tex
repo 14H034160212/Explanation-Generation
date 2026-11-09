@@ -1,0 +1,35 @@
+\begin{table}[t]
+\centering
+\caption{Gemma~4: every reward variant trained on pairs drawn from \emph{one} shared pool (500 prompts $\times$ 3 candidates, each scored once by every signal), with identical DPO settings. Means over the five test sets (500 questions, greedy decoding). Rows with $\pm$ give mean$\pm$s.d.\ over three DPO seeds; all other cells are seed 42. The CI is a paired bootstrap of the seed-42 change in masked held-out NLI vs.\ SFT. Ver: \emph{reproduced} verifier (Appendix~\ref{sec:verifier_repro}). Judge: \% of non-tie pairwise reasoning judgements won against SFT (Qwen2.5-7B / Llama-3.1-8B / Gemma-4-31B, 500 items each, order-flipped). Round-2 SimPO rows use $\beta{=}2$, $\gamma{=}1$, 3 epochs; the reasoning-judge reward is a fourth model (Qwen3-8B) that is never used for evaluation. Judge cells of three-seed rows pool the three seeds' judgements.}
+\label{tab:g4shared}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lccccccccc}
+\toprule
+Reward & Pairs & NLI & Held-out NLI & Masked held-out & 95\% CI $\Delta$masked & Words & Copies (\%) & Ver & Judge vs SFT \\
+\midrule
+SFT & -- & 0.261 & 0.307 & 0.062 & -- & 55 & 52 & 2.89 & -- \\
+\midrule
+Verifier only & 314 & 0.160 & 0.266 & 0.086 & [+0.001, +0.048] & 99 & 51 & 3.18 & -- \\
+$H_A$, $w{=}0.25$ & 258 & 0.287 & 0.397 & 0.087 & [+0.003, +0.047] & 66 & 54 & 3.00 & -- \\
+$H_A$, $w{=}0.5$ & 257 & 0.335 & 0.435 & 0.103 & [+0.019, +0.064] & 62 & 52 & 2.95 & -- \\
+$H_A$, $w{=}0.75$ & 262 & 0.331 & 0.425 & 0.100 & [+0.016, +0.060] & 57 & 51 & 2.92 & -- \\
+NLI only & 270 & 0.381 & 0.473 & 0.133 & [+0.048, +0.095] & 53 & 47 & 2.89 & 39 / 42 / 41 \\
+$H_M$ (Table~\ref{tab:main} reward) & 159 & 0.311$\pm$0.011 & 0.405$\pm$0.015 & 0.086$\pm$0.006 & [+0.008, +0.047] & 49 & 50 & 2.89 & 38 / 41 / 39 \\
+$H_M$, dominating pairs only & 117 & 0.270 & 0.334 & 0.080 & [-0.002, +0.038] & 60 & 53 & 2.94 & -- \\
+Masked NLI & 93 & 0.272$\pm$0.006 & 0.343$\pm$0.011 & 0.084$\pm$0.007 & [-0.002, +0.036] & 58 & 54 & 2.91 & 47 / 47 / 47 \\
+NLI only, 93 random pairs & 93 & 0.277$\pm$0.010 & 0.361$\pm$0.004 & 0.083$\pm$0.010 & [-0.004, +0.033] & 56 & 54 & 2.88 & 46 / 53 / 53 \\
+\midrule
+\multicolumn{10}{l}{\emph{Round 2: lighter NLI training, SimPO, and a reasoning-judge reward (Qwen3-8B) on the same pool}} \\
+NLI only, 1 epoch & 270 & 0.240 & 0.300 & 0.077 & [+0.004, +0.028] & 54 & 55 & 2.89 & 50 / 49 / 52 \\
+NLI only, 2 epochs & 270 & 0.310 & 0.351 & 0.077 & [+0.001, +0.029] & 50 & 53 & 2.89 & 49 / 48 / 47 \\
+NLI only, $\beta{=}0.5$ & 270 & 0.287 & 0.339 & 0.085 & [+0.005, +0.041] & 53 & 54 & 2.90 & 48 / 49 / 50 \\
+NLI only (SimPO) & 270 & 0.391 & 0.403 & 0.092 & [+0.009, +0.053] & 29 & 44 & 2.84 & 39 / 36 / 31 \\
+Reasoning judge (SimPO) & 293 & 0.244 & 0.313 & 0.084 & [+0.001, +0.045] & 60 & 45 & 2.90 & 48 / 60 / 61 \\
+Judge + NLI (SimPO) & 390 & 0.343 & 0.410 & 0.115 & [+0.028, +0.078] & 48 & 47 & 2.86 & 42 / 47 / 40 \\
+\midrule
+\multicolumn{10}{l}{\emph{Round 3: judge pairs restricted to candidates within 15 words of each other}} \\
+Judge, length-matched pairs (SimPO) & 182 & 0.258$\pm$0.011 & 0.316$\pm$0.000 & 0.075$\pm$0.001 & [-0.006, +0.030] & 54 & 52 & 2.88 & 52 / 56 / 54 \\
+Judge + NLI, length-matched (SimPO) & 254 & 0.288 & 0.364 & 0.096 & [+0.011, +0.057] & 53 & 52 & 2.88 & 46 / 52 / 50 \\
+\bottomrule
+\end{tabular}}
+\end{table}

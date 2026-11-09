@@ -1,0 +1,21 @@
+{
+ "heldout": {
+  "n": 1000,
+  "parsed": 1000,
+  "mae": 0.21431,
+  "mae_const_mean": 0.2432774,
+  "pearson": 0.4522645766185565,
+  "spearman": 0.45154624074780514
+ },
+ "vs_original": {
+  "texts": 328,
+  "pearson": 0.7338744547832168,
+  "spearman": 0.6934528430460705,
+  "old_mean": 3.051798780487805,
+  "new_mean": 2.9161585365853657,
+  "old_sd": 0.25615971770386253,
+  "new_sd": 0.23422914408613169,
+  "pair_order_agree_when_old_differs": 0.41904761904761906,
+  "pairs_old_differs": 105
+ }
+}

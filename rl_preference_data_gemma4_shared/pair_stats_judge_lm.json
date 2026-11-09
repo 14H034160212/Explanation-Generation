@@ -1,0 +1,24 @@
+{
+ "judge_lm": {
+  "pairs": 182,
+  "chosen_nli": 0.28669999532014495,
+  "chosen_masked_nli": 0.05809987434441699,
+  "chosen_words": 43.71978021978022,
+  "chosen_judge_wins": 3.021978021978022,
+  "rejected_nli": 0.23476347282711096,
+  "rejected_masked_nli": 0.03819757987267811,
+  "rejected_words": 43.62637362637363,
+  "rejected_judge_wins": 0.967032967032967
+ },
+ "judgenli_lm": {
+  "pairs": 254,
+  "chosen_nli": 0.4709970836618767,
+  "chosen_masked_nli": 0.09813185433897634,
+  "chosen_words": 41.681102362204726,
+  "chosen_judge_wins": 2.6496062992125986,
+  "rejected_nli": 0.14129987660802956,
+  "rejected_masked_nli": 0.027220572176609163,
+  "rejected_words": 42.3503937007874,
+  "rejected_judge_wins": 1.3405511811023623
+ }
+}

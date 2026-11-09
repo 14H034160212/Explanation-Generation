@@ -1,0 +1,28 @@
+\begin{table}[t]
+\centering
+\caption{Reasoning reward vs.\ NLI reward on the 191 Cardiff Tier-C test questions (Gemma~4, same SFT checkpoint, greedy decoding). \textbf{Top:} pairwise reasoning judgements (first policy wins / second wins / ties; \% of non-tied pairs; two-sided sign test), same prompt and order flip as Table~\ref{tab:reasoning_judges}, judges run locally in bf16. \textbf{Bottom:} the same outputs on the entailment metrics.}
+\label{tab:reasoning_vs_hybrid}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lccc}
+\toprule
+Judge & SimPO vs SFT & Hybrid-DPO vs SFT & SimPO vs Hybrid-DPO \\
+\midrule
+Qwen2.5-7B-Instruct & 138/49/4 (74\%, $p{=}5{\times}10^{-11}$) & 96/94/0 (51\%, $p{=}0.94$) & 134/57/0 (70\%, $p{=}2{\times}10^{-8}$) \\
+Llama-3.1-8B-Instruct & 160/30/0 (84\%, $p{=}1{\times}10^{-22}$) & 111/79/0 (58\%, $p{=}0.02$) & 148/43/0 (77\%, $p{=}1{\times}10^{-14}$) \\
+\bottomrule
+\end{tabular}}
+
+\vspace{4pt}
+\resizebox{0.86\textwidth}{!}{%
+\begin{tabular}{lccccc}
+\toprule
+Policy & Words & Copies (\%) & NLI (train) & NLI (held-out) & Masked held-out NLI \\
+\midrule
+SFT & 66 & 53 & 0.186 & 0.321 & 0.086 \\
+Hybrid-DPO (NLI reward) & 78 & 71 & 0.390 & 0.558 & 0.136 \\
+SimPO (reasoning reward) & 68 & 51 & 0.165 & 0.281 & 0.049 \\
+DPO (reasoning reward) & 60 & 51 & 0.202 & 0.289 & 0.073 \\
+Self-distillation (reasoning reward) & 44 & 58 & 0.229 & 0.343 & 0.064 \\
+\bottomrule
+\end{tabular}}
+\end{table}

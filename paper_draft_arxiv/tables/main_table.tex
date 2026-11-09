@@ -1,0 +1,29 @@
+\begin{table}[t]
+\centering
+\caption{SFT$\to$RLearner-LLM on the five test sets. Each pair of numbers comes from \emph{one} evaluation run on the same 100 questions (LLaMA-2 decodes by sampling at $T{=}0.5$, so its SFT score varies between runs; Qwen3 and Gemma~4 decode greedily). \emph{NLI}: training scorer (DeBERTa-v3-small), bold if the 95\% bootstrap CI of the change excludes zero. \emph{Held-out}: DeBERTa-v3-large, used nowhere in training. \emph{Masked}: held-out NLI after every key term of the correct option is replaced by \texttt{[MASK]} in the explanation (\S\ref{sec:masking}); bold marks an increase. \emph{Copies}: \% of explanations containing the correct-option text verbatim.}
+\label{tab:main}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llcccccc}
+\toprule
+Model & Test set & NLI & 95\% CI of $\Delta$ & Held-out NLI & Masked held-out NLI & Words & Copies (\%) \\
+\midrule
+LLaMA-2-13B & Cardiff Bio. & \textbf{.082$\to$.319} & [+0.14, +0.33] & \textbf{.308$\to$.383} & .198$\to$.104 & 228$\to$80 & 54$\to$71 \\
+LLaMA-2-13B & Sydney Bio. & \textbf{.069$\to$.356} & [+0.19, +0.38] & \textbf{.179$\to$.464} & .104$\to$.065 & 288$\to$55 & 37$\to$61 \\
+LLaMA-2-13B & Auckland Law & .289$\to$.323 & [-0.07, +0.14] & .520$\to$.376 & .283$\to$.132 & 191$\to$80 & 46$\to$60 \\
+LLaMA-2-13B & UK Med Y1 & \textbf{.069$\to$.425} & [+0.26, +0.45] & \textbf{.254$\to$.455} & .149$\to$.124 & 223$\to$69 & 57$\to$74 \\
+LLaMA-2-13B & UK Med Y2 & \textbf{.076$\to$.388} & [+0.21, +0.41] & \textbf{.198$\to$.430} & .144$\to$.079 & 215$\to$74 & 49$\to$75 \\
+\midrule
+Qwen3-8B & Cardiff Bio. & .196$\to$.182 & [-0.11, +0.08] & .281$\to$.238 & \textbf{.071$\to$.141} & 59$\to$181 & 59$\to$78 \\
+Qwen3-8B & Sydney Bio. & .174$\to$.231 & [-0.04, +0.15] & .320$\to$.290 & \textbf{.067$\to$.156} & 66$\to$179 & 40$\to$71 \\
+Qwen3-8B & Auckland Law & .319$\to$.230 & [-0.20, +0.02] & \textbf{.297$\to$.409} & \textbf{.071$\to$.221} & 32$\to$199 & 41$\to$85 \\
+Qwen3-8B & UK Med Y1 & .246$\to$.207 & [-0.13, +0.06] & .315$\to$.258 & \textbf{.081$\to$.162} & 56$\to$184 & 65$\to$75 \\
+Qwen3-8B & UK Med Y2 & .163$\to$.207 & [-0.05, +0.13] & \textbf{.202$\to$.255} & \textbf{.073$\to$.151} & 74$\to$182 & 44$\to$75 \\
+\midrule
+Gemma~4 E4B & Cardiff Bio. & \textbf{.212$\to$.350} & [+0.03, +0.25] & \textbf{.239$\to$.400} & \textbf{.060$\to$.105} & 61$\to$45 & 57$\to$53 \\
+Gemma~4 E4B & Sydney Bio. & .247$\to$.231 & [-0.12, +0.09] & .414$\to$.355 & \textbf{.081$\to$.110} & 61$\to$49 & 44$\to$38 \\
+Gemma~4 E4B & Auckland Law & .391$\to$.438 & [-0.08, +0.17] & \textbf{.349$\to$.454} & \textbf{.057$\to$.083} & 29$\to$28 & 46$\to$48 \\
+Gemma~4 E4B & UK Med Y1 & .296$\to$.391 & [-0.02, +0.21] & \textbf{.266$\to$.502} & \textbf{.042$\to$.106} & 55$\to$40 & 66$\to$51 \\
+Gemma~4 E4B & UK Med Y2 & \textbf{.160$\to$.389} & [+0.12, +0.33] & \textbf{.264$\to$.412} & \textbf{.069$\to$.083} & 67$\to$54 & 49$\to$47 \\
+\bottomrule
+\end{tabular}}
+\end{table}

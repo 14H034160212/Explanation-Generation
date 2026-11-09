@@ -1,0 +1,27 @@
+\begin{table}[h]
+\centering
+\caption{Provenance of every cell in Tables~\ref{tab:main} and~\ref{tab:full_metrics}: SFT checkpoint, preference pool (\texttt{rl\_preference\_data\_*}), reward variant, number of pairs, DPO adapter (\texttt{*\_generator}), and the evaluation file in \texttt{rl\_eval\_results/} from which \emph{both} the SFT and the RLearner numbers are read. Test sets are the fixed 100-question splits of \S\ref{sec:setup}.}
+\label{tab:provenance}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llllcrll}
+\toprule
+Model & Test set & SFT checkpoint & Preference pool & Reward & Pairs & DPO adapter & Evaluation file \\
+\midrule
+LLaMA-2-13B & Cardiff Bio. & rl\_sft\_llama2\_13b\_generator & hybrid\_cross\_domain\_llama2 & $H_A$ & 239 & rl\_dpo\_hybrid\_cross\_domain\_llama2 & \texttt{llama2\_dpo\_hybrid\_cross\_domain\_cardiff\_eval.json} \\
+LLaMA-2-13B & Sydney Bio. & rl\_sft\_llama2\_13b\_generator & hybrid\_cross\_domain\_llama2 & $H_A$ & 239 & rl\_dpo\_hybrid\_cross\_domain\_llama2 & \texttt{llama2\_dpo\_hybrid\_cross\_domain\_sydney\_eval.json} \\
+LLaMA-2-13B & Auckland Law & rl\_sft\_llama2\_13b\_generator & hybrid\_cross\_domain\_llama2 & $H_A$ & 239 & rl\_dpo\_hybrid\_cross\_domain\_llama2 & \texttt{llama2\_dpo\_hybrid\_cross\_domain\_law\_eval.json} \\
+LLaMA-2-13B & UK Med Y1 & rl\_sft\_llama2\_13b\_generator & hybrid\_cross\_domain\_llama2 & $H_A$ & 239 & rl\_dpo\_hybrid\_cross\_domain\_llama2 & \texttt{llama2\_dpo\_hybrid\_cross\_domain\_med\_y1\_eval.json} \\
+LLaMA-2-13B & UK Med Y2 & rl\_sft\_llama2\_13b\_generator & hybrid\_cross\_domain\_llama2 & $H_A$ & 239 & rl\_dpo\_hybrid\_cross\_domain\_llama2 & \texttt{llama2\_dpo\_hybrid\_cross\_domain\_med\_y2\_eval.json} \\
+Qwen3-8B & Cardiff Bio. & rl\_sft\_qwen3\_8b\_generator & n5\_qwen3 & $H_M$ & 143 & rl\_dpo\_n5\_qwen3\_8b & \texttt{qwen3\_dpo\_n5\_cardiff\_eval.json} \\
+Qwen3-8B & Sydney Bio. & rl\_sft\_qwen3\_8b\_generator & n5\_qwen3 & $H_M$ & 143 & rl\_dpo\_n5\_qwen3\_8b & \texttt{qwen3\_dpo\_n5\_sydney\_eval.json} \\
+Qwen3-8B & Auckland Law & rl\_sft\_qwen3\_8b\_generator & hybrid\_cross\_domain\_qwen3 & $H_A$ & 632 & rl\_dpo\_hybrid\_cross\_domain\_qwen3 & \texttt{qwen3\_dpo\_hybrid\_cross\_domain\_law\_eval.json} \\
+Qwen3-8B & UK Med Y1 & rl\_sft\_qwen3\_8b\_generator & hybrid\_cross\_domain\_qwen3 & $H_A$ & 632 & rl\_dpo\_hybrid\_cross\_domain\_qwen3 & \texttt{qwen3\_dpo\_hybrid\_cross\_domain\_med\_y1\_eval.json} \\
+Qwen3-8B & UK Med Y2 & rl\_sft\_qwen3\_8b\_generator & hybrid\_cross\_domain\_qwen3 & $H_A$ & 632 & rl\_dpo\_hybrid\_cross\_domain\_qwen3 & \texttt{qwen3\_dpo\_hybrid\_cross\_domain\_med\_y2\_eval.json} \\
+Gemma~4 E4B & Cardiff Bio. & rl\_sft\_gemma4\_e4b\_merged\_generator & gemma4\_merged & $H_M$ & 164 & rl\_dpo\_gemma4\_e4b\_merged & \texttt{gemma4\_cardiff\_merged\_eval.json} \\
+Gemma~4 E4B & Sydney Bio. & rl\_sft\_gemma4\_e4b\_merged\_generator & gemma4\_merged & $H_M$ & 164 & rl\_dpo\_gemma4\_e4b\_merged & \texttt{gemma4\_sydney\_merged\_eval.json} \\
+Gemma~4 E4B & Auckland Law & rl\_sft\_gemma4\_e4b\_merged\_generator & gemma4\_merged & $H_M$ & 164 & rl\_dpo\_gemma4\_e4b\_merged & \texttt{gemma4\_auckland\_merged\_eval.json} \\
+Gemma~4 E4B & UK Med Y1 & rl\_sft\_gemma4\_e4b\_merged\_generator & gemma4\_merged & $H_M$ & 164 & rl\_dpo\_gemma4\_e4b\_merged & \texttt{gemma4\_medicine\_y1\_merged\_eval.json} \\
+Gemma~4 E4B & UK Med Y2 & rl\_sft\_gemma4\_e4b\_merged\_generator & gemma4\_merged & $H_M$ & 164 & rl\_dpo\_gemma4\_e4b\_merged & \texttt{gemma4\_medicine\_y2\_merged\_eval.json} \\
+\bottomrule
+\end{tabular}}
+\end{table}

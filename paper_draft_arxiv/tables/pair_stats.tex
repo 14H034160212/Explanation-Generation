@@ -1,0 +1,16 @@
+\begin{table}[h]
+\centering
+\caption{Preference pools behind Table~\ref{tab:main}. Columns 3--6: \% of pairs in which the chosen explanation has lower NLI, lower verifier score, the same verifier score, or strictly higher on both. Columns 7--8: mean score of chosen / rejected. Last column: number of distinct questions from Cardiff or UK Medicine (the two courses share question text in our files), Sydney, and Auckland Law. No pool shares a question with a test set.}
+\label{tab:pair_stats}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lcccccccc}
+\toprule
+Pool & Pairs & Lower NLI & Lower Ver & Ver tie & Both higher & NLI ch./rej. & Ver ch./rej. & Cardiff+Med / Syd / Law \\
+\midrule
+LLaMA-2-13B, $H_A$ cross-domain & 239 & 7.5 & 26.8 & 15.5 & 50.2 & 0.53 / 0.02 & 3.10 / 2.97 & 137 / 24 / 77 \\
+Qwen3-8B, $H_M$ $N{=}5$ & 143 & 1.4 & 8.4 & 76.9 & 14.0 & 0.94 / 0.04 & 2.55 / 2.49 & 100 / 18 / 24 \\
+Qwen3-8B, $H_A$ cross-domain & 632 & 7.3 & 3.5 & 63.4 & 25.2 & 0.59 / 0.06 & 2.50 / 2.21 & 431 / 78 / 108 \\
+Gemma~4 E4B, $H_M$ merged & 164 & 1.2 & 34.1 & 36.0 & 29.9 & 0.89 / 0.05 & 3.05 / 3.06 & 113 / 20 / 29 \\
+\bottomrule
+\end{tabular}}
+\end{table}

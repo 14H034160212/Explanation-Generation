@@ -255,10 +255,13 @@ def evaluate_model(model_name: str, gen_model, gen_tok, ver_model, ver_tok,
 
         result.acr_scores.append(compute_acr(expl, correct_opt))
 
-        try:
-            vs = get_verifier_score(ver_model, ver_tok, input_text, expl)
-        except Exception:
-            vs = 3.0
+        if ver_model is None:
+            vs = float("nan")
+        else:
+            try:
+                vs = get_verifier_score(ver_model, ver_tok, input_text, expl)
+            except Exception:
+                vs = 3.0
         result.verifier_scores.append(vs)
 
         if (i + 1) % 10 == 0:
@@ -321,6 +324,8 @@ def main():
     parser.add_argument("--nli_device", default="cpu")
     parser.add_argument("--nli_model", default="cross-encoder/nli-deberta-v3-small")
     parser.add_argument("--skip_nli", action="store_true")
+    parser.add_argument("--skip_sft", action="store_true",
+                        help="Evaluate only the DPO policy (SFT evaluated once elsewhere)")
     parser.add_argument("--max_new_tokens", type=int, default=300)
     parser.add_argument("--cache_dir", default="cache")
     parser.add_argument("--limit", type=int, default=None,
@@ -334,7 +339,10 @@ def main():
     logger.info(f"Test data: {len(test_data)} examples")
 
     bleu_metric = BLEU(effective_order=True)
-    ver_model, ver_tok = load_verifier(args.verifier_path, args.verifier_device)
+    if args.verifier_path.lower() == "none":  # verifier unavailable: record NaN, never a fake score
+        ver_model = ver_tok = None
+    else:
+        ver_model, ver_tok = load_verifier(args.verifier_path, args.verifier_device)
 
     nli_model = nli_tok = None
     nli_ent_idx = 1
@@ -349,7 +357,7 @@ def main():
     all_results = []
     # For SFT eval, apply only SFT adapter. For DPO eval, apply SFT first then DPO
     # because the DPO adapter was trained on top of the SFT-merged base.
-    models_to_eval = [("Gemma4-E4B-SFT", [args.sft_lora_path])]
+    models_to_eval = [] if args.skip_sft else [("Gemma4-E4B-SFT", [args.sft_lora_path])]
     if args.dpo_lora_path and os.path.exists(args.dpo_lora_path):
         models_to_eval.append(("Gemma4-E4B-DPO", [args.sft_lora_path, args.dpo_lora_path]))
 

@@ -1,0 +1,243 @@
+<title>Explanation Reasoning Study</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400&display=swap">
+<style>
+/* Layout: one reading column; each item is a question card followed by two answer panels side by side (stacked on phones). */
+:root {
+  --bg: #f6f7f4; --surface: #ffffff; --ink: #1d2320; --muted: #5d6762; --line: #d9ddd7;
+  --accent: #2f6b55; --accent-soft: #e3efe9; --key: #8a5a12; --key-soft: #f6ecd9; --warn: #9b3b2f;
+  --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #141816; --surface: #1c211f; --ink: #e6ebe8; --muted: #9aa59f; --line: #2f3633;
+  --accent: #7cc2a4; --accent-soft: #20332b; --key: #e2b46a; --key-soft: #33291a; --warn: #e48a7d; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #141816; --surface: #1c211f; --ink: #e6ebe8; --muted: #9aa59f; --line: #2f3633;
+  --accent: #7cc2a4; --accent-soft: #20332b; --key: #e2b46a; --key-soft: #33291a; --warn: #e48a7d; color-scheme: dark }
+body { background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.55; }
+.wrap { max-width: 980px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 28px 80px; display: grid; gap: 22px; }
+h1 { font-family: var(--serif); font-weight: 600; font-size: 1.9rem; line-height: 1.2; margin: 0; text-wrap: balance; }
+h2 { font-family: var(--serif); font-weight: 600; font-size: 1.15rem; margin: 0; }
+p { margin: 0; max-width: 68ch; }
+.muted { color: var(--muted); }
+.intro { display: grid; gap: 10px; }
+.rules { display: grid; gap: 6px; padding: 14px 18px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); }
+.rules ol { margin: 0; padding-left: 1.2em; display: grid; gap: 4px; max-width: 72ch; }
+.who { display: flex; flex-wrap: wrap; gap: 12px 18px; align-items: end; }
+.who label { display: grid; gap: 4px; font-size: 13px; color: var(--muted); }
+input[type=text], select { font: inherit; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 7px 10px; min-width: 0; }
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); padding-block: 10px; border-bottom: 1px solid var(--line); display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+.track { flex: 1 1 200px; height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; }
+.track i { display: block; height: 100%; width: 0; background: var(--accent); transition: width .2s; }
+.count { font-family: var(--mono); font-size: 13px; font-variant-numeric: tabular-nums; }
+.status { font-size: 13px; color: var(--muted); }
+.item { display: grid; gap: 12px; padding-top: 18px; border-top: 1px solid var(--line); scroll-margin-top: 70px; }
+.item-head { display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+.qno { font-family: var(--mono); font-size: 13px; color: var(--muted); }
+.course { font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+.stem { font-family: var(--serif); font-size: 1.05rem; max-width: 72ch; }
+.opts { margin: 4px 0 0; padding: 0; list-style: none; display: grid; gap: 2px; font-size: 14px; max-width: 72ch; }
+.opts li.correct { color: var(--key); font-weight: 600; }
+.answer { display: inline-block; font-size: 13px; padding: 2px 8px; border-radius: 3px; background: var(--key-soft); color: var(--key); font-weight: 600; }
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 700px) { .pair { grid-template-columns: 1fr; } }
+.exp { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 12px 14px; min-width: 0; display: grid; gap: 6px; align-content: start; }
+.exp b { font-family: var(--mono); font-size: 12px; font-weight: 400; color: var(--muted); }
+.exp div { white-space: pre-wrap; overflow-wrap: anywhere; }
+.choice { display: flex; flex-wrap: wrap; gap: 8px; }
+.choice label { cursor: pointer; }
+.choice input { position: absolute; opacity: 0; pointer-events: none; }
+.choice span { display: inline-block; padding: 7px 14px; border: 1px solid var(--line); border-radius: 4px; background: var(--surface); font-size: 14px; }
+.choice input:checked + span { background: var(--accent); border-color: var(--accent); color: var(--bg); font-weight: 600; }
+.choice input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
+.choice .skip input:checked + span { background: var(--muted); border-color: var(--muted); }
+button { font: inherit; font-weight: 600; cursor: pointer; padding: 9px 18px; border-radius: 4px; border: 1px solid var(--accent); background: var(--accent); color: var(--bg); }
+button.ghost { background: transparent; color: var(--accent); }
+button:disabled { opacity: .5; cursor: default; }
+button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.finish { display: grid; gap: 10px; padding: 18px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); }
+textarea { font-family: var(--mono); font-size: 12px; width: 100%; box-sizing: border-box; min-height: 80px; color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 4px; padding: 8px; }
+.row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.err { color: var(--warn); }
+@media (prefers-reduced-motion: reduce) { .track i { transition: none; } }
+</style>
+
+<div class="wrap">
+  <header class="intro">
+    <h1>Which explanation reasons better?</h1>
+    <p class="muted">A blinded study of AI-written explanations for multiple-choice exam questions from university biology, law and medicine courses. 10 questions, about 10 minutes. 本研究为盲评，共 10 题，大约 10 分钟。</p>
+  </header>
+
+  <section class="rules" aria-labelledby="how">
+    <h2 id="how">How to judge</h2>
+    <ol>
+      <li>Each question shows the correct answer. Two explanations of <em>why</em> it is correct follow, labelled A and B. They come from two different systems, in random order.</li>
+      <li>Pick the explanation whose reasoning better justifies the correct answer: the facts are right and the steps actually lead to the answer.</li>
+      <li>Ignore length, formatting and style. An explanation that only restates the answer without a reason is worse.</li>
+      <li>Choose <strong>Tie</strong> if they are equally good or equally bad. Choose <strong>Outside my expertise</strong> if you cannot judge the subject.</li>
+    </ol>
+  </section>
+
+  <section class="who" aria-label="About you">
+    <label for="rater">Your name or initials
+      <input type="text" id="rater" autocomplete="off" placeholder="e.g. J.S.">
+    </label>
+    <label for="field">Your background
+      <select id="field">
+        <option value="">Choose…</option>
+        <option>Biology</option><option>Medicine</option><option>Law</option><option>Other science</option><option>Other</option>
+      </select>
+    </label>
+  </section>
+
+  <div class="bar" role="status">
+    <div class="track" aria-hidden="true"><i id="fill"></i></div>
+    <span class="count" id="count">0 / 0</span>
+    <span class="status" id="save">Loading questions…</span>
+  </div>
+
+  <main id="items" aria-live="polite"></main>
+
+  <section class="finish" aria-labelledby="done">
+    <h2 id="done">Submit</h2>
+    <p class="muted" id="finishNote">Answer every question, then submit. You can change answers and submit again.</p>
+    <div class="row">
+      <button id="submit" type="button" disabled>Submit my answers</button>
+      <span id="submitMsg" class="status"></span>
+    </div>
+    <div id="manual" hidden>
+      <p>If the page says it could not save, copy this code and send it to the study organiser:</p>
+      <textarea id="code" readonly aria-label="Result code"></textarea>
+      <div class="row"><button class="ghost" id="copy" type="button">Copy code</button><span id="copyMsg" class="status"></span></div>
+    </div>
+  </section>
+</div>
+
+<script>
+(function () {
+  const $ = id => document.getElementById(id);
+  const LS = "hev2-draft-10q";
+  let items = [], answers = {}, db = null, uid = null, saveTimer = null;
+
+  function store(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+  function load(k) { try { return JSON.parse(localStorage.getItem(k) || "null"); } catch (e) { return null; } }
+
+  function parseQ(raw) {
+    let s = raw.replace(/^Given question:\s*/i, "");
+    let ans = "";
+    const m = s.match(/The correct answer is (Option [A-Z])\.?\s*$/i);
+    if (m) { ans = m[1]; s = s.slice(0, m.index).trim(); }
+    const parts = s.split(/\s(?=Option [A-Z]\s*:)/);
+    return { stem: parts[0], opts: parts.slice(1), ans };
+  }
+
+  function el(tag, cls, text) { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+
+  function render() {
+    const root = $("items"); root.textContent = "";
+    items.forEach((it, n) => {
+      const q = parseQ(it.question);
+      const sec = el("section", "item"); sec.id = it.id; sec.setAttribute("aria-label", "Question " + (n + 1));
+      const head = el("div", "item-head");
+      head.append(el("span", "qno", "Q" + (n + 1) + " of " + items.length), el("span", "course", it.course));
+      sec.append(head, el("p", "stem", q.stem));
+      if (q.opts.length) {
+        const ul = el("ul", "opts");
+        q.opts.forEach(o => { const li = el("li", null, o); if (q.ans && o.startsWith(q.ans)) li.className = "correct"; ul.append(li); });
+        sec.append(ul);
+      }
+      if (q.ans) sec.append(el("span", "answer", "Correct answer: " + q.ans));
+      const pair = el("div", "pair");
+      ["A", "B"].forEach(L => { const box = el("div", "exp"); box.append(el("b", null, "Explanation " + L), el("div", null, it[L])); pair.append(box); });
+      sec.append(pair);
+      const ch = el("div", "choice"); ch.setAttribute("role", "radiogroup"); ch.setAttribute("aria-label", "Your judgement for question " + (n + 1));
+      [["A", "A is better"], ["B", "B is better"], ["Tie", "Tie"], ["Skip", "Outside my expertise"]].forEach(([v, t]) => {
+        const lab = el("label", v === "Skip" ? "skip" : null);
+        const inp = document.createElement("input"); inp.type = "radio"; inp.name = it.id; inp.value = v; inp.id = it.id + "-" + v;
+        if (answers[it.id] === v) inp.checked = true;
+        inp.addEventListener("change", () => { answers[it.id] = v; changed(); });
+        lab.append(inp, el("span", null, t)); ch.append(lab);
+      });
+      sec.append(ch); root.append(sec);
+    });
+    progress();
+  }
+
+  function progress() {
+    const done = items.filter(it => answers[it.id]).length;
+    $("count").textContent = done + " / " + items.length;
+    $("fill").style.width = items.length ? (100 * done / items.length) + "%" : "0";
+    $("submit").disabled = !(done === items.length && $("rater").value.trim());
+    $("finishNote").textContent = done < items.length ? (items.length - done) + " question(s) left. Your answers are kept on this device as you go."
+      : ($("rater").value.trim() ? "All questions answered. Submit when ready; you can change answers and submit again." : "Enter your name or initials at the top, then submit.");
+    $("code").value = code();
+  }
+
+  function code() {
+    return "HEV2|" + ($("rater").value.trim() || "anon") + "|" + ($("field").value || "?") + "|" +
+      items.map(it => it.id + "=" + (answers[it.id] || "?")).join(",");
+  }
+
+  function payload(submitted) {
+    return { rater: $("rater").value.trim(), field: $("field").value, answers: { ...answers },
+             answered: items.filter(it => answers[it.id]).length, total: items.length,
+             submitted: !!submitted, updatedAt: new Date().toISOString() };
+  }
+
+  function changed() {
+    store(LS, { answers, rater: $("rater").value, field: $("field").value });
+    progress();
+    if (db && uid) {
+      clearTimeout(saveTimer);
+      saveTimer = setTimeout(() => {
+        db.doc("ratings/" + uid).set(payload(false)).then(() => { $("save").textContent = "Progress saved"; })
+          .catch(() => { $("save").textContent = "Kept on this device"; });
+      }, 1200);
+    } else { $("save").textContent = "Kept on this device"; }
+  }
+
+  $("rater").addEventListener("input", changed);
+  $("field").addEventListener("change", changed);
+
+  $("submit").addEventListener("click", async () => {
+    $("submit").disabled = true; $("submitMsg").textContent = "Saving…";
+    let ok = false;
+    if (db && uid) { try { await db.doc("ratings/" + uid).set(payload(true)); ok = true; } catch (e) {} }
+    if (ok) { $("submitMsg").textContent = "Submitted. Thank you."; $("manual").hidden = true; }
+    else { $("submitMsg").innerHTML = ""; $("submitMsg").append(el("span", "err", "Could not save online. Please send the code below instead.")); $("manual").hidden = false; }
+    $("code").value = code(); $("submit").disabled = false;
+  });
+
+  $("copy").addEventListener("click", () => {
+    const t = $("code");
+    navigator.clipboard.writeText(t.value).then(() => { $("copyMsg").textContent = "Copied"; })
+      .catch(() => { t.focus(); t.select(); $("copyMsg").textContent = "Selected. Press Ctrl+C or Cmd+C."; });
+  });
+
+  const d = load(LS);
+  if (d) { answers = d.answers || {}; $("rater").value = d.rater || ""; $("field").value = d.field || ""; }
+
+  fetch("items.json").then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(js => {
+    items = js; render(); $("save").textContent = "Answers are kept as you go";
+  }).catch(() => { $("save").textContent = "Could not load the questions. Reload the page."; });
+
+  if (window.claude && claude.use) {
+    Promise.all([claude.use("db"), claude.use("user")]).then(async ([d1, u]) => {
+      if (!d1 || !u) return;
+      try {
+        uid = await u.id(); if (!uid) return; db = d1;
+        const snap = await db.doc("ratings/" + uid).get();
+        const v = snap.exists ? snap.data() : null;
+        if (v && v.answers && !Object.keys(answers).length) {
+          answers = v.answers; $("rater").value = v.rater || ""; $("field").value = v.field || ""; if (items.length) render();
+        }
+        $("save").textContent = "Signed in: answers save online";
+      } catch (e) { db = null; }
+    }).catch(() => {});
+  }
+})();
+</script>

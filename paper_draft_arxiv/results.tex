@@ -1,69 +1,56 @@
 \section{Experimental Setup}
 \label{sec:experimental_setup}
+\label{sec:setup}
 
-We conduct experiments on three base architectures spanning two parameter regimes and three pre-training recipes: \textbf{LLaMA-2-13B}, \textbf{Qwen3-8B}, and \textbf{Gemma 4 E4B-it} ($4.5$B effective parameters via Per-Layer Embeddings). All training is performed on a cluster of NVIDIA A100 GPUs using the TRL and PEFT libraries. The same iterative-refinement \textbf{ILearner-LLM (K{=}5)} baseline of \citep{bao2025exploring} is reproduced from a LLaMA-2-13B SFT checkpoint with $K{=}5$ refinement passes per question, identical to the original publication; we use this as a strictly stronger inference-time baseline ($5\times$ the inference compute of our single-pass models).
+\textbf{Models.} LLaMA-2-13B, Qwen3-8B and Gemma~4 E4B-it (4.5B effective parameters), each fine-tuned with LoRA ($r{=}16$, $\alpha{=}32$, 3 epochs) on 13{,}211 student-written PeerWise explanations \citep{bao2025exploring} pooled from five courses: Cardiff Biology, Sydney Biology, Auckland Law, and UK Medicine Years 1 and 2.
 
-\subsection{Datasets and Preprocessing}
-The evaluation spans five academic domains: Cardiff Biology, Sydney Biology, Auckland Law, and UK Medicine (Years 1 and 2). For each domain, we utilize a 100-question held-out test set. Input contexts are formatted as multi-choice questions with associated correct options. The SFT corpus consists of 13{,}211 question--explanation pairs authored by \textbf{undergraduate students} on the PeerWise peer-learning platform. These explanations reflect authentic learner reasoning rather than expert-curated answer keys, which introduces a known ceiling on ground-truth quality (incomplete justifications, occasional misconceptions, and stylistic variance); we quantify the downstream effect of this ceiling through the SFT failure-mode analysis in Table~\ref{tab:failure_modes} and discuss its implications for future expert-verified corpora in Section~\ref{sec:discussion-limits}.
+\textbf{Preference data.} For each base model we sample $n{=}3$ explanations for 500 training questions drawn from the same pooled corpus, so every pool contains questions from all five courses (Appendix~\ref{sec:pair_stats}); no pool shares a question with a test set. We keep the best- vs.\ worst-scoring pair when the score gap is $\geq 0.05$, which leaves 143--632 pairs. DPO: 5 epochs, lr $5{\times}10^{-5}$, $\beta{=}0.1$, effective batch 8.
 
-\subsection{Training Configurations}
-\label{sec:train_config}
-\textbf{SFT}: 3 epochs on $13{,}211$ examples, LoRA $r{=}16$, $\alpha{=}32$, per-device batch size $2$, gradient accumulation $8$, bf16. \textbf{Preference data}: $500$ prompts $\times$ $n{=}3$ candidates scored with $H(E)$ (Eq.~\ref{eq:hybrid_reward}). $H_M$ uses $w_\text{nli}{=}0.7$, $w_\text{ver}{=}0.3$, $\gamma{=}0.002\times(\text{word\_count}/100)$, $\theta{=}0.5$ (ACR-failing candidates get zero reward); $H_A$ uses $0.5/0.5$ weights on $S_\text{NLI}$ and $\tilde S_\text{ver}{=}(S_\text{ver}{-}1)/4$ with no gate or length term. Pairs with score gap $\Delta{\geq}0.05$ are retained. \textbf{DPO}: 5 epochs, lr $5\times 10^{-5}$, batch size $1$, grad accum $8$, bf16, $\beta_{\text{DPO}}{=}0.1$. \textbf{Variant assignment} (selector rule, \S\ref{sec:first_principles}): LLaMA-2-13B uses $H_A$ on the cross-domain pool ($239$ pairs); Qwen3-8B uses $H_M$ at $N{=}5$ on Cardiff/Sydney ($143$ pairs) and $H_A$ cross-domain elsewhere ($632$ pairs); Gemma 4 E4B-it uses $H_M$ on the 5-domain merged pool ($164$ pairs). Full assignment in Table~\ref{tab:variant_per_arch} (Appendix~\ref{sec:variant_assignment_appendix}).
+\textbf{Test sets and decoding.} Each course has a fixed 100-question test set. Qwen3 and Gemma~4 decode greedily. The LLaMA-2 harness samples ($T{=}0.5$), so the same LLaMA-2 SFT checkpoint scores differently from run to run (e.g.\ Cardiff NLI 0.045--0.21 over 11 runs, Appendix~\ref{sec:provenance}). We therefore always compare a DPO policy with the SFT row of the \emph{same} evaluation run, and report a 95\% bootstrap confidence interval for the change. We have one DPO training seed per cell; the SimPO result of \S\ref{sec:reasoning-reward} has three.
 
-\subsection{Evaluation Tier}
-\label{sec:eval_tier}
-We evaluate on four metrics. \textbf{Textual Overlap}: BLEU and BERTScore vs.\ the student reference rationale. \textbf{Answer Anchoring}: BERTScore(Ans) and Answer Coverage Rate (ACR) vs.\ the correct-option text. \textbf{Logical Entailment (NLI)}: $S_\text{NLI}{=}P(\text{entail}\mid E, A){\in}[0,1]$ from \texttt{cross-encoder/nli-deberta-v3-small} (premise $E$, hypothesis $A$, joint max length $512$, no prompt wrapping). \textbf{Verifier score (Ver)}: raw mean of the Alpaca-7B Likert scorer of \citep{bao2025exploring}, reported as a diagnostic that the same automatic judge that produced the training signal does not penalise our outputs; the verifier is \emph{not} used as a primary evaluation comparator.
+\textbf{Metrics.} \emph{NLI}: $S_\text{NLI}$ with the training scorer. \emph{Held-out NLI}: the same with \texttt{cross-encoder/nli-deberta-v3-large}, which is used nowhere in training, pair construction or model selection. \emph{Copies}: the share of explanations that contain the correct-option text verbatim. ACR, BLEU, BERTScore and the verifier score are in Appendix~\ref{sec:per_domain_appendix}.
 
-\section{Analysis and Results}
+\textbf{Answer-masking test.}\label{sec:masking} An explanation can entail the answer by restating it. To see how much entailment remains without that, we replace, in the explanation, the full option text and every word beginning with one of the option's key terms (words of $\geq$4 letters) with \texttt{[MASK]}, and re-score with the held-out model. For example, with the option ``ATP is generated anaerobically through substrate level phosphorylation using creatine phosphate'', the explanation sentence ``ATP is generated anaerobically \ldots'' becomes ``[MASK] is [MASK] [MASK] \ldots'', while the reasons around it are kept. Masked scores are low for every model; what matters is whether DPO raises or lowers them relative to SFT.
+
+\section{Results}
 \label{sec:results}
 
-We compare \textbf{RLearner-LLM} against four baselines: (i) each architecture's \emph{SFT} checkpoint; (ii) our verifier-only \emph{DPO\,v1}/\emph{DPO\,v2} ablations (no NLI signal) that surface the alignment tax; (iii) the iterative \emph{ILearner-LLM (K=5)} of \citep{bao2025exploring} (\S\ref{sec:experimental_setup}); and (iv) a proprietary \emph{GPT-4o-mini} blind pairwise judge. RLearner-LLM improves NLI over SFT in $11$ of $15$ (architecture, domain) cells (the four non-improvements: Qwen3 on Cardiff/Auckland~Law/Med~Y1, Gemma~4 on Sydney), surpasses ILearner-LLM on four of five domains, and wins $95\%$ of pairwise comparisons against its own SFT baseline while losing $95\%$ to GPT-4o-mini's longer outputs (\S\ref{sec:verbosity}, Table~\ref{tab:pairwise_1}). Table~\ref{tab:nli_summary} gives the headline; \S\S\ref{sec:domains}--\ref{sec:verbosity} unpack each comparison.
+\subsection{Entailment gains, and what they are made of}
+\label{sec:main_results}
 
-\begin{table}[h]
-\centering
-\small
-\resizebox{\textwidth}{!}{
-\begin{tabular}{l|c|c|c|c}
-\toprule
-Domain & LLaMA-2-13B & Qwen3-8B & Gemma\,4-E4B-it & ILearner-LLM (K=5) \\
-       & SFT $\to$ \textbf{RLearner} & SFT $\to$ \textbf{RLearner} & SFT $\to$ \textbf{RLearner} & (iterative ref.) \\
-\midrule
-Cardiff Biology  & 0.0555 $\to$ \textbf{0.3209} ($5.8\times$) & 0.1959 $\to$ 0.1820   & 0.2117 $\to$ \textbf{0.3505} (+66\%) & 0.0864 \\
-Sydney Biology   & 0.0537 $\to$ \textbf{0.3562} ($6.6\times$) & 0.1737 $\to$ \textbf{0.2284} (+31\%) & 0.2469 $\to$ 0.2309   & 0.0837 \\
-Auckland Law     & 0.2702 $\to$ \textbf{0.3229} (+19\%)       & 0.3191 $\to$ 0.2303   & 0.3911 $\to$ \textbf{0.4377}* (+12\%) & 0.3996 \\
-UK Medicine Y1   & 0.0860 $\to$ \textbf{0.4251} ($4.9\times$) & 0.2457 $\to$ 0.2104   & 0.2962 $\to$ \textbf{0.3910} (+32\%) & 0.1219 \\
-UK Medicine Y2   & 0.2319 $\to$ \textbf{0.3885} (+68\%)       & 0.1632 $\to$ \textbf{0.2009} (+23\%) & 0.1604 $\to$ \textbf{0.3892} (+143\%) & 0.0668 \\
-\bottomrule
-\end{tabular}
-}
-\caption{NLI entailment improvement summary ($\text{SFT}\to\text{RLearner-LLM}$; bold marks an improvement, parentheses give the relative gain). RLearner-LLM improves NLI in $11$ of $15$ cells; the four non-improvements (Qwen3 on Cardiff/Auckland~Law/Medicine~Y1, Gemma~4 on Sydney) are domains whose SFT NLI is already high and where gains shift onto answer-coverage (\S\ref{sec:arch-effects}; per-domain breakdown in Appendix~\ref{sec:per_domain_appendix}). The asterisk marks the first single-pass-RL result to surpass ILearner-LLM (K=5) (Gemma~4, Auckland Law). Paired-Wilcoxon significance for the Gemma-4 flagship and for the LLaMA-2-13B and Qwen3-8B per-domain gains is reported in Appendix~\ref{sec:per_domain_appendix}.}
-\label{tab:nli_summary}
-\end{table}
+\input{tables/main_table}
 
-\subsection{Comparison across Scientific Domains}
-\label{sec:domains}
-Table~\ref{tab:cardiff_results} gives the full per-architecture breakdown on Cardiff Biology (other Biology and Medicine domains in Appendix~\ref{sec:per_domain_appendix}). On Cardiff, LLaMA-2 RLearner lifts NLI $5.8\times$ over SFT, Qwen3 trades a small NLI delta for a substantial ACR gain ($+8.5$\,pp), and Gemma 4 E4B-it, despite $4.5$B effective parameters, achieves the highest NLI among RLearner variants ($0.3505$, $+65.6\%$ over SFT) at the fastest inference ($4.76$s). On Sydney, LLaMA-2 reaches a $6.6\times$ lift, Qwen3 gains $+31.5\%$ NLI / $+23.5$\,pp ACR, and Gemma 4 SFT already sits at a high SFT NLI ($0.2469$, upper third of our cells); we connect the flat Gemma 4 result to entailment-headroom in \S\ref{sec:arch-effects}.
+Table~\ref{tab:main} gives the 15 (model, test set) cells; Figure~\ref{fig:masking} plots the held-out and masked changes. The three base models behave differently.
 
+\textbf{LLaMA-2-13B: the gain is restatement.} Entailment rises in four of five test sets with confidence intervals well above zero (e.g.\ UK Med Y1 0.069$\to$0.425), and the held-out scorer agrees. But DPO also cuts the output from 190--290 to 55--80 words and raises the share that copies the answer (e.g.\ 49\%$\to$75\% on Med Y2). Once the answer is masked, the held-out score is \emph{lower} than SFT's in all five test sets. The model has learned to state the answer in a short output, not to argue for it. Auckland Law, the one non-significant cell, is also where ILearner-LLM, which refines each answer five times, stays ahead (Appendix~\ref{sec:per_domain_appendix}).
 
+\textbf{Qwen3-8B: no reliable change.} No confidence interval excludes zero, the two scorers disagree on direction in two cells, and outputs triple in length (32--74$\to$179--199 words). The masked score rises, but with three times as much text to mask around we do not read this as evidence either way.
 
+\textbf{Gemma~4 E4B: a gain that survives masking.} The held-out scorer improves in four of five test sets (all but Sydney) and the masked score in all five, while outputs get \emph{shorter} (by 1--16 words) and copy the answer no more often (change $-15$ to $+2$ points). The training-scorer change has a CI above zero on Cardiff and Med Y2; on Med Y1 and Law the CI touches zero. This is the result we consider robust: on Gemma~4, the entailment reward improves how well the explanation supports the answer beyond repeating it. Whether reasoning judges also prefer these outputs is a separate question, which \S\ref{sec:single_dual} answers in the negative. On the strict question-quality filter of Appendix~\ref{sec:tierc_appendix} the Gemma~4 gains are larger (held-out 0.32$\to$0.56 on Cardiff, 0.37$\to$0.55 on Sydney).
 
-\subsection{Cross-Domain Performance in Medicine and Law}
-Zero-shot transfer of the same Hybrid-DPO policy to Auckland Law and UK Medicine, neither contributed questions to the preference-data construction, is summarised in Table~\ref{tab:nli_summary} (per-architecture detail in Appendix~\ref{sec:per_domain_appendix}). \textbf{Auckland Law} is the hardest single-pass-RL domain: LLaMA-2 RLearner reaches $0.3229$ ($+19.5\%$ over SFT) but falls short of ILearner-LLM (K=5) at $0.3996$, while Qwen3 delivers a $+28.9$\,pp ACR jump ($0.5175{\to}0.8070$). Most notably, \textbf{RLearner-LLM (Gemma 4 E4B-it)} is the first single-pass-RL result to surpass the ILearner-LLM (K=5) benchmark on Auckland Law ($0.4377$ vs $0.3996$). On \textbf{UK Medicine}, all three architectures improve NLI; LLaMA-2 peaks at $0.4251$ (Y1) and $0.3885$ (Y2), and Gemma 4 matches the LLaMA-2 peak on Y2 ($0.3892$) with $\sim$3$\times$ fewer effective parameters.
+Across all 15 cells, the CI excludes zero in 6, a one-sided paired Wilcoxon test gives $p{<}0.05$ in 9, and the two scorers agree on the direction of the change in 12.
 
-\subsection{Pairwise Evaluation and the Persistent Verbosity Bias}
-\label{sec:verbosity}
-Three pairwise comparisons (Table~\ref{tab:pairwise_1}) probe LLM-as-a-judge behaviour. Row 1 replicates verbosity bias \citep{wang2023large,zheng2024judging,park2024lengthbias}: GPT-4o-mini awards $69\%$ to the verbose \emph{LLaMA-2 SFT} over the more concise, logically stronger \emph{DPO\,v2}. Row 2 reverses this pattern when both candidates come from the same family: \textbf{RLearner-LLM (Qwen3)} wins $95\%$ vs.\ its own Qwen3-8B SFT. Row 3 is the cautionary finding: against the proprietary \emph{GPT-4o-mini} comparator, our concise RLearner-LLM \emph{loses} $95\%$ under the same GPT-4o-mini judge. We read this not as a quality verdict but as a continuation of the verbosity bias on a frontier comparator, since GPT-4o-mini's longer hedged outputs satisfy the same length heuristic that drives Row 1.
-
-
-
-The juxtaposition of rows 2 and 3 is the headline takeaway: the alignment tax is a property of the \emph{reward signal} used during preference-data construction, not of DPO itself. The Hybrid reward lets an $8$B local model beat its own SFT on the same judge, while the same judge reverts to verbosity bias against a frontier comparator, arguing for logic-aware automatic metrics (NLI, ACR) over LLM-as-a-judge as ground truth on logical quality.
-
-\subsection{Reward-Variant Ablation: $H_A$ vs.\ $H_M$}
+\subsection{Does combining NLI with a verifier help?}
+\label{sec:single_dual}
 \label{sec:variant_ablation}
-$H_M$ wins $7/11$ NLI head-to-heads (mean $+1.5$\,pp, Table~\ref{tab:variant_ablation}); $H_A$ wins the remaining $4$ (three on Sydney). Both variants beat SFT wherever the dual signal is supplied, supporting the view that the dual-signal hypothesis, not the algebraic form, is the load-bearing claim: $H_A$ vs.\ $H_M$ is a hyperparameter chosen by pair-pool feasibility (\S\ref{sec:first_principles}).
 
+\input{tables/gemma4_shared_main}
 
+Our original motivation for adding the verifier was that NLI alone would collapse into short, incoherent text. We did not observe this. With LLaMA-2, NLI-only DPO produces 71--97-word outputs with the same verifier scores as the combined reward, and the same entailment gains (+0.24 vs.\ +0.29 on Cardiff, +0.29 vs.\ +0.29 on Sydney, +0.31 vs.\ +0.31 on Med Y2); verifier-only DPO, with no NLI signal at all, gives +0.24 and +0.22 (Appendix~\ref{sec:single_dual_appendix}, Table~\ref{tab:single_dual}). On Qwen3 the combined, NLI-only and verifier-only policies are indistinguishable. Those runs used separately sampled candidate pools. To compare the rewards cleanly we built a single pool of scored candidates for Gemma~4 and trained every variant of Table~\ref{tab:rewards} on pairs drawn from it (Table~\ref{tab:g4shared}).
 
-\subsection{SFT Failure Mode Analysis}
-\label{sec:failure_modes}
-A systematic error analysis on $5{,}100$ SFT explanations (Appendix~\ref{sec:failure_mode_appendix}) finds standard SFT fluent-but-vacuous in $48$--$85\%$ of cases ($\mathrm{NLI}{<}0.05$), hallucinating citation-style URLs in $44$--$69\%$, and failing to anchor the answer in $12$--$37\%$ ($\mathrm{ACR}{=}0$). Hybrid-DPO targets each by construction: the NLI signal suppresses vacuous generations, and under $H_M$ the ACR gate removes answer-evasive candidates while the length penalty discourages verbose hallucinations. A case study (Appendix~\ref{sec:case_study_appendix}) shows the same in microcosm: SFT lists facts without a deductive chain ($\mathrm{NLI}{=}0.001$) whereas RLearner-LLM produces a structured proof ($\mathrm{NLI}{=}0.943$).
+\GSHAREDTEXT
+
+\subsection{Rewarding reasoning directly}
+\label{sec:reasoning-reward}
+
+Entailment, masked or not, does not ask whether the reason given is valid. We therefore also train with a reward that does. From the Cardiff Tier-C training prompts we sample three explanations per question from the Gemma~4 SFT model and rank them with a pairwise judge (DeepSeek-R1-32B) asked which explanation better justifies \emph{why} the stated answer is correct, ignoring length and formatting, with randomised order. Of 321 pairs we keep the 112 whose lengths differ by at most 15 words (chosen 46, rejected 44 words), so length cannot drive the preference; a judge from another family (Llama-3-8B) agrees on 69\% of them. We train with SimPO, whose length-normalised objective removes the incentive to lengthen; the policy writes 68 words on the test set against 66 for SFT.
+
+\input{tables/reasoning_vs_hybrid}
+
+On all 191 Cardiff Tier-C test questions, three judges independent of the reward (Qwen2.5-7B, Llama-3-8B and gpt-5-mini) prefer SimPO's explanations to SFT's in 70\%, 72\% and 82\% of non-tied pairs ($p\ll10^{-3}$, Appendix~\ref{sec:reasoning_appendix}); three training seeds give $76.4\pm0.8\%$ under Qwen2.5. In a blinded study, four raters with biology or medical background prefer SimPO in 63\% of non-tied judgements on 24 length-matched pairs ($p\approx0.02$; agreement between raters is modest, 49\%; Appendix~\ref{sec:human_appendix}).
+
+Table~\ref{tab:reasoning_vs_hybrid} puts the NLI-reward policy, trained from the same SFT model on the same course, into this comparison. The two rewards do different things. The NLI-reward policy doubles entailment (0.19$\to$0.39) and part of that survives masking, but the reasoning judges prefer it to SFT only 51\% and 58\% of the time, and prefer SimPO to it 70\% and 77\% of the time. The reasoning reward leaves entailment unchanged or lower. Higher entailment is not better-judged reasoning; each reward improves what it measures.
+
+\subsection{LLM judges prefer the longer output}
+\label{sec:verbosity}
+We also asked GPT-4o-mini to compare explanations pairwise (one call per item, order randomised; Appendix~\ref{sec:pairwise_appendix}). In every comparison it chose the longer output: LLaMA-2 SFT (234 words) over verifier-only DPO (88) in 69\% of items, Qwen3 combined-reward DPO (183) over its SFT (59) in 95\%, and its own outputs (237) over Qwen3 DPO (183) in 95\%. Because length differs in each of these comparisons, they say nothing about quality; we report them as a reason to use length-matched comparisons and several judges, as in \S\ref{sec:reasoning-reward}.
